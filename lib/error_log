@@ -1,0 +1,2 @@
+[23-Oct-2014 12:08:38 UTC] PHP Notice:  Undefined variable: receiver in /home/bakedand/public_html/bento/config-template.php on line 35
+[27-Oct-2014 08:29:25 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/pickbento/public_html/config-template.php on line 34
