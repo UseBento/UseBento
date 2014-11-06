@@ -13,6 +13,14 @@
 			$template = 'mail-template-contacts.php';
 			$field_email = $_POST['field-e-mail'];
 
+		} elseif (isset($_POST['contact-form-agency'])) {
+
+			$field_name = $_POST['field-name'];
+			$field_agency = $_POST['field-agency'];
+			$field_message = $_POST['field-message'];
+			$template = 'mail-template-contact-agency.php';
+			$field_email = $_POST['field-e-mail'];
+
 		} elseif (isset($_POST['application-form'])) {
 
 			$field_name = $_POST['field-full-name'];

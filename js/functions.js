@@ -3,42 +3,64 @@
 	var $doc = $(document);
 
 	$doc.ready(function() {
-		var Wheight = $win.height()
-
-		// mobile menu
-		$('.expand').on('click', function () {
-
-			$('.header .nav').stop(true, true).slideToggle();
-			return false;
-		});
 
 
-		// HIDE / SHOW HEADER
-		$win.scroll(function () {
-			var $target = $('.top');
-			var target_offset  = $target.offset().top
-
-			if (target_offset > 100) {
-				$('body').addClass('fixed');
-			} else if (target_offset < 100 ) {
-				$('body').removeClass('fixed');
-			}
-		})		
-
-		//Fullscreener
+		// UI Helpers
 		$('.intro-bg').fullscreener();
 
-		$(".select").selectbox();
+		$('.select').selectbox();
 
-		$(".group1").colorbox({
-			opacity: 0.8,
-			rel:'group1',
-			current: false,
-			close: false
+		$('.popup-link').magnificPopup({
+			type: 'ajax',
+			callbacks: {
+				ajaxContentAdded: function() {
+					$(this.content).find('.slide-image').find('img').each(function() {
+						var $img = $(this);
+
+						$img
+							.height($img.width() * $img.attr('height') / $img.attr('width'))
+							
+							.on('load', function() {
+								$img.css('height', '');
+							});
+					});
+
+					this.content.find('.slides').carouFredSel({
+						auto: 8000,
+						responsive: true,
+						width: '100%',
+						height: 'variable',
+						items: {
+							height: 'variable'
+						},
+						prev: this.content.find('.slider-prev'),
+						next: this.content.find('.slider-next'),
+						swipe: true
+					});
+				}
+			}
 		});
 
-		console.log('OK');
-		$('form').on('submit', function() {
+
+		$('.scroll-to').on('click', function(event) {
+			event.preventDefault();
+
+			$('html, body').animate({scrollTop: $($(this).attr('href')).offset().top}, 1000)
+		});
+
+
+
+		// mobile menu
+		$('.expand').on('click', function (event) {
+			event.preventDefault();
+
+			$('.header .nav').stop(true, true).slideToggle();
+		});
+
+
+		$('form').on('submit', function(event) {
+			event.preventDefault();
+
 			var $form = $(this);
 			$('.message-status').addClass('hide');
 			
@@ -49,8 +71,8 @@
 				url: $form.attr('action'),
 				type: $form.attr('method'),
 				data: $form.serializeArray(),
-				dataType: 'json',
-				});
+				dataType: 'json'
+			});
 
 			request.done(function (response) {
 				if (response.status === 'success') {
@@ -71,13 +93,23 @@
 					};
 				}
 			});
+
 			request.fail(function(jqXHR, error, status) {
 				alert('Something went wrong, please contact the administrator.');
 			});
+
 			request.always(function(jqXHR, error, status) {
 				$form.find('input[type="submit"]').removeAttr('disabled');
 			});	
-			return false;
 		});
 	});
+
+	$win.on('scroll', function() {
+		if($win.scrollTop() > 99) {
+			$('body').addClass('fixed');
+		} else {
+			$('body').removeClass('fixed');
+		};
+	});
+		
 })(jQuery, window, document);
