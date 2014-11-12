@@ -4,6 +4,16 @@
 
 	$doc.ready(function() {
 
+		new Calculator($('.side-panel')[0], {
+			itemSelector: '.calc-item',
+			sumHolderSelector: '.calc-value-holder',
+			sumTextSelector: '.calc-value'
+		});
+
+		$('.counter-input').each(function() {
+			counter($(this));
+		});
+
 
 		// UI Helpers
 		$('.intro-bg').fullscreener();
@@ -111,5 +121,140 @@
 			$('body').removeClass('fixed');
 		};
 	});
+
+	function counter($element) {
+		var $field = $element.find('.counter-field');
+		var value = parseInt($field.val());
+		var setValue = function(newVal) {
+			value = Math.max(0, newVal);
+
+			$field.val(value).trigger('change');
+		};
+
+		$element
+			.off('click.counter')
+			.on('click.counter', '.counter-control-minus', function() {
+				setValue(value - 1)
+			})
+			.on('click.counter', '.counter-control-plus', function() {
+				setValue(value + 1);
+			});
+
+	}
 		
 })(jQuery, window, document);
+
+
+var Calculator = (function() {
+
+	function Calculator(element, settings) {
+		this.element = element;
+
+		this.settings = settings;
+
+		this.items = this.collectItems();
+
+		this.data = {};
+
+		this.init();
+	};
+
+	Calculator.prototype.init = function() {
+		
+	};
+
+	Calculator.prototype.collectItems = function() {
+		var itemElements = this.element.querySelectorAll(this.settings.itemSelector);
+		var items = [];
+
+		for (var i = 0; i < itemElements.length; i++) {
+			var calcItem = {
+				element : itemElements[i],
+				mathType: itemElements[i].getAttribute('data-math-type') || 'sum',
+				value   : itemElements[i].value,
+				checked : itemElements[i].checked,
+				type    : itemElements[i].type
+			};
+
+			this.bindItem(calcItem);
+
+			items.push(calcItem);
+		};
+
+		return items;
+	};
+
+	Calculator.prototype.bindItem = function(item) {
+		var that = this;
+		$(item.element).on('change input', function() {
+			item.checked = this.checked;
+			item.value = this.value;
+
+			that.doCalculation();
+		});
+	};
+
+	Calculator.prototype.doCalculation = function() {
+		var sum = 0;
+		var multiply = 0;
+		var total = 0;
+		var count = 0;
+
+		// first sum up all sum items
+		for (var i = 0; i < this.items.length; i++) {
+
+
+			// discard all items that aren't sum
+			if(this.items[i].mathType !== 'sum') {
+				continue;
+			};
+
+			// discard all checkboxes and radios that aren't checked
+			if((this.items[i].type === 'checkbox' || this.items[i].type === 'radio') && !this.items[i].checked) {
+				continue;
+			};
+
+			sum += parseFloat(this.items[i].value);
+			count += 1;
+		};
+
+		// now sum up all the multipliers
+		for (var i = 0; i < this.items.length; i++) {
+
+			// discard all items that aren't sum
+			if(this.items[i].mathType !== 'multiply') {
+				continue;
+			};
+
+			// discard all checkboxes and radios that aren't checked
+			if((this.items[i].type === 'checkbox' || this.items[i].type === 'radio') && !this.items[i].checked) {
+				continue;
+			};
+
+			multiply += parseFloat(this.items[i].value);
+
+			count += parseFloat(this.items[i].value) - 1;
+		};
+
+
+		total = sum * (multiply);
+
+		this.data = {
+			total: total,
+			count: count
+		};
+
+		this.updateView();
+	};
+
+	Calculator.prototype.updateView = function() {
+		console.log(this.data.count);
+		$(this.element).find(this.settings.sumHolderSelector).toggleClass('many', this.data.count > 1 && this.data.total > 0);
+
+		$(this.element).find(this.settings.sumTextSelector).text(this.data.total);
+	};
+
+
+	return Calculator;
+
+})();
