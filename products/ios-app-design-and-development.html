@@ -1,0 +1,60 @@
+<form action="cart.php" method="post" class="side-cart">
+	<input type="hidden" name="product-type" value="ios-app-design-and-development">
+
+	<button type="button" class="side-panel-close"></button>
+
+	<div class="side-panel-head">
+		<h2>Add Item</h2>
+	</div><!-- /.side-panel-head -->
+
+	<div class="side-panel-body">
+
+		<div class="product">
+			<div class="product-description">
+				<h3>iOS App Design &amp; Development</h3>
+
+				<p>Hand-picked experts to get your iOS app to market.</p>
+
+				<p><small><em>iOS app design includes 3 rounds of  designs.  Development optimized for iPhone 4, 4s, 5, 5s, 6 and 6 plus.</em></small></p>
+			</div><!-- /.product-description -->
+
+			<div class="product-options">
+				<div class="product-options-group">
+					<h4>Select services:</h4>
+					
+					<div class="product-option">
+						<div class="product-option-checkbox">
+							<input type="checkbox" name="ios-app-design" id="ios-app-design" class="calc-item" value="100" checked>
+							<label for="ios-app-design">iOS App Design</label>
+						</div><!-- /.product-option-checkbox -->
+					</div><!-- /.product-option -->
+
+					<div class="product-option">
+						<div class="product-option-checkbox">
+							<input type="checkbox" name="ios-app-development" id="ios-app-development" class="calc-item" value="100">
+							<label for="ios-app-development">iOS App Development</label>
+						</div><!-- /.product-option-checkbox -->
+					</div><!-- /.product-option -->
+				</div><!-- /.product-options-group -->
+
+				<div class="product-options-group">
+					<div class="counter-input">
+						<button type="button" class="counter-control counter-control-minus">-</button>
+						<input type="text" name="qty" id="pages-count" class="counter-field calc-item" readonly value="1" data-math-type="multiply">
+						<button type="button" class="counter-control counter-control-plus">+</button>
+					</div><!-- /.counter-input -->
+
+					<h4><label for="pages-count">Number of Estimated iOS App Pages</label></h4>
+				</div><!-- /.product-options-group -->
+			</div><!-- /.product-options -->
+		</div><!-- /.product -->
+	</div><!-- /.side-panel-body -->
+
+	<div class="side-panel-foot">
+		<button type="submit" class="btn btn-block btn-edgy btn-large calc-value-holder">
+			ADD ITEM<span class="many-affix">S</span>:
+
+			$<span class="calc-value">0</span>
+		</button>
+	</div><!-- /.side-panel-foot -->
+</form>

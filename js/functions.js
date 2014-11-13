@@ -4,15 +4,15 @@
 
 	$doc.ready(function() {
 
-		new Calculator($('.side-panel')[0], {
-			itemSelector: '.calc-item',
-			sumHolderSelector: '.calc-value-holder',
-			sumTextSelector: '.calc-value'
+		window.cart = new Cart();
+
+
+		$('.product-tile').on('click', function(event) {
+			event.preventDefault();
+
+			new CartPanel(document.querySelector('.side-panel-holder'), this.href);
 		});
 
-		$('.counter-input').each(function() {
-			counter($(this));
-		});
 
 
 		// UI Helpers
@@ -121,28 +121,181 @@
 			$('body').removeClass('fixed');
 		};
 	});
+})(jQuery, window, document);
 
-	function counter($element) {
-		var $field = $element.find('.counter-field');
-		var value = parseInt($field.val());
-		var setValue = function(newVal) {
-			value = Math.max(0, newVal);
 
-			$field.val(value).trigger('change');
-		};
 
-		$element
-			.off('click.counter')
-			.on('click.counter', '.counter-control-minus', function() {
-				setValue(value - 1)
-			})
-			.on('click.counter', '.counter-control-plus', function() {
-				setValue(value + 1);
+function counter($element) {
+	var $field = $element.find('.counter-field');
+	var value = parseInt($field.val());
+	var setValue = function(newVal) {
+		value = Math.max(0, newVal);
+
+		$field.val(value).trigger('change');
+	};
+
+	$element
+		.off('click.counter')
+		.on('click.counter', '.counter-control-minus', function() {
+			setValue(value - 1)
+		})
+		.on('click.counter', '.counter-control-plus', function() {
+			setValue(value + 1);
+		});
+
+};
+
+
+var CartPanel = (function() {
+
+	function CartPanel(element, url) {
+		this.element = element;
+
+		this.url = url;
+
+		this.calculator = null;
+
+		this.init();
+	};
+
+	CartPanel.prototype.init = function() {
+		this.show();
+
+		this.bind();
+
+		this.getContent();
+	};
+
+	CartPanel.prototype.bind = function() {
+		var that = this;
+
+		$(this.element).find('.side-panel-overlay').on('click', function() {
+			that.close();
+		});
+
+		$(this.element).on('click.close', '.side-panel-close', function() {
+			that.close();
+		});
+
+		$(this.element).on('submit', '.side-cart', function(event) {
+			event.preventDefault();
+
+			$.ajax({
+				url: this.action,
+				type: this.method,
+				data: $(this).serialize()
 			});
 
-	}
-		
-})(jQuery, window, document);
+			cart.addItems($(this).serializeArray());
+
+			that.close();
+
+			setTimeout(function() {
+				cart.showPopout();
+			}, 600);
+		});
+	};
+
+	CartPanel.prototype.unbind = function() {
+		$(this.element)
+			.off('click.close')
+			.off('submit')
+			.find('.side-panel-overlay').off('click');
+	};
+
+	CartPanel.prototype.getContent = function() {
+		var that = this;
+
+		$.ajax({
+			url     : this.url,
+			type    : 'get',
+			success : function(data) {
+				if($('.product', data).length) {
+					that.setContent(data);
+				} else {
+					that.setError();
+					that.removeLoading();
+				};
+			},
+			error   : function() {
+				that.setError();
+				that.removeLoading();
+			}
+		})
+	};
+
+	CartPanel.prototype.show = function() {
+		$(this.element).addClass('visible');
+	};
+
+	CartPanel.prototype.hide = function() {
+		$(this.element).removeClass('visible');
+	};
+
+	CartPanel.prototype.close = function() {
+
+		this.hide();
+
+		this.destroy();
+	};
+
+	CartPanel.prototype.setContent = function(data) {
+
+		$(this.element).find('.side-panel-content').html(data);
+
+		$(this.element).find('.counter-input').each(function() {
+			counter($(this));
+		});
+
+		this.calculator = new Calculator(this.element, {
+			itemSelector      : '.calc-item',
+			sumHolderSelector : '.calc-value-holder',
+			sumTextSelector   : '.calc-value'
+		});
+
+		this.removeLoading();
+	};
+
+	CartPanel.prototype.removeContent = function(data) {
+
+		this.unbind();
+
+		if(this.calculator) {
+			this.calculator.destroy();
+		};
+
+		$(this.element).find('.side-panel-content').empty();
+	};
+
+	CartPanel.prototype.removeLoading = function() {
+		$(this.element).removeClass('loading');
+	};
+
+	CartPanel.prototype.setLoading = function() {
+		$(this.element).addClass('loading');
+	};
+
+	CartPanel.prototype.setError = function() {
+		$(this.element).addClass('error');
+	};
+
+	CartPanel.prototype.removeError = function() {
+		$(this.element).removeClass('error');
+	};
+
+	CartPanel.prototype.destroy = function() {
+		this.removeError();
+
+		this.setLoading();
+
+		this.removeContent();
+	};
+
+
+	return CartPanel;
+
+})();
+
 
 
 var Calculator = (function() {
@@ -160,7 +313,7 @@ var Calculator = (function() {
 	};
 
 	Calculator.prototype.init = function() {
-		
+		this.doCalculation();
 	};
 
 	Calculator.prototype.collectItems = function() {
@@ -186,12 +339,17 @@ var Calculator = (function() {
 
 	Calculator.prototype.bindItem = function(item) {
 		var that = this;
+
 		$(item.element).on('change input', function() {
 			item.checked = this.checked;
 			item.value = this.value;
 
 			that.doCalculation();
 		});
+	};
+
+	Calculator.prototype.unbindItem = function(item) {
+		$(item.element).off('change input');
 	};
 
 	Calculator.prototype.doCalculation = function() {
@@ -248,13 +406,132 @@ var Calculator = (function() {
 	};
 
 	Calculator.prototype.updateView = function() {
-		console.log(this.data.count);
 		$(this.element).find(this.settings.sumHolderSelector).toggleClass('many', this.data.count > 1 && this.data.total > 0);
 
 		$(this.element).find(this.settings.sumTextSelector).text(this.data.total);
 	};
 
+	Calculator.prototype.destroy = function() {
+		for (var i = 0; i < this.items.length; i++) {
+			this.unbindItem(this.items[i]);
+		};
+	};
+
 
 	return Calculator;
+
+})();
+
+var Cart = (function() {
+
+	function Cart() {
+		this.items = {};
+
+		this.init();
+	};
+
+	Cart.prototype.init = function() {
+		this.bind();
+	};
+
+	Cart.prototype.bind = function() {
+		var that = this;
+
+		$('.cart-continue').on('click', function() {
+			$('body').removeClass('items-added');
+
+			that.toggleCartBar();
+		});
+	};
+
+	Cart.prototype.toggleCartBar = function() {
+		$('body').toggleClass('cart-bar-visible', (this.getTotalQty() > 0 && this.getTotalSum() > 0));
+	};
+
+	Cart.prototype.addItems = function(items) {
+		var product = null;
+		var qty = 0;
+
+		for (var i = 0; i < items.length; i++) {
+			if(items[i].name === 'product-type') {
+				product = items[i].value;
+
+				items.splice(i, 1);
+				break;
+			};
+		};
+
+		for (var i = 0; i < items.length; i++) {
+			if(items[i].name.match(/^qty/)) {
+				qty += parseFloat(items[i].value);
+			};
+		};
+
+		for (var i = 0; i < items.length; i++) {
+			if(!items[i].name.match(/^qty/)) {
+				items[i].qty = qty;
+
+				if(!(product in this.items)) {
+					this.items[product] = {};
+				};
+
+				this.items[product][items[i].name] = items[i];
+			};
+		};
+	};
+
+	Cart.prototype.getTotalQty = function() {
+		var qty = 0;
+
+		for (var productName in this.items) {
+			var product = this.items[productName];
+
+			for (var itemName in product) {
+				qty += parseFloat(product[itemName].qty);
+			};
+
+		};
+
+		return qty;
+	};
+
+	Cart.prototype.getTotalSum = function() {
+		var total = 0;
+
+		for (var productName in this.items) {
+			var product = this.items[productName];
+
+			for (var itemName in product) {
+				total += product[itemName].value * product[itemName].qty;
+			};
+
+		};
+
+		return total;
+	};
+
+	Cart.prototype.getProductsQty = function() {
+		var qty = 0;
+
+		for (var productName in this.items) {
+			qty += 1;
+		};
+
+		return qty;
+	};
+
+	Cart.prototype.showPopout = function() {
+
+		$('body').removeClass('cart-bar-visible');
+
+		$('body').addClass('items-added');
+
+		$('body, html').animate({scrollTop: 0});
+
+		$('.cart-qty-bubble').text(this.getProductsQty());
+	};
+
+
+	return Cart;
 
 })();
