@@ -1,0 +1,74 @@
+<form action="cart.php" method="post" class="side-cart">
+	<input type="hidden" name="product-type" value="social-media-design">
+
+	<button type="button" class="side-panel-close"></button>
+
+	<div class="side-panel-head">
+		<h2>Add Item</h2>
+	</div><!-- /.side-panel-head -->
+
+	<div class="side-panel-body">
+
+		<div class="product">
+			<div class="product-description">
+				<h3>Social Media Design</h3>
+
+				<p>Hand-picked designers to enhance your social media profiles..</p>
+
+				<p><small><em>Includes 3 rounds of design.  Final files develivered as .jpg or .png images.</em></small></p>
+			</div><!-- /.product-description -->
+
+			<div class="product-options">
+				<div class="product-options-group">
+					<h4>Select service(s):</h4>
+					
+					<div class="product-option">
+						<div class="product-option-checkbox">
+							<input type="checkbox" name="social-media-facebook" id="social-media-facebook" class="calc-item" value="100">
+							<label for="social-media-facebook">Facebook header &amp; profile photo</label>
+						</div><!-- /.product-option-checkbox -->
+					</div><!-- /.product-option -->
+					
+					<div class="product-option">
+						<div class="product-option-checkbox">
+							<input type="checkbox" name="social-media-twitter" id="social-media-twitter" class="calc-item" value="100">
+							<label for="social-media-twitter">Twitter header &amp; profile photo</label>
+						</div><!-- /.product-option-checkbox -->
+					</div><!-- /.product-option -->
+					
+					<div class="product-option">
+						<div class="product-option-checkbox">
+							<input type="checkbox" name="social-media-youtube" id="social-media-youtube" class="calc-item" value="100">
+							<label for="social-media-youtube">YouTube header &amp; profile photo</label>
+						</div><!-- /.product-option-checkbox -->
+					</div><!-- /.product-option -->
+					
+					<div class="product-option">
+						<div class="product-option-checkbox">
+							<input type="checkbox" name="social-media-linkedin" id="social-media-linkedin" class="calc-item" value="100">
+							<label for="social-media-linkedin">LinkedIn header &amp; profile photo</label>
+						</div><!-- /.product-option-checkbox -->
+					</div><!-- /.product-option -->
+				</div><!-- /.product-options-group -->
+
+				<div class="product-options-group">
+					<div class="counter-input">
+						<button type="button" class="counter-control counter-control-minus">-</button>
+						<input type="text" name="qty" id="qty" class="counter-field calc-item" readonly value="1" data-math-type="multiply">
+						<button type="button" class="counter-control counter-control-plus">+</button>
+					</div><!-- /.counter-input -->
+
+					<h4><label for="qty">Quantity</label></h4>
+				</div><!-- /.product-options-group -->
+			</div><!-- /.product-options -->
+		</div><!-- /.product -->
+	</div><!-- /.side-panel-body -->
+
+	<div class="side-panel-foot">
+		<button type="submit" class="btn btn-block btn-edgy btn-large calc-value-holder">
+			ADD ITEM<span class="many-affix">S</span>:
+
+			$<span class="calc-value">0</span>
+		</button>
+	</div><!-- /.side-panel-foot -->
+</form>
