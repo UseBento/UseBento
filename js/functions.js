@@ -7,7 +7,7 @@
 		window.cart = new Cart();
 
 
-		$('.product-tile').on('click', function(event) {
+		$('.product-tile, .product-link').on('click', function(event) {
 			event.preventDefault();
 
 			new CartPanel(document.querySelector('.side-panel-holder'), this.href);
@@ -66,6 +66,13 @@
 
 			$('.header .nav').stop(true, true).slideToggle();
 		});
+
+		$('[name="payment-method"]').on('change', function() {
+			var $form = $(this).closest('form');
+			var oldClass = $form[0].className.match(/payment-method-\w*/);
+
+			$form.removeClass(oldClass && oldClass[0]).addClass('payment-method-' + this.value);
+		});	
 
 
 		$('form').on('submit', function(event) {

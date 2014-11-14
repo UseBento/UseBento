@@ -1,0 +1,44 @@
+<form action="#" method="post" class="side-cart">
+	<input type="hidden" name="product-type" value="presentation-design">
+	<input type="hidden" name="presentation-design" id="presentation-design" class="calc-item" value="500">
+
+	<button type="button" class="side-panel-close"></button>
+
+	<div class="side-panel-head">
+		<h2>Add Item</h2>
+	</div><!-- /.side-panel-head -->
+
+	<div class="side-panel-body">
+
+		<div class="product">
+			<div class="product-description">
+				<h3>Presentation Design</h3>
+
+				<p>PowerPoint or Keynote, presentation is everything.</p>
+
+				<p><small><em>Includes 3 rounds of design.  Final presentations develivered as either Powerpoint or Keynote.</em></small></p>
+			</div><!-- /.product-description -->
+
+			<div class="product-options">
+
+				<div class="product-options-group">
+					<div class="counter-input">
+						<button type="button" class="counter-control counter-control-minus">-</button>
+						<input type="text" name="qty" id="pages-count" class="counter-field calc-item" readonly value="1" data-math-type="multiply">
+						<button type="button" class="counter-control counter-control-plus">+</button>
+					</div><!-- /.counter-input -->
+
+					<h4><label for="pages-count">Quantity</label></h4>
+				</div><!-- /.product-options-group -->
+			</div><!-- /.product-options -->
+		</div><!-- /.product -->
+	</div><!-- /.side-panel-body -->
+
+	<div class="side-panel-foot">
+		<button type="submit" class="btn btn-block btn-edgy btn-large calc-value-holder">
+			ADD ITEM<span class="many-affix">S</span>:
+
+			$<span class="calc-value">0</span>
+		</button>
+	</div><!-- /.side-panel-foot -->
+</form>
