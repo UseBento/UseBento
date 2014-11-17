@@ -199,6 +199,12 @@ var CartPanel = (function() {
 
 			setTimeout(function() {
 				cart.showPopout();
+
+				setTimeout(function() {
+					$('body').removeClass('items-added');
+
+					cart.toggleCartBar();
+				}, 1000);
 			}, 600);
 		});
 	};
