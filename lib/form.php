@@ -18,7 +18,9 @@
 			$required = array('field-name', 'field-project-type', 'field-e-mail', 'field-type-work', 'field-description', 'field-inspire', 'field-how');
 			$response['page'] = 'project_form';
 			
-		};
+		} elseif ( isset($_POST['contact-form-agency']) ) {
+			$required = array('field-name', 'field-e-mail', 'field-agency', 'field-message');
+		}
 
 		$select_fields = array('field-project-type', 'field-type-work', 'field-how');
 		
