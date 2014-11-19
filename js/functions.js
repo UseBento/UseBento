@@ -14,6 +14,28 @@
 		});
 
 
+		$('form:not(.form-required)').on('submit', function(event) {
+			event.preventDefault();
+
+			ajaxSubmit($(this));
+		});
+
+
+		$('.form-required').each(function() {
+			var $form = $(this);
+			new Validator(this, {
+				classHolder : '.field',
+				validClass  : 'valid',
+				errorClass  : 'error',
+				onSubmit    : function(event) {
+					event.preventDefault();
+
+					ajaxSubmit($form);
+				}
+			});
+		});
+
+
 
 		// UI Helpers
 		$('.intro-bg').fullscreener();
@@ -72,53 +94,10 @@
 			var oldClass = $form[0].className.match(/payment-method-\w*/);
 
 			$form.removeClass(oldClass && oldClass[0]).addClass('payment-method-' + this.value);
-		});	
-
-
-		$('form').on('submit', function(event) {
-			event.preventDefault();
-
-			var $form = $(this);
-			$('.message-status').addClass('hide');
-			
-			$form.find('input[type="submit"]').attr('disabled', 'disabled');
-			$form.find(':input').removeClass('error');
-
-			var request = $.ajax({
-				url: $form.attr('action'),
-				type: $form.attr('method'),
-				data: $form.serializeArray(),
-				dataType: 'json'
-			});
-
-			request.done(function (response) {
-				if (response.status === 'success') {
-					$form.trigger('reset');
-
-					if (response.page === 'project_form') {
-						window.location.href = './project_submitted.html';
-					} else {
-						alert('Your message has been sent.');
-					}
-
-				} else if (response.status === 'email-error') {
-					alert(response.message);
-				} else {
-					alert('Fill all required fields');
-					for (i in response.errors) {
-						$(':input[name="' + response.errors[i] + '"]').addClass('error');
-					};
-				}
-			});
-
-			request.fail(function(jqXHR, error, status) {
-				alert('Something went wrong, please contact the administrator.');
-			});
-
-			request.always(function(jqXHR, error, status) {
-				$form.find('input[type="submit"]').removeAttr('disabled');
-			});	
 		});
+
+
+		$('[name="payment-method"]:checked').trigger('change');
 	});
 
 	$win.on('scroll', function() {
@@ -128,6 +107,51 @@
 			$('body').removeClass('fixed');
 		};
 	});
+
+
+	function ajaxSubmit($form) {
+
+		var $form = $(this);
+		$('.message-status').addClass('hide');
+		
+		$form.find('input[type="submit"]').attr('disabled', 'disabled');
+
+		var request = $.ajax({
+			url: $form.attr('action'),
+			type: $form.attr('method'),
+			data: $form.serializeArray(),
+			dataType: 'json'
+		});
+
+		request.done(function (response) {
+			if (response.status === 'success') {
+				$form.trigger('reset');
+
+				if (response.page === 'project_form') {
+					window.location.href = './project_submitted.html';
+				} else {
+					alert('Your message has been sent.');
+				}
+
+			} else if (response.status === 'email-error') {
+				alert(response.message);
+			} else {
+				alert('Fill all required fields');
+				for (i in response.errors) {
+					$(':input[name="' + response.errors[i] + '"]').addClass('error');
+				};
+			}
+		});
+
+		request.fail(function(jqXHR, error, status) {
+			alert('Something went wrong, please contact the administrator.');
+		});
+
+		request.always(function(jqXHR, error, status) {
+			$form.find('input[type="submit"]').removeAttr('disabled');
+		});		
+	};
+
 })(jQuery, window, document);
 
 

@@ -1,11 +1,11 @@
 /* ================================================================ *\
-	#Reset
+    #Reset
 \* ================================================================ */
 
 * { padding: 0; margin: 0; outline: 0; }
 
 /* ================================================================ *\
-	#Base
+    #Base
 \* ================================================================ */
 
 @font-face {
@@ -64,7 +64,7 @@ th,
 td { padding: 0; }
 
 /* ================================================================ *\
-	#Helpers
+    #Helpers
 \* ================================================================ */
 
 .alignleft { float: left; }
@@ -196,7 +196,7 @@ html, body { height: 100%; }
 
 
 /* ==========================================================================
-	#Fullscreener
+    #Fullscreener
 ========================================================================== */
 .fsr-container { overflow: hidden; background-position: center center; background-repeat: no-repeat; background-size: cover; }
 .fsr-element { position: absolute; }
@@ -396,6 +396,9 @@ html, body { height: 100%; }
 .form .field { width: 100%; border:1px solid #dce3ef; background: #f4f6fa; border-radius: 3px; overflow: hidden; height:50px; padding: 12px; box-sizing: border-box;  }
 .form .textarea { height:190px;  }
 
+.form-validated .textarea.error,
+.form-validated .field.error { border-color: red; }
+
 .form-body p { margin-bottom:20px; }
 
 .form .form-label { font-weight:700; color: #525f71; padding-bottom:15px; display:block; }
@@ -421,11 +424,11 @@ html, body { height: 100%; }
 .widgets li { list-style:none; list-style-position: outside; }
 .widget-title { color: #525f71; font-size:18px; font-weight:700; padding-bottom:30px;  }
 
-.slider-projects { padding: 0 120px; position: relative; }
+.slider-projects { position: relative; }
 .slider-projects li { list-style:none; list-style-position: outside;}
 .cboxCurrent { display:none !important; }
 
-.slider-projects { max-width: 1000px; margin: 0 auto; }
+.slider-projects { max-width: 880px; margin: 0 auto; }
 .slider-projects .slider-clip { border-radius: 5px 5px 0 0; overflow: hidden; }
 .slider-projects .slider-clip .slide { float: left; }
 
@@ -433,8 +436,8 @@ html, body { height: 100%; }
 
 .slider-prev,
 .slider-next { position: absolute; top: 50%; background: url(images/arrows.png) no-repeat 0 0; width: 71px; height: 71px; }
-.slider-prev { left: 0; }
-.slider-next { right: 0; background-position: 0 bottom; }
+.slider-prev { left: -120px; }
+.slider-next { right: -120px; background-position: 0 bottom; }
 
 .slide-image img { max-width: 100%; height: auto; }
 
@@ -767,6 +770,10 @@ input:checked + label .paypal-logo { background-position: 0 -29px; }
 .form-text { font-size: 14px; line-height: 1.7; padding: 10px 0; }
 .form-text p { padding: 0; margin: 0; }
 
+@media (max-width: 1260px) {
+    .slider-projects { max-width: 900px; }
+}
+
 
 @media (max-width: 1200px) {
     .shell { width: auto; padding: 0 10px; }
@@ -791,6 +798,8 @@ input:checked + label .paypal-logo { background-position: 0 -29px; }
     .agency-testimonials li + li { padding-left: 0; padding-top: 50px; }
 
     .section-image { padding-left: 0; padding-right: 0; }
+
+    .slider-projects { max-width: 750px; }
 
 
 }
@@ -838,10 +847,14 @@ input:checked + label .paypal-logo { background-position: 0 -29px; }
     .header .nav { float:none; clear: both; padding-top:30px; display:none; }
     .header .nav li { float:none; padding-left:0; }
     .header .nav li a { display:block; padding-left:10px; }
+
+    .slider-projects { max-width: 500px; }
 }
 
 @media (max-width: 815px) {
     .service ~ .service { margin-left: 0; }
+
+    .slider-projects { max-width: 400px; }
 }
 
 @media (max-width: 767px) {
@@ -857,6 +870,9 @@ input:checked + label .paypal-logo { background-position: 0 -29px; }
     .slider-actions { top: 100%; margin-top: 10px; }
     .slider-prev,
     .slider-next { width: 35px; height:36px; -webkit-background-size: 35px 83px; background-size: 35px 83px; }
+
+    .slider-prev { left: 0; }
+    .slider-next { right: 0; }
 
     .header.header-top a { background-color: #2a363a; }
     .intro-content { padding:80px 0; }
