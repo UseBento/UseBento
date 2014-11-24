@@ -15,7 +15,8 @@
 
 	<script src="js/jquery.fullscreener.min.js" type="text/javascript"></script>
 	<script src="js/jquery.magnific-popup.min.js" type="text/javascript"></script>
-	<script src="js/jquery.selectbox-0.2.min.js" type="text/javascript"></script>	
+	<script src="js/jquery.selectbox-0.2.min.js" type="text/javascript"></script>
+	<script src="js/validator.js" type="text/javascript"></script>
 
 	<script src="js/jquery.touchSwipe.min.js" type="text/javascript"></script>
 	<script src="js/jquery.carouFredSel-6.2.1-packed.js" type="text/javascript"></script>
@@ -69,7 +70,7 @@
 				<div class="content">
 					<div class="section section-contacts">
 						<div class="form form-contact">
-							<form action="lib/form.php" method="post">
+							<form action="lib/form.php" method="post" class="form-required">
 								<div class="section-head form-head">
 									<h2 class="section-title">Get in touch with us!</h2>
 
@@ -84,15 +85,15 @@
 												<label for="field-name" class="form-label">Name <span class="form-asterisk">*</span></label>
 												
 												<div class="form-controls">
-													<input type="text" class="field" name="field-name" id="field-name" />
+													<input type="text" class="field" name="field-name" id="field-name" required data-validation-type="['presence']" />
 												</div><!-- /.form-controls -->
 											</div><!-- /.form-col form-col-1of2 -->
 											
 											<div class="form-col form-col-1of2">
-												<label for="field-e-mail" class="form-label">E-mail</label>
+												<label for="field-e-mail" class="form-label">E-mail <span class="form-asterisk">*</span></label>
 												
 												<div class="form-controls">
-													<input type="text" class="field" name="field-e-mail" id="field-e-mail" />
+													<input type="email" class="field" name="field-e-mail" id="field-e-mail" required data-validation-type="['email']" />
 												</div><!-- /.form-controls -->
 											</div><!-- /.form-col form-col-1of2 -->
 										</div><!-- /.form-cols -->
@@ -103,7 +104,7 @@
 										<label for="field-subject" class="form-label">Subject <span class="form-asterisk">*</span></label>
 										
 										<div class="form-controls">
-											<input type="text" class="field" name="field-subject" id="field-subject" />
+											<input type="text" class="field" name="field-subject" id="field-subject" required data-validation-type="['presence']" />
 										</div><!-- /.form-controls -->
 									</div><!-- /.form-row -->
 
@@ -111,7 +112,7 @@
 										<label for="field-message" class="form-label">Message <span class="form-asterisk">*</span></label>
 										
 										<div class="form-controls">
-											<textarea name="field-message" id="field-message" cols="30" rows="10" class="textarea"></textarea>
+											<textarea name="field-message" id="field-message" cols="30" rows="10" class="field textarea" required data-validation-type="['presence']"></textarea>
 										</div><!-- /.form-controls -->
 									</div><!-- /.form-row -->
 								</div><!-- /.form-body -->
