@@ -39,3 +39,4 @@ gem 'spring',        group: :development
 gem 'mongoid', '~> 4.0.0', github: 'mongoid/mongoid'
 gem 'bson_ext'
 gem 'mongoid-rails'
+gem 'valid_email'
