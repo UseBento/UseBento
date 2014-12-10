@@ -1,0 +1,400 @@
+Services:
+  - name: 'logo_design'
+    title: 'Logo Design'
+    description: ''
+    rounds: 3
+    price: 400
+    completion_time: [3, 5]
+    fields: 
+      - name: full_name
+        label: Your Full Name
+        type: :full_name
+        required: true
+      - name: email
+        label: Email Address
+        type: :email
+        required: true
+      - name: business_name
+        label: What is the name of your business?
+        type: :text
+        required: true
+      - name: business_description
+        label: Please describe your business.
+        type: :long_text
+        required: true
+      - name: target_audience
+        label: Who is your target audience?
+        type: :text
+        required: true
+      - name: business_keywords
+        label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
+        type: :keywords
+        required: true
+      - name: logotype
+        label: Which logotype do you prefer?
+        type: :enum
+        values: [text_only, text_plus_icon]
+        required: true
+  - name: 'mobile_app'
+    title: 'Mobile App Design & Development'
+    rounds: 3
+    price: 400
+    completion_time: [2, 3]
+    fields: 
+      - name: full_name
+        label: Your Full Name
+        type: :full_name
+        required: true
+      - name: email
+        label: Email Address
+        type: :email
+        required: true
+      - name: business_name
+        label: What is the name of your business?
+        type: :text
+        required: true
+      - name: business_description
+        label: Please describe your business.
+        type: :long_text
+        required: true
+      - name: target_audience
+        label: Who is your target audience?
+        type: :text
+        required: true
+      - name: business_keywords
+        label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
+        type: :keywords
+        required: true
+      - name: type
+        label: What type of application is this for?
+        type: :enum
+        values: [apple_ios, android]
+        required: true
+      - name: service_type
+        label: Select your service below.
+        type: :enum
+        values: [design_only, design_and_development]
+        required: true
+      - name: number_of_screens
+        label: Number of estimated screens
+        type: :integer
+        values: [1,100]
+        required: true
+  - name: 'app_icon'
+    title: 'App Icon Design'
+    rounds: 3
+    price: 400
+    completion_time: [3, 5]
+    fields: 
+      - name: full_name
+        label: Your Full Name
+        type: :full_name
+        required: true
+      - name: email
+        label: Email Address
+        type: :email
+        required: true
+      - name: business_name
+        label: What is the name of your business?
+        type: :text
+        required: true
+      - name: business_description
+        label: Please describe your business.
+        type: :long_text
+        required: true
+      - name: target_audience
+        label: Who is your target audience?
+        type: :text
+        required: true
+      - name: business_keywords
+        label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
+        type: :keywords
+        required: true
+      - name: type
+        label: What type of application is this for?
+        type: :enum
+        values: [apple_ios, android]
+        required: true
+  - name: 'business_card'
+    title: 'Business Card Design'
+    rounds: 3
+    price: 300
+    completion_time: [3, 5]
+    fields: 
+      - name: full_name
+        label: Your Full Name
+        type: :full_name
+        required: true
+      - name: email
+        label: Email Address
+        type: :email
+        required: true
+      - name: business_name
+        label: What is the name of your business?
+        type: :text
+        required: true
+      - name: business_description
+        label: Please describe your business.
+        type: :long_text
+        required: true
+      - name: target_audience
+        label: Who is your target audience?
+        type: :text
+        required: true
+      - name: business_keywords
+        label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
+        type: :keywords
+        required: true
+  - name: 'stationary_design'
+    title: 'Stationary Design'
+    rounds: 3
+    price: 300
+    completion_time: [3, 5]
+    fields: 
+      - name: full_name
+        label: Your Full Name
+        type: :full_name
+        required: true
+      - name: email
+        label: Email Address
+        type: :email
+        required: true
+      - name: business_name
+        label: What is the name of your business?
+        type: :text
+        required: true
+      - name: business_description
+        label: Please describe your business.
+        type: :long_text
+        required: true
+      - name: target_audience
+        label: Who is your target audience?
+        type: :text
+        required: true
+      - name: business_keywords
+        label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
+        type: :keywords
+        required: true
+  - name: 'presentation_design'
+    title: 'Presentation Design'
+    rounds: 3
+    price: 300
+    completion_time: [3, 5]
+    fields: 
+      - name: full_name
+        label: Your Full Name
+        type: :full_name
+        required: true
+      - name: email
+        label: Email Address
+        type: :email
+        required: true
+      - name: business_name
+        label: What is the name of your business?
+        type: :text
+        required: true
+      - name: business_description
+        label: Please describe your business.
+        type: :long_text
+        required: true
+      - name: target_audience
+        label: Who is your target audience?
+        type: :text
+        required: true
+      - name: business_keywords
+        label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
+        type: :keywords
+        required: true
+      - name: presentation_type
+        label: Which presentation type do you prefer?
+        type: :enum
+        values: [Powerpoint, Keynote]
+        required: true
+      - name: slide_count
+        label: Number of estimated slides
+        type: :integer
+        values: [1,100]
+        required: true
+  - name: 'social_media_design'
+    title: 'Social Media Design'
+    rounds: 3
+    price: 300
+    completion_time: [3, 5]
+    fields: 
+      - name: full_name
+        label: Your Full Name
+        type: :full_name
+        required: true
+      - name: email
+        label: Email Address
+        type: :email
+        required: true
+      - name: business_name
+        label: What is the name of your business?
+        type: :text
+        required: true
+      - name: business_description
+        label: Please describe your business.
+        type: :long_text
+        required: true
+      - name: target_audience
+        label: Who is your target audience?
+        type: :text
+        required: true
+      - name: business_keywords
+        label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
+        type: :keywords
+        required: true
+      - name: design
+        label: Select design service(s) needed below
+        type: :enum
+        values: 
+          - facebook_header_and_profile
+          - twitter_header_and_profile
+          - youtube_header_and_profile
+          - linkedin_header_and_profile
+        required: true
+  - name: 'website_design_and_development'
+    title: 'Website Design & Development'
+    rounds: 3
+    price: 400
+    completion_time: [2, 3]
+    fields: 
+      - name: full_name
+        label: Your Full Name
+        type: :full_name
+        required: true
+      - name: email
+        label: Email Address
+        type: :email
+        required: true
+      - name: business_name
+        label: What is the name of your business?
+        type: :text
+        required: true
+      - name: business_description
+        label: Please describe your business.
+        type: :long_text
+        required: true
+      - name: target_audience
+        label: Who is your target audience?
+        type: :text
+        required: true
+      - name: business_keywords
+        label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
+        type: :keywords
+        required: true
+      - name: service
+        label: Select your service below
+        type: :enum
+        values: 
+          - design_only
+          - design_and_development
+        required: true
+      - name: responsiveness
+        label: What type of responsive development do you need?
+        type: :enum
+        values: 
+          - desktop
+          - desktop_plus_mobile
+        required: true
+      - name: free_services
+        label: Select FREE services below
+        type: :enum
+        values: 
+          - google_analytics_setup
+          - ftp_upload
+        required: true
+      - name: pages
+        label: Number of estimated pages
+        type: :integer
+        values: [1,100]
+        required: true
+  - name: 'email_design_and_development'
+    title: 'Email Design & Development'
+    rounds: 3
+    price: 400
+    completion_time: [3, 5]
+    fields: 
+      - name: full_name
+        label: Your Full Name
+        type: :full_name
+        required: true
+      - name: email
+        label: Email Address
+        type: :email
+        required: true
+      - name: business_name
+        label: What is the name of your business?
+        type: :text
+        required: true
+      - name: business_description
+        label: Please describe your business.
+        type: :long_text
+        required: true
+      - name: target_audience
+        label: Who is your target audience?
+        type: :text
+        required: true
+      - name: business_keywords
+        label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
+        type: :keywords
+        required: true
+      - name: service
+        label: Select your service below
+        type: :enum
+        values: 
+          - design_only
+          - design_and_development
+        required: true
+  - name: 'landing_page_design_and_development'
+    title: 'Landing Page Design & Development'
+    rounds: 3
+    price: 400
+    completion_time: [3, 5]
+    fields: 
+      - name: full_name
+        label: Your Full Name
+        type: :full_name
+        required: true
+      - name: email
+        label: Email Address
+        type: :email
+        required: true
+      - name: business_name
+        label: What is the name of your business?
+        type: :text
+        required: true
+      - name: business_description
+        label: Please describe your business.
+        type: :long_text
+        required: true
+      - name: target_audience
+        label: Who is your target audience?
+        type: :text
+        required: true
+      - name: business_keywords
+        label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
+        type: :keywords
+        required: true
+      - name: service
+        label: Select your service below
+        type: :enum
+        values: 
+          - design_only
+          - design_and_development
+        required: true
+      - name: responsiveness
+        label: What type of responsive development do you need?
+        type: :enum
+        values: 
+          - desktop
+          - desktop_plus_mobile
+        required: true
+      - name: free_services
+        label: Select FREE services below
+        type: :enum
+        values: 
+          - google_analytics_setup
+          - ftp_upload
+        required: true
