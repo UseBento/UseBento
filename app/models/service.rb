@@ -7,5 +7,5 @@ class Service
   field :completion_time, type: Range
   field :price,           type: Integer
 
-  embeds_many :fields
+  embeds_many :questions
 end

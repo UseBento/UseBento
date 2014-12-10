@@ -1,4 +1,4 @@
-class Field
+class Question
   include Mongoid::Document
   
   field :name,       type: String
