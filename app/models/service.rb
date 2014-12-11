@@ -13,4 +13,18 @@ class Service
   def lookup_question(name) 
     self.questions.where(name: name).first
   end
+
+  def create_project(answers) 
+    project = Project.new
+    project.service = self
+    project.start_date = DateTime.now
+    
+    answers.each { |name, answer|
+        project.answers.push Answer.new(name: name, answer: answer) }
+
+    if !project.validate_project
+      raise Exceptions::ValidationError.new(project: project)
+    end
+    project
+  end
 end

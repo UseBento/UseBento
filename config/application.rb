@@ -28,3 +28,6 @@ module UseBento
     # config.i18n.default_locale = :de
   end
 end
+
+require "#{Rails.root}/lib/exceptions.rb" 
+

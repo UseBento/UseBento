@@ -9,9 +9,9 @@ class Project
   validate :validate_project
 
   def validate_project
-    results = self.service.questions.map {|q|
-        answer = answer_for(q)
-        answer && q.validate_answer(a.answer) }
+    results = self.service.questions.map {|question|
+        answer = answer_for(question)
+        answer && question.validate_answer(answer) }
     results.all? {|r| r}
   end
 
