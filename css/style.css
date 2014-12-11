@@ -770,6 +770,33 @@ input:checked + label .paypal-logo { background-position: 0 -29px; }
 .form-text { font-size: 14px; line-height: 1.7; padding: 10px 0; }
 .form-text p { padding: 0; margin: 0; }
 
+.access { width: 571px; margin: 0 auto; }
+.form.form-access .form-head { text-align:center; padding:0 0 40px 0; border-bottom:0; margin: 0; }
+.form.form-access .form-head .form-logo { background: url(images/form-logo.png) no-repeat 0 0; display: inline-block; width: 120px; height:28px; margin-bottom:40px; }
+.form.form-access .separator { border-top:1px solid #dce3ef; padding-bottom:44px; }
+.form.form-access .form-head h2 {  border:0; padding: 0; margin:0; color: #525f71; font-size:26px; font-weight:300; }
+.form.form-access .form-head h2 strong { font-weight:600; }
+.form.form-access .form-head small { color: #718097; font-size:13px; }
+.form.form-access .form-row { position: relative; }
+.form.form-access .form-label { position: absolute; top:0; left:0; width: 100%; padding: 0; line-height:50px; padding-left:21px; box-sizing: border-box; }
+.form.form-access .form-actions,
+.form.form-access .form-body { padding: 0 70px; }
+.form.form-access .form-actions { padding-bottom:33px; }
+.form.form-access .form-actions .btn { display:block; width: 100%; box-sizing: border-box; }
+.form.form-access .form-foot { text-align:center; overflow: hidden; }
+.form.form-access .form-foot p { margin-bottom:70px; }
+.form.form-access .form-foot small { font-size:12px; color: #718097; }
+.form.form-access .form-foot small a { text-decoration: underline; color: #718097; }
+.form.form-access .form-foot small a:hover { text-decoration: none; }
+.form.form-access .form-foot-secondary .link-forgot { color: #cedbeb; }
+.form.form-access .form-foot-secondary { color: #cedbeb; font-size:13px; font-weight:400; }
+.form.form-access .form-foot-secondary span:first-child { float:left; }
+.form.form-access .form-foot-secondary span { float:right; }
+
+.form.form-access .password-success { display:block; text-align:center; padding-bottom:40px; }
+.form.form-access .password-success i { font-style: normal;  display:block; }
+.form.form-access .password-success:before { content:''; display: inline-block; background: url(images/pass-success.png) no-repeat 0 0; width: 44px; height:34px; }
+
 @media (max-width: 1260px) {
     .slider-projects { max-width: 900px; }
 }

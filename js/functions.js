@@ -46,6 +46,24 @@
 			type: 'ajax',
 			callbacks: {
 				ajaxContentAdded: function() {
+			        $('.form-access .field').on('focusin', function() {
+			            if(this.title==this.value) {
+			                this.value = '';
+			                $(this).parents('.form-row').find('label').hide();
+			            }
+			        }).on('focusout', function(){
+			            if(this.value=='') {
+			                this.value = this.title;
+			                $(this).parents('.form-row').find('label').show();
+			            }
+			        });
+
+			        $('input[type=text]').each(function() {
+			           if ($(this).val().length) {
+			               $(this).prev('label').hide();
+			           };
+			        });
+
 					$(this.content).find('.slide-image').find('img').each(function() {
 						var $img = $(this);
 
