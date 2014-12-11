@@ -9,4 +9,8 @@ class Service
 
   has_many :project
   embeds_many :questions
+
+  def lookup_question(name) 
+    self.questions.where(name: name).first
+  end
 end
