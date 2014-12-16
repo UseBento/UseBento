@@ -1,0 +1,33 @@
+.form-row
+  .form-cols
+    .form-col.form-col-1of2
+      label.form-label[for="field-full-name"]
+        | Which presentation type do you prefer?
+        span.form-asterisk
+          | *
+      .form-controls
+        ul.list-radios.list-radios-custom
+          li
+            .radio
+              label.form-label-radio[for="field-powerpoint"]
+                input#field-powerpoint[type="radio" name="presentation-type"]
+                span
+                  | Powerpoint
+          li
+            .radio
+              label.form-label-radio[for="field-keynote"]
+                input#field-keynote[type="radio" name="presentation-type"]
+                span
+                  | Keynote
+    .form-col.form-col-1of2
+      label.form-label[for="field-e-mail"]
+        | Number of estimated slides 
+        span.form-asterisk
+          | *
+      .form-controls
+        .counter-input
+          button.counter-control.counter-control-minus[type="button"]
+            | -
+          input#pages-count.counter-field.calc-item[type="text" name="qty" readonly value="1" data-math-type="multiply"]
+          button.counter-control.counter-control-plus[type="button"]
+            | +

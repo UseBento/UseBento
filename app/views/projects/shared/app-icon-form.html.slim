@@ -1,0 +1,19 @@
+.form-row
+  label.form-label[for="field-type-of-development"]
+    | What type of application is this for?
+    span.form-asterisk
+      | *
+  .form-controls
+    ul.list-radios.list-radios-custom
+      li
+        .radio
+          label.form-label-radio[for="field-apple"]
+            input#field-apple[type="radio" name="type-of-development"]
+            span
+              | Apple iOS
+      li
+        .radio
+          label.form-label-radio[for="field-android"]
+            input#field-android[type="radio" name="type-of-development"]
+            span
+              | Android

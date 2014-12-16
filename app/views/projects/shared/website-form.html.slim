@@ -1,0 +1,73 @@
+.form-row
+  .form-cols
+    .form-col.form-col-1of2
+      label.form-label[for="field-select-service"]
+        | Select your service below: 
+        span.form-asterisk
+          | *
+      .form-controls
+        ul.list-radios.list-radios-custom
+          li
+            .radio
+              label.form-label-radio[for="field-design-only"]
+                input#field-design-only[type="radio" name="presentation-type"]
+                span
+                  | Design Only
+          li
+            .radio
+              label.form-label-radio[for="field-design-development"]
+                input#field-design-development[type="radio" name="presentation-type"]
+                span
+                  | Design & Development
+    .form-col.form-col-1of2
+      label.form-label[for="field-type-of-development"]
+        | What type of responsive development do you need?
+        span.form-asterisk
+          | *
+      .form-controls
+        ul.list-radios.list-radios-custom
+          li
+            .radio
+              label.form-label-radio[for="field-desktop-only"]
+                input#field-desktop-only[type="radio" name="type-of-development"]
+                span
+                  | Desktop Only
+          li
+            .radio
+              label.form-label-radio[for="field-desktop-mobile"]
+                input#field-desktop-mobile[type="radio" name="type-of-development"]
+                span
+                  | Desktop + Mobile
+.form-row
+  label.form-label[for="field-e-mail"]
+    | Select FREE services below:
+    span.form-asterisk
+      | *
+  .form-controls
+    ul.list-checkboxes.list-checkboxes-custom
+      li
+        .checkbox
+          label.form-label-check[for="field-Google analytics setup"]
+            input#field-Google analytics setup[type="checkbox" name="field-Google analytics setup"]
+            i.ico-check
+            span
+              | Google analytics setup
+      li
+        .checkbox
+          label.form-label-check[for="field-FTP Upload"]
+            input#field-FTP Upload[type="checkbox" name="field-FTP Upload"]
+            i.ico-check
+            span
+              | FTP Upload
+.form-row
+  label.form-label[for="field-e-mail"]
+    | Number of estimated slides 
+    span.form-asterisk
+      | *
+  .form-controls
+    .counter-input
+      button.counter-control.counter-minus[type="button"]
+        | -
+      input#pages-count.counter-field.calc-item[type="text" name="qty" readonly value="1" data-math-type="multiply"]
+      button.counter-control.counter-control-plus[type="button"]
+        | +
