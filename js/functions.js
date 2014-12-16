@@ -3,10 +3,8 @@
 	var $doc = $(document);
 
 	$doc.ready(function() {
-
 		window.cart = new Cart();
-
-
+		
 		$('.product-tile, .product-link').on('click', function(event) {
 			event.preventDefault();
 
@@ -19,7 +17,6 @@
 
 			ajaxSubmit($(this));
 		});
-
 
 		$('.form-required').each(function() {
 			var $form = $(this);
@@ -35,8 +32,6 @@
 			});
 		});
 
-
-
 		// UI Helpers
 		$('.intro-bg').fullscreener();
 
@@ -46,6 +41,24 @@
 			type: 'ajax',
 			callbacks: {
 				ajaxContentAdded: function() {
+			        $('.form-access .field').on('focusin', function() {
+			            if(this.title==this.value) {
+			                this.value = '';
+			                $(this).parents('.form-row').find('label').hide();
+			            }
+			        }).on('focusout', function(){
+			            if(this.value=='') {
+			                this.value = this.title;
+			                $(this).parents('.form-row').find('label').show();
+			            }
+			        });
+
+			        $('input[type=text]').each(function() {
+			           if ($(this).val().length) {
+			               $(this).prev('label').hide();
+			           };
+			        });
+
 					$(this.content).find('.slide-image').find('img').each(function() {
 						var $img = $(this);
 
@@ -79,8 +92,6 @@
 
 			$('html, body').animate({scrollTop: $($(this).attr('href')).offset().top}, 1000)
 		});
-
-
 
 		// mobile menu
 		$('.expand').on('click', function (event) {
@@ -155,7 +166,6 @@
 })(jQuery, window, document);
 
 
-
 function counter($element) {
 	var $field = $element.find('.counter-field');
 	var value = parseInt($field.val());
@@ -173,9 +183,7 @@ function counter($element) {
 		.on('click.counter', '.counter-control-plus', function() {
 			setValue(value + 1);
 		});
-
 };
-
 
 var CartPanel = (function() {
 

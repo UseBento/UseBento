@@ -209,6 +209,9 @@ html, body { height: 100%; }
          -o-transition: all 0.3s; 
             transition: all 0.3s; 
 }
+input.btn { display: inline-block; height:60px; }
+.btn-disabled { background-color: #8a9fb9; }
+
 .btn:hover { text-decoration: none; background: #6872e7; }
 .btn-light:hover { border-color: #6872e7; }
 
@@ -300,6 +303,9 @@ html, body { height: 100%; }
 .ico-presentation { width: 113px; background-position: -286px 0px; }
 .ico-rocket { width: 100px; background-position: -82px 0px; }
 .ico-wp { width: 100px; background-position: -184px 0px; }
+.ico-calendar { background: url(images/icons.png) no-repeat -806px 0; width: 24px; height:24px; display: inline-block; vertical-align: top; }
+.ico-mouse { background: url(images/icons.png) no-repeat -851px 0; width: 16px; height:30px; display: inline-block;  vertical-align: top; }
+
 
 
 .section-actions { padding: 60px 0 0 0; }
@@ -770,10 +776,80 @@ input:checked + label .paypal-logo { background-position: 0 -29px; }
 .form-text { font-size: 14px; line-height: 1.7; padding: 10px 0; }
 .form-text p { padding: 0; margin: 0; }
 
+.access { width: 571px; margin: 0 auto; }
+.form.form-access .form-head { text-align:center; padding:0 0 40px 0; border-bottom:0; margin: 0; }
+.form.form-access .form-head .form-logo { background: url(images/form-logo.png) no-repeat 0 0; display: inline-block; width: 120px; height:28px; margin-bottom:40px; }
+.form.form-access .separator { border-top:1px solid #dce3ef; padding-bottom:44px; }
+.form.form-access .form-head h2 {  border:0; padding: 0; margin:0; color: #525f71; font-size:26px; font-weight:300; }
+.form.form-access .form-head h2 strong { font-weight:600; }
+.form.form-access .form-head small { color: #718097; font-size:13px; }
+.form.form-access .form-row { position: relative; }
+.form.form-access .form-label { position: absolute; top:0; left:0; width: 100%; padding: 0; line-height:50px; padding-left:21px; box-sizing: border-box; }
+.form.form-access .form-actions,
+.form.form-access .form-body { padding: 0 70px; }
+.form.form-access .form-actions { padding-bottom:33px; }
+.form.form-access .form-actions .btn { display:block; width: 100%; box-sizing: border-box; }
+.form.form-access .form-foot { text-align:center; overflow: hidden; }
+.form.form-access .form-foot p { margin-bottom:70px; }
+.form.form-access .form-foot small { font-size:12px; color: #718097; }
+.form.form-access .form-foot small a { text-decoration: underline; color: #718097; }
+.form.form-access .form-foot small a:hover { text-decoration: none; }
+.form.form-access .form-foot-secondary .link-forgot { color: #cedbeb; }
+.form.form-access .form-foot-secondary { color: #cedbeb; font-size:13px; font-weight:400; }
+.form.form-access .form-foot-secondary span:first-child { float:left; }
+.form.form-access .form-foot-secondary span { float:right; }
+
+.form.form-access .password-success { display:block; text-align:center; padding-bottom:40px; }
+.form.form-access .password-success i { font-style: normal;  display:block; }
+.form.form-access .password-success:before { content:''; display: inline-block; background: url(images/pass-success.png) no-repeat 0 0; width: 44px; height:34px; }
+
+
+.form-business-card .form-label { font-size:14px; }
+.form-business-card .form-actions { padding-top:40px; border-top:1px solid #d5dfe8; }
+.form-business-card .form-body { padding-bottom:15px; }
+.form-business-card .form-head { padding-bottom:0; margin-bottom:30px; }
+.form-business-card .form-head p { margin-bottom:28px; }
+.form-business-card .form-head p span { display: inline-block; margin-right:10px; }
+
+.list-radios-custom { border-radius: 3px; border:1px solid #dce3ef; overflow: hidden;  display: inline-block; }
+.list-radios-custom li { list-style:none; list-style-position: outside; float:left; box-sizing: border-box; }
+.list-radios-custom li:first-child { border-right:1px solid #dce3ef; }
+.list-radios-custom .radio { position: relative; overflow: hidden; }
+.list-radios-custom .radio input { position: absolute; top:-100px; left:-100px; }
+.list-radios-custom .radio span { display:block; line-height:60px; color: #525f71; font-size:16px; background-color: #f4f6fa; text-align:center; font-weight:700; cursor: pointer; padding: 0 25px; }
+.list-radios-custom .radio input:checked + span { background-color: #3ec8a7; color: #fff; 
+    -webkit-box-shadow: inset 0px 0px 5px 0px rgba(50, 50, 50, 0.5);
+    -moz-box-shadow:    inset 0px 0px 5px 0px rgba(50, 50, 50, 0.5);
+    box-shadow:         inset 0px 0px 5px 0px rgba(50, 50, 50, 0.5);
+}
+
+.form-business-card .counter-input { float:none; padding-left:0; }
+.form-business-card .counter-control { color: #5a64e7; background-color: #edf1f7; width: 60px; height:60px; font-size:25px; line-height:60px;  
+    background: #f0f3f9;
+    background: -moz-linear-gradient(top,  #f0f3f9 0%, #e5ebf4 44%, #dce3ef 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0f3f9), color-stop(44%,#e5ebf4), color-stop(100%,#dce3ef));
+    background: -webkit-linear-gradient(top,  #f0f3f9 0%,#e5ebf4 44%,#dce3ef 100%);
+    background: -o-linear-gradient(top,  #f0f3f9 0%,#e5ebf4 44%,#dce3ef 100%);
+    background: -ms-linear-gradient(top,  #f0f3f9 0%,#e5ebf4 44%,#dce3ef 100%);
+    background: linear-gradient(to bottom,  #f0f3f9 0%,#e5ebf4 44%,#dce3ef 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f3f9', endColorstr='#dce3ef',GradientType=0 );
+}
+.form-business-card .counter-field { line-height:60px; height:60px; font-size:20px; }
+
+.list-checkboxes-custom li { list-style:none; list-style-position: outside; }
+.list-checkboxes-custom .form-label-check { display: inline-block;  overflow: hidden; position: relative; line-height:24px; margin-bottom:15px; }
+.list-checkboxes-custom .form-label-check input { position: absolute; top:-100px; left:-100px; }
+.list-checkboxes-custom .form-label-check span { display: inline-block; vertical-align: top; margin-left:10px; }
+.list-checkboxes-custom .ico-check { display: inline-block; width: 22px; height:22px; vertical-align: top; border-radius: 50%; background-color: #f4f6fa; 
+    -webkit-box-shadow: inset 0px 1px 1px 0px rgba(50, 50, 50, 0.2);
+    -moz-box-shadow:    inset 0px 1px 1px 0px rgba(50, 50, 50, 0.2);
+    box-shadow:         inset 0px 1px 1px 0px rgba(50, 50, 50, 0.2);
+}
+.list-checkboxes-custom input:checked + .ico-check { background: url(images/icons.png) no-repeat -181px 0; }
+
 @media (max-width: 1260px) {
     .slider-projects { max-width: 900px; }
 }
-
 
 @media (max-width: 1200px) {
     .shell { width: auto; padding: 0 10px; }
@@ -837,9 +913,7 @@ input:checked + label .paypal-logo { background-position: 0 -29px; }
     .testimonilas li { float:none; width: auto; padding-bottom:30px; }
     .testimonial blockquote { padding-bottom:10px; }
 
-    .feature ~ .feature:before { display: none; } 
-
-
+    .feature ~ .feature:before { display: none; }
     
     .expand { border-top:5px solid #718097; border-bottom:5px solid #718097; display: inline-block; width: 40px; padding: 5px 0; position: absolute; top:20px; right:10px; }
     .expand:before { content:''; display:block; height:5px; width: 100%; background-color: #718097; }
@@ -849,6 +923,10 @@ input:checked + label .paypal-logo { background-position: 0 -29px; }
     .header .nav li a { display:block; padding-left:10px; }
 
     .slider-projects { max-width: 500px; }
+    
+    .list-radios-custom { display:block; }
+    .list-radios-custom li { float:none; }
+    .list-radios-custom li:first-child { border-right:0; border-bottom:1px solid #dce3ef;  }
 }
 
 @media (max-width: 815px) {

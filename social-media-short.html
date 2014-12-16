@@ -45,7 +45,7 @@
 
 				<nav class="nav">
 					<ul>
-						<li>
+						<li class="current">
 							<a href="project.html">START YOUR PROJECT</a>
 						</li>
 						
@@ -53,7 +53,7 @@
 							<a href="contact.html">CONTACT US</a>
 						</li>
 						
-						<li class="current">
+						<li>
 							<a href="apply.html">JOIN THE TEAM</a>
 						</li>
 
@@ -75,11 +75,25 @@
 
 		<div class="section section-contacts">
 			<div class="shell">
-				<div class="form form-apply">
+				<div class="form form-apply form-business-card">
 					<div class="section-head form-head">
-						<h2>Join Our Team</h2>
+						<h2>Social Media Design</h2>
 				
-						<p>Have a passion for design?  We are looking for the designers to be part of TeamLead.  <br /> You make 70% revenue on everything you sell, period.  Submit your information and we’ll get back to you shortly.  We are experiencing high demand so we apologize for any delay.</p>
+						<p>Hand-picked designers to enhance your social media profiles. <br />Final logos sent to you as .jpg, .png, .and .psd file formats.</p>
+
+						<p>
+							<span>
+								<i class="ico-mouse"></i>
+
+								3 rounds of design 
+							</span>
+
+							<span>
+								<i class="ico-calendar"></i>
+
+								3-5 business days
+							</span>
+						</p>
 					</div><!-- /.section-head -->
 				
 					<form action="lib/form.php" method="post" class="form-required">
@@ -88,7 +102,7 @@
 							<div class="form-row">
 								<div class="form-cols">
 									<div class="form-col form-col-1of2">
-										<label for="field-full-name" class="form-label">Full Name <span class="form-asterisk">*</span></label>
+										<label for="field-full-name" class="form-label">Your Full Name<span class="form-asterisk">*</span></label>
 										
 										<div class="form-controls">
 											<input type="text" class="field" name="field-full-name" id="field-full-name" required data-validation-type="['presence']" />
@@ -96,7 +110,7 @@
 									</div><!-- /.form-col form-col-1of2 -->
 									
 									<div class="form-col form-col-1of2">
-										<label for="field-e-mail" class="form-label">E-mail <span class="form-asterisk">*</span></label>
+										<label for="field-e-mail" class="form-label">Email Address<span class="form-asterisk">*</span></label>
 										
 										<div class="form-controls">
 											<input type="email" class="field" name="field-e-mail" id="field-e-mail" required data-validation-type="['email']" />
@@ -107,32 +121,98 @@
 							</div><!-- /.form-row -->
 							
 							<div class="form-row">
-								<label for="field-portfolio-url" class="form-label">Portfolio URL <span class="form-asterisk">*</span></label>
+								<label for="field-name-business" class="form-label">What is the name of your business?<span class="form-asterisk">*</span></label>
 								
 								<div class="form-controls">
-									<input type="text" class="field" name="field-portfolio-url" id="field-portfolio-url" required data-validation-type="['presence']" />
+									<input type="text" class="field" name="field-name-business" id="field-name-business" required data-validation-type="['presence']" />
 								</div><!-- /.form-controls -->
 							</div><!-- /.form-row -->
 							
 							<div class="form-row">
-								<label for="field-dribbble-url" class="form-label">Dribbble URL</label>
+								<label for="field-describe-business" class="form-label">Please describe your business. <span class="form-asterisk">*</span></label>
 								
 								<div class="form-controls">
-									<input type="text" class="field" name="field-dribbble-url" id="field-dribbble-url" />
+									<textarea type="text" class="textarea" cols="10" rpws="10" name="field-describe-business" id="field-describe-business" required required data-validation-type="['presence']"></textarea>
 								</div><!-- /.form-controls -->
 							</div><!-- /.form-row -->
 							
 							<div class="form-row">
-								<label for="field-behance-url" class="form-label">Behance URL</label>
+								<label for="field-target" class="form-label">Who is your target audience? <span class="form-asterisk">*</span></label>
 								
 								<div class="form-controls">
-									<input type="text" class="field" name="field-behance-url" id="field-behance-url" />
+									<input type="text" class="field" name="field-target" id="field-target" required required data-validation-type="['presence']"/>
 								</div><!-- /.form-controls -->
 							</div><!-- /.form-row -->
+
+							<div class="form-row">
+								<label for="field-keywords" class="form-label">What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)<span class="form-asterisk">*</span></label>
+								
+								<div class="form-controls">
+									<input type="text" class="field" name="field-keywords" id="field-keywords" required required data-validation-type="['presence']" />
+								</div><!-- /.form-controls -->
+							</div><!-- /.form-row -->
+
+							<div class="form-row">
+								<label for="field-design-service" class="form-label">Select design service(s) needed below:<span class="form-asterisk">*</span></label>
+								
+								<div class="form-controls">
+									<ul class="list-checkboxes list-checkboxes-custom">
+										<li>
+											<div class="checkbox">
+												<label for="field-facebook-photo" class="form-label-check">
+													<input type="checkbox" name="field-facebook-photo" id="field-facebook-photo" />
+													
+													<i class="ico-check"></i>
+													
+													<span>Facebook header &amp; profile photo</span>
+												</label>
+											</div><!-- /.checkbox -->
+										</li>
+										
+										<li>
+											<div class="checkbox">
+												<label for="field-twitter-photo" class="form-label-check">
+													<input type="checkbox" name="field-twitter-photo" id="field-twitter-photo" />
+													
+													<i class="ico-check"></i>
+													
+													<span>Twitter header &amp; profile photo</span>
+												</label>
+											</div><!-- /.checkbox -->
+										</li>
+										
+										<li>
+											<div class="checkbox">
+												<label for="field-youtube-photo" class="form-label-check">
+													<input type="checkbox" name="field-youtube-photo" id="field-youtube-photo" />
+													
+													<i class="ico-check"></i>
+													
+													<span>YouTube header &amp; profile photo</span>
+												</label>
+											</div><!-- /.checkbox -->
+										</li>
+										
+										<li>
+											<div class="checkbox">
+												<label for="field-linkedin-photo" class="form-label-check">
+													<input type="checkbox" name="field-linkedin-photo" id="field-linkedin-photo" />
+													
+													<i class="ico-check"></i>
+													
+													<span>LinkedIn header &amp; profile photo</span>
+												</label>
+											</div><!-- /.checkbox -->
+										</li>
+									</ul><!-- /.list-checkboxes -->
+								</div><!-- /.form-controls -->
+							</div><!-- /.form-row -->							
 						</div><!-- /.form-body -->
 						
 						<div class="form-actions">
-							<input type="submit" class="btn form-btn" value="APPLY NOW" />
+							<input type="submit" class="btn form-btn" value="GET STARTED - $300" />
+
+							<a href="#" class="btn btn-disabled">ADD MORE ITEMS</a>
 						</div><!-- /.form-actions -->
 					</form>
 				</div><!-- /.form form-apply -->
