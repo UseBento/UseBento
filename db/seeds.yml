@@ -1,7 +1,7 @@
 Services:
   - name: 'logo_design'
     title: 'Logo Design'
-    description: ''
+    description: 'Hand-picked designers to create your brand for your next project or company. Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
     rounds: 3
     price: 400
     completion_time: [3, 5]

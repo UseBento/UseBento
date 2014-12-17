@@ -7,7 +7,6 @@ class Question
   field :values,     type: Array
   field :required,   type: Boolean
 
-  has_many :answer
   embedded_in :service
 
   def validate_answer(answer_obj) 

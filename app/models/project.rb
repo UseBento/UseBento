@@ -13,10 +13,10 @@ class Project
     results = self.service.questions.map { |question|
         answer = answer_for(question)
         if !answer
-          errors.push {valid:     false, 
+          errors.push({valid:     false, 
                        answer:    nil, 
                        question:  question,
-                       message:  "This field is required"}
+                       message:  "This field is required"})
         else
           valid = question.validate_answer(answer)
           if (!valid[:valid])
