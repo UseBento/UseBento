@@ -10,13 +10,13 @@
           li
             .radio
               label.form-label-radio[for="field-design-only"]
-                input#field-design-only[type="radio" name="presentation-type"]
+                input#field-design-only[type="radio" name="service" value="design_only"]
                 span
                   | Design Only
           li
             .radio
               label.form-label-radio[for="field-design-development"]
-                input#field-design-development[type="radio" name="presentation-type"]
+                input#field-design-development[type="radio" name="service" value="design_and_development"]
                 span
                   | Design & Development
     .form-col.form-col-1of2
@@ -29,13 +29,13 @@
           li
             .radio
               label.form-label-radio[for="field-desktop-only"]
-                input#field-desktop-only[type="radio" name="type-of-development"]
+                input#field-desktop-only[type="radio" name="responsiveness" value="desktop"]
                 span
                   | Desktop Only
           li
             .radio
               label.form-label-radio[for="field-desktop-mobile"]
-                input#field-desktop-mobile[type="radio" name="type-of-development"]
+                input#field-desktop-mobile[type="radio" name="responsiveness" value="desktop_plus_mobile"]
                 span
                   | Desktop + Mobile
 .form-row
@@ -48,14 +48,14 @@
       li
         .checkbox
           label.form-label-check[for="field-Google analytics setup"]
-            input#field-Google analytics setup[type="checkbox" name="field-Google analytics setup"]
+            input#field-Google analytics setup[type="checkbox" name="free_services" value="google_analytics_setup"]
             i.ico-check
             span
               | Google analytics setup
       li
         .checkbox
           label.form-label-check[for="field-FTP Upload"]
-            input#field-FTP Upload[type="checkbox" name="field-FTP Upload"]
+            input#field-FTP Upload[type="checkbox" name="free_services" value="ftp_upload"]
             i.ico-check
             span
               | FTP Upload
@@ -68,6 +68,6 @@
     .counter-input
       button.counter-control.counter-minus[type="button"]
         | -
-      input#pages-count.counter-field.calc-item[type="text" name="qty" readonly value="1" data-math-type="multiply"]
+      input#pages-count.counter-field.calc-item[type="text" name="pages" readonly value="1" data-math-type="multiply"]
       button.counter-control.counter-control-plus[type="button"]
         | +

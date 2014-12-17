@@ -31,42 +31,42 @@
                     span.form-asterisk
                       | *
                   .form-controls
-                    input#field-full-name.field[type="text" name="field-full-name" required data-validation-type="['presence']"]
+                    input#field-full-name.field[type="text" name="full_name" required data-validation-type="['presence']"]
                 .form-col.form-col-1of2
                   label.form-label[for="field-e-mail"]
                     | Email Address
                     span.form-asterisk
                       | *
                   .form-controls
-                    input#field-e-mail.field[type="email" name="field-e-mail" required data-validation-type="['email']"]
+                    input#field-e-mail.field[type="email" name="email" required data-validation-type="['email']"]
             .form-row
               label.form-label[for="field-name-business"]
                 | What is the name of your business?
                 span.form-asterisk
                   | *
               .form-controls
-                input#field-name-business.field[type="text" name="field-name-business" required data-validation-type="['presence']"]
+                input#field-name-business.field[type="text" name="business_name" required data-validation-type="['presence']"]
             .form-row
               label.form-label[for="field-describe-business"]
                 | Please describe your business. 
                 span.form-asterisk
                   | *
               .form-controls
-                textarea#field-describe-business.textarea[type="text" cols="10" rpws="10" name="field-describe-business" required data-validation-type="['presence']"]
+                textarea#field-describe-business.textarea[type="text" cols="10" rows="10" name="business_description" required data-validation-type="['presence']"]
             .form-row
               label.form-label[for="field-target"]
                 | Who is your target audience? 
                 span.form-asterisk
                   | *
               .form-controls
-                input#field-target.field[type="text" name="field-target" required data-validation-type="['presence']"]
+                input#field-target.field[type="text" name="target_audience" required data-validation-type="['presence']"]
             .form-row
               label.form-label[for="field-keywords"]
                 | What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
                 span.form-asterisk
                   | *
               .form-controls
-                input#field-keywords.field[type="text" name="field-keywords" required data-validation-type="['presence']"]
+                input#field-keywords.field[type="text" name="business_keywords" required data-validation-type="['presence']"]
             = render partial: @partial
           .form-actions
             input.btn.form-btn[type="submit" value=("GET STARTED - $" + @service.price.to_s)]

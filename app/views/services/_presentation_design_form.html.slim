@@ -10,13 +10,13 @@
           li
             .radio
               label.form-label-radio[for="field-powerpoint"]
-                input#field-powerpoint[type="radio" name="presentation-type"]
+                input#field-powerpoint[type="radio" name="presentation_type" value="Powerpoint"]
                 span
                   | Powerpoint
           li
             .radio
               label.form-label-radio[for="field-keynote"]
-                input#field-keynote[type="radio" name="presentation-type"]
+                input#field-keynote[type="radio" name="presentation_type" value="Keynote"]
                 span
                   | Keynote
     .form-col.form-col-1of2
@@ -28,6 +28,6 @@
         .counter-input
           button.counter-control.counter-control-minus[type="button"]
             | -
-          input#pages-count.counter-field.calc-item[type="text" name="qty" readonly value="1" data-math-type="multiply"]
+          input#pages-count.counter-field.calc-item[type="text" name="slide_count" readonly value="1" data-math-type="multiply"]
           button.counter-control.counter-control-plus[type="button"]
             | +
