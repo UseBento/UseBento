@@ -1,0 +1,12 @@
+.wrapper
+  = render partial: 'header'
+  .section.section-contacts
+    .shell
+      .form.form-apply.form-business-card
+        .section-head.form-head
+          h2
+            = @project.service.title
+          p
+            == @project.service.description
+          br
+= render partial: 'footer'
