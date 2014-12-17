@@ -1,22 +1,5 @@
 .wrapper
-  header.header
-    a.expand[href="index.html"]
-    .shell
-      a.logo[href="index.html"]
-        | Bento
-      nav.nav
-        ul
-          li.current
-            = link_to "START YOUR PROJECT", "/services/select"
-          li
-            a[href="contact.html"]
-              | CONTACT US
-          li
-            a[href="apply.html"]
-              | JOIN THE TEAM
-          li
-            a[href="agencies.html"]
-              | FOR AGENCIES
+  = render partial: 'header'
   .section.section-project
     .cart-bar
       ul.cart-bar-items
