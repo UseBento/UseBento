@@ -7,8 +7,7 @@
       nav.nav
         ul
           li.current
-            a[href="project.html"]
-              | START YOUR PROJECT
+            = link_to "START YOUR PROJECT", "/services/select"
           li
             a[href="contact.html"]
               | CONTACT US
@@ -51,92 +50,92 @@
               | Branding and Marketing
           .products-body
             .products-grid-item
-              a.product-tile[href="products/logo-design.html"]
-               .product-tile-image
-                img[src="images/products/logo.jpg" alt="" width="280" height="222"]
-              .product-tile-title
-                h3
-                  | Logo Design
+              a.product-tile href=url_for(:controller => 'services', :action => 'create', :name => 'logo_design')
+                .product-tile-image
+                  img[src="/images/products/logo.jpg" alt="" width="280" height="222"]
+                .product-tile-title
+                  h3
+                    | Logo Design
             .products-grid-item
-              a.product-tile[href="products/business-card-design.html"]
-               .product-tile-image
-                img[src="images/products/business_card.jpg" alt="" width="280" height="222"]
-              .product-tile-title
-                h3
-                  | Business Card Design
+              a.product-tile href=url_for(:controller => 'services', :action => 'create', :name => 'business_card')
+                .product-tile-image
+                  img[src="/images/products/business_card.jpg" alt="" width="280" height="222"]
+                .product-tile-title
+                  h3
+                    | Business Card Design
             .products-grid-item
-              a.product-tile[href="products/stationary-design.html"]
-               .product-tile-image
-                img[src="images/products/stationary.jpg" alt="" width="280" height="222"]
-              .product-tile-title
-                h3
-                  | Stationary Design
+              a.product-tile href=url_for(:controller => 'services', :action => 'create', :name => 'stationary_design')
+                .product-tile-image
+                  img[src="/images/products/stationary.jpg" alt="" width="280" height="222"]
+                .product-tile-title
+                  h3
+                    | Stationary Design
             .products-grid-item
-              a.product-tile[href="products/presentation-design.html"]
-               .product-tile-image
-                img[src="images/products/presentation.jpg" alt="" width="280" height="222"]
-              .product-tile-title
-                h3
-                  | Presentation Design
+              a.product-tile href=url_for(:controller => 'services', :action => 'create', :name => 'presentation_design')
+                .product-tile-image
+                  img[src="/images/products/presentation.jpg" alt="" width="280" height="222"]
+                .product-tile-title
+                  h3
+                    | Presentation Design
             .products-grid-item
-              a.product-tile[href="products/social-media-design.html"]
-               .product-tile-image
-                img[src="images/products/social.jpg" alt="" width="280" height="222"]
-              .product-tile-title
-                h3
-                  | Social Media Design
+              a.product-tile href=url_for(:controller => 'services', :action => 'create', :name => 'social_media_design')
+                .product-tile-image
+                  img[src="/images/products/social.jpg" alt="" width="280" height="222"]
+                .product-tile-title
+                  h3
+                    | Social Media Design
         #websites.products
           .products-head
             h2
               | Websites & Programming
           .products-body
             .products-grid-item
-              a.product-tile[href="products/website-design-and-development.html"]
-               .product-tile-image
-                img[src="images/products/website.jpg" alt="" width="280" height="222"]
-              .product-tile-title
-                h3
-                  | Website Design & Development
+              a.product-tile href=url_for(:controller => 'services', :action => 'create', :name => 'website_design_and_development')
+                .product-tile-image
+                  img[src="/images/products/website.jpg" alt="" width="280" height="222"]
+                .product-tile-title
+                  h3
+                    | Website Design & Development
             .products-grid-item
-              a.product-tile[href="products/wordpress-design-and-development.html"]
-               .product-tile-image
-                img[src="images/products/wordpress.jpg" alt="" width="280" height="222"]
-              .product-tile-title
-                h3
-                  | Wordpress Design & Development
+              a.product-tile href=url_for(:controller => 'services', :action => 'create', :name => 'wordpress_design_and_development')
+                .product-tile-image
+                  img[src="/images/products/wordpress.jpg" alt="" width="280" height="222"]
+                .product-tile-title
+                  h3
+                    | Wordpress Design & Development
             .products-grid-item
-              a.product-tile[href="products/email-design-and-development.html"]
-               .product-tile-image
-                img[src="images/products/email.jpg" alt="" width="280" height="222"]
-              .product-tile-title
-                h3
-                  | HTML Email Design & Development
+              a.product-tile href=url_for(:controller => 'services', :action => 'create', :name => 'email_design_and_development')
+                .product-tile-image
+                  img[src="/images/products/email.jpg" alt="" width="280" height="222"]
+                .product-tile-title
+                  h3
+                    | HTML Email Design & Development
             .products-grid-item
-              a.product-tile[href="products/landing-page-design-and-development.html"]
-               .product-tile-image
-                img[src="images/products/landing_page.jpg" alt="" width="280" height="222"]
-              .product-tile-title
-                h3
-                  | Landing Page Design & Development
+              a.product-tile href=url_for(:controller => 'services', :action => 'create', :name => 'landing_page_design_and_development')
+                .product-tile-image
+                  img[src="/images/products/landing_page.jpg" alt="" width="280" height="222"]
+                .product-tile-title
+                  h3
+                    | Landing Page Design & Development
         #mobile.products
           .products-head
             h2
               | Mobile Apps
           .products-body
             .products-grid-item
-              a.product-tile[href="products/ios-app-design-and-development.html"]
-               .product-tile-image
-                img[src="images/products/app_design.jpg" alt="" width="280" height="222"]
-              .product-tile-title
-                h3
-                  | Mobile App Design & Development
+              a.product-tile href=url_for(:controller => 'services', :action => 'create', :name => 'mobile_app')
+                .product-tile-image
+                  img[src="/images/products/app_design.jpg" alt="" width="280" height="222"] 
+                .product-tile-title
+                  h3
+                    | Mobile App Design & Development
             .products-grid-item
-              a.product-tile[href="products/app-icon-design.html"]
-               .product-tile-image
-                img[src="images/products/app_icon.jpg" alt="" width="280" height="222"]
-              .product-tile-title
-                h3
-                  | App Icon Design
+              a.product-tile href=url_for(:controller => 'services', :action => 'create', :name => 'app_icon')
+                .product-tile-image
+                  img[src="/images/products/app_icon.jpg" alt="" width="280" height="222"]
+                .product-tile-title
+                  h3
+                    | App Icon Design
   #footer-push
 .footer
   .shell

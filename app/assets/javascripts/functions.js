@@ -7,12 +7,6 @@
 		window.cart = new Cart();
 
 
-		$('.product-tile, .product-link').on('click', function(event) {
-			event.preventDefault();
-
-			new CartPanel(document.querySelector('.side-panel-holder'), this.href);
-		});
-
 
 		$('form:not(.form-required)').on('submit', function(event) {
 			event.preventDefault();

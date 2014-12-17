@@ -27,4 +27,8 @@ class Service
     end
     project
   end
+
+  def partial_name
+    self.name + '_form'
+  end
 end

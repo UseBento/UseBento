@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  get 'services/select'
-  get 'services/add'
+  get  'services/select'
+  get  'services/add'
+  get  'projects/new/:name', to: 'services#create', as: 'service'
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

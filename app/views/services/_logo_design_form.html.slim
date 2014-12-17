@@ -1,0 +1,21 @@
+.form-row
+  .form-cols
+    .form-col.form-col-1of2
+      label.form-label[for="field-full-name"]
+        | Which logotype type do you prefer?
+        span.form-asterisk
+          | *
+      .form-controls
+        ul.list-radios.list-radios-custom
+          li
+            .radio
+              label.form-label-radio[for="field-text-only"]
+                input#field-text-only[type="radio" name="logotype"]
+                span
+                  | Text Only
+          li
+            .radio
+              label.form-label-radio[for="field-text-plus-icon"]
+                input#field-text-plus-icon[type="radio" name="logotype"]
+                span
+                  | Text + Icon
