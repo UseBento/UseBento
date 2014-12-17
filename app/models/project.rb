@@ -39,6 +39,6 @@ class Project
 
   def answer_for(name)
     name = name.name if name.is_a? Question
-    self.answers.where(name: name).first
+    self.answers.where(name: name).first || Answer.new
   end
 end

@@ -32,44 +32,57 @@
                     | Your Full Name
                     span.form-asterisk
                       |  *
+                  .form-errors
+                    = get_error('full_name')
                   .form-controls
-                    input#field-full-name.field[type="text" name="full_name" required data-validation-type="['presence']"]
+                    input#field-full-name.field[type="text" name="full_name" required data-validation-type="['presence']" value=@project.answer_for('full_name').answer]
                 .form-col.form-col-1of2
                   label.form-label[for="field-e-mail"]
                     | Email Address
                     span.form-asterisk
                       |  *
+                  .form-errors
+                    = get_error('email')
                   .form-controls
-                    input#field-e-mail.field[type="email" name="email" required data-validation-type="['email']"]
+                    input#field-e-mail.field[type="email" name="email" value=@project.answer_for('email').answer required data-validation-type="['email']"]
             .form-row
               label.form-label[for="field-name-business"]
                 | What is the name of your business?
                 span.form-asterisk
                   |  *
+              .form-errors
+                = get_error('business_name')
               .form-controls
-                input#field-name-business.field[type="text" name="business_name" required data-validation-type="['presence']"]
+                input#field-name-business.field[type="text" name="business_name" value=@project.answer_for('business_name').answer required data-validation-type="['presence']"]
             .form-row
               label.form-label[for="field-describe-business"]
                 | Please describe your business. 
                 span.form-asterisk
                   |  *
+              .form-errors
+                = get_error('business_description')
               .form-controls
                 textarea#field-describe-business.textarea[type="text" cols="10" rows="10" name="business_description" required data-validation-type="['presence']"]
+                  = @project.answer_for('business_description').answer
             .form-row
               label.form-label[for="field-target"]
                 | Who is your target audience? 
                 span.form-asterisk
                   |  *
+              .form-errors
+                = get_error('target_audience')
               .form-controls
-                input#field-target.field[type="text" name="target_audience" required data-validation-type="['presence']"]
+                input#field-target.field[type="text" name="target_audience" value=@project.answer_for('target_audience').answer required data-validation-type="['presence']"]
             .form-row
               label.form-label[for="field-keywords"]
                 | What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
                 span.form-asterisk
                   |  *
+              .form-errors
+                = get_error('business_keywords')
               .form-controls
-                input#field-keywords.field[type="text" name="business_keywords" required data-validation-type="['presence']"]
-            = render partial: @partial
+                input#field-keywords.field[type="text" name="business_keywords" value=@project.answer_for('business_keywords').answer required data-validation-type="['presence']"]
+            = render partial: @service.partial_name
           .form-actions
             input.btn.form-btn[type="submit" value=("GET STARTED - $" + @service.price.to_s)]
 = render partial: 'footer'
