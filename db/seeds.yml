@@ -1,7 +1,7 @@
 Services:
   - name: 'logo_design'
     title: 'Logo Design'
-    description: 'Hand-picked designers to create your brand for your next project or company. Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
+    description: 'Hand-picked designers to create your brand for your next project or company. <br /> Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
     rounds: 3
     price: 400
     completion_time: [3, 5]
@@ -37,6 +37,7 @@ Services:
         required: true
   - name: 'mobile_app'
     title: 'Mobile App Design & Development'
+    description: 'Hand-picked experts to get your iOS app to market. <br />Development optimized for iPhone 4, 4s, 5, 5s, 6 and 6 plus.'
     rounds: 3
     price: 400
     completion_time: [2, 3]
@@ -82,6 +83,7 @@ Services:
         required: true
   - name: 'app_icon'
     title: 'App Icon Design'
+    description: 'Hand-picked designers to create the perfect face for your app. <br /> Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
     rounds: 3
     price: 400
     completion_time: [3, 5]
@@ -117,6 +119,7 @@ Services:
         required: true
   - name: 'business_card'
     title: 'Business Card Design'
+    description: 'Stand-out with a custom, professional business card. <br />Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
     rounds: 3
     price: 300
     completion_time: [3, 5]
@@ -147,6 +150,7 @@ Services:
         required: true
   - name: 'stationary_design'
     title: 'Stationary Design'
+    description: 'From letterheads to your complete corporate identity. <br />Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
     rounds: 3
     price: 300
     completion_time: [3, 5]
@@ -177,6 +181,7 @@ Services:
         required: true
   - name: 'presentation_design'
     title: 'Presentation Design'
+    description: 'Creation of new powerpoint or keynote presentation template. <br />Sourced images are an additional cost.'
     rounds: 3
     price: 300
     completion_time: [3, 5]
@@ -217,6 +222,7 @@ Services:
         required: true
   - name: 'social_media_design'
     title: 'Social Media Design'
+    description: 'Hand-picked designers to enhance your social media profiles. <br />Final logos sent to you as .jpg, .png, .and .psd file formats.'
     rounds: 3
     price: 300
     completion_time: [3, 5]
@@ -256,6 +262,7 @@ Services:
         required: true
   - name: 'website_design_and_development'
     title: 'Website Design & Development'
+    description: 'Hand-picked experts to create your website. <br />HTML website development optimized for all major browser clients.'
     rounds: 3
     price: 400
     completion_time: [2, 3]
@@ -312,6 +319,7 @@ Services:
         required: true
   - name: 'email_design_and_development'
     title: 'Email Design & Development'
+    description: 'A professional email template created just for your business.<br />Responsive HTML optimized for all major email clients.'
     rounds: 3
     price: 400
     completion_time: [3, 5]
@@ -349,6 +357,7 @@ Services:
         required: true
   - name: 'landing_page_design_and_development'
     title: 'Landing Page Design & Development'
+    description: 'High converting HTML landing pages by hand-picked experts. <br />HTML landing page development optimized for all major browser clients'
     rounds: 3
     price: 400
     completion_time: [3, 5]
@@ -397,4 +406,61 @@ Services:
         values: 
           - google_analytics_setup
           - ftp_upload
+        required: true
+  - name: 'wordpress_design_and_development'
+    title: 'Wordpress Website Design & Development'
+    description: 'Hand-picked experts to unleash the power of WordPress. <br />Wordpress development optimized for all major browser clients.'
+    rounds: 3
+    price: 400
+    completion_time: [2, 3]
+    fields: 
+      - name: full_name
+        label: Your Full Name
+        type: :full_name
+        required: true
+      - name: email
+        label: Email Address
+        type: :email
+        required: true
+      - name: business_name
+        label: What is the name of your business?
+        type: :text
+        required: true
+      - name: business_description
+        label: Please describe your business.
+        type: :long_text
+        required: true
+      - name: target_audience
+        label: Who is your target audience?
+        type: :text
+        required: true
+      - name: business_keywords
+        label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
+        type: :keywords
+        required: true
+      - name: service
+        label: Select your service below
+        type: :enum
+        values: 
+          - design_only
+          - design_and_development
+        required: true
+      - name: responsiveness
+        label: What type of responsive development do you need?
+        type: :enum
+        values: 
+          - desktop
+          - desktop_plus_mobile
+        required: true
+      - name: free_services
+        label: Select FREE services below
+        type: :enum
+        values: 
+          - google_analytics_setup
+          - ftp_upload
+        required: true
+      - name: pages
+        label: Number of estimated pages
+        type: :integer
+        values: [1,100]
         required: true
