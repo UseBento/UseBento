@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   get  'services/select'
   get  'services/add'
   get  'projects/new/:name',          to: 'services#create',      as: 'service'
-  post 'projects/new',                to: 'projects#new',         as: 'project'
+  get  'projects/:id',                to: 'projects#view',        as: 'project'
+  post 'projects/new',                to: 'projects#new'         
 
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   def view 
+    @project = Project.find(params[:id])
   end
   
   def new
@@ -16,6 +17,7 @@ class ProjectsController < ApplicationController
       render "projects/create"
     else
       @project.save
+      redirect_to @project
     end
   end
 
