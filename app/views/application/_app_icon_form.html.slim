@@ -3,17 +3,19 @@
     | What type of application is this for?
     span.form-asterisk
       | *
+  .form-errors
+    = get_error('business_description')
   .form-controls
     ul.list-radios.list-radios-custom
       li
         .radio
           label.form-label-radio[for="field-apple"]
-            input#field-apple[type="radio" name="type" value="apple_ios"]
+            input#field-apple[type="radio" name="type" value="apple_ios" checked=(@project.answer_for('type').answer == "apple_ios")]
             span
               | Apple iOS
       li
         .radio
           label.form-label-radio[for="field-android"]
-            input#field-android[type="radio" name="type" value="android"]
+            input#field-android[type="radio" name="type" value="android" checked=(@project.answer_for('type').answer == "android")]
             span
               | Android

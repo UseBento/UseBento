@@ -4,38 +4,40 @@
       label.form-label[for="field-select-service"]
         | Select your service below: 
         span.form-asterisk
-          | *
+          |  *
+      .form-errors
+        = get_error('service')
       .form-controls
         ul.list-radios.list-radios-custom
           li
             .radio
               label.form-label-radio[for="field-design-only"]
-                input#field-design-only[type="radio" name="service" value="design_only"]
+                input#field-design-only[type="radio" name="service" value="design_only" checked=(@project.answer_for('service').answer == "design_only")]
                 span
                   | Design Only
           li
             .radio
               label.form-label-radio[for="field-design-development"]
-                input#field-design-development[type="radio" name="service" value="design_and_development"]
+                input#field-design-development[type="radio" name="service" value="design_and_development" checked=(@project.answer_for('service').answer == "design_and_development")]
                 span
                   | Design & Development
     .form-col.form-col-1of2
       label.form-label[for="field-type-of-development"]
         | What type of responsive development do you need?
         span.form-asterisk
-          | *
+          |  *
       .form-controls
         ul.list-radios.list-radios-custom
           li
             .radio
               label.form-label-radio[for="field-desktop-only"]
-                input#field-desktop-only[type="radio" name="responsiveness" value="desktop"]
+                input#field-desktop-only[type="radio" name="responsiveness" value="desktop" checked=(@project.answer_for('responsiveness').answer == "desktop")]
                 span
                   | Desktop Only
           li
             .radio
               label.form-label-radio[for="field-desktop-mobile"]
-                input#field-desktop-mobile[type="radio" name="responsiveness" value="desktop_plus_mobile"]
+                input#field-desktop-mobile[type="radio" name="responsiveness" value="desktop_plus_mobile" checked=(@project.answer_for('responsiveness').answer == "desktop_plus_mobile")]
                 span
                   | Desktop + Mobile
 .form-row
@@ -43,19 +45,21 @@
     | Select FREE services below:
     span.form-asterisk
       | *
+  .form-errors
+    = get_error('responsiveness')
   .form-controls
     ul.list-checkboxes.list-checkboxes-custom
       li
         .checkbox
           label.form-label-check[for="field-Google analytics setup"]
-            input#field-Google analytics setup[type="checkbox" name="free_services" value="google_analytics_setup"]
+            input#field-Google analytics setup[type="checkbox" name="free_services" value="google_analytics_setup" checked=(@project.answer_for('free_services').answer == "google_analytics_setup")]
             i.ico-check
             span
               | Google analytics setup
       li
         .checkbox
           label.form-label-check[for="field-FTP Upload"]
-            input#field-FTP Upload[type="checkbox" name="free_services" value="ftp_upload"]
+            input#field-FTP Upload[type="checkbox" name="free_services" value="ftp_upload" checked=(@project.answer_for('free_services').answer == "ftp_upload")]
             i.ico-check
             span
               | FTP Upload

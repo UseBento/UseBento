@@ -4,30 +4,34 @@
       label.form-label[for="field-full-name"]
         | Which presentation type do you prefer?
         span.form-asterisk
-          | *
+          |  *
+      .form-errors
+        = get_error('presentation_type')
       .form-controls
         ul.list-radios.list-radios-custom
           li
             .radio
               label.form-label-radio[for="field-powerpoint"]
-                input#field-powerpoint[type="radio" name="presentation_type" value="Powerpoint"]
+                input#field-powerpoint[type="radio" name="presentation_type" value="Powerpoint" checked=(@project.answer_for('presentation_type').answer == "Powerpoint")]
                 span
                   | Powerpoint
           li
             .radio
               label.form-label-radio[for="field-keynote"]
-                input#field-keynote[type="radio" name="presentation_type" value="Keynote"]
+                input#field-keynote[type="radio" name="presentation_type" value="Keynote" checked=(@project.answer_for('presentation_type').answer == "Keynote")]
                 span
                   | Keynote
     .form-col.form-col-1of2
       label.form-label[for="field-e-mail"]
         | Number of estimated slides 
         span.form-asterisk
-          | *
+          |  *
+      .form-errors
+        = get_error('slide_count')
       .form-controls
         .counter-input
           button.counter-control.counter-control-minus[type="button"]
             | -
-          input#pages-count.counter-field.calc-item[type="text" name="slide_count" readonly value="1" data-math-type="multiply"]
+          input#pages-count.counter-field.calc-item[type="text" name="slide_count" readonly value="1" data-math-type="multiply" value=(@project.answer_for('slide_count').answer)]
           button.counter-control.counter-control-plus[type="button"]
             | +

@@ -4,18 +4,20 @@
       label.form-label[for="field-full-name"]
         | Which logotype type do you prefer?
         span.form-asterisk
-          | *
+          |  *
+      .form-errors
+        = get_error('business_description')
       .form-controls
         ul.list-radios.list-radios-custom
           li
             .radio
               label.form-label-radio[for="field-text-only"]
-                input#field-text-only[type="radio" name="logotype" value="text_only"]
+                input#field-text-only[type="radio" name="logotype" value="text_only" checked=(@project.answer_for('logotype').answer == "text_only")]
                 span
                   | Text Only
           li
             .radio
               label.form-label-radio[for="field-text-plus-icon"]
-                input#field-text-plus-icon[type="radio" name="logotype" value="text_plus_icon"]
+                input#field-text-plus-icon[type="radio" name="logotype" value="text_plus_icon" checked=(@project.answer_for('logotype').answer == "text_plus_icon")]
                 span
                   | Text + Icon

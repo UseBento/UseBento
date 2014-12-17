@@ -3,33 +3,35 @@
     | Select design service(s) needed below:
     span.form-asterisk
       | *
+  .form-errors
+    = get_error('design')
   .form-controls
     ul.list-checkboxes.list-checkboxes-custom
       li
         .checkbox
           label.form-label-check[for="field-facebook-photo"]
-            input#field-facebook-photo[type="checkbox" name="design" value="facebook_header_and_profile"]
+            input#field-facebook-photo[type="checkbox" name="design" value="facebook_header_and_profile" checked=(@project.answer_for('design').answer == "facebook_header_and_profile")]
             i.ico-check
             span
               | Facebook header & profile photo
       li
         .checkbox
           label.form-label-check[for="field-twitter-photo"]
-            input#field-twitter-photo[type="checkbox" name="design" value="twitter_header_and_profile"]
+            input#field-twitter-photo[type="checkbox" name="design" value="twitter_header_and_profile" checked=(@project.answer_for('design').answer == "twitter_header_and_profile")]
             i.ico-check
             span
               | Twitter header & profile photo
       li
         .checkbox
           label.form-label-check[for="field-youtube-photo"]
-            input#field-youtube-photo[type="checkbox" name="design" value="youtube_header_and_profile"]
+            input#field-youtube-photo[type="checkbox" name="design" value="youtube_header_and_profile" checked=(@project.answer_for('design').answer == "youtube_header_and_profile")]
             i.ico-check
             span
               | YouTube header & profile photo
       li
         .checkbox
           label.form-label-check[for="field-linkedin-photo"]
-            input#field-linkedin-photo[type="checkbox" name="design" value="linkedin_header_and_profile"]
+            input#field-linkedin-photo[type="checkbox" name="design" value="linkedin_header_and_profile" checked=(@project.answer_for('design').answer == "linkedin_header_and_profile")]
             i.ico-check
             span
               | LinkedIn header & profile photo

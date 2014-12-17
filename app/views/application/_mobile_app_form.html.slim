@@ -4,49 +4,55 @@
       label.form-label[for="field-type-of-development"]
         | What type of application is this for?
         span.form-asterisk
-          | *
+          |  *
+      .form-errors
+        = get_error('business_description')
       .form-controls
         ul.list-radios.list-radios-custom
           li
             .radio
               label.form-label-radio[for="field-apple"]
-                input#field-apple[type="radio" name="type" value="apple_ios"]
+                input#field-apple[type="radio" name="type" value="apple_ios" checked=(@project.answer_for('type').answer == "apple_ios")]
                 span
                   | Apple iOS
           li
             .radio
               label.form-label-radio[for="field-android"]
-                input#field-android[type="radio" name="type" value="android"]
+                input#field-android[type="radio" name="type" value="android" checked=(@project.answer_for('type').answer == "android")]
                 span
                   | Android
     .form-col.form-col-1of2
       label.form-label[for="field-select-service"]
         | Select your service below: 
         span.form-asterisk
-          | *
+          |  *
+      .form-errors
+        = get_error('service_type')
       .form-controls
         ul.list-radios.list-radios-custom
           li
             .radio
               label.form-label-radio[for="field-design-only"]
-                input#field-design-only[type="radio" name="service_type" value="design_only"]
+                input#field-design-only[type="radio" name="service_type" value="design_only" checked=(@project.answer_for('service_type').answer == "design_only")]
                 span
                   | Design Only
           li
             .radio
               label.form-label-radio[for="field-design-development"]
-                input#field-design-development[type="radio" name="service_type" value="design_and_development"]
+                input#field-design-development[type="radio" name="service_type" value="design_and_development" checked=(@project.answer_for('service_type').answer == "design_and_development")]
                 span
                   | Design & Development
 .form-row
   label.form-label[for="field-e-mail"]
     | Number of estimated screens
     span.form-asterisk
-      | *
+      |  *
+  .form-errors
+    = get_error('number_of_screens')
   .form-controls
     .counter-input
       button.counter-control.counter-minus[type="button"]
         | -
-      input#pages-count.counter-field.calc-item[type="text" name="number_of_screens" readonly value="1" data-math-type="multiply"]
+      input#pages-count.counter-field.calc-item[type="text" name="number_of_screens" readonly value="1" data-math-type="multiply" value=(@project.answer_for('number_of_screens').answer)]
       button.counter-control.counter-control-plus[type="button"]
         | +
