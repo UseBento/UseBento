@@ -1,28 +1,5 @@
 .wrapper
-  header.header
-    a.expand[href="#"]
-    .shell
-      a.logo[href="index.html"]
-        | Bento
-      nav.nav
-        ul
-          li.current
-            = link_to "START YOUR PROJECT", "/services/select"
-          li
-            a[href="contact.html"]
-              | CONTACT US
-          li
-            a[href="apply.html"]
-              | JOIN THE TEAM
-          li
-            a[href="agencies.html"]
-              | FOR AGENCIES
-          li
-            a.popup-link[href="popups/login-popup.html"]
-              | LOG IN
-          li
-            a.popup-link[href="popups/sign-up-popup.html"]
-              | SIGN UP
+  = render partial: 'header'
   .section.section-contacts
     .shell
       .form.form-apply.form-business-card
@@ -30,15 +7,17 @@
           h2
             = @service.title
           p
-            = @service.description
+            == @service.description
+          br
           p
             span
               i.ico-mouse
+              |  &nbsp; 
               = @service.rounds
-              |  rounds of design 
+              |   rounds of design &nbsp; &nbsp; 
             span
               i.ico-calendar
-              |  in 
+              |  &nbsp; in 
               = @service.completion_time.first.to_s + '-' + @service.completion_time.last.to_s
               |  business days 
         form.form-required[action="lib/form.php" method="post"]
@@ -91,8 +70,4 @@
             = render partial: @partial
           .form-actions
             input.btn.form-btn[type="submit" value=("GET STARTED - $" + @service.price.to_s)]
-  #footer-push
-.footer
-  .shell
-    .copyright
-      | © Copyright 2014. All Rights Reserved 
+= render partial: 'footer'
