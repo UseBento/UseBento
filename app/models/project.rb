@@ -26,6 +26,13 @@ class Project
     errors
   end
 
+  def add_answer(name, answer)
+    if self.service.has_question(name)
+      self.answers.push(Answer.new({name:   name,
+                                    answer: answer}))
+    end
+  end
+
   def is_valid?
     validate_project.length == 0
   end

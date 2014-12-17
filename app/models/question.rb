@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Question
   include Mongoid::Document
   
@@ -18,7 +19,8 @@ class Question
       valid = true
 
     elsif (self.type == :email)
-      valid = answer.email?
+      email_regex = /^(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Z‌​a-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6}$/i
+      valid = answer.match(email_regex)
       invalid_message =  "Please enter a valid email"
 
     elsif [:full_name, :text, :keywords].member?(self.type)

@@ -8,13 +8,13 @@
 
 
 
-		$('form:not(.form-required)').on('submit', function(event) {
+/*		$('form:not(.form-required)').on('submit', function(event) {
 			event.preventDefault();
 
 			ajaxSubmit($(this));
-		});
+		});*/
 
-
+/*
 		$('.form-required').each(function() {
 			var $form = $(this);
 			new Validator(this, {
@@ -28,7 +28,7 @@
 				}
 			});
 		});
-
+*/
 
 
 		// UI Helpers

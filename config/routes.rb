@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   get  'services/select'
   get  'services/add'
-  get  'projects/new/:name', to: 'services#create', as: 'service'
+  get  'projects/new/:name',          to: 'services#create',      as: 'service'
+  post 'projects/new',                to: 'projects#new',         as: 'project'
+
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -20,6 +22,7 @@ Rails.application.routes.draw do
 
   # Example resource route with options:
   #   resources :products do
+
   #     member do
   #       get 'short'
   #       post 'toggle'

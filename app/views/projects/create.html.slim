@@ -20,8 +20,10 @@
               |  &nbsp; in 
               = @service.completion_time.first.to_s + '-' + @service.completion_time.last.to_s
               |  business days 
-        form.form-required[action="lib/form.php" method="post"]
+        form.form-required[action="/projects/new" method="post"]
           input[type="hidden" name="application-form"]
+          input[type="hidden" name="service_name" value=@service.name]
+          = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) 
           .form-body
             .form-row
               .form-cols
@@ -29,42 +31,42 @@
                   label.form-label[for="field-full-name"]
                     | Your Full Name
                     span.form-asterisk
-                      | *
+                      |  *
                   .form-controls
                     input#field-full-name.field[type="text" name="full_name" required data-validation-type="['presence']"]
                 .form-col.form-col-1of2
                   label.form-label[for="field-e-mail"]
                     | Email Address
                     span.form-asterisk
-                      | *
+                      |  *
                   .form-controls
                     input#field-e-mail.field[type="email" name="email" required data-validation-type="['email']"]
             .form-row
               label.form-label[for="field-name-business"]
                 | What is the name of your business?
                 span.form-asterisk
-                  | *
+                  |  *
               .form-controls
                 input#field-name-business.field[type="text" name="business_name" required data-validation-type="['presence']"]
             .form-row
               label.form-label[for="field-describe-business"]
                 | Please describe your business. 
                 span.form-asterisk
-                  | *
+                  |  *
               .form-controls
                 textarea#field-describe-business.textarea[type="text" cols="10" rows="10" name="business_description" required data-validation-type="['presence']"]
             .form-row
               label.form-label[for="field-target"]
                 | Who is your target audience? 
                 span.form-asterisk
-                  | *
+                  |  *
               .form-controls
                 input#field-target.field[type="text" name="target_audience" required data-validation-type="['presence']"]
             .form-row
               label.form-label[for="field-keywords"]
                 | What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
                 span.form-asterisk
-                  | *
+                  |  *
               .form-controls
                 input#field-keywords.field[type="text" name="business_keywords" required data-validation-type="['presence']"]
             = render partial: @partial

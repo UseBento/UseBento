@@ -31,4 +31,8 @@ class Service
   def partial_name
     self.name + '_form'
   end
+
+  def has_question(name) 
+    self.questions.where(name: name).first
+  end
 end
