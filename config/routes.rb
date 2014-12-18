@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   post 'projects/new',                to: 'projects#new'         
 
   root 'welcome#index'
+  get  'contact',                     to: 'application#contact'
+  get  'apply',                       to: 'application#apply'
+  get  'agencies',                    to: 'application#agencies'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,51 @@
+.wrapper
+  = render partial: 'header', locals: {page: 'apply'}
+  .section.section-contacts
+    .shell
+      .form.form-apply
+        .section-head.form-head
+          h2
+            | Join Our Team
+          p
+            | Have a passion for design? We are looking for the designers to be part of TeamLead. 
+            br
+            |  You make 70% revenue on everything you sell, period. Submit your information and we’ll get back to you shortly. We are experiencing high demand so we apologize for any delay.
+        form.form-required[action="lib/form.php" method="post"]
+          input[type="hidden" name="application-form"]
+          .form-body
+            .form-row
+              .form-cols
+                .form-col.form-col-1of2
+                  label.form-label[for="field-full-name"]
+                    | Full Name 
+                    span.form-asterisk
+                      | *
+                  .form-controls
+                    input#field-full-name.field[type="text" name="field-full-name" required data-validation-type="['presence']"]
+                .form-col.form-col-1of2
+                  label.form-label[for="field-e-mail"]
+                    | E-mail 
+                    span.form-asterisk
+                      | *
+                  .form-controls
+                    input#field-e-mail.field[type="email" name="field-e-mail" required data-validation-type="['email']"]
+            .form-row
+              label.form-label[for="field-portfolio-url"]
+                | Portfolio URL 
+                span.form-asterisk
+                  | *
+              .form-controls
+                input#field-portfolio-url.field[type="text" name="field-portfolio-url" required data-validation-type="['presence']"]
+            .form-row
+              label.form-label[for="field-dribbble-url"]
+                | Dribbble URL
+              .form-controls
+                input#field-dribbble-url.field[type="text" name="field-dribbble-url"]
+            .form-row
+              label.form-label[for="field-behance-url"]
+                | Behance URL
+              .form-controls
+                input#field-behance-url.field[type="text" name="field-behance-url"]
+          .form-actions
+            input.btn.form-btn[type="submit" value="APPLY NOW"]
+= render partial: 'footer'

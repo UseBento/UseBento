@@ -2,21 +2,23 @@
   header.header.header-top
     a.expand[href="#"]
     .shell
-      a.logo[href="index.html"]
-        | Bento
+      = link_to "Bento", "/", class: "logo"
       nav.nav
         ul
           li
             = link_to "START YOUR PROJECT", "/services/select"
           li
-            a[href="contact.html"]
-              | CONTACT US
+            = link_to "CONTACT US", "/contact"
           li
-            a[href="apply.html"]
-              | JOIN THE TEAM
+            = link_to "JOIN THE TEAM", "/apply"
           li
-            a[href="agencies.html"]
-              | FOR AGENCIES
+            = link_to "FOR AGENCIES", "/agencies"
+          /li
+            a.popup-link[href="popups/login-popup.html"]
+              | LOG IN
+          /li
+            a.popup-link[href="popups/sign-up-popup.html"]
+              | SIGN UP
   .intro
     img.intro-bg[src="/css/images/desk.jpg" alt="" width="1600" height="776" class="intro-bg fsr-element fsr-hidden"]
     .intro-content
@@ -33,21 +35,23 @@
   header.header.header-secondary
     .shell
       a.expand[href="#"]
-      a.logo[href="#"]
-        | TeamLead
+      = link_to "Bento", "/", class: "logo"
       nav.nav
         ul
           li
             = link_to "START YOUR PROJECT", "/services/select"
           li
-            a[href="contact.html"]
-              | CONTACT US
+            = link_to "CONTACT US", "/contact"
           li
-            a[href="apply.html"]
-              | JOIN THE TEAM
+            = link_to "JOIN THE TEAM", "/apply"
           li
-            a[href="agencies.html"]
-              | FOR AGENCIES
+            = link_to "FOR AGENCIES", "/agencies"
+          /li
+            a.popup-link[href="popups/login-popup.html"]
+              | LOG IN
+          /li
+            a.popup-link[href="popups/sign-up-popup.html"]
+              | SIGN UP
   section.section
     .shell
       header.section-head

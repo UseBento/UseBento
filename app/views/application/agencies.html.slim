@@ -1,0 +1,166 @@
+.wrapper
+  = render partial: 'header', locals: {page: 'agencies'}
+  .intro.intro-secondary
+    img.intro-bg[src="css/images/work.jpg" alt="" width="1600" height="564"]
+    .intro-content
+      .shell
+        h2
+          | We’re Your In-House Team
+        p
+          | Our turn-key process gets your client’s projects done easily, quickly, and beautifully.
+        p
+          a.btn.scroll-to[href="#agency-contact"]
+            | LET’S TALK
+      a.arrow-down.scroll-to[href="#feature-01"]
+  section#feature-01.section.section-feature
+    .shell
+      .section-main
+        header.section-head
+          h2
+            | A Partner to Work With You and Your Clients
+        .section-body
+          p
+            | As an agency, you are the trusted partner that your clients look to for expert advice and to help them grow their business while driving ROI on any investment they make. Being able to offer more of the services that your clients need helps you to continue to build a stronger client relationships. Bento was created to be your partner in providing the piece of mind that projects will get done efficiently and effectively while exceeding your client’s expectations. 
+          a.btn.scroll-to[href="#agency-contact"]
+            | LEARN MORE
+      .section-image
+        img[src="css/images/section-image.png" alt="" width="409" height="413"]
+  section#feature-02.section.section-feature.section-inverse.section-divided
+    .shell
+      .section-main
+        header.section-head
+          h2
+            | Turn-key Design and Development Process
+        .section-body
+          p
+            | Using our extensive experience in both the UI/UX and development we will be able to ask you the right questions and walk you through our design and development process to properly scope out the project so it gets done right the first time.
+          a.btn.scroll-to[href="#agency-contact"]
+            | LEARN MORE
+      .section-image
+        img[src="css/images/section-image.png" alt="" width="409" height="413"]
+  .section.section-divided
+    .shell
+      ul.features-list
+        li
+          .features-list-item-icon
+            span.feature-icon-cloud
+          .features-list-item-body
+            h4
+              | Turn-Key Projects
+            p
+              | Turn key website development, branding, social media branding
+        li
+          .features-list-item-icon
+            span.feature-icon-chat
+          .features-list-item-body
+            h4
+              | Requirements and Communication
+            p
+              | We understand project requirements and facilitating communication on our platform to get the project done.
+        li
+          .features-list-item-icon
+            span.feature-icon-terminal
+          .features-list-item-body
+            h4
+              | Trusted Partner
+            p
+              | Trusted technology and design partner to offer value to your clients. 
+        li
+          .features-list-item-icon
+            span.feature-icon-server
+          .features-list-item-body
+            h4
+              | Compliment Your Services
+            p
+              | We compliment the services you already offer to your clients. 
+  .section.section-agency-testimonials
+    .shell
+      .section-head
+        h2
+          | Agencies Love Us
+        p
+          | Cras pellentesque odio ligula, sed suscipit massa venenatis et.
+      ul.agency-testimonials
+        li
+          .testimonial-body
+            |  “Suspendisse interdum quam sed ipsum sagittis malesuada a sagittis nisi. Duis gravida quam nisl, quis luctus orci posuere sit amet.” 
+          .testimonial-head
+            .testimonial-image
+              img[src="images/testimonials/agency-01.png" alt="" width="70" height="70"]
+            .testimonial-author
+              h5
+                | Jeremy Parker
+              p
+                | Public Relations - 
+                a[href="#"]
+                  | Envato
+        li
+          .testimonial-body
+            |  “Suspendisse interdum quam sed ipsum sagittis malesuada a sagittis nisi. Duis gravida quam nisl, quis luctus orci posuere sit amet.” 
+          .testimonial-head
+            .testimonial-image
+              img[src="images/testimonials/agency-01.png" alt="" width="70" height="70"]
+            .testimonial-author
+              h5
+                | Jeremy Parker
+              p
+                | Public Relations - 
+                a[href="#"]
+                  | Envato
+        li
+          .testimonial-body
+            |  “Suspendisse interdum quam sed ipsum sagittis malesuada a sagittis nisi. Duis gravida quam nisl, quis luctus orci posuere sit amet.” 
+          .testimonial-head
+            .testimonial-image
+              img[src="images/testimonials/agency-01.png" alt="" width="70" height="70"]
+            .testimonial-author
+              h5
+                | Jeremy Parker
+              p
+                | Public Relations - 
+                a[href="#"]
+                  | Envato
+  #agency-contact.section.section-callout.section-contact
+    .shell
+      .section-head
+        h2
+          | Talk With Us
+      .section-body
+        .form.form-contact
+          form.form-required[action="lib/form.php" method="post"]
+            input[type="hidden" name="contact-form-agency"]
+            .form-body
+              .form-row
+                .form-cols.clearfix
+                  .form-col.form-col-1of2
+                    label.form-label[for="field-name"]
+                      | Name 
+                      span.form-asterisk
+                        | *
+                    .form-controls
+                      input#field-name.field[type="text" name="field-name" required data-validation-type="['presence']"]
+                  .form-col.form-col-1of2
+                    label.form-label[for="field-e-mail"]
+                      | E-mail 
+                      span.form-asterisk
+                        | *
+                    .form-controls
+                      input#field-e-mail.field[type="email" name="field-e-mail" required data-validation-type="['email']"]
+              .form-row
+                label.form-label[for="field-agency"]
+                  | Agency 
+                  span.form-asterisk
+                    | *
+                .form-controls
+                  input#field-agency.field[type="text" name="field-agency" required data-validation-type="['presence']"]
+              .form-row
+                label.form-label[for="field-message"]
+                  | Message 
+                  span.form-asterisk
+                    | *
+                .form-controls
+                  textarea#field-message.textarea[name="field-message" cols="30" rows="10" required data-validation-type="['presence']"]
+            .form-actions
+              button.btn-callout[type="submit"]
+                | SEND MESSAGE
+= render partial: 'footer'

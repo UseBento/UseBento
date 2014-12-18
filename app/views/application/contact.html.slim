@@ -1,0 +1,98 @@
+.wrapper
+  = render partial: 'header', locals: {page: 'contact'}
+  .main
+    .shell
+      .content
+        .section.section-contacts
+          .form.form-contact
+            form.form-required[action="lib/form.php" method="post"]
+              .section-head.form-head
+                h2.section-title
+                  | Get in touch with us!
+                p
+                  | We would love to hear from you. Tell us what you think of ScreenKit and tell us what you want to see or problems that you have. We are designers and want to hear from you.
+              input[type="hidden" name="contact-form"]
+              .form-body
+                .form-row
+                  .form-cols.clearfix
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-name"]
+                        | Name 
+                        span.form-asterisk
+                          | *
+                      .form-controls
+                        input#field-name.field[type="text" name="field-name" required data-validation-type="['presence']"]
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-e-mail"]
+                        | E-mail 
+                        span.form-asterisk
+                          | *
+                      .form-controls
+                        input#field-e-mail.field[type="email" name="field-e-mail" required data-validation-type="['email']"]
+                .form-row
+                  label.form-label[for="field-subject"]
+                    | Subject 
+                    span.form-asterisk
+                      | *
+                  .form-controls
+                    input#field-subject.field[type="text" name="field-subject" required data-validation-type="['presence']"]
+                .form-row
+                  label.form-label[for="field-message"]
+                    | Message 
+                    span.form-asterisk
+                      | *
+                  .form-controls
+                    textarea#field-message.field.textarea[name="field-message" cols="30" rows="10" required data-validation-type="['presence']"]
+              .form-actions
+                input.btn.form-btn[type="submit" value="SEND EMAIL"]
+      .sidebar
+        ul.widgets
+          li.widget
+            h3.widget-title
+              | Contact Info
+            ul.list-contacts
+              li
+                span.circle
+                  i.ico-pin
+                |  Lovingly crafted in 
+                br
+                | San Francisco, CA 
+              li
+                span.circle
+                  i.ico-mail
+                |  info@usebento.com 
+                br
+                | support@usebento.com 
+          li.widget
+            h3.widget-title
+              | Find us on
+            .socials-secondary.clearfix
+              ul
+                li
+                  a.link-facebook[href="#"]
+                    i.ico-facebook
+                li
+                  a.link-twitter[href="#"]
+                    i.ico-twitter
+                li
+                  a.link-google[href="#"]
+                    i.ico-google
+                li
+                  a.link-youtube[href="#"]
+                    i.ico-youtube
+                li
+                  a.link-instagram[href="#"]
+                    i.ico-instagram
+  .section.section-callout
+    .shell
+      .callout
+        h2
+          | Want to Join the Team?
+        p
+          | We are looking for amazing designers who like to work on a variety of 
+          br
+          |  projects and want to grow with us. If that’s you then apply now.
+        p
+          a.btn-callout[href="#"]
+            | APPLY NOW
+= render partial: 'footer'

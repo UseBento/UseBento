@@ -4,17 +4,14 @@ header.header
     = link_to "Bento", "/", class: "logo"
     nav.nav
       ul
-        li.current
+        li class=(page == 'project' ? 'current' : '')
           = link_to "START YOUR PROJECT", "/services/select"
-        li
-          a[href="contact.html"]
-            | CONTACT US
-        li
-          a[href="apply.html"]
-            | JOIN THE TEAM
-        li
-          a[href="agencies.html"]
-            | FOR AGENCIES
+        li class=(page == 'contact' ? 'current' : '')
+          = link_to "CONTACT US", "/contact"
+        li class=(page == 'apply' ? 'current' : '')
+          = link_to "JOIN THE TEAM", "/apply"
+        li class=(page == 'agencies' ? 'current' : '')
+          = link_to "FOR AGENCIES", "/agencies"
         /li
           a.popup-link[href="popups/login-popup.html"]
             | LOG IN
