@@ -1,0 +1,54 @@
+.access
+  .form.form-access
+    form[action="?" method="post"]
+      .form-head
+        a.form-logo[href="#"]
+        .separator
+        h2
+          | Get Started for 
+          strong
+            | Free
+        small
+          | No credit card needed.
+      .form-body
+        .form-row
+          label.form-label[for="field-name"]
+            |  Name 
+            span.form-asterisk
+              | *
+          .form-controls
+            input#field-name.field[type="text" name="field-name"]
+        .form-row
+          label.form-label[for="field-email-address"]
+            |  Email Address 
+            span.form-asterisk
+              | *
+          .form-controls
+            input#field-email-address.field[type="text" name="field-email-address"]
+        .form-row
+          label.form-label[for="field-password"]
+            |  Password 
+            span.form-asterisk
+              | *
+          .form-controls
+            input#field-password.field[type="text" name="field-password"]
+        .form-row
+          label.form-label[for="field-company-name"]
+            |  Company Name 
+            span.form-asterisk
+              | *
+          .form-controls
+            input#field-company-name.field[type="text" name="field-company-name"]
+      .form-actions
+        input.form-btn.btn[type="submit" value="sign up free"]
+      .form-foot
+        p
+          small
+            | By clicking "Sign Up Free" I agree to Bento’s 
+            a[href="#"]
+              | Terms of Service.
+        p
+          span
+            | Already have an Account? 
+            a[href="#"]
+              | Login!
