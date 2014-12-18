@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get  'services/select'
   get  'services/add'
   get  'projects/new/:name',          to: 'services#create',      as: 'service'
@@ -9,6 +10,8 @@ Rails.application.routes.draw do
   get  'contact',                     to: 'application#contact'
   get  'apply',                       to: 'application#apply'
   get  'agencies',                    to: 'application#agencies'
+  get  'popups/login-popup',          to: 'accounts#login'
+  get  'popups/sign-up-popup',        to: 'accounts#signup'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
