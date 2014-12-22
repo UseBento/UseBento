@@ -10,8 +10,10 @@ Rails.application.routes.draw do
   get  'contact',                     to: 'application#contact'
   get  'apply',                       to: 'application#apply'
   get  'agencies',                    to: 'application#agencies'
-  get  'popups/login-popup',          to: 'users#login'
-  get  'popups/sign-up-popup',        to: 'users#signup'
+  get  'popups/login',                to: 'users#login'
+  get  'popups/sign_up',              to: 'users#sign_up'
+  get  'popups/password',             to: 'users#password'
+  get  'popups/password_reset_sent',  to: 'users#password_reset_sent'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

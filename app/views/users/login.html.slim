@@ -1,24 +1,25 @@
 .access
   .form.form-access
     form[action="?" method="post"]
-      .form-head
-        a.form-logo[href="#"]
-        .separator
-        h2
-          | Login to Your Bento Account
-      .form-body
-        .form-row
-          label.form-label[for="field-email"]
-            | Email
-          .form-controls
-            input#field-email.field[type="text" name="field-email"]
-        .form-row
-          label.form-label[for="field-password"]
-            | Password
-          .form-controls
-            input#field-password.field[type="text" name="field-password"]
-      .form-actions
-        input.form-btn.btn[type="submit" value="Login"]
+      .popup-body
+        .form-head
+          a.form-logo[href="#"]
+          .separator
+          h2
+            | Login to Your Bento Account
+        .form-body
+          .form-row
+            label.form-label[for="field-email"]
+              | Email
+            .form-controls
+              input#field-email.field[type="text" name="field-email"]
+          .form-row
+            label.form-label[for="field-password"]
+              | Password
+            .form-controls
+              input#field-password.field[type="text" name="field-password"]
+        .form-actions
+          input.form-btn.btn[type="submit" value="Login"]
       .form-foot.form-foot-secondary
         p
           span
