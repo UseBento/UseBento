@@ -13,12 +13,18 @@
             = link_to "JOIN THE TEAM", "/apply"
           li
             = link_to "FOR AGENCIES", "/agencies"
-          li
-            a.popup-link[href="/popups/login"]
-              | LOG IN
-          li
-            a.popup-link[href="/popups/sign_up"]
-              | SIGN UP
+          - unless user_signed_in?
+            li
+              a.popup-link[href="/popups/login"]
+                | LOG IN
+            li
+              a.popup-link[href="/popups/sign_up"]
+                | SIGN UP
+          - else
+            li
+              = link_to current_user.name, "/profile"
+            li 
+              = link_to "logout", destroy_user_session_path, :method => :delete
   .intro
     img.intro-bg[src="/css/images/desk.jpg" alt="" width="1600" height="776" class="intro-bg fsr-element fsr-hidden"]
     .intro-content
@@ -46,12 +52,18 @@
             = link_to "JOIN THE TEAM", "/apply"
           li
             = link_to "FOR AGENCIES", "/agencies"
-          li
-            a.popup-link[href="/popups/login"]
-              | LOG IN
-          li
-            a.popup-link[href="/popups/sign_up"]
-              | SIGN UP
+          - unless user_signed_in?
+            li
+              a.popup-link[href="/popups/login"]
+                | LOG IN
+            li
+              a.popup-link[href="/popups/sign_up"]
+                | SIGN UP
+          - else
+            li
+              = link_to current_user.name, "/profile"
+            li 
+              = link_to "logout", destroy_user_session_path, :method => :delete
   section.section
     .shell
       header.section-head

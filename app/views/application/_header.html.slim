@@ -12,9 +12,16 @@ header.header
           = link_to "JOIN THE TEAM", "/apply"
         li class=(page == 'agencies' ? 'current' : '')
           = link_to "FOR AGENCIES", "/agencies"
-        li
-          a.popup-link[href="/popups/login"]
-            | LOG IN
-        li
-          a.popup-link[href="/popups/sign_up"]
-            | SIGN UP
+        - unless user_signed_in?
+          li
+            a.popup-link[href="/popups/login"]
+              | LOG IN
+          li
+            a.popup-link[href="/popups/sign_up"]
+              | SIGN UP
+        - else
+          li
+            = link_to current_user.name, "/profile"
+          li 
+            = link_to "logout", destroy_user_session_path, :method => :delete
+            
