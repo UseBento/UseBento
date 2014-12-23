@@ -1,6 +1,6 @@
 .access
   .form.form-access
-    form[action="?" method="post"]
+    form[action="/users/sign_up" id="sign-up-form" method="post"]
       .popup-body
         .form-head
           a.form-logo[href="#"]
@@ -12,34 +12,19 @@
           small
             | No credit card needed.
         .form-body
+          .form-errors#sign-up-errors
           .form-row
-            label.form-label[for="field-name"]
-              |  Name 
-              span.form-asterisk
-                | *
             .form-controls
-              input#field-name.field[type="text" name="field-name"]
+              input#field-name.field[type="text" name="name" required placeholder="Name *"]
           .form-row
-            label.form-label[for="field-email-address"]
-              |  Email Address 
-              span.form-asterisk
-                | *
             .form-controls
-              input#field-email-address.field[type="text" name="field-email-address"]
+              input#field-email-address.field[type="text" name="email-address" required placeholder="Email Address *"]
           .form-row
-            label.form-label[for="field-password"]
-              |  Password 
-              span.form-asterisk
-                | *
             .form-controls
-              input#field-password.field[type="text" name="field-password"]
+              input#field-password.field[type="password" name="password" required placeholder="Password *" ]
           .form-row
-            label.form-label[for="field-company-name"]
-              |  Company Name 
-              span.form-asterisk
-                | *
             .form-controls
-              input#field-company-name.field[type="text" name="field-company-name"]
+              input#field-company-name.field[type="text" name="company-name" placeholder="Company Name *" required]
         .form-actions
           input.form-btn.btn[type="submit" value="sign up free"]
       .form-foot

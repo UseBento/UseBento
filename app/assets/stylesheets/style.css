@@ -995,3 +995,6 @@ input:checked + label .paypal-logo { background-position: 0 -29px; }
     background: white;
     border-radius: 0.25em;
     box-shadow: 0em 0.15em 0.1em 0.1em rgba(0,0,0,0.3); }
+
+.form-error {
+    font-weight: bold; color: red; }
