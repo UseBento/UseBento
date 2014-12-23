@@ -32,6 +32,6 @@
         .counter-input
           button.counter-control.counter-control-minus[type="button"]
             | -
-          input#pages-count.counter-field.calc-item[type="text" name="slide_count" readonly value="1" data-math-type="multiply" value=(@project.answer_for('slide_count').answer)]
+          input#pages-count.counter-field.calc-item[type="text" name="slide_count" readonly data-math-type="multiply" value=(@project.answer_for('slide_count').answer || 1)]
           button.counter-control.counter-control-plus[type="button"]
             | +
