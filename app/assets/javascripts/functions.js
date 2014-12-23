@@ -18,6 +18,22 @@ function sign_up(event) {
                 else 
                     window.location.href = '/'; }}); }
 
+function log_in(event) {
+    event.preventDefault();
+    var form       = $('#log-in-form');
+    var email      = $('#log-in-form #field-email').val();
+    var password   = $('#log-in-form #field-password').val();
+    
+    $.ajax({type: 'POST',
+            url:  '/users/log_in.json',
+            data: {email:      email,
+                   password:   password},
+            success: function(data) {
+                if (data.error)
+                    $('#log-in-errors').html(data.error);
+                else
+                    window.location.href = '/'; }}); }
+
 (function($, window, document, undefined) {
     var $win = $(window);
     var $doc = $(document);
@@ -25,30 +41,6 @@ function sign_up(event) {
     $doc.ready(function() {
 
 	window.cart = new Cart();
-
-
-
-        /*		$('form:not(.form-required)').on('submit', function(event) {
-	 event.preventDefault();
-
-	 ajaxSubmit($(this));
-	 });*/
-
-        /*
-	 $('.form-required').each(function() {
-	 var $form = $(this);
-	 new Validator(this, {
-	 classHolder : '.field',
-	 validClass  : 'valid',
-	 errorClass  : 'error',
-	 onSubmit    : function(event) {
-	 event.preventDefault();
-
-	 ajaxSubmit($form);
-	 }
-	 });
-	 });
-         */
         
 	// UI Helpers
 	$('.intro-bg').fullscreener();
@@ -56,7 +48,8 @@ function sign_up(event) {
 	$('.select').selectbox();
 
         function run_on_popup() {
-            $('#sign-up-form').submit(sign_up); }
+            $('#sign-up-form').submit(sign_up); 
+            $('#log-in-form').submit(log_in); }
 
 	$('.popup-link').magnificPopup({
 	    type: 'ajax',

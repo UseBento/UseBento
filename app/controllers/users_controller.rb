@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < Devise::SessionsController
   def login_popup
     render 'login', layout: false
   end
@@ -13,6 +13,30 @@ class UsersController < ApplicationController
 
   def password_reset_sent_popup
     render 'password_reset_sent', layout: false
+  end
+
+  def log_in
+    error = false
+    user = User.where(email: params[:email]).first
+    if (!user)
+      error = "Invalid username or password"
+    else
+      if !user.valid_password?(params[:password])
+        error = "Invalid username or password"
+      else
+        sign_in :user, user
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to '/' }
+      format.json { 
+          if error
+            render json: {error: error}
+          else
+            render json: {}
+          end }
+    end
   end
 
   def sign_up

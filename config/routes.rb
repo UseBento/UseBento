@@ -10,11 +10,16 @@ Rails.application.routes.draw do
   get  'contact',                     to: 'application#contact'
   get  'apply',                       to: 'application#apply'
   get  'agencies',                    to: 'application#agencies'
-  post 'users/sign_up',               to: 'users#sign_up'
-  get  'popups/login',                to: 'users#login_popup'
-  get  'popups/sign_up',              to: 'users#sign_up_popup'
-  get  'popups/password',             to: 'users#password_popup'
-  get  'popups/password_reset_sent',  to: 'users#password_reset_sent_popup'
+
+  devise_scope :user do
+    post 'users/sign_up',               to: 'users#sign_up'
+    post 'users/log_in',                to: 'users#log_in'
+
+    get  'popups/login',                to: 'users#login_popup'
+    get  'popups/sign_up',              to: 'users#sign_up_popup'
+    get  'popups/password',             to: 'users#password_popup'
+    get  'popups/password_reset_sent',  to: 'users#password_reset_sent_popup'
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

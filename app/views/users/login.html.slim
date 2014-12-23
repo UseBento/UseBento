@@ -1,6 +1,6 @@
 .access
   .form.form-access
-    form[action="?" method="post"]
+    form#log-in-form[action="?" method="post"]
       .popup-body
         .form-head
           a.form-logo[href="#"]
@@ -8,16 +8,13 @@
           h2
             | Login to Your Bento Account
         .form-body
+          .form-errors#log-in-errors
           .form-row
-            label.form-label[for="field-email"]
-              | Email
             .form-controls
-              input#field-email.field[type="text" name="field-email"]
+              input#field-email.field[type="text" placeholder="Email *" name="field-email"]
           .form-row
-            label.form-label[for="field-password"]
-              | Password
             .form-controls
-              input#field-password.field[type="text" name="field-password"]
+              input#field-password.field[type="password" placeholder="Password *" name="field-password"]
         .form-actions
           input.form-btn.btn[type="submit" value="Login"]
       .form-foot.form-foot-secondary
