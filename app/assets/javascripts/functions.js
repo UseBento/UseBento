@@ -34,6 +34,26 @@ function log_in(event) {
                 else
                     window.location.href = '/'; }}); }
 
+function counter($element) {
+    var $field = $element.find('.counter-field');
+    var value = parseInt($field.val());
+    var setValue = function(newVal) {
+	value = Math.max(1, newVal);
+
+	$field.val(value).trigger('change');
+    };
+
+    $element
+	.off('click.counter')
+	.on('click.counter', '.counter-control-minus', function() {
+	    setValue(value - 1)
+	})
+	.on('click.counter', '.counter-control-plus', function() {
+	    setValue(value + 1);
+	});
+
+};
+
 (function($, window, document, undefined) {
     var $win = $(window);
     var $doc = $(document);
@@ -41,6 +61,8 @@ function log_in(event) {
     $doc.ready(function() {
 
 	window.cart = new Cart();
+
+        counter($('.counter-input'));
         
 	// UI Helpers
 	$('.intro-bg').fullscreener();
@@ -166,26 +188,6 @@ function log_in(event) {
 })(jQuery, window, document);
 
 
-
-function counter($element) {
-    var $field = $element.find('.counter-field');
-    var value = parseInt($field.val());
-    var setValue = function(newVal) {
-	value = Math.max(0, newVal);
-
-	$field.val(value).trigger('change');
-    };
-
-    $element
-	.off('click.counter')
-	.on('click.counter', '.counter-control-minus', function() {
-	    setValue(value - 1)
-	})
-	.on('click.counter', '.counter-control-plus', function() {
-	    setValue(value + 1);
-	});
-
-};
 
 
 var CartPanel = (function() {
