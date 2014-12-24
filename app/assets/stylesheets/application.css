@@ -23,3 +23,19 @@
     position:relative;
     top: -0.5em;
 }
+
+.form-business-card .counter-input {
+float: none;
+padding-left: 0;
+border: 1px solid #DCE3EF;
+border-radius: 3px;
+}
+
+.form-business-card .counter-field {
+line-height: 60px;
+height: 60px;
+font-size: 20px;
+border-left: 1px solid #DCE3EF;
+border-right: 1px solid #DCE3EF;
+}
+
