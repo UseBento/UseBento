@@ -54,6 +54,14 @@ function counter($element) {
 
 };
 
+function check_first() {
+    var radios = $.unique($('input[type="radio"]')
+                              .map(function(i, j) { 
+                                  return j.name; }));
+    radios.map(function(i, name) {
+        var inputs = $('input[type="radio"][name="' + name + '"]');
+        $(inputs[0]).prop('checked', true); }); }
+
 (function($, window, document, undefined) {
     var $win = $(window);
     var $doc = $(document);
@@ -63,7 +71,7 @@ function counter($element) {
 	window.cart = new Cart();
 
         counter($('.counter-input'));
-        
+        check_first();
 	// UI Helpers
 	$('.intro-bg').fullscreener();
 
