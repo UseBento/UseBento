@@ -22,8 +22,10 @@ class User
   field :last_sign_in_at,    type: Time
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
+
   field :name,               type: String
   field :company,            type: String
+  field :admin,              type: Boolean
 
   ## Confirmable
   # field :confirmation_token,   type: String
@@ -35,4 +37,6 @@ class User
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
+
+  has_many :projects
 end
