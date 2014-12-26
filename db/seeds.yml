@@ -183,7 +183,7 @@ Services:
     title: 'Presentation Design'
     description: 'Creation of new powerpoint or keynote presentation template. <br />Sourced images are an additional cost.'
     rounds: 3
-    price: 300
+    price: 50
     completion_time: [3, 5]
     fields: 
       - name: full_name
@@ -224,7 +224,7 @@ Services:
     title: 'Social Media Design'
     description: 'Hand-picked designers to enhance your social media profiles. <br />Final logos sent to you as .jpg, .png, .and .psd file formats.'
     rounds: 3
-    price: 300
+    price: 150
     completion_time: [3, 5]
     fields: 
       - name: full_name
@@ -264,7 +264,7 @@ Services:
     title: 'Website Design & Development'
     description: 'Hand-picked experts to create your website. <br />HTML website development optimized for all major browser clients.'
     rounds: 3
-    price: 400
+    price: 1200
     completion_time: [2, 3]
     fields: 
       - name: full_name
@@ -321,7 +321,7 @@ Services:
     title: 'Email Design & Development'
     description: 'A professional email template created just for your business.<br />Responsive HTML optimized for all major email clients.'
     rounds: 3
-    price: 400
+    price: 500
     completion_time: [3, 5]
     fields: 
       - name: full_name
@@ -411,7 +411,7 @@ Services:
     title: 'Wordpress Website Design & Development'
     description: 'Hand-picked experts to unleash the power of WordPress. <br />Wordpress development optimized for all major browser clients.'
     rounds: 3
-    price: 400
+    price: 1500
     completion_time: [2, 3]
     fields: 
       - name: full_name
