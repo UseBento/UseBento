@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     post 'users/sign_up',               to: 'users#sign_up'
     post 'users/log_in',                to: 'users#log_in'
+    post 'users/reset',                 to: 'users#reset'
 
     get  'popups/login',                to: 'users#login_popup'
     get  'popups/sign_up',              to: 'users#sign_up_popup'

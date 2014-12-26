@@ -34,6 +34,20 @@ function log_in(event) {
                 else
                     window.location.href = '/'; }}); }
 
+function reset_password(event) {
+    event.preventDefault();
+    var form       = $('#password-reset-form');
+    var email      = $('#password-reset-form #field-email').val();
+
+    $.ajax({type: 'POST',
+            url:  '/users/reset.json',
+            data: {email:      email},
+            success: function(data) {
+                if (data.error)
+                    $('#password-reset-errors').html(data.error);
+                else
+                    $('#sent-link').click(); }}); }
+
 function counter($element) {
     var $field = $element.find('.counter-field');
     var value = parseInt($field.val());
@@ -79,41 +93,45 @@ function check_first() {
 
         function run_on_popup() {
             $('#sign-up-form').submit(sign_up); 
-            $('#log-in-form').submit(log_in); }
+            $('#log-in-form').submit(log_in);
+            $('#password-reset-form').submit(reset_password);
+            link_popups(); }
 
-	$('.popup-link').magnificPopup({
-	    type: 'ajax',
-	    callbacks: {
-		ajaxContentAdded: function() {
-		    $(this.content).find('.slide-image').find('img').each(function() {
-			var $img = $(this);
+        function link_popups() {
+	    $('.popup-link').magnificPopup({
+	        type: 'ajax',
+	        callbacks: {
+		    ajaxContentAdded: function() {
+		        $(this.content).find('.slide-image').find('img').each(function() {
+			    var $img = $(this);
 
-			$img
-			    .height($img.width() * $img.attr('height') / $img.attr('width'))
-			
-			    .on('load', function() {
-				$img.css('height', '');
-			    });
-		    });
+			    $img
+			        .height($img.width() * $img.attr('height') / $img.attr('width'))
+			    
+			        .on('load', function() {
+				    $img.css('height', '');
+			        });
+		        });
 
-		    this.content.find('.slides').carouFredSel({
-			auto: 8000,
-			responsive: true,
-			width: '100%',
-			height: 'variable',
-			items: {
-			    height: 'variable'
-			},
-			prev: this.content.find('.slider-prev'),
-			next: this.content.find('.slider-next'),
-			swipe: true
-		    });
-                    
-                    run_on_popup();
-		}
-	    }
-	});
+		        this.content.find('.slides').carouFredSel({
+			    auto: 8000,
+			    responsive: true,
+			    width: '100%',
+			    height: 'variable',
+			    items: {
+			        height: 'variable'
+			    },
+			    prev: this.content.find('.slider-prev'),
+			    next: this.content.find('.slider-next'),
+			    swipe: true
+		        });
+                        
+                        run_on_popup();
+		    }
+	        }
+	    }); }
 
+        link_popups();
 
 	$('.scroll-to').on('click', function(event) {
 	    event.preventDefault();
