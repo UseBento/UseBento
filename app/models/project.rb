@@ -5,6 +5,7 @@ class Project
   field :state,         type: Symbol
 
   belongs_to :service
+  belongs_to :user
   embeds_many :answers
   validate :is_valid?
 
