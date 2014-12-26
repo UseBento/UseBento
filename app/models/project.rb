@@ -41,4 +41,25 @@ class Project
     name = name.name if name.is_a? Question
     self.answers.where(name: name).first || Answer.new
   end
+
+  def get_pages
+    names = ['number_of_screens', 'slide_count', 'pages']
+    answers = names.map { |name|
+                answer = self.answer_for(name)
+                answer ? answer.answer : false }
+    answers = answers.select {|a| a}
+    answers.empty? ? 1 : answers[0]
+  end
+
+  def get_responsive
+    answer = self.answer_for('responsiveness')
+    answer ? answer.answer == 'desktop_plus_mobile' : false
+  end
+
+  def get_price
+    pages          = get_pages
+    price_per_page = self.service.price + (self.get_responsive ? 20 : 0)
+
+    price_per_page * pages
+  end
 end
