@@ -1,0 +1,29 @@
+doctype html
+html[lang="en"]
+  = render partial: 'htmlhead'
+  body
+    .wrapper
+      = render partial: 'header', locals: {page: 'project'}
+      .section.section-project
+        .cart-bar
+          ul.cart-bar-items
+            li
+              a[href="#"]
+                span.cart-icon-holder
+                  span.link-inner
+                    i.cart-icon
+                  span.cart-qty-bubble
+                    | 0
+                span.link-inner
+                  |  EDIT ORDER 
+            li
+              a[href="checkout.html"]
+                span.link-inner
+                  i.tick-icon
+                  |  Checkout 
+        .shell
+          .section-head.section-head-little-gutter
+            h2
+              | Change your password
+          .section-body
+            = yield
