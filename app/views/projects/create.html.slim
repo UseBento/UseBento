@@ -20,7 +20,7 @@
               |  &nbsp; in 
               = @service.completion_time.first.to_s + '-' + @service.completion_time.last.to_s
               |  business days 
-        form.form-required[action="/projects/new" method="post"]
+        form.form-required#project-form[action="/projects/new" method="post"]
           input[type="hidden" name="application-form"]
           input[type="hidden" name="service_name" value=@service.name]
           = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) 
@@ -84,5 +84,5 @@
                 input#field-keywords.field[type="text" name="business_keywords" value=@project.answer_for('business_keywords').answer required data-validation-type="['presence']"]
             = render partial: @service.partial_name
           .form-actions
-            input.btn.form-btn[type="submit" value=("GET STARTED - $" + @service.price.to_s)]
+            input.btn.form-btn#project-submit[type="submit" value=("GET STARTED - $" + @service.price.to_s)]
 = render partial: 'footer'

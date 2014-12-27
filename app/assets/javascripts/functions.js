@@ -1,95 +1,137 @@
-function sign_up(event) {
-    event.preventDefault();
-    var form       = $('#sign-up-form');
-    var name       = $('#sign-up-form #field-name').val();
-    var email      = $('#sign-up-form #field-email-address').val();
-    var password   = $('#sign-up-form #field-password').val();
-    var company    = $('#sign-up-form #field-company-name').val();
-
-    $.ajax({type: 'POST',
-            url:  '/users/sign_up.json',
-            data: {name:      name,
-                   email:     email,
-                   password:  password,
-                   company:   company},
-            success: function(data) {
-                if (data.error) 
-                    $('#sign-up-errors').html(data.error); 
-                else 
-                    window.location.href = '/'; }}); }
-
-function log_in(event) {
-    event.preventDefault();
-    var form       = $('#log-in-form');
-    var email      = $('#log-in-form #field-email').val();
-    var password   = $('#log-in-form #field-password').val();
-    
-    $.ajax({type: 'POST',
-            url:  '/users/log_in.json',
-            data: {email:      email,
-                   password:   password},
-            success: function(data) {
-                if (data.error)
-                    $('#log-in-errors').html(data.error);
-                else
-                    window.location.href = '/'; }}); }
-
-function reset_password(event) {
-    event.preventDefault();
-    var form       = $('#password-reset-form');
-    var email      = $('#password-reset-form #field-email').val();
-
-    $.ajax({type: 'POST',
-            url:  '/users/reset.json',
-            data: {email:      email},
-            success: function(data) {
-                if (data.error)
-                    $('#password-reset-errors').html(data.error);
-                else
-                    $('#sent-link').click(); }}); }
-
-function counter($element) {
-    var $field = $element.find('.counter-field');
-    var value = parseInt($field.val());
-    var setValue = function(newVal) {
-	value = Math.max(1, newVal);
-
-	$field.val(value).trigger('change');
-    };
-
-    $element
-	.off('click.counter')
-	.on('click.counter', '.counter-control-minus', function() {
-	    setValue(value - 1)
-	})
-	.on('click.counter', '.counter-control-plus', function() {
-	    setValue(value + 1);
-	});
-
-};
-
-function check_first() {
-    var radios = $.unique($('input[type="radio"]')
-                              .map(function(i, j) { 
-                                  return j.name; }));
-    radios.map(function(i, name) {
-        var inputs = $('input[type="radio"][name="' + name + '"]');
-        $(inputs[0]).prop('checked', true); }); }
-
 (function($, window, document, undefined) {
     var $win = $(window);
     var $doc = $(document);
 
     $doc.ready(function() {
+        var waiting_for_login   = false;
+        var signed_in           = false;
+        var just_submit_project = true;
+
+        function sign_up(event) {
+            event.preventDefault();
+            var form       = $('#sign-up-form');
+            var name       = $('#sign-up-form #field-name').val();
+            var email      = $('#sign-up-form #field-email-address').val();
+            var password   = $('#sign-up-form #field-password').val();
+            var company    = $('#sign-up-form #field-company-name').val();
+
+            $.ajax({type: 'POST',
+                    url:  '/users/sign_up.json',
+                    data: {name:      name,
+                           email:     email,
+                           password:  password,
+                           company:   company},
+                    success: function(data) {
+                        if (data.error) 
+                            $('#sign-up-errors').html(data.error); 
+                        else {
+                            if (waiting_for_login)
+                                waiting_for_login();
+                            else
+                                window.location.href = '/'; }}}); }
+
+        function log_in(event) {
+            event.preventDefault();
+            var form       = $('#log-in-form');
+            var email      = $('#log-in-form #field-email').val();
+            var password   = $('#log-in-form #field-password').val();
+            
+            $.ajax({type: 'POST',
+                    url:  '/users/log_in.json',
+                    data: {email:      email,
+                           password:   password},
+                    success: function(data) {
+                        if (data.error)
+                            $('#log-in-errors').html(data.error);
+                        else {
+                            if (waiting_for_login)
+                                waiting_for_login();
+                            else
+                                window.location.href = '/'; }}}); }
+
+        function reset_password(event) {
+            event.preventDefault();
+            var form       = $('#password-reset-form');
+            var email      = $('#password-reset-form #field-email').val();
+
+            $.ajax({type: 'POST',
+                    url:  '/users/reset.json',
+                    data: {email:      email},
+                    success: function(data) {
+                        if (data.error)
+                            $('#password-reset-errors').html(data.error);
+                        else
+                            $('#sent-link').click(); }}); }
+
+        function counter($element) {
+            var $field = $element.find('.counter-field');
+            var value = parseInt($field.val());
+            var setValue = function(newVal) {
+	        value = Math.max(1, newVal);
+
+	        $field.val(value).trigger('change');
+            };
+
+            $element
+	        .off('click.counter')
+	        .on('click.counter', '.counter-control-minus', function() {
+	            setValue(value - 1)
+	        })
+	        .on('click.counter', '.counter-control-plus', function() {
+	            setValue(value + 1);
+	        });
+
+        };
+
+        function check_first() {
+            var radios = $.unique($('input[type="radio"]')
+                                  .map(function(i, j) { 
+                                      return j.name; }));
+            radios.map(function(i, name) {
+                var inputs = $('input[type="radio"][name="' + name + '"]');
+                $(inputs[0]).prop('checked', true); }); }
+
+        function current_user() {
+            var user_link = $('#userlink');
+            var user_id   = user_link.attr('data-userid');
+            var name      = user_link.html();
+
+            return (user_id
+                    ? {id:     user_id,
+                       name:   name}
+                    : false); }
 
 	window.cart = new Cart();
 
         counter($('.counter-input'));
         check_first();
-	// UI Helpers
-	$('.intro-bg').fullscreener();
 
+	$('.intro-bg').fullscreener();
 	$('.select').selectbox();
+
+        function log_in_then(next) {
+            if (current_user())
+                next();
+            else {
+                waiting_for_login = next;
+                $('#userlink').click(); }}
+
+        function setup_project_form() {
+            var project_form     = $('#project-form'); 
+            var project_submit   = $('#project-submit');
+            
+            if (project_form) {
+                just_submit_project = false;
+                project_form.submit(function(event) {
+                    if (just_submit_project)
+                        return true;
+                    else {
+                        event.preventDefault();
+                        log_in_then(function() {
+                            just_submit_project = true;
+                            log_in_then(project_form.submit()); }); }}); }}
+
+        setup_project_form();
 
         function run_on_popup() {
             $('#sign-up-form').submit(sign_up); 
