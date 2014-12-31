@@ -47,6 +47,16 @@ class Project
     self.answers.where(name: name).first || Answer.new
   end
 
+  def print_pages
+    pages = get_pages
+    unit = self.service.unit
+
+    if (pages > 1)
+      unit = unit.pluralize
+    end
+    pages.to_s + ' ' + unit
+  end
+
   def get_pages
     names = ['number_of_screens', 'slide_count', 'pages']
     answers = names.map { |name|

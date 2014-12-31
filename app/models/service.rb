@@ -6,6 +6,7 @@ class Service
   field :rounds,          type: Integer
   field :completion_time, type: Range
   field :price,           type: Integer
+  field :unit,            type: String
 
   has_many :project
   embeds_many :questions

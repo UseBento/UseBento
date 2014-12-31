@@ -4,6 +4,7 @@ Services:
     description: 'Hand-picked designers to create your brand for your next project or company. <br /> Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
     rounds: 3
     price: 400
+    unit: 'Logo'
     completion_time: [3, 5]
     fields: 
       - name: full_name
@@ -40,6 +41,7 @@ Services:
     description: 'Hand-picked experts to get your iOS app to market. <br />Development optimized for iPhone 4, 4s, 5, 5s, 6 and 6 plus.'
     rounds: 3
     price: 0
+    unit: 'Screen'
     completion_time: [2, 3]
     fields: 
       - name: full_name
@@ -86,6 +88,7 @@ Services:
     description: 'Hand-picked designers to create the perfect face for your app. <br /> Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
     rounds: 3
     price: 400
+    unit: 'Icon'
     completion_time: [3, 5]
     fields: 
       - name: full_name
@@ -122,6 +125,7 @@ Services:
     description: 'Stand-out with a custom, professional business card. <br />Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
     rounds: 3
     price: 300
+    unit: 'Card'
     completion_time: [3, 5]
     fields: 
       - name: full_name
@@ -153,6 +157,7 @@ Services:
     description: 'From letterheads to your complete corporate identity. <br />Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
     rounds: 3
     price: 300
+    unit: 'Stationary'
     completion_time: [3, 5]
     fields: 
       - name: full_name
@@ -184,6 +189,7 @@ Services:
     description: 'Creation of new powerpoint or keynote presentation template. <br />Sourced images are an additional cost.'
     rounds: 3
     price: 50
+    unit: 'Slide'
     completion_time: [3, 5]
     fields: 
       - name: full_name
@@ -226,6 +232,7 @@ Services:
     rounds: 3
     price: 150
     completion_time: [3, 5]
+    unit: 'Profile'
     fields: 
       - name: full_name
         label: Your Full Name
@@ -264,6 +271,7 @@ Services:
     title: 'Website Design & Development'
     description: 'Hand-picked experts to create your website. <br />HTML website development optimized for all major browser clients.'
     rounds: 3
+    unit: 'Page'
     price: 1200
     completion_time: [2, 3]
     fields: 
@@ -322,6 +330,7 @@ Services:
     description: 'A professional email template created just for your business.<br />Responsive HTML optimized for all major email clients.'
     rounds: 3
     price: 500
+    unit: 'Email'
     completion_time: [3, 5]
     fields: 
       - name: full_name
@@ -359,7 +368,8 @@ Services:
     title: 'Landing Page Design & Development'
     description: 'High converting HTML landing pages by hand-picked experts. <br />HTML landing page development optimized for all major browser clients'
     rounds: 3
-    price: 400
+    price: 1200
+    unit: 'Page'
     completion_time: [3, 5]
     fields: 
       - name: full_name
@@ -412,6 +422,7 @@ Services:
     description: 'Hand-picked experts to unleash the power of WordPress. <br />Wordpress development optimized for all major browser clients.'
     rounds: 3
     price: 1500
+    unit: 'Page'
     completion_time: [2, 3]
     fields: 
       - name: full_name

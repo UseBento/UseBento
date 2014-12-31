@@ -14,6 +14,7 @@ seeds["Services"].map { |service_def|
       service.description       = service_def['description']
       service.rounds            = service_def['rounds']
       service.price             = service_def['price']
+      service.unit              = service_def['unit']
       service.completion_time   = Range.new(service_def['completion_time'][0],
                                             service_def['completion_time'][1])
       service.save
@@ -23,6 +24,7 @@ seeds["Services"].map { |service_def|
                  title:           service_def['title'],
                  description:     service_def['description'],
                  rounds:          service_def['rounds'],
+                 unit:            service_def['unit'],
                  price:           service_def['price'],
                  completion_time: Range.new(service_def['completion_time'][0],
                                             service_def['completion_time'][1])})
