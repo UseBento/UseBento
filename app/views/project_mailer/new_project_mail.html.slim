@@ -4,4 +4,4 @@ html[lang="en"]
   body
     h1 
       = @user.company + " started a new " + @service.name + " project"
-    = link_to "View Project", @project
+    = link_to "View Project", project_url(@project), :only_path => false

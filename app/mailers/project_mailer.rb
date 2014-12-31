@@ -6,7 +6,9 @@ class ProjectMailer < ActionMailer::Base
     @service    = project.service
     @project    = project
     @admin      = User.get_admin
-    
+
+    print @admin.email
+    print project
     mail(to:      @admin.email, 
          subject: @user.company + " started a new " + @service.name + " project")
   end

@@ -13,14 +13,15 @@ class ProjectsController < ApplicationController
   end
   
   def new
-    @service           = Service.where(name: params[:service_name]).first
-    @project           = Project.new
-    @project.service   = @service
-    @project.user      = current_user
-    @project.status    = :pending
+    @service             = Service.where(name: params[:service_name]).first
+    @project             = Project.new
+    @project.service     = @service
+    @project.user        = current_user
+    @project.status      = :pending
+    @project.start_date  = DateTime.now.to_date
 
-    last_project       = current_user.projects.order_by(:number.desc).first
-    @project.number    = last_project ? last_project.number + 1 : 1
+    last_project         = current_user.projects.order_by(:number.desc).first
+    @project.number      = last_project ? last_project.number + 1 : 1
 
     params.map do |key, val|
             @project.add_answer(key, val)
@@ -31,7 +32,7 @@ class ProjectsController < ApplicationController
       render "projects/create"
     else
       @project.save
-      ProjectMailer.new_project_mail(@project)
+      ProjectMailer.new_project_mail(@project).deliver
       redirect_to @project
     end
   end
