@@ -84,5 +84,6 @@
                 input#field-keywords.field[type="text" name="business_keywords" value=@project.answer_for('business_keywords').answer required data-validation-type="['presence']"]
             = render partial: @service.partial_name
           .form-actions
-            input.btn.form-btn#project-submit[type="submit" value=("GET STARTED - $" + @service.price.to_s)]
+            input.btn.form-btn#project-submit[type="submit" value=(@service.price != 0 ? "GET STARTED - $" + @service.price.to_s : "Get Started")]
+            input#page-price[type="hidden" value=(@service.price)]
 = render partial: 'footer'

@@ -22,7 +22,7 @@
                            password:  password,
                            company:   company},
                     success: function(data) {
-                        if (data.error) 
+                        if (data.error)
                             $('#sign-up-errors').html(data.error); 
                         else {
                             if (waiting_for_login)
@@ -132,6 +132,23 @@
                             log_in_then(project_form.submit()); }); }}); }}
 
         setup_project_form();
+
+        function update_price() {
+            var button         = $('#project-submit');
+            var price          = parseInt($('#page-price').val());
+            var page_counter   = $('#pages-count');
+            var page_count     = page_counter ? page_counter.val() : 1;
+            var responsive     = $('#field-desktop-mobile').prop('checked');
+
+            if (price === 0) return;
+            if (responsive) 
+                price += 20;
+
+            price = price * page_count;
+            button.val('GET STARTED - $' + price); }
+
+        $('#pages-count').change(update_price);
+        $('#field-desktop-mobile, #field-desktop-only').change(update_price);
 
         function run_on_popup() {
             $('#sign-up-form').submit(sign_up); 

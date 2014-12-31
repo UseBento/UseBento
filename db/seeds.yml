@@ -39,7 +39,7 @@ Services:
     title: 'Mobile App Design & Development'
     description: 'Hand-picked experts to get your iOS app to market. <br />Development optimized for iPhone 4, 4s, 5, 5s, 6 and 6 plus.'
     rounds: 3
-    price: 400
+    price: 0
     completion_time: [2, 3]
     fields: 
       - name: full_name

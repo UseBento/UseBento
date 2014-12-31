@@ -4,14 +4,15 @@ class ProjectsController < ApplicationController
   end
   
   def new
-    @service = Service.where(name: params[:service_name]).first
-    @project = Project.new
-    @project.service = @service
-    print params.to_s
+    @service           = Service.where(name: params[:service_name]).first
+    @project           = Project.new
+    @project.service   = @service
+    @project.user      = current_user
+
     params.map do |key, val|
-            print [key, val]
             @project.add_answer(key, val)
           end
+
     @errors = @project.validate_project
     if @errors.length > 0
       render "projects/create"

@@ -51,7 +51,7 @@
     = get_error('number_of_screens')
   .form-controls
     .counter-input
-      button.counter-control.counter-minus[type="button"]
+      button.counter-control.counter-control-minus[type="button"]
         | -
       input#pages-count.counter-field.calc-item[type="text" name="number_of_screens" readonly data-math-type="multiply" value=(@project.answer_for('number_of_screens').answer || 1)]
       button.counter-control.counter-control-plus[type="button"]
