@@ -1,0 +1,7 @@
+doctype html
+html[lang="en"]
+  head
+  body
+    h1 
+      = @user.company + " started a new " + @service.name + " project"
+    = link_to "View Project", @project

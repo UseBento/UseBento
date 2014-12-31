@@ -38,5 +38,9 @@ class User
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
 
+  def self.get_admin
+    self.where(admin: true).first
+  end
+
   has_many :projects
 end
