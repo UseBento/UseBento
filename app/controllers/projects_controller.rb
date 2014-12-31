@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_user!
+
   def view 
     @project = Project.find(params[:id])
   end

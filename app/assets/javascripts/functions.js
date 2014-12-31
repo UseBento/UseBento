@@ -270,6 +270,9 @@
 	});		
     };
 
+    if (window.location.hash == "#login")
+        setTimeout(function() {$('#userlink').click(); }, 1000);
+
 })(jQuery, window, document);
 
 
