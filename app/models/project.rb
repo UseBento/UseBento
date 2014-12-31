@@ -1,8 +1,11 @@
 class Project
   include Mongoid::Document
+  include Mongoid::Timestamps
   
   field :start_date,    type: DateTime
   field :state,         type: Symbol
+  field :status,        type: Symbol  # :pending, :assigned, :awaiting_payment, :closed
+  field :number,        type: Integer
 
   belongs_to :service
   belongs_to :user

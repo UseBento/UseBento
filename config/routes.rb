@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get  'services/select'
   get  'services/add'
   get  'projects/new/:name',          to: 'services#create',      as: 'service'
+  get  'projects/list',               to: 'projects#list'
   get  'projects/:id',                to: 'projects#view',        as: 'project'
   post 'projects/new',                to: 'projects#new'         
 

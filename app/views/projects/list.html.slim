@@ -1,0 +1,71 @@
+.wrapper
+  = render partial: 'header', locals: {page: 'project'}
+  .section.section-contacts
+    .shell
+      .form.form-apply.form-business-card
+        .section-head.form-head
+          h2
+            Your Projects
+        .section-body
+          button
+            Start a new project >
+          h3 
+            Ongoing Projects
+          table
+            tr
+              td
+                Project Number
+              td
+                Company
+              td
+                Project Type
+              td
+                Deliverables
+              td
+                Date Started
+              td
+                Project Status
+            - for project in @open_projects do
+              tr
+                td
+                  = project.number
+                td
+                  = current_user.company
+                td 
+                  = project.service.title
+                td 
+                  = project.get_pages.to_s + ' Pages'
+                td
+                  = project.start_date
+                td
+                  = project.status
+          h3 
+            Closed Projects
+          table
+            tr
+              td
+                Project Number
+              td
+                Company
+              td
+                Project Type
+              td
+                Deliverables
+              td
+                Date Started
+              td
+                Project Status
+            - for project in @closed_projects do
+              tr
+                td
+                  = project.number
+                td
+                  = current_user.company
+                td 
+                  = project.service.title
+                td 
+                  = project.get_pages.to_s + ' Pages'
+                td
+                  = project.start_date
+                td
+                  = project.status

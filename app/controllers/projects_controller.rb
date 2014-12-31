@@ -2,12 +2,25 @@ class ProjectsController < ApplicationController
   def view 
     @project = Project.find(params[:id])
   end
+
+  def list
+    @open_projects   = current_user.projects
+                       .where(:status.ne => :closed)
+                       .order_by(:number.asc)
+    @closed_projects = current_user.projects
+                       .where(:status => :closed)
+                       .order_by(:number.asc)
+  end
   
   def new
     @service           = Service.where(name: params[:service_name]).first
     @project           = Project.new
     @project.service   = @service
     @project.user      = current_user
+    @project.status    = :pending
+
+    last_project       = current_user.projects.order_by(:number.desc).first
+    @project.number    = last_project ? last_project.number + 1 : 1
 
     params.map do |key, val|
             @project.add_answer(key, val)
