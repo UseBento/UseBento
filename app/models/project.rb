@@ -6,6 +6,7 @@ class Project
   field :state,         type: Symbol
   field :status,        type: Symbol  # :pending, :assigned, :awaiting_payment, :closed
   field :number,        type: Integer
+  field :deadline,      type: Date
 
   belongs_to :service
   belongs_to :user

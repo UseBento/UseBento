@@ -5,26 +5,28 @@
       .form.form-apply.form-business-card
         .section-head.form-head
           h2
-            Your Projects
+            | Your Projects
         .section-body
           button
-            Start a new project >
+            | Start a new project >
           h3 
-            Ongoing Projects
+            | Ongoing Projects
           table
             tr
               td
-                Project Number
+                | Project Number
               td
-                Company
+                | Company
               td
-                Project Type
+                | Project Type
               td
-                Deliverables
+                | Deliverables
               td
-                Date Started
+                | Date Started
               td
-                Project Status
+                | Project Status
+              td
+                | View
             - for project in @open_projects do
               tr
                 td
@@ -39,22 +41,26 @@
                   = project.start_date
                 td
                   = project.status
+                td 
+                  = link_to "View", project
           h3 
-            Closed Projects
+            | Closed Projects
           table
             tr
               td
-                Project Number
+                | Project Number
               td
-                Company
+                | Company
               td
-                Project Type
+                | Project Type
               td
-                Deliverables
+                | Deliverables
               td
-                Date Started
+                | Date Started
               td
-                Project Status
+                | Project Status
+              td
+                | View
             - for project in @closed_projects do
               tr
                 td
@@ -69,3 +75,5 @@
                   = project.start_date
                 td
                   = project.status
+                td 
+                  = link_to "View", project

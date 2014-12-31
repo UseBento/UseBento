@@ -1,12 +1,31 @@
 .wrapper
-  = render partial: 'header'
+  = render partial: 'header', locals: {page: 'project'}
   .section.section-contacts
     .shell
       .form.form-apply.form-business-card
-        .section-head.form-head
-          h2
-            = @project.service.title
-          p
-            == @project.service.description
-          br
+        .inner-head
+          = link_to "Back to your projects", "/projects/list"
+        .inner-body
+          h3
+            = current_user.company + " - " + @project.service.title
+          table
+            tr
+              td
+                | Type
+                br
+                = @project.service.name
+              td
+                | Size
+                br
+                = @project.get_pages.to_s + " pages"
+              td
+                | Total
+                br
+                = '$' + @project.get_price.to_s
+              td
+                | Deadline
+                br
+                = @project.deadline || 'Not set'
+          h3
+            | Messages
 = render partial: 'footer'
