@@ -77,4 +77,8 @@ class Project
 
     price_per_page * pages
   end
+
+  def format_start_date
+    (self.start_date || DateTime.now).strftime "%b %d, %Y"
+  end
 end

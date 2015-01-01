@@ -7,8 +7,7 @@
           h2
             | Your Projects
         .section-body
-          button
-            | Start a new project >
+          = link_to "Start a new project >", "/services/select"
           h3 
             | Ongoing Projects
           table
@@ -38,7 +37,7 @@
                 td 
                   = project.print_pages
                 td
-                  = project.start_date
+                  = project.format_start_date
                 td
                   = project.status
                 td 
@@ -72,7 +71,7 @@
                 td 
                   = project.print_pages
                 td
-                  = project.start_date
+                  = project.format_start_date
                 td
                   = project.status
                 td 
