@@ -1,0 +1,65 @@
+.wrapper
+  = render partial: 'header', locals: {page: 'project'}
+  .section.section-contacts
+    .shell
+      .form.form-apply.form-business-card
+        .section-head.form-head
+          h2
+            | Your Profile
+        form.form-required#project-form[action="/profile/update" method="post"]
+          input[type="hidden" name="application-form"]
+          = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) 
+          .form-body
+            .form-row
+              .success
+                = @info_success
+            .form-row
+              .form-cols
+                .form-col.form-col-1of2
+                  label.form-label[for="field-full-name"]
+                    | Full Name
+                  .form-controls
+                    input#field-name.field[type="text" name="name" required data-validation-type="['presence']" value=current_user.name]
+                .form-col.form-col-1of2
+                  label.form-label[for="field-e-mail"]
+                    | Email 
+                  .form-controls
+                    input#field-email.field[type="email" name="email" value=current_user.email required data-validation-type="['email']"]
+            .form-row
+              .form-cols
+                .form-col.form-col-1of2
+                  label.form-label[for="field-company"]
+                    | Company Name
+                  .form-controls
+                    input#field-company.field[type="text" name="company" required data-validation-type="['presence']" value=current_user.company]
+            .form-header-row
+              | Change Password
+            .form-row
+              .success
+                = @password_success
+              .errors
+                = @password_errors
+            .form-row
+              .form-cols
+                .form-col.form-col-1of2
+                  label.form-label[for="field-password"]
+                    | Current Password
+                  .form-controls
+                    input#field-password.field[type="password" name="password"]
+            .form-row
+              .form-cols
+                .form-col.form-col-1of2
+                  label.form-label[for="field-new-password"]
+                    | New Password
+                  .form-controls
+                    input#field-new-password.field[type="password" name="new_password"]
+                .form-col.form-col-1of2
+                  label.form-label[for="field-new-password-confirm"]
+                    | Comfirm New Password
+                  .form-controls
+                    input#field-new-password-confirm.field[type="password" name="new_password_confirm"]
+              a#show-password-link[style="cursor:pointer"]
+                | Show passwords
+          .form-actions
+            input.btn.form-btn#profile-submit[type="submit" value="SAVE CHANGES"]
+= render partial: 'footer'

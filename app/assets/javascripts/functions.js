@@ -192,6 +192,19 @@
 
         link_popups();
 
+
+        $('#show-password-link').click(function() {
+            if ($('#show-password-link').attr('class') == "hide-passwords") {
+                $('input#field-password, input#field-new-password, input#field-new-password-confirm')
+                    .attr('type', 'password');
+                $('#show-password-link').attr('class', '');
+                $('#show-password-link').html('Show Passwords'); }
+            else{ 
+                $('input#field-password, input#field-new-password, input#field-new-password-confirm')
+                    .attr('type', 'text');
+                $('#show-password-link').attr('class', 'hide-passwords');
+                $('#show-password-link').html('Hide Passwords'); }});
+
 	$('.scroll-to').on('click', function(event) {
 	    event.preventDefault();
 

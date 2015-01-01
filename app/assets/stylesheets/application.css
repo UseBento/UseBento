@@ -39,3 +39,18 @@ border-left: 1px solid #DCE3EF;
 border-right: 1px solid #DCE3EF;
 }
 
+.form-header-row {
+border-bottom: 1px solid #d1dae8;
+padding-bottom: 0.5em;
+margin-bottom: 1em;
+padding-top:1em;
+}
+
+.form-row .errors {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #ee5544; }
+
+.form-row .success {
+    font-size: 0.8em;
+    font-weight: bold; }

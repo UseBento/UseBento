@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   get  'agencies',                    to: 'application#agencies'
 
   devise_scope :user do
+    get  'profile',                     to: 'users#profile'
+    post 'profile/update',              to: 'users#update_profile'
+  
     post 'users/sign_up',               to: 'users#sign_up'
     post 'users/log_in',                to: 'users#log_in'
     post 'users/reset',                 to: 'users#reset'
