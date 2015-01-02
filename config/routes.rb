@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get  'contact',                     to: 'application#contact'
   get  'apply',                       to: 'application#apply'
   get  'agencies',                    to: 'application#agencies'
+  get  'payments/checkout/:project_id/:percent',           
+       to: 'payments#checkout'
 
   devise_scope :user do
     get  'profile',                     to: 'users#profile'

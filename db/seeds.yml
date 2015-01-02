@@ -258,14 +258,21 @@ Services:
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
         required: true
-      - name: design
+      - name: facebook_header_and_profile
         label: Select design service(s) needed below
-        type: :enum
-        values: 
-          - facebook_header_and_profile
-          - twitter_header_and_profile
-          - youtube_header_and_profile
-          - linkedin_header_and_profile
+        type: :boolean
+        required: true
+      - name: twitter_header_and_profile
+        label: Select design service(s) needed below
+        type: :boolean
+        required: true
+      - name: youtube_header_and_profile
+        label: Select design service(s) needed below
+        type: :boolean
+        required: true
+      - name: linkedin_header_and_profile
+        label: Select design service(s) needed below
+        type: :boolean
         required: true
   - name: 'website_design_and_development'
     title: 'Website Design & Development'
@@ -313,12 +320,13 @@ Services:
           - desktop
           - desktop_plus_mobile
         required: true
-      - name: free_services
+      - name: google_analytics_setup
         label: Select FREE services below
-        type: :enum
-        values: 
-          - google_analytics_setup
-          - ftp_upload
+        type: :boolean
+        required: true
+      - name: ftp_upload
+        label: Select FREE services below
+        type: :boolean
         required: true
       - name: pages
         label: Number of estimated pages
@@ -410,12 +418,13 @@ Services:
           - desktop
           - desktop_plus_mobile
         required: true
-      - name: free_services
+      - name: google_analytics_setup
         label: Select FREE services below
-        type: :enum
-        values: 
-          - google_analytics_setup
-          - ftp_upload
+        type: :boolean
+        required: true
+      - name: ftp_upload
+        label: Select FREE services below
+        type: :boolean
         required: true
   - name: 'wordpress_design_and_development'
     title: 'Wordpress Website Design & Development'
@@ -463,12 +472,13 @@ Services:
           - desktop
           - desktop_plus_mobile
         required: true
-      - name: free_services
+      - name: google_analytics_setup
         label: Select FREE services below
-        type: :enum
-        values: 
-          - google_analytics_setup
-          - ftp_upload
+        type: :boolean
+        required: true
+      - name: ftp_upload
+        label: Select FREE services below
+        type: :boolean
         required: true
       - name: pages
         label: Number of estimated pages

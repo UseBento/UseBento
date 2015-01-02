@@ -26,6 +26,11 @@
                 | Deadline
                 br
                 = @project.deadline || 'Not set'
+        .inner-body
           h3
             | Messages
+        .inner-body
+          h3
+            | Payments
+          = link_to "Pay Deposit", "/payments/checkout/" + @project.id.to_s + "/50"
 = render partial: 'footer'

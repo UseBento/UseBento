@@ -1,0 +1,146 @@
+.wrapper
+  = render partial: 'header', locals: {page: 'project'}
+  .section.section-contacts
+    .shell
+      .section-head.section-head-little-gutter
+        h2
+          | Checkout
+      .section-body.clearfix
+        .checkout-sum-up
+          .checkout-sum-up-group
+            ul.selected-products
+              li
+                span.product-value
+                  = '$' + @project.get_price.to_s
+                h3
+                  = @project.service.title 
+                  | &nbsp;
+                  small
+                    = link_to "Edit", @project
+                ul
+                  - for feature in @project.get_features do
+                    li
+                      = feature
+          .checkout-sum-up-group
+            .checkout-total
+              table
+                tr
+                  td
+                    | Subtotal
+                  td
+                    = '$' + @project.get_price.to_s
+                tr
+                  td
+                    = params[:percent] + '% deposit'
+                  td
+                    = '$' + @amount.round(2).to_s
+          .checkout-sum-up-group
+            .checkout-total
+              table
+                tr
+                  td
+                    h2
+                      | Total
+                  td
+                    h2.value
+                      = '$' + @amount.round(2).to_s
+        .checkout-form-holder
+          .form.checkout-form
+            form[action="lib/form.php" method="post"]
+              .section-head.form-head
+                h2.section-title
+                  | Billing Information
+              input[type="hidden" name="checkout-form"]
+              .form-body
+                .form-row
+                  .form-cols.clearfix
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-fname"]
+                        | First Name 
+                        span.form-asterisk
+                          | *
+                      .form-controls
+                        input#field-fname.field[type="text" name="field-fname"]
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-lname"]
+                        | Last Name 
+                        span.form-asterisk
+                          | *
+                      .form-controls
+                        input#field-lname.field[type="text" name="field-lname"]
+                .form-row
+                  .form-cols
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-company-name"]
+                        | Company Name
+                      .form-controls
+                        input#field-company-name.field[type="text" name="field-company-name"]
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-phone-number"]
+                        | Phone Number
+                      .form-controls
+                        input#field-phone-number.field[type="text" name="field-phone-number"]
+                .form-row
+                  .form-cols
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-e-mail"]
+                        | E-mail 
+                        span.form-asterisk
+                          | *
+                      .form-controls
+                        input#field-e-mail.field[type="text" name="field-e-mail"]
+                .form-row.form-row-divider
+                .form-row
+                  .payment-method-selector
+                    .payment-method-item
+                      input#cc[type="radio" name="payment-method" value="cc" checked]
+                      label[for="cc"]
+                        |  Credit Card 
+                    .payment-method-item
+                      input#paypal[type="radio" name="payment-method" value="paypal"]
+                      label[for="paypal"]
+                        i.paypal-logo
+                .cc-element
+                  .form-row
+                    label.form-label[for="credit-card-number"]
+                      | Credit Card Number 
+                      span.form-asterisk
+                        | *
+                    .form-controls
+                      input#credit-card-number.field[type="text" name="credit-card-number"]
+                  .form-row
+                    .form-cols
+                      .form-col.form-col-1of3
+                        label.form-label
+                          | Expiration Date 
+                          span.form-asterisk
+                            | *
+                        .form-controls
+                          .form-col
+                            input#expr-date-month.field[type="text" name="expr-date-month"]
+                          .form-col
+                            input#expr-date-year.field[type="text" name="expr-date-month"]
+                      .form-col.form-col-1of3
+                        label.form-label[for="cvv"]
+                          | CVV Code 
+                          span.form-asterisk
+                            | *
+                        .form-controls
+                          input#cvv.field[type="text" name="cvv"]
+                .paypal-element
+                  .form-text
+                    p
+                      | You will be redirected to PayPal’s website to make your payment. After completing your payment, you will be forwarded back to our website to view or print your receipt.
+              .form-actions
+                input.btn.btn-large.form-btn[type="submit" value="SUBMIT PAYMENT"]
+              p.form-terms
+                em
+                  | By completing my purchase, I agree to the <a href+"#">Payment Terms
+                  | , 
+                  a[href="#"]
+                    | Terms of Use
+                  | , and the 
+                  a[href="#"]
+                    | Privacy Statement
+                  | . Payment support available in English.
+= render partial: 'footer'

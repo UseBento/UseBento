@@ -81,4 +81,32 @@ class Project
   def format_start_date
     (self.start_date || DateTime.now).strftime "%b %d, %Y"
   end
+
+  def get_features
+    features = []
+    featured_answers = 
+      {"ftp_upload"                => "FTP Upload",
+       "google_analytics_setup"    => "Google Analytics Setup",
+       "presentation_type"         => {"Powerpoint"             => "Powerpoint <>",
+                                       "Keynote"                => "Keynote <>"},
+       "type"                      => {"apple_ios"              => "iOS <>",
+                                       "android"                => "Android <>"},
+       "responsiveness"            => {"desktop"                => false,
+                                       "desktop_plus_mobile"    => "Responsive <>"},
+       "service"                   => {"design_only"            => "Design Only",
+                                       "design_and_development" => "Design and Development"},
+       "facebook_header_and_profile" => "Facebook Header & Profile",
+       "twitter_header_and_profile"  => "Twitter Header & Profile",
+       "youtube_header_and_profile"  => "Youtube Header & Profile",
+       "linkedin_header_and_profile" => "LinkedIn Header & Profile"}
+
+    featured_answers.map do |name, label|
+                      answer = self.answer_for(name).answer
+                      if answer
+                        label = label[answer]                      if !label.is_a? String
+                        features.push(label.sub("<>", self.service.title)) if label
+                      end
+                    end
+    features
+  end
 end
