@@ -108,7 +108,7 @@ class UsersController < Devise::SessionsController
                              name:       params[:name],
                              password:   params[:password],
                              company:    params[:company]})
-        sign_in(:user, user)
+        sign_in(:user, @user)
     end
 
     respond_to do |format|
