@@ -33,4 +33,6 @@
           h3
             | Payments
           = link_to "Pay Deposit", "/payments/checkout/" + @project.id.to_s + "/50"
+          br
+          = link_to "Edit Project", "/projects/" + @project.id.to_s + "/edit"
 = render partial: 'footer'

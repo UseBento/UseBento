@@ -8,6 +8,18 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def edit
+    @project = Project.find(params[:id])
+    if !@project.has_access?(current_user)
+      redirect_to_login
+    end
+    
+    @errors  = []
+    @service = @project.service
+    @partial = @service.partial_name
+    render "projects/create"
+  end
+
   def list
     @open_projects   = current_user.projects
                        .where(:status.ne => :closed)
@@ -15,6 +27,23 @@ class ProjectsController < ApplicationController
     @closed_projects = current_user.projects
                        .where(:status => :closed)
                        .order_by(:number.asc)
+  end
+
+  def update
+    @project = Project.find(params[:project_id])
+    @service = @project.service
+    
+    params.map do |key, val|
+            @project.update_answer(key, val)
+          end
+
+    @errors = @project.validate_project
+    if @errors.length > 0
+      render "projects/create"
+    else
+      @project.save
+      redirect_to @project
+    end
   end
   
   def new
@@ -47,7 +76,7 @@ class ProjectsController < ApplicationController
                         error[:question].name == name
                       end
     if filtered.length == 0
-      "ff"
+      ""
     else
       filtered[0][:message]
     end

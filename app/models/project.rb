@@ -42,6 +42,13 @@ class Project
     end
   end
 
+  def update_answer(name, new_answer)
+    answer = self.answer_for(name)
+    if answer
+      answer.answer = new_answer
+    end
+  end
+
   def is_valid?
     validate_project.length == 0
   end
