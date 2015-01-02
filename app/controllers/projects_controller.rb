@@ -3,6 +3,9 @@ class ProjectsController < ApplicationController
 
   def view 
     @project = Project.find(params[:id])
+    if !@project.has_access?(current_user)
+      redirect_to_login
+    end
   end
 
   def list

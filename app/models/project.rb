@@ -13,6 +13,10 @@ class Project
   embeds_many :answers
   validate :is_valid?
 
+  def has_access?(user) 
+    (user.id == self.user.id) || user.admin
+  end
+
   def validate_project
     errors = []
     results = self.service.questions.map { |question|
