@@ -7,13 +7,29 @@ function get_tco_token() {
                    cvv:             $('#cvv').val()};
 
     TCO.loadPubKey('sandbox', function() {
-        function success() {
-            console.log(['success', arguments]); }
+        function success(response) {
+            console.log(['success', arguments]); 
+            $('#twocheckout-token').val(response.response.token.token)
+            $('#twocheckout-token')
+                .val(JSON.stringify(response.response.paymentMethod)); }
         function failure() {
             console.log(['failure', arguments]); }
 
         TCO.requestToken(success, failure, payload); }); }
 
+function setup_paypal_direct() {
+    $('#paypal-name').val($('#field-fname').val() + ' ' + $('#field-lname').val());
+    $('#paypal-addr').val($('#field-addr').val());
+    $('#paypal-addr2').val($('#field-addr2').val());
+    $('#paypal-city').val($('#field-city').val());
+    $('#paypal-state').val($('#field-state').val());
+    $('#paypal-country').val($('#field-country').val());
+    $('#paypal-email').val($('#field-email').val());
+    $('#paypal-phone').val($('#field-phone').val()); 
+
+    $('#tco-form').attr('action', 'https://www.2checkout.com/checkout/purchase');
+    $('#tco-form')[0].submit(); }
+    
 (function($, window, document, undefined) {
     var $win = $(window);
     var $doc = $(document);
@@ -21,7 +37,10 @@ function get_tco_token() {
     $doc.ready(function() {
         $('#tco-form').submit(function(event) {
             event.preventDefault();
-            get_tco_token(); });
+            if ($('#paypal').prop('checked'))
+                setup_paypal_direct();
+            else
+                get_tco_token(); }); 
 
         var waiting_for_login   = false;
         var signed_in           = false;

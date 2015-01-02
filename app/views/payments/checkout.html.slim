@@ -53,6 +53,8 @@
               input[type="hidden" name="checkout-form"]
               input[type="hidden" id="seller_id" name="seller_id" value=Rails.configuration.twocheckout_seller_id]
               input[type="hidden" id="publishable_key" name="publishable_key" value=Rails.configuration.twocheckout_public_key]
+              input[type="hidden" id="twocheckout-token" name="towcheckout_token" value=""]
+              input[type="hidden" id="twocheckout-payment-method" name="twocheckout_payment_method" value=""]
               .form-body
                 .form-row
                   .form-cols.clearfix
@@ -62,21 +64,21 @@
                         span.form-asterisk
                           | *
                       .form-controls
-                        input#field-fname.field[type="text" name="field-fname"]
+                        input#field-fname.field[type="text" name="field-fname" required]
                     .form-col.form-col-1of2
                       label.form-label[for="field-lname"]
                         | Last Name 
                         span.form-asterisk
                           | *
                       .form-controls
-                        input#field-lname.field[type="text" name="field-lname"]
+                        input#field-lname.field[type="text" name="field-lname" required]
                 .form-row
                   .form-cols
                     .form-col.form-col-1of2
                       label.form-label[for="field-company-name"]
                         | Company Name
                       .form-controls
-                        input#field-company-name.field[type="text" name="field-company-name"]
+                        input#field-company-name.field[type="text" name="field-company-name" value=current_user.company]
                     .form-col.form-col-1of2
                       label.form-label[for="field-phone-number"]
                         | Phone Number
@@ -90,7 +92,52 @@
                         span.form-asterisk
                           | *
                       .form-controls
-                        input#field-e-mail.field[type="text" name="field-e-mail"]
+                        input#field-e-mail.field[type="text" name="field-e-mail" required value=current_user.email]
+                .form-row.form-row-divider
+                .form-row
+                  label.form-label[for="field-addr"]
+                    | Address
+                    span.form-asterisk
+                      | *
+                  .form-controls
+                    input#field-addr.field[type="text" name="field-addr" required]
+                .form-row
+                  label.form-label[for="field-addr2"]
+                    | Address 2
+                  .form-controls
+                    input#field-addr2.field[type="text" name="field-addr2"]
+                .form-row
+                  .form-cols
+                    .form-col.form-col-1of3
+                      label.form-label[for="field-city"]
+                        | City
+                        span.form-asterisk
+                          | *
+                      .form-controls
+                        input#field-city.field[type="text" name="field-city" required]
+                    .form-col.form-col-1of3
+                      label.form-label[for="field-state"]
+                        | State
+                        span.form-asterisk
+                          | *
+                      .form-controls
+                        input#field-state.field[type="text" name="field-state" required]
+                    .form-col.form-col-1of3
+                      label.form-label[for="field-country"]
+                        | Country
+                        span.form-asterisk
+                          | *
+                      .form-controls
+                        input#field-country.field[type="text" name="field-country" value="United States" required]
+                .form-row
+                  .form-cols
+                    .form-col.form-col-1of3
+                      label.form-label[for="field-zip"]
+                        | Zipcode
+                        span.form-asterisk
+                          | *
+                      .form-controls
+                        input#field-zip.field[type="text" name="field-zip" required]
                 .form-row.form-row-divider
                 .form-row
                   .payment-method-selector
@@ -130,9 +177,28 @@
                         .form-controls
                           input#cvv.field[type="text" name="cvv"]
                 .paypal-element
+                  input#paypal-sid[type='hidden' name='sid' value=Rails.configuration.twocheckout_seller_id]
+                  input[type='hidden' name='mode' value='2CO']
+                  input[type='hidden' name='li_0_type' value='product']
+                  input[type='hidden' name='li_0_name' value=@project.service.title]
+                  input[type='hidden' name='li_0_product_id' value=@project.id]
+                  input[type='hidden' name='li_0__description' value=@project.service.description]
+                  input[type='hidden' name='li_0_price' value=@amount.round(2).to_s]
+                  input[type='hidden' name='li_0_quantity' value='1']
+                  input[type='hidden' name='li_0_tangible' value='N']
+                  input#paypal-name[type='hidden' name='card_holder_name' value='']
+                  input#paypal-addr[type='hidden' name='street_address' value='']
+                  input#paypal-addr2[type='hidden' name='street_address2' value='']
+                  input#paypal-city[type='hidden' name='city' value='']
+                  input#paypal-state[type='hidden' name='state' value='']
+                  input#paypal-zip[type='hidden' name='zip' value='']
+                  input#paypal-country[type='hidden' name='country' value='']
+                  input#paypal-email[type='hidden' name='email' value='']
+                  input#paypal-phone[type='hidden' name='phone' value='']
+                  input#paypal-phone_ext[type='hidden' name='phone_extension' value='']
                   .form-text
-                    p
-                      | You will be redirected to PayPal’s website to make your payment. After completing your payment, you will be forwarded back to our website to view or print your receipt.
+                  p
+                    | You will be redirected to PayPal’s website to make your payment. After completing your payment, you will be forwarded back to our website to view or print your receipt.
               .form-actions
                 input.btn.btn-large.form-btn[type="submit" value="SUBMIT PAYMENT"]
               p.form-terms
