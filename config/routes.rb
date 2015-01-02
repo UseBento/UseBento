@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get  'agencies',                    to: 'application#agencies'
   get  'payments/checkout/:project_id/:percent',           
        to: 'payments#checkout'
+  post 'payments/checkout/:project_id/:percent/process',   to: 'payments#process_payment'
 
   devise_scope :user do
     get  'profile',                     to: 'users#profile'

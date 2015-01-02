@@ -46,15 +46,16 @@
                       = '$' + @amount.round(2).to_s
         .checkout-form-holder
           .form.checkout-form
-            form#tco-form[action="lib/form.php" method="post"]
+            form#tco-form[action=("/payments/checkout/" + @project.id.to_s + '/' + @percent_orig + '/process')  method="post"]
               .section-head.form-head
                 h2.section-title
                   | Billing Information
               input[type="hidden" name="checkout-form"]
               input[type="hidden" id="seller_id" name="seller_id" value=Rails.configuration.twocheckout_seller_id]
               input[type="hidden" id="publishable_key" name="publishable_key" value=Rails.configuration.twocheckout_public_key]
-              input[type="hidden" id="twocheckout-token" name="towcheckout_token" value=""]
-              input[type="hidden" id="twocheckout-payment-method" name="twocheckout_payment_method" value=""]
+              input#twocheckout-token[type="hidden" name="twocheckout_token" value=""]
+              input#twocheckout-payment-method[type="hidden" name="twocheckout_payment_method" value=""]
+              = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) 
               .form-body
                 .form-row
                   .form-cols.clearfix
@@ -168,7 +169,7 @@
                           .form-col
                             input#expr-date-month.field[type="text" name="expr-date-month"]
                           .form-col
-                            input#expr-date-year.field[type="text" name="expr-date-month"]
+                            input#expr-date-year.field[type="text" name="expr-date-year"]
                       .form-col.form-col-1of3
                         label.form-label[for="cvv"]
                           | CVV Code 

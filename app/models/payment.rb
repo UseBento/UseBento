@@ -2,17 +2,17 @@ class Payment
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :amount,          type Integer
-  field :raw_response,    type Hash
-  field :transaction_id,  type Integer
-  field :response_code,   type String
+  field :amount,          type: Integer
+  field :raw_response,    type: Hash
+  field :transaction_id,  type: Integer
+  field :response_code,   type: String
   
   belongs_to :project
   belongs_to :user
 
   def self.api_credentials
     {private_key:      Rails.configuration.twocheckout_private_key,
-     seller_id:        Rails.configuration.twocheckout_seller_id,
+     seller_id:        Rails.configuration.twocheckout_seller_id.to_s,
      sandbox:          true}
   end
   
@@ -24,14 +24,16 @@ class Payment
                total:           amount.to_s,
                billingAddr:     address}
     begin
+      Rails.logger.debug params
+      Twocheckout::Checkout.sandbox(true);
       result = Twocheckout::Checkout.authorize(params)
-      payment = Payment.create({amount:           aount,
+      payment = Payment.create({amount:           amount,
                                 raw_response:     result,
                                 transaction_id:   result["orderNumber"],
                                 response_code:    result["responseCode"]})
     rescue Twocheckout::TwocheckoutError => e
-      puts e.message
-      false
+      Rails.logger.debug e.to_json
+      raise e
     end
   end
 end

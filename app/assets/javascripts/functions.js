@@ -8,10 +8,11 @@ function get_tco_token() {
 
     TCO.loadPubKey('sandbox', function() {
         function success(response) {
-            console.log(['success', arguments]); 
             $('#twocheckout-token').val(response.response.token.token)
-            $('#twocheckout-token')
-                .val(JSON.stringify(response.response.paymentMethod)); }
+            $('#twocheckout-payment-method')
+                .val(JSON.stringify(response.response.paymentMethod)); 
+            $('#tco-form')[0].submit(); }
+
         function failure() {
             console.log(['failure', arguments]); }
 
@@ -24,6 +25,7 @@ function setup_paypal_direct() {
     $('#paypal-city').val($('#field-city').val());
     $('#paypal-state').val($('#field-state').val());
     $('#paypal-country').val($('#field-country').val());
+    $('#paypal-zip').val($('#field-zip').val());
     $('#paypal-email').val($('#field-email').val());
     $('#paypal-phone').val($('#field-phone').val()); 
 
