@@ -46,11 +46,13 @@
                       = '$' + @amount.round(2).to_s
         .checkout-form-holder
           .form.checkout-form
-            form[action="lib/form.php" method="post"]
+            form#tco-form[action="lib/form.php" method="post"]
               .section-head.form-head
                 h2.section-title
                   | Billing Information
               input[type="hidden" name="checkout-form"]
+              input[type="hidden" id="seller_id" name="seller_id" value=Rails.configuration.twocheckout_seller_id]
+              input[type="hidden" id="publishable_key" name="publishable_key" value=Rails.configuration.twocheckout_public_key]
               .form-body
                 .form-row
                   .form-cols.clearfix
@@ -144,3 +146,5 @@
                     | Privacy Statement
                   | . Payment support available in English.
 = render partial: 'footer'
+script[type="text/javascript" src="https://www.2checkout.com/checkout/api/2co.min.js"]
+

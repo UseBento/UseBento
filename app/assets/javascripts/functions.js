@@ -1,8 +1,28 @@
+function get_tco_token() {
+    var payload = {sellerId:        $('#seller_id').val(),
+                   publishableKey:  $('#publishable_key').val(),
+                   ccNo:            $('#credit-card-number').val(),
+                   expMonth:        $('#expr-date-month').val(),
+                   expYear:         $('#expr-date-year').val(),
+                   cvv:             $('#cvv').val()};
+
+    TCO.loadPubKey('sandbox', function() {
+        function success() {
+            console.log(['success', arguments]); }
+        function failure() {
+            console.log(['failure', arguments]); }
+
+        TCO.requestToken(success, failure, payload); }); }
+
 (function($, window, document, undefined) {
     var $win = $(window);
     var $doc = $(document);
 
     $doc.ready(function() {
+        $('#tco-form').submit(function(event) {
+            event.preventDefault();
+            get_tco_token(); });
+
         var waiting_for_login   = false;
         var signed_in           = false;
         var just_submit_project = true;
