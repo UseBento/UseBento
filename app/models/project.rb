@@ -93,6 +93,10 @@ class Project
     (self.start_date || DateTime.now).strftime "%b %d, %Y"
   end
 
+  def number_format
+    self.number.to_s.rjust(4,'0')
+  end
+
   def get_features
     features = []
     featured_answers = 

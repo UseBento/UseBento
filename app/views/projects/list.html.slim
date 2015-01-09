@@ -1,78 +1,79 @@
 .wrapper
   = render partial: 'header', locals: {page: 'project'}
-  .section.section-contacts
-    .shell
-      .form.form-apply.form-business-card
-        .section-head.form-head
-          h2
-            | Your Projects
-        .section-body
-          = link_to "Start a new project >", "/services/select"
-          h3 
-            | Ongoing Projects
-          table
-            tr
+  .page_content.center_container
+    .project_box
+      .left_section
+        h2
+          | Your Projects
+      .right_section
+        a.btn_large.purple[href="/services/select"]
+          | START A NEW PROJECT 
+          i.fa.fa-angle-right
+      .clear
+      .table_box
+        table[width="100%" border="0" cellspacing="0" cellpadding="0"]
+          tr
+            td.heading[colspan="6"]
+              | Ongoing Projects
+          tr.tbl_row.subtitle
+            td[width="20%"]
+              | Project Number
+            td[width="19%"]
+              | Company
+            td[width="16%"]
+              | Project Type
+            td[width="13%"]
+              | Deliverables
+            td[width="14%"]
+              | Date Started 
+            td[width="18%"]
+              | Project Status 
+          - for project in @open_projects do
+            tr.tbl_row
               td
-                | Project Number
+                = link_to project.number_format, project
               td
-                | Company
+                = current_user.company
               td
-                | Project Type
+                = project.service.title 
               td
-                | Deliverables
+                = project.print_pages
               td
-                | Date Started
+                = project.format_start_date
               td
-                | Project Status
-              td
-                | View
-            - for project in @open_projects do
-              tr
-                td
-                  = project.number
-                td
-                  = current_user.company
-                td 
-                  = project.service.title
-                td 
-                  = project.print_pages
-                td
-                  = project.format_start_date
-                td
+                a.btn_small.blue[href="#"]
                   = project.status
-                td 
-                  = link_to "View", project
-          h3 
-            | Closed Projects
-          table
-            tr
+      .table_box
+        table[width="100%" border="0" cellspacing="0" cellpadding="0"]
+          tr
+            td.heading[colspan="6"]
+              | Archived Projects
+          tr.tbl_row.subtitle
+            td[width="20%"]
+              | Project Number
+            td[width="19%"]
+              | Company
+            td[width="16%"]
+              | Project Type
+            td[width="13%"]
+              | Deliverables
+            td[width="14%"]
+              | Date Started 
+            td[width="18%"]
+              | Project Status 
+          - for project in @closed_projects do
+            tr.tbl_row
               td
-                | Project Number
+                = link_to project.number_format, project
               td
-                | Company
+                = current_user.company
               td
-                | Project Type
+                = project.service.title 
               td
-                | Deliverables
+                = project.print_pages
               td
-                | Date Started
+                = project.format_start_date
               td
-                | Project Status
-              td
-                | View
-            - for project in @closed_projects do
-              tr
-                td
-                  = project.number
-                td
-                  = current_user.company
-                td 
-                  = project.service.title
-                td 
-                  = project.print_pages
-                td
-                  = project.format_start_date
-                td
+                a.btn_small.blue[href="#"]
                   = project.status
-                td 
-                  = link_to "View", project
+= render partial: "footer"
