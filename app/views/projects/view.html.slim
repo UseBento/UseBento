@@ -69,6 +69,14 @@
             .dtl_box
               textarea.text_box[rows="" name="Add a comment or upload a file..." onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"]
                 |  Add a comment or upload a file... 
+              .bottom_box
+                .attachment_box
+                  a[href="#"]
+                    img[src="/images/attachment.png" alt=""]
+                    | Attach files from your computer.
+                .submit_box
+                  input.cancel_btn[name="" type="button" value="Cancel"]
+                  input.comment_btn.purple[name="" type="button" value="ADD COMMENT"]
       .right_container
         ul.box_list
           li
