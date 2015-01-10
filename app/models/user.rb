@@ -47,4 +47,11 @@ class User
   def full_name
     self.name.split.map(&:capitalize).join ' '
   end
+
+  def avatar(root_domain)
+    hash = Digest::MD5.hexdigest(self.email.strip.downcase)
+    default_img = URI.encode_www_form_component(
+                    root_domain + "/images/default_avatar.gif")
+    "http://www.gravatar.com/avatar/" + hash + "?d=" + default_img
+  end
 end

@@ -36,7 +36,7 @@
           - for message in @project.messages
             li
               .avtar
-                img[src="images/1.jpg" alt=""]
+                img[src=message.user.avatar(request.host_with_port) alt=""]
               .dtl_box
                 h4
                   = message.user.full_name
