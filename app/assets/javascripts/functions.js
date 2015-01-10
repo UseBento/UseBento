@@ -123,9 +123,35 @@ function setup_paypal_direct() {
 
         function submit_project_message(event) {
             event.preventDefault();
-            var message       = $('#message-box').html();
-            var project_id    = $('#project-id').html();
-            }
+            var message       = $('#message-box').val();
+            var project_id    = $('#project-id').val();
+            
+            function success(data) {
+                var message_li = 
+                        build_el(
+                            li('',
+                               [div('avtar',
+                                    [img({src: data.avatar,
+                                          alt: ''})]),
+                                div('dtl_box',
+                                    [h4('', [data.user_name]),
+                                     span('message-body',
+                                          [unescape(data.body)]),
+                                     p('info_text',
+                                       ['Posted ' + data.posted])])])); 
+
+                message_li.insertBefore($('li#message-form-li')); 
+                message_li.children('.dtl_box')
+                    .children('.message-body')
+                    .html(unescape(data.body)); 
+                $('#message-box').val($('#message-box')[0].defaultValue); }
+
+            $.ajax({type: 'POST',
+                    url:  '/projects/' + project_id + '/message.json',
+                    data: {message_body: message},
+                    success: success}); }
+
+        $('#message-form').submit(submit_project_message);
 
         function check_first() {
             var radios = $.unique($('input[type="radio"]')

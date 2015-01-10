@@ -44,7 +44,7 @@
                 p.info_text
                   | Posted 
                   = time_ago_in_words message.posted_date
-          li
+          li#message-form-li
             .post_img
               img[src="/images/chat.png" alt=""]
             form#message-form.dtl_box[action=("/projects/" + @project.id.to_s + "/message") method="POST"]
