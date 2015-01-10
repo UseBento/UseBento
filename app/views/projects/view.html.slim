@@ -40,8 +40,7 @@
               .dtl_box
                 h4
                   = message.user.full_name
-                p
-                  = message.body
+                = raw message.body_as_html
                 p.info_text
                   | Posted 
                   = time_ago_in_words message.posted_date
