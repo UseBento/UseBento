@@ -1447,3 +1447,7 @@ padding-right: 15px;
 .clear {
 	clear: both;
 }
+
+.attachment_box {
+    margin-top: -0.5em;
+    font-size: 0.9em; }

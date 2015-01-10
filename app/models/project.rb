@@ -11,8 +11,10 @@ class Project
   belongs_to :service
   belongs_to :user
   embeds_many :answers
+  embeds_many :messages
   validate :is_valid?
   has_many :payments
+
 
   def has_access?(user) 
     (user.id == self.user.id) || user.admin

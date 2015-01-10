@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get  'projects/:id',                to: 'projects#view',        as: 'project'
   post 'projects/new',                to: 'projects#new'         
   get  'projects/:id/edit',           to: 'projects#edit'         
+  post 'projects/:project_id/message', to: 'messages#post_message'         
 
   root 'welcome#index'
   get  'contact',                     to: 'application#contact'

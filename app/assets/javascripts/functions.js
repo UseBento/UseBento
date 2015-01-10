@@ -119,10 +119,13 @@ function setup_paypal_direct() {
 	            setValue(value - 1)
 	        })
 	        .on('click.counter', '.counter-control-plus', function() {
-	            setValue(value + 1);
-	        });
+	            setValue(value + 1); }); };
 
-        };
+        function submit_project_message(event) {
+            event.preventDefault();
+            var message       = $('#message-box').html();
+            var project_id    = $('#project-id').html();
+            }
 
         function check_first() {
             var radios = $.unique($('input[type="radio"]')

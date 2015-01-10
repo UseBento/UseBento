@@ -33,41 +33,25 @@
         .clear
       .left_container
         ul.list_comment
-          li
-            .avtar
-              img[src="images/1.jpg" alt=""]
-            .dtl_box
-              h4
-                | Joan Culbertson
-              p
-                | Lorem ipsum dolor sit amet, sint phaedrum duo ut. Usu choro ubique eligendi in, utinam tibique has ad. Eu mel eruditi mentitum deleniti. Nec debet consul id, ne iudico iuvaret facilisis per. 
-              p
-                | Accumsan singulis platonem mel te, error tincidunt ei est, vim cibo nominavi no. Vim cu fugit argumentum. No cum mazim recteque, illud nihil qualisque mel ei. Ad scaevola qualisque mnesarchum nec, cum ne agam simul diceret. Eum at dicant gloriatur argumentum, id veniam commodo comprehensam mel. 
-              p.info_text
-                | Posted 23 hours ago 
-              p.responsive_img
-                img[src="images/img_1.jpg" alt=""]
-              p.img_text
-                | calendar.jpg
-          li
-            .avtar
-              img[src="images/2.jpg" alt=""]
-            .dtl_box
-              h4
-                | Vin Thomas
-              p
-                | It's a backdoor URL like the regular pricing page -- let's just use the
-                br
-                |  formatting like this one: 
-                a[href="#"]
-                  | https://new.soldsie.com/pricing-4/
-              p.info_text
-                | Posted at 7:55am 
+          - for message in @project.messages
+            li
+              .avtar
+                img[src="images/1.jpg" alt=""]
+              .dtl_box
+                h4
+                  = message.user.full_name
+                p
+                  = message.body
+                p.info_text
+                  | Posted 
+                  = time_ago_in_words message.posted_date
           li
             .post_img
               img[src="/images/chat.png" alt=""]
-            .dtl_box
-              textarea.text_box[rows="" name="Add a comment or upload a file..." onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"]
+            form#message-form.dtl_box[action=("/projects/" + @project.id.to_s + "/message") method="POST"]
+              = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) 
+              input#project-id[name="project_id" type="hidden" value=@project.id]
+              textarea#message-box.text_box[rows="" name="message_body" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"]
                 |  Add a comment or upload a file... 
               .bottom_box
                 .attachment_box
@@ -75,8 +59,8 @@
                     img[src="/images/attachment.png" alt=""]
                     | Attach files from your computer.
                 .submit_box
-                  input.cancel_btn[name="" type="button" value="Cancel"]
-                  input.comment_btn.purple[name="" type="button" value="ADD COMMENT"]
+                  input.cancel_btn[name="" type="reset" value="Cancel"]
+                  input.comment_btn.purple[name="" type="submit" value="ADD COMMENT"]
       .right_container
         ul.box_list
           li
