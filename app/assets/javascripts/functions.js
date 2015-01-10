@@ -151,7 +151,21 @@ function setup_paypal_direct() {
                     data: {message_body: message},
                     success: success}); }
 
-        $('#message-form').submit(submit_project_message);
+        //$('#message-form').submit(submit_project_message);
+        var file_upload_id = 1;
+        $('#file-link').click(function(event) {
+            event.preventDefault();
+            var file_upload = $('#file-upload');
+            file_upload.change(function() {
+                file_upload.css('display', 'block');
+                file_upload.attr('id', 'file-upload-' + file_upload_id.toString());
+                file_upload.attr('name', 'file-upload-' + file_upload_id.toString());
+                file_upload.parent().append(
+                    build_el(input({id:    'file-upload', 
+                                    type:  'file', 
+                                    style: 'display:none'})));
+                file_upload_id++; });
+            file_upload.trigger('click'); });
 
         function check_first() {
             var radios = $.unique($('input[type="radio"]')

@@ -7,6 +7,7 @@ class Message
   
   belongs_to :user
   embedded_in :project
+  embeds_many :attachments
 
   def serialize_message(request)
 
