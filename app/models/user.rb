@@ -43,4 +43,8 @@ class User
   end
 
   has_many :projects
+
+  def full_name
+    self.name.split.map(&:capitalize).join ' '
+  end
 end

@@ -1,38 +1,100 @@
 .wrapper
   = render partial: 'header', locals: {page: 'project'}
-  .section.section-contacts
-    .shell
-      .form.form-apply.form-business-card
-        .inner-head
-          = link_to "Back to your projects", "/projects/list"
-        .inner-body
-          h3
-            = current_user.company + " - " + @project.service.title
-          table
-            tr
-              td
-                | Type
+  .center_container.padding_less
+    .back_btn_box
+      a[href="/projects/list"]
+        img[src="/images/back_arrow.png" alt=""]
+        |  Back to Your Projects
+    .project_detail_box
+      .row_box
+        h2
+          = current_user.company + " - " + @project.service.title
+      .row_box.gray_brd
+        .col_two
+          p
+            | Type:
+          h5
+            = @project.service.name.gsub('_', ' ').capitalize
+        .col_one
+          p
+            | Size: 
+          h5
+            = @project.print_pages
+        .col_one
+          p
+            | Total: 
+          h5
+            = '$' + @project.get_price.to_s
+        .col_two
+          p
+            | Deadline: 
+          h5
+            = @project.deadline || 'Not set'
+        .clear
+      .left_container
+        ul.list_comment
+          li
+            .avtar
+              img[src="images/1.jpg" alt=""]
+            .dtl_box
+              h4
+                | Joan Culbertson
+              p
+                | Lorem ipsum dolor sit amet, sint phaedrum duo ut. Usu choro ubique eligendi in, utinam tibique has ad. Eu mel eruditi mentitum deleniti. Nec debet consul id, ne iudico iuvaret facilisis per. 
+              p
+                | Accumsan singulis platonem mel te, error tincidunt ei est, vim cibo nominavi no. Vim cu fugit argumentum. No cum mazim recteque, illud nihil qualisque mel ei. Ad scaevola qualisque mnesarchum nec, cum ne agam simul diceret. Eum at dicant gloriatur argumentum, id veniam commodo comprehensam mel. 
+              p.info_text
+                | Posted 23 hours ago 
+              p.responsive_img
+                img[src="images/img_1.jpg" alt=""]
+              p.img_text
+                | calendar.jpg
+          li
+            .avtar
+              img[src="images/2.jpg" alt=""]
+            .dtl_box
+              h4
+                | Vin Thomas
+              p
+                | It's a backdoor URL like the regular pricing page -- let's just use the
                 br
-                = @project.service.name
-              td
-                | Size
-                br
-                = @project.print_pages
-              td
-                | Total
-                br
-                = '$' + @project.get_price.to_s
-              td
-                | Deadline
-                br
-                = @project.deadline || 'Not set'
-        .inner-body
-          h3
-            | Messages
-        .inner-body
-          h3
-            | Payments
-          = link_to "Pay Deposit", "/payments/checkout/" + @project.id.to_s + "/50"
-          br
-          = link_to "Edit Project", "/projects/" + @project.id.to_s + "/edit"
+                |  formatting like this one: 
+                a[href="#"]
+                  | https://new.soldsie.com/pricing-4/
+              p.info_text
+                | Posted at 7:55am 
+          li
+            .post_img
+              img[src="images/chat.png" alt=""]
+            .dtl_box
+              textarea.text_box[rows="" name="Add a comment or upload a file..." onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"]
+                |  Add a comment or upload a file... 
+      .right_container
+        ul.box_list
+          li
+            h5
+              | People on this project
+            - for person in @project.people
+              .col_four
+                span
+                  = person.full_name
+                = person.email 
+          li
+            h5
+              | PROJECT INVOICE
+            p
+              = @project.current_payment.to_s + ' of ' + @project.total_payments.to_s + ' Payments: '
+              span
+                = '$' + number_with_delimiter(@project.next_payment_price, :delimiter => ',')
+            a.btn_large.purple[href=("/payments/checkout/" + @project.id.to_s + "/50")]
+              | PAY INVOICE NOW
+          li
+            p
+              | You need to PAY all outstanding project invoices in order to DOWNLOAD the files.
+            a.btn_large.gray[href="#"]
+              img[src="/images/download.png" alt=""]
+              | DOWNLOAD FILES
+          li
+            = link_to "Edit Project", "/projects/" + @project.id.to_s + "/edit"
+      .clear
 = render partial: 'footer'

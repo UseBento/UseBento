@@ -12,6 +12,7 @@ class Project
   belongs_to :user
   embeds_many :answers
   validate :is_valid?
+  has_many :payments
 
   def has_access?(user) 
     (user.id == self.user.id) || user.admin
@@ -97,6 +98,10 @@ class Project
     self.number.to_s.rjust(4,'0')
   end
 
+  def people
+    [self.user]
+  end
+
   def get_features
     features = []
     featured_answers = 
@@ -123,5 +128,17 @@ class Project
                       end
                     end
     features
+  end
+
+  def total_payments
+    2
+  end
+
+  def current_payment
+    self.payments.count + 1
+  end
+
+  def next_payment_price
+    self.get_price / 2
   end
 end
