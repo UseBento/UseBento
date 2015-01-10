@@ -3,6 +3,10 @@ class MessagesController < ApplicationController
   
   def post_message
     @project = Project.find(params[:project_id])
+    if !@project.has_access?(current_user)
+      redirect_to_login
+    end
+
     @message = @project.messages.create({body:  params[:message_body],
                                          posted_date: DateTime.now})
     @message.user = current_user
@@ -21,5 +25,19 @@ class MessagesController < ApplicationController
       format.html { redirect_to @project }
       format.json { render json: @message.serialize_message(request) }
     end
+  end
+
+  def view_attachment
+    @project = Project.find(params[:project_id])
+    if !@project.has_access?(current_user)
+      redirect_to_login
+    end
+
+    @message    = @project.messages.find(params[:message_id])
+    @attachment = @message.attachments.find(params[:attachment_id])
+    
+    send_data(@attachment.data.data, 
+              :type => MIME::Types.type_for(@attachment.name), 
+              :disposition => 'inline')
   end
 end

@@ -44,6 +44,11 @@
                 p.info_text
                   | Posted 
                   = time_ago_in_words message.posted_date
+                - for attachment in message.attachments
+                  p.responsive_img
+                    img[src=attachment.url alt=""]
+                  p.img_txt
+                    = attachment.name
           li#message-form-li
             .post_img
               img[src="/images/chat.png" alt=""]

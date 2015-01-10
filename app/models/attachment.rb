@@ -6,4 +6,8 @@ class Attachment
   field :data,             type: BSON::Binary
 
   embedded_in :message
+
+  def url
+    "/attachment/" + self.message.project.id + "/" + self.message.id + "/" + self.id
+  end
 end
