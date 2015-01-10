@@ -151,6 +151,10 @@ function setup_paypal_direct() {
                     data: {message_body: message},
                     success: success}); }
 
+        $('#message-form').bind('reset', function() {
+            $('input[name^="file-upload-"]').map(function(i,input) {
+                $(input).remove(); }); });
+
         //$('#message-form').submit(submit_project_message);
         var file_upload_id = 1;
         $('#file-link').click(function(event) {
