@@ -8,7 +8,9 @@
     .project_detail_box
       .row_box
         h2
-          = current_user.company + " - " + @project.service.title
+          = current_user.company 
+          |  &mdash; 
+          = @project.service.title
       .row_box.gray_brd
         .col_two
           p
@@ -75,7 +77,8 @@
               .col_four
                 span
                   = person.full_name
-                = person.email 
+                a[href=("mailto:"+person.email)]
+                  = person.email
           li
             h5
               | PROJECT INVOICE
