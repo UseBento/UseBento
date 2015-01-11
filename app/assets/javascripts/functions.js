@@ -163,7 +163,7 @@ function setup_paypal_direct() {
                 $(input).remove(); }); };
 
         $('#message-form').submit(submit_project_message);
-        $('#message-form').bind('reset', reset_form);
+        $('#message-form').bind('reset', reset_message_form);
 
         var file_upload_id = 1;
         $('#file-link').click(function(event) {
