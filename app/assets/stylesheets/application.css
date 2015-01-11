@@ -61,3 +61,7 @@ padding-top:1em;
     
 .intro-bg {
     z-index: -1;}
+
+.intro {
+    background-image: url('/css/images/desk.jpg');
+    background-size: cover; }
