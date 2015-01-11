@@ -144,18 +144,27 @@ function setup_paypal_direct() {
                 message_li.children('.dtl_box')
                     .children('.message-body')
                     .html(unescape(data.body)); 
-                $('#message-box').val($('#message-box')[0].defaultValue); }
+                $('#message-box').val($('#message-box')[0].defaultValue); 
+                reset_message_form(); }
+
+            var data = {message_body: message};
+            data     = new FormData($('#message-form')[0]);
 
             $.ajax({type: 'POST',
                     url:  '/projects/' + project_id + '/message.json',
-                    data: {message_body: message},
+                    data: data,
+                    enctype: 'multipart/form-data',
+                    processData: false,
+                    contentType: false,
                     success: success}); }
 
-        $('#message-form').bind('reset', function() {
+        function reset_message_form() {
             $('input[name^="file-upload-"]').map(function(i,input) {
-                $(input).remove(); }); });
+                $(input).remove(); }); };
 
-        //$('#message-form').submit(submit_project_message);
+        $('#message-form').submit(submit_project_message);
+        $('#message-form').bind('reset', reset_form);
+
         var file_upload_id = 1;
         $('#file-link').click(function(event) {
             event.preventDefault();

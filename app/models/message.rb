@@ -16,8 +16,22 @@ class Message
      posted:       time_ago_in_words(self.posted_date)}
   end
 
+  def attachments_as_html
+    html = ""
+    attachments.map do |attachment|
+                 html += ("<p class=\"responsive_img\">" + 
+                          ("<img src=\"" + attachment.url + "\" />") +
+                          "</p><p class=\"img_txt\">" +
+                          attachment.name +
+                          "</p>")
+               end
+    html
+  end
+
   def body_as_html
     body = self.body.gsub(URI.regexp, "<a href='\\0'>\\0</a>")
-    "<p>" + body.split(/(\r?\n){2,}/).join("</p><p>") + "</p>"
+    ("<p>" + body.split(/(\r?\n){2,}/).join("</p><p>") + "</p>" + 
+                                       self.attachments_as_html)
+
   end
 end
