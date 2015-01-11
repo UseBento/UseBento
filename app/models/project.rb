@@ -77,7 +77,7 @@ class Project
                 answer = self.answer_for(name)
                 answer ? answer.answer : false }
     answers = answers.select {|a| a}
-    answers.empty? ? 1 : answers[0]
+    answers.empty? ? 1 : answers[0].to_i
   end
 
   def get_responsive

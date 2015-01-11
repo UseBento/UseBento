@@ -31,8 +31,8 @@ class Question
       int = answer.to_i
       if self.values
         valid = int >= self.values[0] && int <= self.values[1]
-        invalid_message = ("Must be between " + self.values[0].to_s + " and " 
-                           + self.values[1].to_s)
+        invalid_message = ("Must be between " + self.values[0].to_s + " and " +
+                                                               self.values[1].to_s)
       else
         valid = answer.strip.match(/^[0-9]+$/)
         invalid_message = "This field is required"
