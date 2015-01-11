@@ -65,3 +65,7 @@ padding-top:1em;
 .intro {
     background-image: url('/css/images/desk.jpg');
     background-size: cover; }
+
+.form.form-access.form-sign-up .form-foot p {
+margin-bottom: 20px;
+}
