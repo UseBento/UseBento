@@ -10,7 +10,7 @@
                 h2.section-title
                   | Get in touch with us!
                 p
-                  | We would love to hear from you. Tell us what you think of ScreenKit and tell us what you want to see or problems that you have. We are designers and want to hear from you.
+                  | We would love to hear from you. Tell us what you think of Bento and what you want to see or problems that you have.
               input[type="hidden" name="contact-form"]
               .form-body
                 .form-row
@@ -60,9 +60,11 @@
               li
                 span.circle
                   i.ico-mail
-                |  info@usebento.com 
+                a[href="mailto:info@usebento.com"]
+                  |  info@usebento.com 
                 br
-                | support@usebento.com 
+                a[href="mailto:support@usebento.com"]
+                  | support@usebento.com 
           li.widget
             h3.widget-title
               | Find us on
@@ -75,13 +77,13 @@
                   a.link-twitter[href="#"]
                     i.ico-twitter
                 li
-                  a.link-google[href="#"]
+                  a.link-google.hidden[href="#"]
                     i.ico-google
                 li
-                  a.link-youtube[href="#"]
+                  a.link-youtube.hidden[href="#"]
                     i.ico-youtube
                 li
-                  a.link-instagram[href="#"]
+                  a.link-instagram.hidden[href="#"]
                     i.ico-instagram
   .section.section-callout
     .shell
