@@ -1203,14 +1203,14 @@ a.btn_small{
 	width:160px;
 	float:left;
 }
-.project_detail_box .gray_brd .col_one p, .col_two p{
+.project_detail_box .gray_brd .col_one p, .col_two p, .col_flex p{
 	margin:0px 0 7px;
 	padding:0px;
 	color:#525f71;
 	font-size:14px;
 }
 
-.project_detail_box .gray_brd .col_one h5, .col_two h5{
+.project_detail_box .gray_brd .col_one h5, .col_two h5, .col_flex h5{
 	margin:0px;
 	padding:0px;
 	font-size:14px;
