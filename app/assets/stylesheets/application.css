@@ -54,3 +54,8 @@ padding-top:1em;
 .form-row .success {
     font-size: 0.8em;
     font-weight: bold; }
+
+.list-item:hover {
+    cursor: pointer;
+    background-color: #F6f6f6; }
+    

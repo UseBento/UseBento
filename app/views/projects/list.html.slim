@@ -29,7 +29,7 @@
             td[width="18%"]
               | Project Status 
           - for project in @open_projects do
-            tr.tbl_row
+            tr.tbl_row.list-item[onclick=("window.location.href=\"/projects/" + project.id + "\"")]
               td
                 = link_to project.number_format, project
               td
@@ -62,7 +62,7 @@
             td[width="18%"]
               | Project Status 
           - for project in @closed_projects do
-            tr.tbl_row
+            tr.tbl_row.list-item[onclick=("window.location.href=\"/projects/" + project.id + "\"")]
               td
                 = link_to project.number_format, project
               td
