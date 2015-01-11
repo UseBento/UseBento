@@ -12,7 +12,7 @@ class Message
   def serialize_message(request)
     {avatar:       self.user.avatar(request.host_with_port),
      user_name:    self.user.full_name,
-     body:         self.body_as_html,
+     body:         self.body_as_html(true),
      posted:       time_ago_in_words(self.posted_date)}
   end
 
