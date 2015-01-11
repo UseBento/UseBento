@@ -62,7 +62,7 @@
             input#field-FTP-Upload[type="checkbox" name="free_services" value="on" checked=(@project.answer_for('ftp_upload').answer == "on")]
             i.ico-check
             span
-              | FTP Upload
+              | FTP Upload 
 .form-row
   label.form-label[for="field-e-mail"]
     | Number of estimated slides 
@@ -72,7 +72,7 @@
     = get_error('pages')
   .form-controls
     .counter-input
-      button.counter-control.counter-minus[type="button"]
+      button.counter-control.counter-control-minus[type="button"]
         | -
       input#pages-count.counter-field.calc-item[type="text" name="pages" readonly data-math-type="multiply" value=(@project.answer_for('pages').answer || 1)]
       button.counter-control.counter-control-plus[type="button"]
