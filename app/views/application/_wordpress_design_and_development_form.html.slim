@@ -52,14 +52,14 @@
       li
         .checkbox
           label.form-label-check[for="field-Google-analytics-setup"]
-            input#field-Google-analytics-setup[type="checkbox" name="free_services" value="on" checked=(@project.answer_for('google_analytics_setup').answer == "on")]
+            input#field-Google-analytics-setup[type="checkbox" name="google_analytics_setup" value="on" checked=(@project.answer_for('google_analytics_setup').answer == "on")]
             i.ico-check
             span
               | Google analytics setup
       li
         .checkbox
           label.form-label-check[for="field-FTP-Upload"]
-            input#field-FTP-Upload[type="checkbox" name="free_services" value="on" checked=(@project.answer_for('ftp_upload').answer == "on")]
+            input#field-FTP-Upload[type="checkbox" name="ftp_upload" value="on" checked=(@project.answer_for('ftp_upload').answer == "on")]
             i.ico-check
             span
               | FTP Upload 
