@@ -59,3 +59,5 @@ padding-top:1em;
     cursor: pointer;
     background-color: #F6f6f6; }
     
+.intro-bg {
+    z-index: -1;}
