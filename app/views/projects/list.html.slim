@@ -41,7 +41,7 @@
               td
                 = project.format_start_date
               td
-                a.btn_small.blue[href="#"]
+                a[href="#" class=project.label_class]
                   = project.status
       .table_box
         table[width="100%" border="0" cellspacing="0" cellpadding="0"]
@@ -74,6 +74,6 @@
               td
                 = project.format_start_date
               td
-                a.btn_small.blue[href="#"]
+                a[href="#" class=project.label_class]
                   = project.status
 = render partial: "footer"

@@ -143,4 +143,17 @@ class Project
   def next_payment_price
     self.get_price / 2
   end
+
+  def label_class
+    case self.status
+    when :pending
+      "btn_small blue"
+    when :assigned
+      "btn_small green"
+    when :awaiting_payment
+      "btn_small blue"
+    when :closed
+      "btn_small gray"
+    end
+  end
 end
