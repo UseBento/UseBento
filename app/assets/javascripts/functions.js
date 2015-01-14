@@ -226,7 +226,7 @@ function setup_paypal_direct() {
                         event.preventDefault();
                         log_in_then(function() {
                             just_submit_project = true;
-                            log_in_then(project_form.submit()); }); }}); }}
+                            project_form.submit(); }); }}); }}
 
         setup_project_form();
 
