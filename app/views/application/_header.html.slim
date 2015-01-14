@@ -21,13 +21,15 @@ header.header
             li
               a.popup-link#userlink[href="/popups/login"]
                 | LOG IN
-            li
-              a.popup-link[href="/popups/sign_up"]
-                | SIGN UP
           - else
             li
               a#userlink[href="/profile" data-userid=current_user.id]
                 = current_user.name
             li 
               = link_to "logout", destroy_user_session_path, :method => :delete
+        - else
+          li
+            a.popup-link.hidden#userlink[href="/popups/login"]
+              | LOG IN
+
             
