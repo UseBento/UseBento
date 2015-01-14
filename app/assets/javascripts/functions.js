@@ -100,7 +100,7 @@ function setup_paypal_direct() {
                     data: {email:      email},
                     success: function(data) {
                         if (data.error)
-                            $('#password-reset-errors').html(data.error);
+                            $('#password-errors').html(data.error);
                         else
                             $('#sent-link').click(); }}); }
 
