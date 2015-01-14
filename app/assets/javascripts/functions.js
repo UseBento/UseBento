@@ -224,11 +224,25 @@ function setup_paypal_direct() {
                         return true;
                     else {
                         event.preventDefault();
-                        log_in_then(function() {
-                            just_submit_project = true;
-                            project_form.submit(); }); }}); }}
+                        return check_user_exists(
+                            $('#field-e-mail').val(),
+                            function() {
+                                log_in_then(function() {
+                                    just_submit_project = true;
+                                    project_form.submit(); }); },
+                            function() {
+                                just_submit_project = true;
+                                project_form.submit(); }); }}); }}
 
         setup_project_form();
+
+        function check_user_exists(email, if_exists, otherwise) {
+            $.ajax({type:    'GET',
+                    url:     '/user_exists.json?email=' + encodeURIComponent(email),
+                    success:  function(data) {
+                        return data.exists 
+                            ? if_exists()
+                            : otherwise(); }}); }
 
         function update_price() {
             var button         = $('#project-submit');
@@ -251,6 +265,7 @@ function setup_paypal_direct() {
             $('#sign-up-form').submit(sign_up); 
             $('#log-in-form').submit(log_in);
             $('#password-reset-form').submit(reset_password);
+            $('#field-email').val($('#field-e-mail').val());
             link_popups(); }
 
         function link_popups() {

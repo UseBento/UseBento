@@ -48,6 +48,14 @@ class User
     self.name.split.map(&:capitalize).join ' '
   end
 
+  def self.generate(name, email, company) 
+    password = Devise.friendly_token.first(12)
+    User.create({email:        email,
+                 name:         name,
+                 company:      company,
+                 password:     password})
+  end
+
   def avatar(root_domain)
     hash = Digest::MD5.hexdigest(self.email.strip.downcase)
     default_img = URI.encode_www_form_component(

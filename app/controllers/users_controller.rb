@@ -57,6 +57,19 @@ class UsersController < Devise::SessionsController
     render 'profile', :layout => "application"
   end
 
+  def exists
+    user = User.where(email: params[:email]).first
+    respond_to do |format|
+      format.html { redirect_to '/' }
+      format.json { 
+          if user
+            render json: {exists: true}
+          else
+            render json: {exists: false}
+          end }
+    end
+  end    
+
   def reset
     error = false
     user = User.where(email: params[:email]).first

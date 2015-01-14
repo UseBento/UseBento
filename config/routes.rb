@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   post 'payments/checkout/:project_id/:percent/process',   to: 'payments#process_payment'
 
   devise_scope :user do
+    get  'user_exists',                 to: 'users#exists'
     get  'profile',                     to: 'users#profile'
     post 'profile/update',              to: 'users#update_profile'
   

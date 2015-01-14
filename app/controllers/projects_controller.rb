@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: :new
 
   def view 
     @project = Project.find(params[:id])
@@ -47,14 +48,28 @@ class ProjectsController < ApplicationController
   end
   
   def new
+    if !user_signed_in?
+      email = params[:email]
+      if User.where(email: email).first
+        return authenticate_user!
+      else
+        @user = User.generate(params[:full_name],
+                              params[:email],
+                              params[:business_name])
+        sign_in(:user, @user)
+      end
+    else
+      @user = current_user
+    end
+
     @service             = Service.where(name: params[:service_name]).first
     @project             = Project.new
     @project.service     = @service
-    @project.user        = current_user
+    @project.user        = @user
     @project.status      = :pending
     @project.start_date  = DateTime.now.to_date
 
-    last_project         = current_user.projects.order_by(:number.desc).first
+    last_project         = @user.projects.order_by(:number.desc).first
     @project.number      = last_project ? last_project.number + 1 : 1
 
     params.map do |key, val|
