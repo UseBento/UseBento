@@ -37,8 +37,8 @@
                     = get_error('full_name')
                   .form-controls
                     - if user_signed_in?
-                      = current_user.company
-                      input#field-full-name.field[type="hidden" name="full_name" value=current_user.company]
+                      = current_user.full_name
+                      input#field-full-name.field[type="hidden" name="full_name" value=current_user.full_name]
                     - else
                       input#field-full-name.field[type="text" name="full_name" required data-validation-type="['presence']" value=@project.answer_for('full_name').answer]
                 .form-col.form-col-1of2
