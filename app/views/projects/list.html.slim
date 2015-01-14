@@ -33,7 +33,7 @@
               td
                 = link_to project.number_format, project
               td
-                = current_user.company
+                = project.user.company
               td
                 = project.service.title 
               td
@@ -66,7 +66,7 @@
               td
                 = link_to project.number_format, project
               td
-                = current_user.company
+                = project.user.company
               td
                 = project.service.title 
               td
