@@ -50,10 +50,12 @@ class User
 
   def self.generate(name, email, company) 
     password = Devise.friendly_token.first(12)
-    User.create({email:        email,
-                 name:         name,
-                 company:      company,
-                 password:     password})
+    user     = User.create({email:        email,
+                            name:         name,
+                            company:      company,
+                            password:     password})
+    UserMailer.new_generated_user_mail(user, password).deliver
+    user
   end
 
   def avatar(root_domain)

@@ -1,0 +1,12 @@
+doctype html
+html[lang="en"]
+  head
+  body
+    strong
+      | Welcome to Bento
+    p
+      | Your account for  
+      = @user.email
+      |  has been created, your new password is:
+      = @password
+    = link_to "Login", root_url, :only_path => false
