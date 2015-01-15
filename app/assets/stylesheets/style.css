@@ -1168,10 +1168,11 @@ a.btn_small{
 }
 .back_btn_box img{
 	position:relative;
-	top:2px;
+	top:-2px;
 	margin-right:5px;
 
 }
+
 
 .project_detail_box{
 	-webkit-border-radius: 2px;-moz-border-radius: 2px;border-radius: 2px;
