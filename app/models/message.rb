@@ -39,7 +39,7 @@ class Message
   end
 
   def body_as_html(with_attachments=false)
-    body = self.body.gsub(URI.regexp, "<a href='\\0'>\\0</a>")
+    body = self.body.gsub(URI.regexp(['http', 'https']), "<a href='\\0'>\\0</a>")
     ("<p>" + body.split(/(\r?\n){2,}/).join("</p><p>") + "</p>") +
       (with_attachments ? self.attachments_as_html : '')
 
