@@ -37,7 +37,7 @@ class MessagesController < ApplicationController
     @attachment = @message.attachments.find(params[:attachment_id])
     
     send_data(@attachment.data.data, 
-              :type => MIME::Types.type_for(@attachment.name), 
+              :type => @attachment.mime,
               :disposition => 'inline')
   end
 end

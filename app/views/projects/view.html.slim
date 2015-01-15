@@ -47,10 +47,14 @@
                   | Posted 
                   = time_ago_in_words message.posted_date
                 - for attachment in message.attachments
-                  p.responsive_img
-                    img[src=attachment.url alt=""]
-                  p.img_txt
-                    = attachment.name
+                  - if attachment.is_image?
+                    p.responsive_img
+                      img[src=attachment.url alt=""]
+                    p.img_txt
+                      = attachment.name
+                  - else
+                    p.img_txt
+                      = link_to attachment.name, attachment.url
           li#message-form-li
             .post_img
               img[src=current_user.avatar(request.host_with_port) alt=""]
