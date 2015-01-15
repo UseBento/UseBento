@@ -8,7 +8,10 @@ class Attachment
   embedded_in :message
 
   def url
-    "/attachment/" + self.message.project.id + "/" + self.message.id + "/" + self.id
+    "/attachment/" + 
+      self.message.project.id + "/" +
+      self.message.id + "/" + self.id + "/" +
+      self.name                                  
   end
 
   def mime

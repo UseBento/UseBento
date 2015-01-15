@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post 'projects/new',                to: 'projects#new'         
   get  'projects/:id/edit',           to: 'projects#edit'         
   post 'projects/:project_id/message', to: 'messages#post_message'         
-  get  'attachment/:project_id/:message_id/:attachment_id', to: 'messages#view_attachment'
+  get  'attachment/:project_id/:message_id/:attachment_id/:filename', to: 'messages#view_attachment'
 
   root 'welcome#index'
   get  'contact',                     to: 'application#contact'
