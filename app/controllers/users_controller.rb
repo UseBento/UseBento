@@ -109,7 +109,11 @@ class UsersController < Devise::SessionsController
           if error
             render json: {error: error}
           else
-            render json: {username:    user.name,
+            render json: {username:    user.full_name,
+                          keywords:    user.default_keywords,
+                          audience:    user.default_target_audience,
+                          email:       user.email,
+                          company:     user.company,
                           id:          user.id.to_s}
           end }
     end

@@ -92,7 +92,29 @@ function setup_paypal_direct() {
                                 userlink.attr('href', '/profile');
                                 userlink.attr('data-userid', data.id);
                                 userlink.html(data.username);
-                                $.magnificPopup.close(); }}}}); }
+                                $.magnificPopup.close(); 
+
+                                var full_name = $('#field-full-name');
+                                full_name.val(data.username);
+                                full_name.attr('type', 'hidden');
+                                full_name.parent().append(data.username);
+
+                                var email = $('#field-e-mail');
+                                email.val(data.email);
+                                email.attr('type', 'hidden');
+                                email.parent().append(data.email);
+
+                                var company = $('#field-name-business');
+                                if (!company.val()) 
+                                    company.val(data.company);
+
+                                var target = $('#field-target');
+                                if (!target.val()) 
+                                    target.val(data.audience);
+
+                                var keywords = $('#field-keywords');
+                                if (!keywords.val()) 
+                                    keywords.val(data.keywords); }}}}); }
 
         function reset_password(event) {
             event.preventDefault();
