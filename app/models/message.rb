@@ -1,6 +1,7 @@
 class Message
   include Mongoid::Document
   include ActionView::Helpers::DateHelper
+  include ActionView::Helpers::SanitizeHelper
 
   field :body,           type: String
   field :posted_date,    type: DateTime
@@ -19,11 +20,20 @@ class Message
   def attachments_as_html
     html = ""
     attachments.map do |attachment|
-                 html += ("<p class=\"responsive_img\">" + 
-                          ("<img src=\"" + attachment.url + "\" />") +
-                          "</p><p class=\"img_txt\">" +
-                          attachment.name +
-                          "</p>")
+                 if attachment.is_image?
+                   html += ("<p class=\"responsive_img\">" + 
+                            ("<img src=\"" + 
+                             URI.encode_www_form_component(attachment.url) + "\" />") +
+                            "</p><p class=\"img_txt\">" +
+                            sanitize(attachment.name) +
+                                       "</p>")
+                 else
+                   html += ("<p class=\"img_txt\">" +
+                            "<a href=\"" + 
+                            URI.encode_www_form_component(attachment.url) +
+                                "\">" + sanitize(attachment.name) + 
+                                "</a></p>")
+                 end
                end
     html
   end
