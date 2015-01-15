@@ -64,4 +64,18 @@ class User
                     root_domain + "/images/default_avatar.gif")
     "http://www.gravatar.com/avatar/" + hash + "?d=" + default_img
   end
+  
+  def last_project
+    self.projects.last
+  end
+
+  def default_keywords
+    project = last_project
+    project ? project.answer_for('business_keywords').answer : ""
+  end
+
+  def default_target_audience
+    project = last_project
+    project ? project.answer_for('target_audience').answer : ""
+  end
 end

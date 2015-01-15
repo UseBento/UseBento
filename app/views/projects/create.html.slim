@@ -92,7 +92,7 @@
               .form-errors
                 = get_error('target_audience')
               .form-controls
-                input#field-target.field[type="text" name="target_audience" value=@project.answer_for('target_audience').answer required data-validation-type="['presence']"]
+                input#field-target.field[type="text" name="target_audience" value=(@project.answer_for('target_audience').answer || current_user ? current_user.default_target_audience : "") required data-validation-type="['presence']"]
             .form-row
               label.form-label[for="field-keywords"]
                 | What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
@@ -101,7 +101,7 @@
               .form-errors
                 = get_error('business_keywords')
               .form-controls
-                input#field-keywords.field[type="text" name="business_keywords" value=@project.answer_for('business_keywords').answer required data-validation-type="['presence']"]
+                input#field-keywords.field[type="text" name="business_keywords" value=(@project.answer_for('business_keywords').answer || current_user ? current_user.default_keywords : "") required data-validation-type="['presence']"]
             = render partial: @service.partial_name
           .form-actions
             input.btn.form-btn#project-submit[type="submit" value=(@service.price != 0 ? "GET STARTED - $" + @service.price.to_s : "Get Started")]
