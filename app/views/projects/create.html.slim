@@ -55,17 +55,28 @@
                     - else
                       input#field-e-mail.field[type="email" name="email" value=@project.answer_for('email').answer required data-validation-type="['email']"]
             .form-row
-              label.form-label[for="field-name-business"]
-                | What is the name of your business?
-                span.form-asterisk
-                  |  *
-              .form-errors
-                = get_error('business_name')
-              .form-controls
-                input#field-name-business.field[type="text" name="business_name" value=(@project.answer_for('business_name').answer || (user_signed_in? ? current_user.company : '')) required data-validation-type="['presence']"]
+              .form-cols
+                .form-col.form-col-1of2
+                  label.form-label[for="field-name-business"]
+                    | What is the name of your business?
+                    span.form-asterisk
+                      |  *
+                  .form-errors
+                    = get_error('business_name')
+                  .form-controls
+                    input#field-name-business.field[type="text" name="business_name" value=(@project.answer_for('business_name').answer || (user_signed_in? ? current_user.company : '')) required data-validation-type="['presence']"]
+                .form-col.form-col-1of2
+                  label.form-label[for="field-name-project"]
+                    | What is the name of your project?
+                    span.form-asterisk
+                      |  *
+                  .form-errors
+                    = get_error('project_name')
+                  .form-controls
+                    input#field-name-project.field[type="text" name="project_name" value=@project.answer_for('project_name').answer required data-validation-type="['presence']"]
             .form-row
               label.form-label[for="field-describe-business"]
-                | Please describe your business. 
+                | Please describe your project.
                 span.form-asterisk
                   |  *
               .form-errors

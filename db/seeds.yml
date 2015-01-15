@@ -19,6 +19,10 @@ Services:
         label: What is the name of your business?
         type: :text
         required: true
+      - name: project_name
+        label: What is the name of your project?
+        type: :text
+        required: true
       - name: business_description
         label: Please describe your business.
         type: :long_text
@@ -54,6 +58,10 @@ Services:
         required: true
       - name: business_name
         label: What is the name of your business?
+        type: :text
+        required: true
+      - name: project_name
+        label: What is the name of your project?
         type: :text
         required: true
       - name: business_description
@@ -103,6 +111,10 @@ Services:
         label: What is the name of your business?
         type: :text
         required: true
+      - name: project_name
+        label: What is the name of your project?
+        type: :text
+        required: true
       - name: business_description
         label: Please describe your business.
         type: :long_text
@@ -140,6 +152,10 @@ Services:
         label: What is the name of your business?
         type: :text
         required: true
+      - name: project_name
+        label: What is the name of your project?
+        type: :text
+        required: true
       - name: business_description
         label: Please describe your business.
         type: :long_text
@@ -172,6 +188,10 @@ Services:
         label: What is the name of your business?
         type: :text
         required: true
+      - name: project_name
+        label: What is the name of your project?
+        type: :text
+        required: true
       - name: business_description
         label: Please describe your business.
         type: :long_text
@@ -202,6 +222,10 @@ Services:
         required: true
       - name: business_name
         label: What is the name of your business?
+        type: :text
+        required: true
+      - name: project_name
+        label: What is the name of your project?
         type: :text
         required: true
       - name: business_description
@@ -244,6 +268,10 @@ Services:
         required: true
       - name: business_name
         label: What is the name of your business?
+        type: :text
+        required: true
+      - name: project_name
+        label: What is the name of your project?
         type: :text
         required: true
       - name: business_description
@@ -292,6 +320,10 @@ Services:
         required: true
       - name: business_name
         label: What is the name of your business?
+        type: :text
+        required: true
+      - name: project_name
+        label: What is the name of your project?
         type: :text
         required: true
       - name: business_description
@@ -353,6 +385,10 @@ Services:
         label: What is the name of your business?
         type: :text
         required: true
+      - name: project_name
+        label: What is the name of your project?
+        type: :text
+        required: true
       - name: business_description
         label: Please describe your business.
         type: :long_text
@@ -390,6 +426,10 @@ Services:
         required: true
       - name: business_name
         label: What is the name of your business?
+        type: :text
+        required: true
+      - name: project_name
+        label: What is the name of your project?
         type: :text
         required: true
       - name: business_description
@@ -444,6 +484,10 @@ Services:
         required: true
       - name: business_name
         label: What is the name of your business?
+        type: :text
+        required: true
+      - name: project_name
+        label: What is the name of your project?
         type: :text
         required: true
       - name: business_description
