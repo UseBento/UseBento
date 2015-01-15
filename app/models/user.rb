@@ -59,6 +59,10 @@ class User
   end
 
   def avatar(root_domain)
+    if self.admin
+      return "/images/chat.png"
+    end
+
     hash = Digest::MD5.hexdigest(self.email.strip.downcase)
     default_img = URI.encode_www_form_component(
                     root_domain + "/images/default_avatar.gif")

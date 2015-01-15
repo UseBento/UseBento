@@ -53,7 +53,7 @@
                     = attachment.name
           li#message-form-li
             .post_img
-              img[src="/images/chat.png" alt=""]
+              img[src=current_user.avatar(request.host_with_port) alt=""]
             form#message-form.dtl_box[action=("/projects/" + @project.id.to_s + "/message") method="POST" enctype="multipart/form-data"]
               = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) 
               input#project-id[name="project_id" type="hidden" value=@project.id]

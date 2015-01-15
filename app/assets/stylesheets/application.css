@@ -75,3 +75,9 @@ width: auto;
 float: left;
 padding-right: 1.5em;
 }
+
+
+.post_img img {
+    height: 50px;
+    width: 50px;
+    border-radius: 25px; }
