@@ -16,7 +16,7 @@ header.header
           = link_to "JOIN THE TEAM", "/apply"
         li class=(page == 'agencies' ? 'current' : '')
           = link_to "FOR AGENCIES", "/agencies"
-        - unless page == 'project' && !user_signed_in?
+        - unless page == 'project' && !user_signed_in? && false
           - unless user_signed_in?
             li
               a.popup-link#userlink[href="/popups/login"]

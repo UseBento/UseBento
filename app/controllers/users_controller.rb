@@ -109,7 +109,8 @@ class UsersController < Devise::SessionsController
           if error
             render json: {error: error}
           else
-            render json: {}
+            render json: {username:    user.name,
+                          id:          user.id.to_s}
           end }
     end
   end

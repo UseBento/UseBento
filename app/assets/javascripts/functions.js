@@ -87,8 +87,12 @@ function setup_paypal_direct() {
                         else {
                             if (waiting_for_login)
                                 waiting_for_login();
-                            else
-                                window.location.href = '/'; }}}); }
+                            else {
+                                var userlink = $('#userlink');
+                                userlink.attr('href', '/profile');
+                                userlink.attr('data-userid', data.id);
+                                userlink.html(data.username);
+                                $.magnificPopup.close(); }}}}); }
 
         function reset_password(event) {
             event.preventDefault();
