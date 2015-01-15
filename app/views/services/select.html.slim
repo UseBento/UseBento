@@ -27,6 +27,39 @@
           button.btn.btn-light.btn-large.cart-continue
             | ITEM SUCCESSFULLY ADDED
       .section-body
+        #websites.products
+          .products-head
+            h2
+              | Websites & Programming
+          .products-body
+            .products-grid-item
+              a.product-tile href=url_for(:controller => 'services', :action => 'create', :name => 'website_design_and_development')
+                .product-tile-image
+                  img[src="/images/products/website.jpg" alt="" width="280" height="222"]
+                .product-tile-title
+                  h3
+                    | Website Design & Development
+            .products-grid-item
+              a.product-tile href=url_for(:controller => 'services', :action => 'create', :name => 'wordpress_design_and_development')
+                .product-tile-image
+                  img[src="/images/products/wordpress.jpg" alt="" width="280" height="222"]
+                .product-tile-title
+                  h3
+                    | Wordpress Design & Development
+            .products-grid-item
+              a.product-tile href=url_for(:controller => 'services', :action => 'create', :name => 'email_design_and_development')
+                .product-tile-image
+                  img[src="/images/products/email.jpg" alt="" width="280" height="222"]
+                .product-tile-title
+                  h3
+                    | HTML Email Design & Development
+            .products-grid-item
+              a.product-tile href=url_for(:controller => 'services', :action => 'create', :name => 'landing_page_design_and_development')
+                .product-tile-image
+                  img[src="/images/products/landing_page.jpg" alt="" width="280" height="222"]
+                .product-tile-title
+                  h3
+                    | Landing Page Design & Development
         #branding.products
           .products-head
             h2
@@ -67,39 +100,6 @@
                 .product-tile-title
                   h3
                     | Social Media Design
-        #websites.products
-          .products-head
-            h2
-              | Websites & Programming
-          .products-body
-            .products-grid-item
-              a.product-tile href=url_for(:controller => 'services', :action => 'create', :name => 'website_design_and_development')
-                .product-tile-image
-                  img[src="/images/products/website.jpg" alt="" width="280" height="222"]
-                .product-tile-title
-                  h3
-                    | Website Design & Development
-            .products-grid-item
-              a.product-tile href=url_for(:controller => 'services', :action => 'create', :name => 'wordpress_design_and_development')
-                .product-tile-image
-                  img[src="/images/products/wordpress.jpg" alt="" width="280" height="222"]
-                .product-tile-title
-                  h3
-                    | Wordpress Design & Development
-            .products-grid-item
-              a.product-tile href=url_for(:controller => 'services', :action => 'create', :name => 'email_design_and_development')
-                .product-tile-image
-                  img[src="/images/products/email.jpg" alt="" width="280" height="222"]
-                .product-tile-title
-                  h3
-                    | HTML Email Design & Development
-            .products-grid-item
-              a.product-tile href=url_for(:controller => 'services', :action => 'create', :name => 'landing_page_design_and_development')
-                .product-tile-image
-                  img[src="/images/products/landing_page.jpg" alt="" width="280" height="222"]
-                .product-tile-title
-                  h3
-                    | Landing Page Design & Development
         #mobile.products
           .products-head
             h2
