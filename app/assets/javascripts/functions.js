@@ -190,6 +190,8 @@ function setup_paypal_direct() {
 
         $('#message-form').submit(submit_project_message);
         $('#message-form').bind('reset', reset_message_form);
+        $('#message-box').change(function() {
+            $('.cancel_btn').css('display', 'inline'); });                
 
         var file_upload_id = 1;
         $('#file-link').click(function(event) {
