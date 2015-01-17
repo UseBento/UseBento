@@ -4,7 +4,7 @@
     .back_btn_box
       a[href="/projects/list"]
         img[src="/images/back_arrow.png" alt=""]
-        |  Back to Your Projects
+        |  Back to My Projects
     .project_detail_box
       .row_box
         h2
@@ -74,7 +74,9 @@
                   input.comment_btn.purple[name="" type="submit" value="ADD COMMENT"]
       .right_container
         ul.box_list
-          li
+         li
+            = link_to "Edit Project", "/projects/" + @project.id.to_s + "/edit"
+         li
             h5
               | People on this project
             - for person in @project.people
@@ -83,7 +85,7 @@
                   = person.full_name
                 a[href=("mailto:"+person.email)]
                   = person.email
-          li
+        li
             h5
               | PROJECT INVOICE
             p
@@ -92,13 +94,11 @@
                 = '$' + number_with_delimiter(@project.next_payment_price, :delimiter => ',')
             a.btn_large.purple[href=("/payments/checkout/" + @project.id.to_s + "/50")]
               | PAY INVOICE NOW
-          li
-            p
-              | You need to PAY all outstanding project invoices in order to DOWNLOAD the files.
-            a.btn_large.gray[href="#"]
-              img[src="/images/download.png" alt=""]
-              | DOWNLOAD FILES
-          li
-            = link_to "Edit Project", "/projects/" + @project.id.to_s + "/edit"
+/          li
+/            p
+/              | You need to PAY all outstanding project invoices in order to DOWNLOAD the files.
+/            a.btn_large.gray[href="#"]
+/              img[src="/images/download.png" alt=""]
+/              | DOWNLOAD FILES
       .clear
 = render partial: 'footer'
