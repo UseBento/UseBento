@@ -24,4 +24,18 @@ class ApplicationController < ActionController::Base
       format.json { render json: {success: true} }
     end
   end
+
+  def contact_agency
+    BentoMailer.contact_agency(params['field-name'], 
+                               params['field-e-mail'],
+                               params['field-agency'],
+                               params['field-message']).deliver
+
+    respond_to do |format|
+      format.html { 
+          @message_sent = true
+          render 'agencies' }
+      format.json { render json: {success: true} }
+    end
+  end
 end

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get  'contact',                     to: 'application#contact'
   post 'send_contact',                to: 'application#send_contact'
+  post 'contact_agency',              to: 'application#contact_agency'
   get  'apply',                       to: 'application#apply'
   get  'agencies',                    to: 'application#agencies'
   get  'payments/checkout/:project_id/:percent',           
