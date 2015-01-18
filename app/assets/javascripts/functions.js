@@ -88,11 +88,18 @@ function setup_paypal_direct() {
                             if (waiting_for_login)
                                 waiting_for_login();
                             else {
+                                if (window.location.pathname == "/")
+                                    window.location.href = "/projects/list";
+
                                 var userlink = $('#userlink');
                                 userlink.attr('href', '/profile');
                                 userlink.attr('data-userid', data.id);
                                 userlink.html(data.username);
                                 $.magnificPopup.close(); 
+
+                                var projects_link = $('a[href="/services/select"]');
+                                projects_link.html('PROJECTS');
+                                projects_link.attr('href', '/projects/list');
 
                                 var full_name = $('#field-full-name');
                                 full_name.val(data.username);
