@@ -6,4 +6,22 @@ class ApplicationController < ActionController::Base
   def redirect_to_login
     redirect_to "/#login"
   end
+
+  def contact
+    @message_sent = false
+  end
+
+  def send_contact
+    BentoMailer.contact_us(params['field-name'], 
+                           params['field-e-mail'],
+                           params['field-subject'],
+                           params['field-message']).deliver
+
+    respond_to do |format|
+      format.html { 
+          @message_sent = true
+          render 'contact' }
+      format.json { render json: {success: true} }
+    end
+  end
 end
