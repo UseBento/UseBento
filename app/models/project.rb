@@ -72,12 +72,22 @@ class Project
   end
 
   def get_pages
-    names = ['number_of_screens', 'slide_count', 'pages']
-    answers = names.map { |name|
-                answer = self.answer_for(name)
-                answer ? answer.answer : false }
-    answers = answers.select {|a| a}
-    answers.empty? ? 1 : answers[0].to_i
+    if self.service.name == "social_media_design"
+      fields = ["twitter_header_and_profile", 
+                "youtube_header_and_profile", 
+                "linkedin_header_and_profile", 
+                "facebook_header_and_profile"]
+      fields = fields.map {|f| self.answer_for(f).answer }
+      fields = fields.select {|f| f}
+      fields.length
+    else
+      names = ['number_of_screens', 'slide_count', 'pages']
+      answers = names.map { |name|
+                  answer = self.answer_for(name)
+                  answer ? answer.answer : false }
+      answers = answers.select {|a| a}
+      answers.empty? ? 1 : answers[0].to_i
+    end
   end
 
   def get_responsive

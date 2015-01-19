@@ -285,6 +285,13 @@ function setup_paypal_direct() {
             var page_counter   = $('#pages-count');
             var page_count     = page_counter ? page_counter.val() : 1;
             var responsive     = $('#field-desktop-mobile').prop('checked');
+            
+            if ($('input[name="service_name"]').val() == 'social_media_design') 
+                page_count = $('input.header-type')
+                    .map(function(i, ii) { 
+                        return $(ii).prop('checked'); })
+                    .filter(function(i, x) { 
+                        return x; }).length; 
 
             if (price === 0) return;
             if (responsive) 
@@ -294,6 +301,7 @@ function setup_paypal_direct() {
             button.val('GET STARTED - $' + price); }
 
         $('#pages-count').change(update_price);
+        $('.header-type').change(update_price);
         $('#field-desktop-mobile, #field-desktop-only').change(update_price);
 
         function run_on_popup() {
