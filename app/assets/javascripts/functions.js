@@ -359,6 +359,25 @@ function setup_paypal_direct() {
 	});
 
 
+        function validate_apply_form(event) {
+            var skills           = [$('#skill1'), 
+                                    $('#skill2'), 
+                                    $('#skill3')];
+            var selected_skills  = [];
+            
+            for (var i in skills) {
+                if (skills[i].val() && member(selected_skills, skills[i].val())) {
+                    event.preventDefault();
+                    return notify_duplicate_skill(skills[i]); }
+                selected_skills.push(skills[i].val()); }
+
+            return true; }
+
+        function notify_duplicate_skill(skill) {
+            $('#error').html("You can't enter the same skill twice!");
+            window.location.hash = '#error'; }
+
+        $('#apply-form').submit(validate_apply_form);
 
 	// mobile menu
 	$('.expand').on('click', function (event) {
