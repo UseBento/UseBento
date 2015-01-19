@@ -199,6 +199,7 @@
                   input#paypal-country[type='hidden' name='country' value='']
                   input#paypal-email[type='hidden' name='email' value='']
                   input#paypal-phone[type='hidden' name='phone' value='']
+                  input[type='hidden' name='x_receipt_link_url' value=(request.base_url + url_for(@project))]
                   input#paypal-phone_ext[type='hidden' name='phone_extension' value='']
                   .form-text
                   p

@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   post 'contact_agency',              to: 'application#contact_agency'
   get  'apply',                       to: 'application#apply'
   get  'agencies',                    to: 'application#agencies'
+  get  'process_payment',             to: 'payments#process_pp_payment'
+  post 'process_payment',             to: 'payments#process_pp_payment'
   get  'payments/checkout/:project_id/:percent',           
        to: 'payments#checkout'
   post 'payments/checkout/:project_id/:percent/process',   to: 'payments#process_payment'
