@@ -61,8 +61,7 @@
             form#message-form.dtl_box[action=("/projects/" + @project.id.to_s + "/message") method="POST" enctype="multipart/form-data"]
               = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) 
               input#project-id[name="project_id" type="hidden" value=@project.id]
-              textarea#message-box.text_box[rows="" name="message_body" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"]
-                |  Add a comment or upload a file... 
+              textarea#message-box.text_box[rows="" placeholder="Add a comment or upload a file..." name="message_body" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"]
               .bottom_box
                 .attachment_box
                   a#file-link[href="#"]

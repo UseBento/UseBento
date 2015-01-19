@@ -183,6 +183,10 @@ function setup_paypal_direct() {
             var data = {message_body: message};
             data     = new FormData($('#message-form')[0]);
 
+            if ($('input[type="file"][id^="file-upload-"]').length == 0
+                && $('#message-box').val() == "")
+                return;
+
             $.ajax({type: 'POST',
                     url:  '/projects/' + project_id + '/message.json',
                     data: data,
