@@ -969,7 +969,7 @@ input:checked + label .paypal-logo { background-position: 0 -29px; }
     .products-grid-item { width: 50%; }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 640px), (max-device-width: 640px) {
     .slider-projects { padding: 0; }
     .slide-foot { line-height:30px; text-align:center; }
     .slide-foot a,
@@ -1007,7 +1007,8 @@ input:checked + label .paypal-logo { background-position: 0 -29px; }
 
     .form-col:first-child { float:none; padding-bottom:25px;  }
     .form-col { float:none; width: auto; }
-}
+    .form-col.form-col-1of3 { float:none; padding-bottom:25px;  }
+    .form-col.form-col-1of3 { float: none; padding-left: 0; }}
 
 @media (max-width: 480px) {
     .btn { display:block; box-sizing: border-box; width: 100%; }
