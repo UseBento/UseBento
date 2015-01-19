@@ -183,8 +183,7 @@ function setup_paypal_direct() {
             var data = {message_body: message};
             data     = new FormData($('#message-form')[0]);
 
-            if ($('input[type="file"][id^="file-upload-"]').length == 0
-                && $('#message-box').val() == "")
+            if (!message_form_has_data())
                 return;
 
             $.ajax({type: 'POST',
@@ -202,7 +201,20 @@ function setup_paypal_direct() {
         $('#message-form').submit(submit_project_message);
         $('#message-form').bind('reset', reset_message_form);
         $('#message-box').change(function() {
-            $('.cancel_btn').css('display', 'inline'); });                
+            set_add_comment_state(); });
+
+        function message_form_has_data() {
+            return $('input[type="file"][id^="file-upload-"]').length > 0
+                || $('#message-box').val() != ""; }
+
+        function set_add_comment_state(reset) {
+            var has_data = message_form_has_data();
+            if (reset !== undefined)
+                has_data = !reset;
+            $('.cancel_btn').css('display', has_data ? 'inline' : 'none');
+            $('#add-comment').prop('disabled', !has_data); }
+
+        $('.cancel_btn').click(curry(set_add_comment_state, true));
 
         var file_upload_id = 1;
         $('#file-link').click(function(event) {
@@ -216,7 +228,8 @@ function setup_paypal_direct() {
                     build_el(input({id:    'file-upload', 
                                     type:  'file', 
                                     style: 'display:none'})));
-                file_upload_id++; });
+                file_upload_id++; 
+                set_add_comment_state(); });
             file_upload.trigger('click'); });
 
         function check_first() {
