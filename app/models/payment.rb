@@ -18,8 +18,10 @@ class Payment
   
   def self.new_payment(project, amount, token, address) 
     Twocheckout::API.credentials = self.api_credentials
+    payment = Payment.new
 
     params  = {token:           token,
+               merchantOrderId: payment.id.to_s,
                currency:        'USD',
                total:           amount.to_s,
                billingAddr:     address}
@@ -27,10 +29,12 @@ class Payment
       Rails.logger.debug params
       Twocheckout::Checkout.sandbox(true);
       result = Twocheckout::Checkout.authorize(params)
-      payment = Payment.create({amount:           amount,
-                                raw_response:     result,
-                                transaction_id:   result["orderNumber"],
-                                response_code:    result["responseCode"]})
+      payment.amount           = amount
+      payment.raw_response     = result
+      payment.transaction_id   = result["orderNumber"]
+      payment.response_code    = result["responseCode"]
+      payment.project          = project
+      payment.save
     rescue Twocheckout::TwocheckoutError => e
       Rails.logger.debug e.to_json
       raise e

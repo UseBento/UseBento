@@ -85,9 +85,12 @@
                   = person.full_name
                 a[href=("mailto:"+person.email)]
                   = person.email
-        li
+         li
             h5
               | PROJECT INVOICE
+            - for payment in @project.payments
+              p
+                = '$' + payment.amount.to_s + " - paid"
             p
               = @project.current_payment.to_s + ' of ' + @project.total_payments.to_s + ' Payments: '
               span
