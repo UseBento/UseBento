@@ -12,6 +12,7 @@ class BentoMailer < ActionMailer::Base
          from:     @email,
          subject:  @subject)
   end
+
   def contact_agency(name, email, agency, message)
     @full_name     = name
     @email         = email
@@ -22,5 +23,19 @@ class BentoMailer < ActionMailer::Base
     mail(to:       @admin.email,
          from:     @email,
          subject:  "Agency: " + @agency + " sent a message")
+  end
+  
+  def apply(name, email, portfolio, dribbble, behance, skills) 
+    @full_name     = name
+    @email         = email
+    @portfolio     = portfolio
+    @dribbble      = dribbble
+    @behance       = behance
+    @skills        = skills
+    @admin         = User.get_admin
+
+    mail(to:        @admin.email,
+         from:      @email,
+         subject:   @full_name + " applied to Bento")
   end
 end

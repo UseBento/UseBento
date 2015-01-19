@@ -1,0 +1,26 @@
+doctype html
+html[lang="en"]
+  head
+  body
+    h3 
+      = "From: " + @full_name + " <" + @email + ">"
+    strong
+      | Portfolio:
+    a[href=@portfolio] 
+      = @portfolio
+    br
+    strong
+      | Dribbble:
+    a[href=@dribbble]
+      = @dribbble
+    br
+    strong
+      | Behance:
+    a[href=@behance]
+      = @behance
+    br
+    strong
+      | Skills:  
+    = @skills.join(", ")
+
+

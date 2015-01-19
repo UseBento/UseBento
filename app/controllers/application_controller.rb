@@ -38,4 +38,26 @@ class ApplicationController < ActionController::Base
       format.json { render json: {success: true} }
     end
   end
+
+  def send_apply
+    skills = [params['skill'], 
+              params['skill2'], 
+              params['skill3']].select do |skill|
+                                 skill
+                               end
+
+    BentoMailer.apply(params['field-full-name'],
+                      params['field-e-mail'],
+                      params['field-portfolio-url'],
+                      params['field-dribbble-url'],
+                      params['field-behance-url'],
+                      skills).deliver
+
+    respond_to do |format|
+      format.html { 
+          @message_sent = true
+          render 'apply' }
+      format.json { render json: {success: true} }
+    end
+  end
 end
