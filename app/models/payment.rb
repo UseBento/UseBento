@@ -36,7 +36,6 @@ class Payment
       payment.project          = project
       payment.save
     rescue Twocheckout::TwocheckoutError => e
-      Rails.logger.debug e.to_json
       raise e
     end
   end

@@ -5,6 +5,9 @@
       .section-head.section-head-little-gutter
         h2
           | Checkout
+        - if @error_message
+          center.form-errors
+            = @error_message
       .section-body.clearfix
         .checkout-sum-up
           .checkout-sum-up-group
@@ -65,26 +68,26 @@
                         span.form-asterisk
                           | *
                       .form-controls
-                        input#field-fname.field[type="text" name="field-fname" required]
+                        input#field-fname.field[type="text" name="field-fname" value=@fname required]
                     .form-col.form-col-1of2
                       label.form-label[for="field-lname"]
                         | Last Name 
                         span.form-asterisk
                           | *
                       .form-controls
-                        input#field-lname.field[type="text" name="field-lname" required]
+                        input#field-lname.field[type="text" name="field-lname" value=@lname required]
                 .form-row
                   .form-cols
                     .form-col.form-col-1of2
                       label.form-label[for="field-company-name"]
                         | Company Name
                       .form-controls
-                        input#field-company-name.field[type="text" name="field-company-name" value=current_user.company]
+                        input#field-company-name.field[type="text" value=(@company_name || current_user.company) name="field-company-name"]
                     .form-col.form-col-1of2
                       label.form-label[for="field-phone-number"]
                         | Phone Number
                       .form-controls
-                        input#field-phone-number.field[type="text" name="field-phone-number"]
+                        input#field-phone-number.field[type="text" value=@address[:phoneNumber] name="field-phone-number"]
                 .form-row
                   .form-cols
                     .form-col.form-col-1of2
@@ -93,7 +96,7 @@
                         span.form-asterisk
                           | *
                       .form-controls
-                        input#field-e-mail.field[type="text" name="field-e-mail" required value=current_user.email]
+                        input#field-e-mail.field[type="text" value=(@address[:email] || current_user.email) name="field-e-mail" required]
                 .form-row.form-row-divider
                 .form-row
                   label.form-label[for="field-addr"]
@@ -101,12 +104,12 @@
                     span.form-asterisk
                       | *
                   .form-controls
-                    input#field-addr.field[type="text" name="field-addr" required]
+                    input#field-addr.field[type="text" value=@address[:addrLine1] name="field-addr" required]
                 .form-row
                   label.form-label[for="field-addr2"]
                     | Address 2
                   .form-controls
-                    input#field-addr2.field[type="text" name="field-addr2"]
+                    input#field-addr2.field[type="text" value=@address[:addrLine2] name="field-addr2"]
                 .form-row
                   .form-cols
                     .form-col.form-col-1of3
@@ -115,21 +118,21 @@
                         span.form-asterisk
                           | *
                       .form-controls
-                        input#field-city.field[type="text" name="field-city" required]
+                        input#field-city.field[type="text" value=@address[:city] name="field-city" required]
                     .form-col.form-col-1of3
                       label.form-label[for="field-state"]
                         | State
                         span.form-asterisk
                           | *
                       .form-controls
-                        input#field-state.field[type="text" name="field-state" required]
+                        input#field-state.field[type="text" value=@address[:state] name="field-state" required]
                     .form-col.form-col-1of3
                       label.form-label[for="field-country"]
                         | Country
                         span.form-asterisk
                           | *
                       .form-controls
-                        input#field-country.field[type="text" name="field-country" value="United States" required]
+                        input#field-country.field[type="text" value=(@address[:country] || "United States") name="field-country" required]
                 .form-row
                   .form-cols
                     .form-col.form-col-1of3
@@ -138,7 +141,7 @@
                         span.form-asterisk
                           | *
                       .form-controls
-                        input#field-zip.field[type="text" name="field-zip" required]
+                        input#field-zip.field[type="text" value=@address[:zipCode] name="field-zip" required]
                 .form-row.form-row-divider
                 .form-row
                   .payment-method-selector
