@@ -6,7 +6,9 @@ class Service
   field :rounds,          type: Integer
   field :completion_time, type: Range
   field :price,           type: Integer
+  field :plus_dev_price,  type: Integer
   field :unit,            type: String
+  field :responsive_price, type: Integer
 
   has_many :project
   embeds_many :questions

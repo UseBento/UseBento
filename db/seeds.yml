@@ -136,7 +136,7 @@ Services:
     title: 'Business Card Design'
     description: 'Stand-out with a custom, professional business card. <br />Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
     rounds: 3
-    price: 300
+    price: 400
     unit: 'Card'
     completion_time: [3, 5]
     fields: 
@@ -172,7 +172,7 @@ Services:
     title: 'Stationary Design'
     description: 'From letterheads to your complete corporate identity. <br />Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
     rounds: 3
-    price: 300
+    price: 400
     unit: 'Stationary'
     completion_time: [3, 5]
     fields: 
@@ -254,7 +254,7 @@ Services:
     title: 'Social Media Design'
     description: 'Hand-picked designers to enhance your social media profiles. <br />Final logos sent to you as .jpg, .png, .and .psd file formats.'
     rounds: 3
-    price: 150
+    price: 200
     completion_time: [3, 5]
     unit: 'Profile'
     fields: 
@@ -307,7 +307,9 @@ Services:
     description: 'Hand-picked experts to create your website. <br />HTML website development optimized for all major browser clients.'
     rounds: 3
     unit: 'Page'
-    price: 1200
+    price: 650
+    plus_dev_price: 1050
+    responsive_price: 1200
     completion_time: [2, 3]
     fields: 
       - name: full_name
@@ -412,7 +414,9 @@ Services:
     title: 'Landing Page Design & Development'
     description: 'High converting HTML landing pages by hand-picked experts. <br />HTML landing page development optimized for all major browser clients'
     rounds: 3
-    price: 1200
+    price: 650
+    plus_dev_price: 1050
+    responsive_price: 1200
     unit: 'Page'
     completion_time: [3, 5]
     fields: 
@@ -470,7 +474,9 @@ Services:
     title: 'Wordpress Website Design & Development'
     description: 'Hand-picked experts to unleash the power of WordPress. <br />Wordpress development optimized for all major browser clients.'
     rounds: 3
-    price: 1500
+    price: 650
+    plus_dev_price: 1300
+    responsive_price: 1550
     unit: 'Page'
     completion_time: [2, 3]
     fields: 

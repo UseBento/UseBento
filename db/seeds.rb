@@ -14,6 +14,8 @@ seeds["Services"].map { |service_def|
       service.description       = service_def['description']
       service.rounds            = service_def['rounds']
       service.price             = service_def['price']
+      service.plus_dev_price    = service_def['plus_dev_price']
+      service.responsive_price  = service_def['responsive_price']
       service.unit              = service_def['unit']
       service.completion_time   = Range.new(service_def['completion_time'][0],
                                             service_def['completion_time'][1])
@@ -26,10 +28,12 @@ seeds["Services"].map { |service_def|
                  rounds:          service_def['rounds'],
                  unit:            service_def['unit'],
                  price:           service_def['price'],
+                 plus_dev_price:  service_def['plus_dev_price'],
+                 responsive_price: service_def['responsive_price'],
                  completion_time: Range.new(service_def['completion_time'][0],
                                             service_def['completion_time'][1])})
     end
-    service_def['fields'].map { |field_def| 
+    service_def['fields'].map { |field_def|
         question = service.questions.where(name: field_def['name']).first
         if question
           question.label    = field_def['label']
