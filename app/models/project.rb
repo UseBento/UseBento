@@ -95,9 +95,27 @@ class Project
     answer ? answer.answer == 'desktop_plus_mobile' : false
   end
 
+  def get_plus_dev
+    answer = self.answer_for('service')
+    answer ? answer.answer == 'design_and_development' : false
+  end
+
   def get_price
     pages          = get_pages
-    price_per_page = self.service.price + (self.get_responsive ? 20 : 0)
+    price_per_page = self.service.price
+    if self.get_plus_dev
+      if self.service.plus_dev_price
+        price_per_page = self.service.plus_dev_price
+      end
+    end
+
+    if self.get_responsive
+      if self.service.responsive_price
+        price_per_page = self.service.responsive_price
+      else
+        price_per_page += 20
+      end
+    end
 
     price_per_page * pages
   end

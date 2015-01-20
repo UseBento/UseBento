@@ -302,6 +302,9 @@ function setup_paypal_direct() {
             var page_counter   = $('#pages-count');
             var page_count     = page_counter ? page_counter.val() : 1;
             var responsive     = $('#field-desktop-mobile').prop('checked');
+            var plus_dev       = $('#field-design-development').prop('checked');
+            var responsive_price     = $('#responsive-price').val();
+            var plus_dev_price       = $('#plus-dev-price').val();
             
             if ($('input[name="service_name"]').val() == 'social_media_design') 
                 page_count = $('input.header-type')
@@ -311,15 +314,22 @@ function setup_paypal_direct() {
                         return x; }).length; 
 
             if (price === 0) return;
-            if (responsive) 
-                price += 20;
+            if (plus_dev) 
+                if (plus_dev_price)
+                    price = plus_dev_price;
+            if (responsive) {
+                if (responsive_price)
+                    price = responsive_price;
+                else 
+                    price += 20; }
 
             price = price * page_count;
             button.val('GET STARTED - $' + price); }
 
         $('#pages-count').change(update_price);
         $('.header-type').change(update_price);
-        $('#field-desktop-mobile, #field-desktop-only').change(update_price);
+        $('#field-desktop-mobile, #field-desktop-only, #field-design-development, #field-design-only')
+            .change(update_price);
 
         function run_on_popup() {
             $('#sign-up-form').submit(sign_up); 
