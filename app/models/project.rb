@@ -197,6 +197,7 @@ class Project
                     "know if you have any questions!")
 
     admin_user   = User.where({admin: true, name: "Noah"}).first
+    admin_user   = User.where({admin: true}).first unless admin_user
     message      = self.messages.create({body:        message_body,
                                          posted_date: DateTime.now})
     message.user = admin_user
