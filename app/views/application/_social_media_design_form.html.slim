@@ -8,7 +8,7 @@
       li
         .checkbox
           label.form-label-check[for="field-facebook-photo"]
-            input.header-type#field-facebook-photo[type="checkbox" name="facebook_header_and_profile" value="on" checked=(@project.answer_for('facebook_header_and_profile').answer == "on")]
+            input.header-type#field-facebook-photo[type="checkbox" name="facebook_header_and_profile" value="on" checked=(@project.answer_for('facebook_header_and_profile').answer ? @project.answer_for('facebook_header_and_profile').answer == "on" : true)]
             i.ico-check
             span
               | Facebook header & profile photo
