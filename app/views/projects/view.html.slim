@@ -45,7 +45,7 @@
                 = raw message.body_as_html
                 p.info_text
                   | Posted 
-                  = time_ago_in_words message.posted_date
+                  = message.posted_date.to_formatted_s(:long_ordinal)
                 - for attachment in message.attachments
                   - if attachment.is_image?
                     p.responsive_img
