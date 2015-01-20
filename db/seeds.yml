@@ -208,7 +208,7 @@ Services:
     title: 'Presentation Design'
     description: 'Creation of new powerpoint or keynote presentation template. <br />Sourced images are an additional cost.'
     rounds: 3
-    price: 50
+    price: 100
     unit: 'Slide'
     completion_time: [3, 5]
     fields: 
