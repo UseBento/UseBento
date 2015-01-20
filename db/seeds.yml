@@ -371,7 +371,9 @@ Services:
     title: 'Email Design & Development'
     description: 'A professional email template created just for your business.<br />Responsive HTML optimized for all major email clients.'
     rounds: 3
-    price: 500
+    price: 350
+    plus_dev_price: 500
+    responsive_price: 500
     unit: 'Email'
     completion_time: [3, 5]
     fields: 
