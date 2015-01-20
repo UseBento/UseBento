@@ -73,9 +73,14 @@
                   input#add-comment.comment_btn.purple[name="" type="submit" value="ADD COMMENT" disabled]
       .right_container
         ul.box_list
-         li
+          li
             = link_to "Edit Project", "/projects/" + @project.id.to_s + "/edit"
-         li
+            - if current_user.admin
+              br
+              = link_to "Archive Project", "/projects/" + @project.id.to_s + "/archive"
+              br
+              = link_to "Delete Project", "/projects/" + @project.id.to_s + "/del_project"
+          li
             h5
               | People on this project
             - for person in @project.people
@@ -84,7 +89,7 @@
                   = person.full_name
                 a[href=("mailto:"+person.email)]
                   = person.email
-         li
+          li
             h5
               | PROJECT INVOICE
             - for payment in @project.payments

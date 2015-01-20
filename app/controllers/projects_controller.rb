@@ -5,20 +5,41 @@ class ProjectsController < ApplicationController
   def view 
     @project = Project.find(params[:id])
     if !@project.has_access?(current_user)
-      redirect_to_login
+      return redirect_to_login
     end
   end
 
   def edit
     @project = Project.find(params[:id])
     if !@project.has_access?(current_user)
-      redirect_to_login
+      return redirect_to_login
     end
     
     @errors  = []
     @service = @project.service
     @partial = @service.partial_name
     render "projects/create"
+  end
+
+  def archive
+    @project = Project.find(params[:id])
+    if !current_user.admin
+      redirect_to "/"
+    else
+      @project.status = :closed
+      @project.save
+      redirect_to "/projects/list"
+    end
+  end
+
+  def delete
+    @project = Project.find(params[:id])
+    if !current_user.admin
+      redirect_to "/"
+    else
+      @project.destroy
+      redirect_to "/projects/list"
+    end
   end
 
   def list

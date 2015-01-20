@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get  'projects/:id',                to: 'projects#view',        as: 'project'
   post 'projects/new',                to: 'projects#new'         
   get  'projects/:id/edit',           to: 'projects#edit'         
+  get  'projects/:id/archive',         to: 'projects#archive'         
+  get  'projects/:id/del_project',     to: 'projects#delete'         
   post 'projects/:project_id/message', to: 'messages#post_message'         
   get  'attachment/:project_id/:message_id/:attachment_id/:filename', to: 'messages#view_attachment'
 
