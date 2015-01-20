@@ -24,7 +24,7 @@ class Question
       invalid_message =  "Please enter a valid email"
 
     elsif [:full_name, :text, :keywords].member?(self.type)
-      valid = answer.strip.length > 0
+      valid = (answer || "").strip.length > 0
       invalid_message = "This field is required"
 
     elsif self.type == :integer

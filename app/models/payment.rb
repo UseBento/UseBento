@@ -35,6 +35,9 @@ class Payment
       payment.response_code    = result["responseCode"]
       payment.project          = project
       payment.save
+
+      project.updated_at       = DateTime.now
+      project.save
     rescue Twocheckout::TwocheckoutError => e
       raise e
     end

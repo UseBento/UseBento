@@ -21,6 +21,9 @@ class MessagesController < ApplicationController
            attachment.save
          end
 
+    @project.updated_at = DateTime.now
+    @project.save
+
     respond_to do |format|
       format.html { redirect_to @project }
       format.json { render json: @message.serialize_message(request) }
