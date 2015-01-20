@@ -102,6 +102,7 @@ class ProjectsController < ApplicationController
       render "projects/create"
     else
       @project.save
+      @project.initialize_project
       ProjectMailer.new_project_mail(@project).deliver
       redirect_to @project
     end

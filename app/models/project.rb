@@ -184,4 +184,22 @@ class Project
       "btn_small gray"
     end
   end
+
+  def initialize_project
+    message_body = ("Hi there! My name is Noah and I'm your project manager. " +
+                    "Its my job to make sure your project gets done quickly and " +
+                    "professionally. If you have any questions just write them in " +
+                    "the message field below and I'll get back to you ASAP. \n\n" +
+                    
+                    "If you're ready to get your project started now, just pay your " +
+                    "first invoice by clicking the \"Pay Invoice Now\" button on the " +
+                    "right. Looking forward to working with you and please let me " +
+                    "know if you have any questions!")
+
+    admin_user   = User.where({admin: true, name: "Noah"}).first
+    message      = self.messages.create({body:        message_body,
+                                         posted_date: DateTime.now})
+    message.user = admin_user
+    message.save
+  end
 end
