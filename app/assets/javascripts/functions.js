@@ -298,11 +298,11 @@ function setup_paypal_direct() {
             var button         = $('#project-submit');
             var price          = parseInt($('#page-price').val());
             var page_counter   = $('#pages-count');
-            var page_count     = page_counter ? page_counter.val() : 1;
+            var page_count     = (page_counter ? page_counter.val() : 1) || 1;
             var responsive     = $('#field-desktop-mobile').prop('checked');
             var plus_dev       = $('#field-design-development').prop('checked');
-            var responsive_price     = $('#responsive-price').val();
-            var plus_dev_price       = $('#plus-dev-price').val();
+            var responsive_price     = $('#responsive-price').val() || price;
+            var plus_dev_price       = $('#plus-dev-price').val() || price;
             
             if ($('input[name="service_name"]').val() == 'social_media_design') 
                 page_count = $('input.header-type')
