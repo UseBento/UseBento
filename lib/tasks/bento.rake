@@ -8,4 +8,9 @@ namespace :bento do
                      company:   'Bento'})
   end
 
+  task update_companies: :environment do
+        Project.all.map do |p|
+                     p.update_company
+                   end
+      end
 end

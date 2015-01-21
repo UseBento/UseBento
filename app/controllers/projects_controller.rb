@@ -76,6 +76,7 @@ class ProjectsController < ApplicationController
       render "projects/create"
     else
       @project.save
+      @project.update_company
       redirect_to @project
     end
   end
@@ -102,7 +103,7 @@ class ProjectsController < ApplicationController
     @project.status      = :pending
     @project.start_date  = DateTime.now.to_date
 
-    last_project         = @user.projects.order_by(:number.desc).first
+    last_project         = Project.where(company: params[:business_name]).order_by(:number.desc).first
     @project.number      = last_project ? last_project.number + 1 : 1
 
     params.map do |key, val|
@@ -114,6 +115,7 @@ class ProjectsController < ApplicationController
       render "projects/create"
     else
       @project.save
+      @project.update_company
       @project.initialize_project
       ProjectMailer.new_project_mail(@project).deliver
       redirect_to @project

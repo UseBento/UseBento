@@ -8,6 +8,7 @@ class Project
   field :last_status,   type: Symbol  # set to keep track of last status before archiving
   field :number,        type: Integer
   field :deadline,      type: Date
+  field :company,       type: String
 
   belongs_to :service
   belongs_to :user
@@ -53,6 +54,15 @@ class Project
     end
   end
 
+  def normalize_company(company)
+    company.downcase.split(" ").join(" ")
+  end
+
+  def update_company
+    self.company = normalize_company(self.business_name)
+    self.save
+  end
+
   def is_valid?
     validate_project.length == 0
   end
@@ -60,6 +70,10 @@ class Project
   def answer_for(name)
     name = name.name if name.is_a? Question
     self.answers.where(name: name).first || Answer.new
+  end
+
+  def business_name
+    answer_for(:business_name).answer
   end
 
   def print_pages
