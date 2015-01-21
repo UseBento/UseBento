@@ -66,14 +66,19 @@
               tr.tbl_row.subtitle
                 td[width="23%"]
                   | Project Name
+                  span.sort-carot
                 td[width="26%"]
                   | Project Type
+                  span.sort-carot
                 td[width="16%"]
                   | Date Started
+                  span.sort-carot
                 td[width="16%"]
                   | Last Updated
+                  span.sort-carot
                 td[width="18%"]
                   | Project Status 
+                  span.sort-carot
             tbody
               - for project in @open_projects do
                 tr.tbl_row.list-item[onclick=("window.location.href=\"/projects/" + project.id + "\"")]
