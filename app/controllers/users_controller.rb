@@ -8,6 +8,7 @@ class UsersController < Devise::SessionsController
   end
 
   def login_popup
+    @saved_email = cookies[:saved_email]
     render 'login', layout: false
   end
 
@@ -90,6 +91,11 @@ class UsersController < Devise::SessionsController
     end
   end
 
+  def save_login(email) 
+    cookies[:saved_email] = {value: email, 
+                             expires: 2.weeks.from_now}
+  end
+
   def log_in
     error = false
     user = User.where(email: params[:email]).first
@@ -102,6 +108,8 @@ class UsersController < Devise::SessionsController
         sign_in :user, user
       end
     end
+
+    save_login(params[:email])
 
     respond_to do |format|
       format.html { redirect_to '/' }
@@ -122,13 +130,18 @@ class UsersController < Devise::SessionsController
   def sign_up
     existing_user = User.where(email: params[:email]).first
     if !existing_user 
-        @user = User.create({email:      params[:email],
-                             name:       params[:name],
-                             password:   params[:password],
-                             company:    params[:company]})
-        sign_in(:user, @user)
+        @user = User.new({email:      params[:email],
+                          name:       params[:name],
+                          password:   params[:password],
+                          company:    params[:company]})
+        @user.save
+
+        sign_in  @user
+        sign_in  @user, :bypass => true
+        save_login(params[:email])
     end
 
+    return render json: @user 
     respond_to do |format|
       format.html { redirect_to '/' }
       format.json { 

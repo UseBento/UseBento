@@ -337,7 +337,8 @@ function setup_paypal_direct() {
             $('#sign-up-form').submit(sign_up); 
             $('#log-in-form').submit(log_in);
             $('#password-reset-form').submit(reset_password);
-            $('#field-email').val($('#field-e-mail').val());
+            $('#field-email').val($('#field-email').val() 
+                                  || $('#field-e-mail').val());
             link_popups(); }
 
         function link_popups() {
