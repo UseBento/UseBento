@@ -82,24 +82,9 @@ class ProjectsController < ApplicationController
   end
   
   def new
-    if !user_signed_in?
-      email = params[:email]
-      if User.where(email: email).first
-        return authenticate_user!
-      else
-        @user = User.generate(params[:full_name],
-                              params[:email],
-                              params[:business_name])
-        sign_in(:user, @user)
-      end
-    else
-      @user = current_user
-    end
-
     @service             = Service.where(name: params[:service_name]).first
     @project             = Project.new
     @project.service     = @service
-    @project.user        = @user
     @project.status      = :pending
     @project.start_date  = DateTime.now.to_date
 
@@ -116,10 +101,29 @@ class ProjectsController < ApplicationController
     if @errors.length > 0
       render "projects/create"
     else
+      existing_user = user_signed_in?
+      if !existing_user
+        email = params[:email]
+        if User.where(email: email).first
+          return authenticate_user!
+        else
+          @user, password = User.generate(params[:full_name],
+                                          params[:email],
+                                          params[:business_name])
+          sign_in @user
+          sign_in @user, :bypass => true
+        end
+      else
+        @user = current_user
+      end
+
+      @project.user = @user
       @project.save
       @project.update_company
       @project.initialize_project
+      
       ProjectMailer.new_project_mail(@project).deliver
+      UserMailer.new_generated_user_mail(@user, password, @project).deliver
       redirect_to @project
     end
   end

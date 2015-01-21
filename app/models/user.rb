@@ -54,8 +54,7 @@ class User
                             name:         name,
                             company:      company,
                             password:     password})
-    UserMailer.new_generated_user_mail(user, password).deliver
-    user
+    [user, password]
   end
 
   def avatar(root_domain)
