@@ -5,6 +5,7 @@ class Project
   field :start_date,    type: DateTime
   field :state,         type: Symbol
   field :status,        type: Symbol  # :pending, :assigned, :awaiting_payment, :closed
+  field :last_status,   type: Symbol  # set to keep track of last status before archiving
   field :number,        type: Integer
   field :deadline,      type: Date
 
@@ -118,6 +119,10 @@ class Project
     end
 
     price_per_page * pages
+  end
+
+  def archived?
+    self.status == :closed
   end
 
   def format_start_date

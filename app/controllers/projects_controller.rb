@@ -26,7 +26,19 @@ class ProjectsController < ApplicationController
     if !current_user.admin
       redirect_to "/"
     else
-      @project.status = :closed
+      @project.last_status    = @project.status
+      @project.status         = :closed
+      @project.save
+      redirect_to "/projects/list"
+    end
+  end
+
+  def unarchive
+    @project = Project.find(params[:id])
+    if !current_user.admin
+      redirect_to "/"
+    else
+      @project.status         = @project.last_status
       @project.save
       redirect_to "/projects/list"
     end

@@ -78,7 +78,10 @@
             = link_to "Edit Project", "/projects/" + @project.id.to_s + "/edit"
             - if current_user.admin
               br
-              = link_to "Archive Project", "/projects/" + @project.id.to_s + "/archive"
+              - if @project.archived?
+                = link_to "Unarchive Project", "/projects/" + @project.id.to_s + "/unarchive"
+              - else
+                = link_to "Archive Project", "/projects/" + @project.id.to_s + "/archive"
               br
               = link_to "Delete Project", "/projects/" + @project.id.to_s + "/del_project"
           li
