@@ -329,6 +329,10 @@ function setup_paypal_direct() {
         $('#field-desktop-mobile, #field-desktop-only, #field-design-development, #field-design-only')
             .change(update_price);
 
+        $('#projects-list').tablesorter({sortList: [[0,0]]});
+//        $('#projects-list thead .tbl_row td:first-child').click();
+
+
         function run_on_popup() {
             $('#sign-up-form').submit(sign_up); 
             $('#log-in-form').submit(log_in);

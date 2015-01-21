@@ -1456,3 +1456,18 @@ padding-right: 15px;
 
 input[type="submit"][disabled] {
     opacity: 0.5; }
+
+.tablesorter-headerAsc  {
+    background-image: url('/images/sort-asc-icon.png');
+    background-size: 1.5em;
+    background-repeat: no-repeat;
+    background-position: right center; }
+
+.tablesorter-headerDesc {
+    background-image: url('/images/sort-desc-icon.png');
+    background-size: 1.5em;
+    background-repeat: no-repeat;
+    background-position: right center; }
+
+.tablesorter-header .tablesorter-header-inner {
+    cursor: pointer; }
