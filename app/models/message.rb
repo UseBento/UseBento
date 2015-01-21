@@ -14,7 +14,7 @@ class Message
     {avatar:       self.user.avatar(request.host_with_port),
      user_name:    self.user.full_name,
      body:         self.body_as_html(true),
-     posted:       time_ago_in_words(self.posted_date)}
+     posted:       self.format_date}
   end
 
   def attachments_as_html
@@ -47,5 +47,21 @@ class Message
     ("<p>" + body.split(/(\r?\n){2,}/).join("</p><p>") + "</p>") +
       (with_attachments ? self.attachments_as_html : '')
 
+  end
+
+  def format_date
+    date          = self.posted_date.in_time_zone("America/Los_Angeles")
+    month         = date.strftime "%B"
+    day           = date.strftime "%d"
+    suffixes      = ['th', 'st', 'nd', 'rd', 'th', 
+                     'th', 'th', 'th', 'th', 'th'];
+    suffix        = suffixes[day.last.to_i]
+    if (day.to_i > 10 && day.to_i < 20)
+      suffix = 'th'
+    end
+
+    date_str      = month + " " + day + suffix + ", " 
+    date_str     += date.strftime "%Y %l:%M%P %Z"
+    date_str
   end
 end
