@@ -108,11 +108,12 @@
             - unless current_user.admin
               a.btn_large.purple[href=("/payments/checkout/" + @project.id.to_s + "/50")]
                 | PAY INVOICE NOW
+      .clear
 /          li
 /            p
 /              | You need to PAY all outstanding project invoices in order to DOWNLOAD the files.
 /            a.btn_large.gray[href="#"]
 /              img[src="/images/download.png" alt=""]
 /              | DOWNLOAD FILES
-      .clear
+
 = render partial: 'footer'
