@@ -19,18 +19,24 @@
           table#projects-list.tablesorter[width="100%" border="0" cellspacing="0" cellpadding="0"]
             thead
               tr.tbl_row.subtitle
-                td[width="20%"]
+                td[width="17%"]
                   | Project Number
-                td[width="19%"]
+                  span.sort-carot
+                td[width="17%"]
                   | Company
+                  span.sort-carot
                 td[width="16%"]
                   | Project Type
-                td[width="13%"]
-                  | Deliverables
+                  span.sort-carot
                 td[width="14%"]
-                  | Date Started 
-                td[width="18%"]
-                  | Project Status 
+                  | Deliverables
+                  span.sort-carot
+                td[width="15%"]
+                  | Date Started
+                  span.sort-carot
+                td[width="19%"]
+                  | Project Status
+                  span.sort-carot
             tbody
               - for project in @open_projects do
                 tr.tbl_row.list-item[onclick=("window.location.href=\"/projects/" + project.id + "\"")]

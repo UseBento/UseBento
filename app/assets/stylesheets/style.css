@@ -1457,17 +1457,34 @@ padding-right: 15px;
 input[type="submit"][disabled] {
     opacity: 0.5; }
 
-.tablesorter-headerAsc  {
+.tablesorter-headerAsc .sort-carot {
     background-image: url('/images/sort-asc-icon.png');
-    background-size: 1.5em;
-    background-repeat: no-repeat;
-    background-position: right center; }
+    background-size: contain;
+    position:relative;
+    top: 0.5em;
+    width: 1.5em;
+    height: 1.5em;
+    display: inline-block;
+    background-repeat: no-repeat; }
 
-.tablesorter-headerDesc {
+.tablesorter-headerDesc, 
+.tablesorter-headerAsc  {
+    padding-top: 13px !important;
+}
+
+.tablesorter-headerDesc .sort-carot {
     background-image: url('/images/sort-desc-icon.png');
-    background-size: 1.5em;
-    background-repeat: no-repeat;
-    background-position: right center; }
+    background-size: contain;
+    width: 1.5em;
+    position: relative;
+    top: 0.5em;
+    height: 1.5em;
+    display: inline-block;
+    background-repeat: no-repeat; }
 
 .tablesorter-header .tablesorter-header-inner {
     cursor: pointer; }
+
+.tablesorter-header {
+    padding-right: 0;
+}
