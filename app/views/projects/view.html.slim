@@ -49,7 +49,8 @@
                 - for attachment in message.attachments
                   - if attachment.is_image?
                     p.responsive_img
-                      img[src=attachment.url alt=""]
+                      a[href=attachment.url target="_blank"]
+                        img[src=attachment.url alt=""]
                     p.img_txt
                       = attachment.name
                   - else

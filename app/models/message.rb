@@ -22,9 +22,12 @@ class Message
     attachments.map do |attachment|
                  if attachment.is_image?
                    html += ("<p class=\"responsive_img\">" + 
+                            ("<a href=\"" + 
+                             URI.encode_www_form_component(attachment.url) + 
+                                 "\" target=\"_blank\">") +
                             ("<img src=\"" + 
                              URI.encode_www_form_component(attachment.url) + "\" />") +
-                            "</p><p class=\"img_txt\">" +
+                            "</a></p><p class=\"img_txt\">" +
                             sanitize(attachment.name) +
                                        "</p>")
                  else
