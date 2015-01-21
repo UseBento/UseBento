@@ -54,12 +54,12 @@ class Project
     end
   end
 
-  def normalize_company(company)
+  def self.normalize_company(company)
     company.downcase.split(" ").join(" ")
   end
 
   def update_company
-    self.company = normalize_company(self.business_name)
+    self.company = Project.normalize_company(self.business_name)
     self.save
   end
 

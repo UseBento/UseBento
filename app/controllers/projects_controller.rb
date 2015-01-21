@@ -103,7 +103,9 @@ class ProjectsController < ApplicationController
     @project.status      = :pending
     @project.start_date  = DateTime.now.to_date
 
-    last_project         = Project.where(company: params[:business_name]).order_by(:number.desc).first
+    last_project         = Project.where(company: Project.normalize_company(
+                                            params[:business_name]))
+                           .order_by(:number.desc).first
     @project.number      = last_project ? last_project.number + 1 : 1
 
     params.map do |key, val|
