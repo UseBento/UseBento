@@ -105,8 +105,9 @@
               = @project.current_payment.to_s + ' of ' + @project.total_payments.to_s + ' Payments: '
               span
                 = '$' + number_with_delimiter(@project.next_payment_price, :delimiter => ',')
-            a.btn_large.purple[href=("/payments/checkout/" + @project.id.to_s + "/50")]
-              | PAY INVOICE NOW
+            - unless current_user.admin
+              a.btn_large.purple[href=("/payments/checkout/" + @project.id.to_s + "/50")]
+                | PAY INVOICE NOW
 /          li
 /            p
 /              | You need to PAY all outstanding project invoices in order to DOWNLOAD the files.
