@@ -12,11 +12,12 @@
       .clear
       - if current_user.admin
         .table_box
+          table[width="100%" border="0" cellspacing="0" cellpadding="0"]
+            tr
+              td.heading[colspan="6"]
+                | Ongoing Projects
           table#projects-list.tablesorter[width="100%" border="0" cellspacing="0" cellpadding="0"]
             thead
-              tr
-                td.heading[colspan="6"]
-                  | Ongoing Projects
               tr.tbl_row.subtitle
                 td[width="20%"]
                   | Project Number
@@ -50,11 +51,12 @@
                       = project.status
       - else
         .table_box
+          table[width="100%" border="0" cellspacing="0" cellpadding="0"]
+            tr
+              td.heading[colspan="6"]
+                | Ongoing Projects
           table#projects-list.tablesorter[width="100%" border="0" cellspacing="0" cellpadding="0"]
             thead
-              tr
-                td.heading[colspan="6"]
-                  | Ongoing Projects
               tr.tbl_row.subtitle
                 td[width="23%"]
                   | Project Name
