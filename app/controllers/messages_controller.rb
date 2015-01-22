@@ -12,6 +12,10 @@ class MessagesController < ApplicationController
     @message.user = current_user
     @message.save
 
+    if (current_user.admin)
+      ProjectMailer.new_admin_message_mail(@message).deliver
+    end
+
     files = params.select {|a,b| a.to_s.slice(0, 11) == "file-upload"}
     files.map do |key, file|
            attachment = 
