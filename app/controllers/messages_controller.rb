@@ -14,6 +14,8 @@ class MessagesController < ApplicationController
 
     if (current_user.admin)
       ProjectMailer.new_admin_message_mail(@message).deliver
+    else
+      ProjectMailer.new_user_message_mail(@message).deliver
     end
 
     files = params.select {|a,b| a.to_s.slice(0, 11) == "file-upload"}

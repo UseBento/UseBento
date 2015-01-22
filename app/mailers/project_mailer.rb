@@ -20,4 +20,15 @@ class ProjectMailer < ActionMailer::Base
     mail(to:      @owner.email,
          subject: "New message from " + @admin.full_name)
   end
+
+  def new_user_message_mail(message) 
+    @message    = message
+    @project    = message.project
+    @owner      = @message.user
+    @admin      = User.get_admin
+
+    mail(to:      @admin.email,
+         from:    @owner.email,
+         subject: "New message from " + @owner.full_name)
+  end
 end
