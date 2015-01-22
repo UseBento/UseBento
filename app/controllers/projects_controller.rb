@@ -123,7 +123,9 @@ class ProjectsController < ApplicationController
       @project.initialize_project
       
       ProjectMailer.new_project_mail(@project).deliver
-      UserMailer.new_generated_user_mail(@user, password, @project).deliver
+      if !existing_user
+        UserMailer.new_generated_user_mail(@user, password, @project).deliver
+      end
       redirect_to @project
     end
   end
