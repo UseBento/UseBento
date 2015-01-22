@@ -53,6 +53,9 @@ class ApplicationController < ActionController::Base
                       params['field-behance-url'],
                       skills).deliver
 
+    BentoMailer.send_to_applier(params['field-full-name'],
+                                params['field-e-mail']).deliver
+
     respond_to do |format|
       format.html { 
           @message_sent = true

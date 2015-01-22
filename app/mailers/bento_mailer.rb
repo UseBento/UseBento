@@ -38,4 +38,14 @@ class BentoMailer < ActionMailer::Base
          from:      @email,
          subject:   @full_name + " applied to Bento")
   end
+
+  def send_to_applier(name, email)
+    @name     = name
+    @email    = email
+    @admin    = User.get_admin
+    
+    mail(to:        @email,
+         from:      @admin.email,
+         subject:   "Bento Application Received")
+  end
 end
