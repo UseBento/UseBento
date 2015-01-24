@@ -98,16 +98,25 @@
           li
             h5
               | PROJECT INVOICE
-            - for payment in @project.payments
+            - i = 1
+            - if current_user.admin
+              - @project.get_awaiting_payments(true).map do |payment|
+                = i.to_s + " of " + @project.get_awaiting_payments(true).length.to_s + " payments: "
+                strong
+                  = "$" + payment.amount.to_s
+                - i += 1
+                br
+            - else
+              - for payment in @project.payments
+                p
+                  = '$' + payment.amount.to_s + " - paid"
               p
-                = '$' + payment.amount.to_s + " - paid"
-            p
-              = @project.current_payment.to_s + ' of ' + @project.total_payments.to_s + ' Payments: '
-              span
-                = '$' + number_with_delimiter(@project.next_payment_price, :delimiter => ',')
-            - unless current_user.admin
-              a.btn_large.purple[href=("/payments/checkout/" + @project.id.to_s + "/50")]
-                | PAY INVOICE NOW
+                = @project.current_payment.to_s + ' of ' + @project.total_payments.to_s + ' Payments: '
+                span
+                  = '$' + number_with_delimiter(@project.next_payment_price, :delimiter => ',')
+              - unless current_user.admin
+                a.btn_large.purple[href=("/payments/checkout/" + @project.id.to_s + "/50")]
+                  | PAY INVOICE NOW
       .clear
 /          li
 /            p

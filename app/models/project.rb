@@ -16,7 +16,32 @@ class Project
   embeds_many :messages
   validate :is_valid?
   has_many :payments
+  has_many :awaiting_payments
 
+  def get_awaiting_payments(all=false)
+    paid_payments     = self.payments.to_a
+    unpaid_payments   = self.awaiting_payments.to_a
+    amount            = self.get_price
+    logged_amount     = 0
+
+    paid_payments.each do |payment|
+                   logged_amount += payment.amount
+                 end
+    unpaid_payments.each do |payment|
+                     logged_amount += payment.amount
+                   end
+    
+    if (logged_amount < amount)
+      payments_needed = (paid_payments.length + unpaid_payments.length == 0 ? 2 : 1)
+      (1..payments_needed).each {|i|
+          unpaid_payments.push(
+              self.awaiting_payments.create({amount: ((amount - logged_amount) / 
+                                                      payments_needed),
+                                             paid:   false})) }
+    end
+
+    paid_payments.concat unpaid_payments
+  end
 
   def has_access?(user) 
     (user.id == self.user.id) || user.admin
