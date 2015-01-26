@@ -95,16 +95,23 @@
                   = person.full_name
                 a[href=("mailto:"+person.email)]
                   = person.email
-          li
+          li#project-invoice
             h5
               | PROJECT INVOICE
             - i = 1
             - if current_user.admin
               - @project.get_awaiting_payments(true).map do |payment|
                 = i.to_s + " of " + @project.get_awaiting_payments(true).length.to_s + " payments: "
-                strong
-                  = "$" + payment.amount.to_s
-                - i += 1
+                form.new-payment-amount[data-id=payment.id]
+                  input.form-control.field.new-payment-amount-field[type="text" value=('$' + payment.amount.to_s)]
+                  a.submit-payment[data-id=payment.id]
+                    |  save
+                span.current-payment-amount[data-id=payment.id]
+                  strong.payment-amount[data-id=payment.id]
+                    = "$" + payment.amount.to_s + " "
+                  - i += 1
+                  a.btn-edit-payment[data-id=payment.id data-amount=payment.amount]
+                    |  Edit
                 br
             - else
               - for payment in @project.payments

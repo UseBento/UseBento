@@ -130,6 +130,22 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def update_payment
+    if !current_user.admin
+      redirect_to "/"
+    else
+      @project        = Project.find(params[:project_id])
+      @payment        = @project.awaiting_payments.find(params[:id])
+      @payment.amount = params[:amount]
+      @payment.save
+       
+      respond_to do |format|
+        format.html { redirect_to @project }
+        format.json { render :json => @payment }
+      end
+    end
+  end
+
   def get_error(name)
     filtered = @errors.select do |error|
                         error[:question].name == name

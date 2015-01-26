@@ -397,6 +397,33 @@ function setup_paypal_direct() {
 	});
 
 
+        $('form.new-payment-amount').submit(function(event) {
+            event.preventDefault();
+            var form   = $(this);
+            var id     = form.attr('data-id');
+            var input  = form.find('input.new-payment-amount-field');
+            var span   = $('span.current-payment-amount[data-id="' + id + '"]');
+            var price  = parseInt(input.val().match(/[0-9]+/));
+
+            $.ajax({type:    'POST',
+                    url:      window.location.pathname + '/update_payment.json',
+                    data:    {id: id, amount: price},
+                    success:  function(data) {
+                        form.css('display', 'none');
+                        span.css('display', 'inline');
+                        span.find('strong.payment-amount[data-id="' + id + '"]')
+                            .html('$' + price.toString()); }}); });
+        
+        $('.btn-edit-payment').click(function() {
+            var id = $(this).attr('data-id');
+            $('span.current-payment-amount[data-id="' + id + '"]')
+                .css('display', 'none');
+            $('form.new-payment-amount[data-id="' + id + '"]')
+                .css('display', 'inline'); });
+
+        $('a.submit-payment').click(function() {
+            $(this).parent().submit(); });
+
         function validate_apply_form(event) {
             var skills           = [$('#skill1'), 
                                     $('#skill2'), 
