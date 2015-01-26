@@ -34,7 +34,7 @@
                     = '$' + @project.get_price.to_s
                 tr
                   td
-                    = params[:percent] + '% deposit'
+                    = @percent_orig.to_s + '% deposit'
                   td
                     = '$' + @amount.round(2).to_s
           .checkout-sum-up-group
@@ -49,7 +49,7 @@
                       = '$' + @amount.round(2).to_s
         .checkout-form-holder
           .form.checkout-form
-            form#tco-form[action=("/payments/checkout/" + @project.id.to_s + '/' + @percent_orig + '/process')  method="post"]
+            form#tco-form[action=("/payments/checkout/" + @project.id.to_s + '/' + @amount.to_s + '/process')  method="post"]
               .section-head.form-head
                 h2.section-title
                   | Billing Information

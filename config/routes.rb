@@ -23,9 +23,9 @@ Rails.application.routes.draw do
   get  'agencies',                    to: 'application#agencies'
   get  'process_payment',             to: 'payments#process_pp_payment'
   post 'process_payment',             to: 'payments#process_pp_payment'
-  get  'payments/checkout/:project_id/:percent',           
+  get  'payments/checkout/:project_id/:amount',           
        to: 'payments#checkout'
-  post 'payments/checkout/:project_id/:percent/process',   to: 'payments#process_payment'
+  post 'payments/checkout/:project_id/:amount/process',   to: 'payments#process_payment'
 
   devise_scope :user do
     get  'user_exists',                 to: 'users#exists'

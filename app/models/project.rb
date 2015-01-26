@@ -209,11 +209,12 @@ class Project
   end
 
   def current_payment
+    self.awaiting_payments.first
     self.payments.count + 1
   end
 
   def next_payment_price
-    self.get_price / 2
+    self.awaiting_payments.first.amount
   end
 
   def label_class

@@ -1,17 +1,19 @@
 class PaymentsController < ApplicationController
   def checkout
     @project         = Project.find(params[:project_id])
-    @percent_orig    = params[:percent]
-    @percent         = params[:percent].to_f / 100.0
-    @amount          = @project.get_price * @percent
+    #@amount          = params[:amount]
+    @amount           = @project.awaiting_payments.first.amount
+    @percent         = @amount.to_f / @project.get_price.to_f
+    @percent_orig    = @percent * 100.0
     @address         = {}
   end
 
   def process_payment
     @project         = Project.find(params[:project_id])
-    @percent_orig    = params[:percent]
-    @percent         = params[:percent].to_f / 100.0
-    @amount          = @project.get_price * @percent
+    @amount          = params[:amount]
+    @amount          = @project.awaiting_payments.first.amount
+    @percent         = @amount.to_f / @project.get_price.to_f
+    @percent_orig    = @percent * 100.0
 
     token            = params[:twocheckout_token]
     @address         = {name:         (params['field-fname'] + ' ' + 
@@ -27,6 +29,7 @@ class PaymentsController < ApplicationController
     
     begin
       Payment.new_payment(@project, @amount, token, @address)
+      @project.awaiting_payments.first.delete
       redirect_to @project
     rescue Twocheckout::TwocheckoutError => e
       @fname           = params['field-fname']
