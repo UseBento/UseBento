@@ -189,3 +189,7 @@ cursor: pointer;
 transition: all 0.3s;
 margin-bottom: 0.75em; 
 }
+
+#progress-bar {
+    display: none;
+}
