@@ -19,39 +19,44 @@
           table#projects-list.tablesorter[width="100%" border="0" cellspacing="0" cellpadding="0"]
             thead
               tr.tbl_row.subtitle
-                td[width="17%"]
-                  | Project Number
+                td[width="15%"]
+                  | Date Created
                   span.sort-carot
                 td[width="17%"]
                   | Company
                   span.sort-carot
-                td[width="16%"]
-                  | Project Type
+                td[width="12%"]
+                  | Number
+                  span.sort-carot
+                td[width="12%"]
+                  | Name
+                  span.sort-carot
+                td[width="14%"]
+                  | Type
                   span.sort-carot
                 td[width="14%"]
                   | Deliverables
                   span.sort-carot
-                td[width="15%"]
-                  | Date Started
-                  span.sort-carot
-                td[width="19%"]
-                  | Project Status
+                td[width="11%"]
+                  | Status
                   span.sort-carot
             tbody
               - for project in @open_projects do
                 tr.tbl_row.list-item[onclick=("window.location.href=\"/projects/" + project.id + "\"")]
                   td
-                    = link_to project.number_format, project
+                    span.hidden
+                      project.start_date.to_i
+                    = project.format_start_date
                   td
                     = project.business_name
+                  td
+                    = link_to project.number_format, project
+                  td
+                    = project.name
                   td
                     = project.service.title 
                   td
                     = project.print_pages
-                  td
-                    span.hidden
-                      project.start_date.to_i
-                    = project.format_start_date
                   td
                     a[href="#" class=project.label_class]
                       = project.status

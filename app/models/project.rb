@@ -101,6 +101,10 @@ class Project
     answer_for(:business_name).answer
   end
 
+  def name
+    answer_for(:project_name).answer || ""
+  end
+
   def print_pages
     pages = get_pages
     unit = self.service.unit
