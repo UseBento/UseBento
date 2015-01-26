@@ -36,7 +36,9 @@ class Message
                             "<a href=\"" + 
                             URI.encode_www_form_component(attachment.url) +
                                 "\">" + sanitize(attachment.name) + 
-                                "</a></p>")
+                                "</a> " + 
+                                attachment.filesize + 
+                                "</p>")
                  end
                end
     html
