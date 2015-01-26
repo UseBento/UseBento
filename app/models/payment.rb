@@ -13,7 +13,7 @@ class Payment
   def self.api_credentials
     {private_key:      Rails.configuration.twocheckout_private_key,
      seller_id:        Rails.configuration.twocheckout_seller_id.to_s,
-     sandbox:          true}
+     sandbox:          Rails.configuration.twocheckout_sandbox}
   end
   
   def self.new_payment(project, amount, token, address) 
@@ -26,8 +26,9 @@ class Payment
                total:           amount.to_s,
                billingAddr:     address}
     begin
-      Rails.logger.debug params
-      Twocheckout::Checkout.sandbox(true);
+      if Rails.configuration.twocheckout_sandbox 
+        Twocheckout::Checkout.sandbox(true);
+      end
       result = Twocheckout::Checkout.authorize(params)
       payment.amount           = amount
       payment.raw_response     = result
