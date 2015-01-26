@@ -21,6 +21,7 @@ html[lang="en"]
                 span.link-inner
                   i.tick-icon
                   |  Checkout 
-        .shell
+        .shell.devise
           .section-head.section-head-little-gutter
-            = yield
+          = yield
+  = render partial: 'footer'

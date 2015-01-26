@@ -141,3 +141,51 @@ box-sizing: border-box;
 
 a.btn-edit-payment, a.submit-payment {
     cursor: pointer; }
+
+.devise .field input[type="checkbox"] { 
+    display: inline-block;
+    width: auto;
+    padding: 0;
+    height: auto;
+    margin-right: 0.66em;
+}
+
+.devise .field input {
+width: 100%;
+border: 1px solid #dce3ef;
+background: #f4f6fa;
+border-radius: 3px;
+overflow: hidden;
+height: 50px;
+padding: 12px;
+box-sizing: border-box;
+}
+.devise .field br {
+    display: none; 
+}
+.devise .field {
+    max-width: 20em;
+    margin-bottom: 1.25em;
+}
+.devise .field label {
+font-weight: 700;
+color: #525f71;
+padding-bottom: 15px;
+display: inline-block; }
+
+.devise input[type="submit"], .devise button {
+background: #5661e8;
+border-radius: 5px;
+color: #fff;
+font-family: 'proxima_nova_rgbold', arial, serif;
+font-size: 15px;
+text-transform: uppercase;
+padding: 15px 44px;
+display: inline-block;
+border: 0;
+cursor: pointer;
+-webkit-transition: all 0.3s;
+-o-transition: all 0.3s;
+transition: all 0.3s;
+margin-bottom: 0.75em; 
+}
