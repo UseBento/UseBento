@@ -6,7 +6,7 @@ function get_tco_token() {
                    expYear:         $('#expr-date-year').val(),
                    cvv:             $('#cvv').val()};
 
-    TCO.loadPubKey('sandbox', function() {
+    TCO.loadPubKey($('#twocheckout_type').val(), function() {
         function success(response) {
             $('#twocheckout-token').val(response.response.token.token)
             $('#twocheckout-payment-method')
@@ -31,7 +31,7 @@ function setup_paypal_direct() {
 
     $('#tco-form').attr('action', 'https://www.2checkout.com/checkout/purchase');
     $('#tco-form')[0].submit(); }
-    
+
 (function($, window, document, undefined) {
     var $win = $(window);
     var $doc = $(document);

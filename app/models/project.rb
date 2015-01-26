@@ -214,7 +214,8 @@ class Project
   end
 
   def next_payment_price
-    self.awaiting_payments.first.amount
+    next_payment = self.awaiting_payments.first
+    next_payment ? next_payment.amount : false
   end
 
   def label_class

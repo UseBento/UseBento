@@ -54,6 +54,7 @@
                 h2.section-title
                   | Billing Information
               input[type="hidden" name="checkout-form"]
+              input[type="hidden" id="twocheckout_type" name="twocheckout_type" value=(Rails.configuration.twocheckout_sandbox ? 'sandbox' : 'production')]
               input[type="hidden" id="seller_id" name="seller_id" value=Rails.configuration.twocheckout_seller_id]
               input[type="hidden" id="publishable_key" name="publishable_key" value=Rails.configuration.twocheckout_public_key]
               input#twocheckout-token[type="hidden" name="twocheckout_token" value=""]

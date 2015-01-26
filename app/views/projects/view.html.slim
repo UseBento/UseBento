@@ -122,13 +122,14 @@
               - for payment in @project.payments
                 p
                   = '$' + payment.amount.to_s + " - paid"
-              p
-                = @project.current_payment.to_s + ' of ' + @project.total_payments.to_s + ' Payments: '
-                span
-                  = '$' + number_with_delimiter(@project.next_payment_price, :delimiter => ',')
-              - unless current_user.admin
-                a.btn_large.purple[href=("/payments/checkout/" + @project.id.to_s + "/50")]
-                  | PAY INVOICE NOW
+              - if @project.next_payment_price
+                p
+                  = @project.current_payment.to_s + ' of ' + @project.total_payments.to_s + ' Payments: '
+                  span
+                    = '$' + number_with_delimiter(@project.next_payment_price, :delimiter => ',')
+                - unless current_user.admin
+                  a.btn_large.purple[href=("/payments/checkout/" + @project.id.to_s + "/50")]
+                    | PAY INVOICE NOW
       .clear
 /          li
 /            p
