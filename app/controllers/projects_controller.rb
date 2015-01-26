@@ -4,6 +4,7 @@ class ProjectsController < ApplicationController
 
   def view 
     @project = Project.find(params[:id])
+    @project.get_awaiting_payments
     if !@project.has_access?(current_user)
       return redirect_to_login
     end
