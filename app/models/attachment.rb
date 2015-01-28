@@ -15,7 +15,7 @@ class Attachment
   end
 
   def mime
-    MIME::Types.type_for(self.name)[0]
+    MIME::Types.type_for(self.name)[0] || MIME::Type.new("file/" + self.name)
   end
 
   def is_image?
