@@ -25,7 +25,7 @@
         .col_one
           p
             | Total: 
-          h5
+          h5#project-total
             = '$' + @project.get_price.to_s
         /.col_two
           p
@@ -100,8 +100,19 @@
           li#project-invoice
             h5
               | PROJECT INVOICE
-            - i = 1
             - if current_user.admin
+              | Project total: 
+              form.new-payment-amount[data-id='total']
+                input.form-control.field.new-payment-amount-field[type="text" value=('$' + @project.get_price.to_s)]
+                  a.submit-payment[data-id='total']
+                    |  save
+              span.current-payment-amount[data-id='total']
+                strong.payment-amount[data-id='total']
+                  = "$" + @project.get_price.to_s + " "
+                a.btn-edit-payment[data-id='total' data-amount=@project.get_price.to_s]
+                  |  Edit
+              br
+              - i = 1
               - @project.get_awaiting_payments(true).map do |payment|
                 = i.to_s + " of " + @project.get_awaiting_payments(true).length.to_s + " payments: "
                 - if payment.class == Payment
@@ -116,9 +127,9 @@
                   span.current-payment-amount[data-id=payment.id]
                     strong.payment-amount[data-id=payment.id]
                       = "$" + payment.amount.to_s + " "
-                    - i += 1
                     a.btn-edit-payment[data-id=payment.id data-amount=payment.amount]
                       |  Edit
+                  - i += 1
                 br
             - else
               - for payment in @project.payments

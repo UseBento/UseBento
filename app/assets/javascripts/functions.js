@@ -429,7 +429,23 @@ function setup_paypal_direct() {
                         form.css('display', 'none');
                         span.css('display', 'inline');
                         span.find('strong.payment-amount[data-id="' + id + '"]')
-                            .html('$' + price.toString()); }}); });
+                            .html('$' + price.toString()); 
+
+                        $('.new-payment-amount[data-id="total"] .new-payment-amount-field')
+                            .val('$' + data.price.toString());
+                        $('strong.payment-amount[data-id="total"], #project-total')
+                            .html('$' + data.price.toString());
+                        $('a.btn-edit-payment[data-id="total"]')
+                            .attr('data-amount', data.price.toString());
+
+                        data.unpaid_payments.map(function(payment) {
+                            var id = payment._id.$oid;
+                        $('.new-payment-amount[data-id="' + id + '"] .new-payment-amount-field')
+                            .val('$' + payment.amount.toString());
+                        $('strong.payment-amount[data-id="' + id + '"]')
+                            .html('$' + payment.amount.toString());
+                        $('a.btn-edit-payment[data-id="' + id + '"]')
+                            .attr('data-amount', payment.amount.toString()); }); }}); });
         
         $('.btn-edit-payment').click(function() {
             var id = $(this).attr('data-id');

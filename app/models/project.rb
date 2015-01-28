@@ -9,6 +9,7 @@ class Project
   field :number,        type: Integer
   field :deadline,      type: Date
   field :company,       type: String
+  field :total_price,   type: Integer
 
   belongs_to :service
   belongs_to :user
@@ -17,6 +18,18 @@ class Project
   validate :is_valid?
   has_many :payments
   has_many :awaiting_payments
+
+  def as_json(i=0)
+    {start_date:       start_date,
+     state:            state,
+     status:           status,
+     number:           number,
+     company:          company,
+     deadline:         deadline,
+     price:            self.get_price,
+     payments:         self.payments,
+     unpaid_payments:  self.awaiting_payments}
+  end
 
   def get_awaiting_payments(all=false)
     paid_payments     = self.payments.to_a
@@ -32,17 +45,42 @@ class Project
                    end
     
     if (logged_amount < amount)
-      payments_needed = (paid_payments.length + unpaid_payments.length == 0 ? 2 : 1)
-      (1..payments_needed).each {|i|
-          unpaid_payments.push(
-              self.awaiting_payments.create({amount: ((amount - logged_amount) / 
-                                                      payments_needed),
-                                             paid:   false})) }
-    end
+      payments_needed = 2 - (paid_payments.length + unpaid_payments.length)
+      if (payments_needed > 0)
+        (1..payments_needed).each {|i|
+            unpaid_payments.push(
+                self.awaiting_payments.create({amount: ((amount - logged_amount) / 
+                                                        payments_needed),
+                                               paid:   false})) }
+      else
+        if unpaid_payments.length > 0
+          fix_awaiting_payment_amounts(paid_payments, unpaid_payments, amount)
+        end
+      end
+    elsif amount < logged_amount
+      if unpaid_payments.length > 0
+        fix_awaiting_payment_amounts(paid_payments, unpaid_payments, amount)
+      end
+    end      
 
     paid_payments.concat unpaid_payments
   end
 
+  def fix_awaiting_payment_amounts(paid_payments, unpaid_payments, amount)
+    paid_amount   = (paid_payments.to_a.map {|p| p.amount }).reduce(&:+) || 0
+    new_amount    = (amount - paid_amount) / unpaid_payments.length
+
+    unpaid_payments.each do |payment|
+                     payment.amount = new_amount
+                     payment.save
+                   end
+
+    if (new_amount * 2) < (amount - paid_amount)
+      unpaid_payments.last.amount += 1
+      unpaid_payments.last.save
+    end
+  end
+    
   def has_access?(user) 
     (user.id == self.user.id) || user.admin
   end
@@ -145,6 +183,8 @@ class Project
   end
 
   def get_price
+    return self.total_price if (self.total_price)
+    
     pages          = get_pages
     price_per_page = self.service.price
     if self.get_plus_dev
