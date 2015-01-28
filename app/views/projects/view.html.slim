@@ -9,8 +9,8 @@
       .row_box
         h2
           = @project.name
-/         |  &mdash; 
-/        = @project.service.title
+          /|  &mdash; 
+        /= @project.service.title
       .row_box.gray_brd
         .col_flex
           p
@@ -144,11 +144,10 @@
                   a.btn_large.purple[href=("/payments/checkout/" + @project.id.to_s + "/50")]
                     | PAY INVOICE NOW
       .clear
-/          li
-/            p
-/              | You need to PAY all outstanding project invoices in order to DOWNLOAD the files.
-/            a.btn_large.gray[href="#"]
-/              img[src="/images/download.png" alt=""]
-/              | DOWNLOAD FILES
-
+        /li
+          p
+            | You need to PAY all outstanding project invoices in order to DOWNLOAD the files.
+          a.btn_large.gray[href="#"]
+            img[src="/images/download.png" alt=""]
+            | DOWNLOAD FILES
 = render partial: 'footer'
