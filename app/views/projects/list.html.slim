@@ -103,40 +103,96 @@
                     a[href="#" class=project.label_class]
                       = project.status
       -if !@closed_projects.empty?
-        .table_box
-          table[width="100%" border="0" cellspacing="0" cellpadding="0"]
-            tr
-              td.heading[colspan="6"]
-                | Archived Projects
-            thead
-              th
+        - if current_user.admin
+          .table_box
+            table[width="100%" border="0" cellspacing="0" cellpadding="0"]
+              tr
+                td.heading[colspan="6"]
+                  | Archived Projects
+            table#projects-list.tablesorter[width="100%" border="0" cellspacing="0" cellpadding="0"]
+              thead
                 tr.tbl_row.subtitle
-                  td[width="20%"]
-                    | Project Number
-                  td[width="19%"]
+                  td[width="15%"]
+                    | Date Created
+                    span.sort-carot
+                  td[width="17%"]
                     | Company
-                  td[width="16%"]
-                    | Project Type
-                  td[width="13%"]
-                    | Deliverables
+                    span.sort-carot
+                  td[width="12%"]
+                    | Number
+                    span.sort-carot
+                  td[width="12%"]
+                    | Name
+                    span.sort-carot
                   td[width="14%"]
-                    | Date Started 
+                    | Type
+                    span.sort-carot
+                  td[width="14%"]
+                    | Deliverables
+                    span.sort-carot
+                  td[width="11%"]
+                    | Status
+                    span.sort-carot
+              tbody
+                - for project in @closed_projects do
+                  tr.tbl_row.list-item[onclick=("window.location.href=\"/projects/" + project.id + "\"")]
+                    td
+                      span.hidden
+                        project.start_date.to_i
+                      = project.format_start_date
+                    td
+                      = project.business_name
+                    td
+                      = link_to project.number_format, project
+                    td
+                      = project.name
+                    td
+                      = project.service.title 
+                    td
+                      = project.print_pages
+                    td
+                      a[href="#" class=project.label_class]
+                        = project.status
+        - else
+          .table_box
+            table[width="100%" border="0" cellspacing="0" cellpadding="0"]
+              tr
+                td.heading[colspan="6"]
+                  | Archived Projects
+            table#projects-list.tablesorter[width="100%" border="0" cellspacing="0" cellpadding="0"]
+              thead
+                tr.tbl_row.subtitle
+                  td[width="23%"]
+                    | Project Name
+                    span.sort-carot
+                  td[width="26%"]
+                    | Project Type
+                    span.sort-carot
+                  td[width="16%"]
+                    | Date Started
+                    span.sort-carot
+                  td[width="16%"]
+                    | Last Updated
+                    span.sort-carot
                   td[width="18%"]
                     | Project Status 
-            tbody
-              - for project in @closed_projects do
-                tr.tbl_row.list-item[onclick=("window.location.href=\"/projects/" + project.id + "\"")]
-                  td
-                    = link_to project.number_format, project
-                  td
-                    = project.business_name
-                  td
-                    = project.service.title 
-                  td
-                    = project.print_pages
-                  td
-                    = project.format_start_date
-                  td
-                    a[href="#" class=project.label_class]
-                      = project.status
+                    span.sort-carot
+              tbody
+                - for project in @closed_projects do
+                  tr.tbl_row.list-item[onclick=("window.location.href=\"/projects/" + project.id + "\"")]
+                    td
+                      = project.answer_for("project_name").answer
+                    td
+                      = project.service.title
+                    td
+                      span.hidden
+                        project.start_date.to_i
+                      = project.format_start_date 
+                    td
+                      span.hidden
+                        project.updated_at.to_i
+                      = time_ago_in_words(project.updated_at) + " ago"
+                    td
+                      a[href="#" class=project.label_class]
+                        = project.status
 = render partial: "footer"
