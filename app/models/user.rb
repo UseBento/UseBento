@@ -48,6 +48,10 @@ class User
     self.name.split.map(&:capitalize).join ' '
   end
 
+  def first_name
+    self.name.split.first.capitalize
+  end
+
   def self.generate(name, email, company) 
     password = Devise.friendly_token.first(12)
     user     = User.create({email:        email,
