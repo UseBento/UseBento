@@ -164,7 +164,6 @@ box-sizing: border-box;
     display: none; 
 }
 .devise .field {
-    max-width: 20em;
     margin-bottom: 1.25em;
 }
 .devise .field label {
