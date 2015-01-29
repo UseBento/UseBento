@@ -487,6 +487,7 @@ function setup_paypal_direct() {
 	$('[name="payment-method"]').on('change', function() {
 	    var $form = $(this).closest('form');
 	    var oldClass = $form[0].className.match(/payment-method-\w*/);
+            $('.cc-req').prop('required', this.value == 'cc');
 
 	    $form.removeClass(oldClass && oldClass[0]).addClass('payment-method-' + this.value);
 	});

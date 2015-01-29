@@ -100,51 +100,6 @@
                         input#field-e-mail.field[type="text" value=(@address[:email] || current_user.email) name="field-e-mail" required]
                 .form-row.form-row-divider
                 .form-row
-                  label.form-label[for="field-addr"]
-                    | Address
-                    span.form-asterisk
-                      | *
-                  .form-controls
-                    input#field-addr.field[type="text" value=@address[:addrLine1] name="field-addr" required]
-                .form-row
-                  label.form-label[for="field-addr2"]
-                    | Address 2
-                  .form-controls
-                    input#field-addr2.field[type="text" value=@address[:addrLine2] name="field-addr2"]
-                .form-row
-                  .form-cols
-                    .form-col.form-col-1of3
-                      label.form-label[for="field-city"]
-                        | City
-                        span.form-asterisk
-                          | *
-                      .form-controls
-                        input#field-city.field[type="text" value=@address[:city] name="field-city" required]
-                    .form-col.form-col-1of3
-                      label.form-label[for="field-state"]
-                        | State
-                        span.form-asterisk
-                          | *
-                      .form-controls
-                        input#field-state.field[type="text" value=@address[:state] name="field-state" required]
-                    .form-col.form-col-1of3
-                      label.form-label[for="field-country"]
-                        | Country
-                        span.form-asterisk
-                          | *
-                      .form-controls
-                        input#field-country.field[type="text" value=(@address[:country] || "United States") name="field-country" required]
-                .form-row
-                  .form-cols
-                    .form-col.form-col-1of3
-                      label.form-label[for="field-zip"]
-                        | Zipcode
-                        span.form-asterisk
-                          | *
-                      .form-controls
-                        input#field-zip.field[type="text" value=@address[:zipCode] name="field-zip" required]
-                .form-row.form-row-divider
-                .form-row
                   .payment-method-selector
                     .payment-method-item
                       input#cc[type="radio" name="payment-method" value="cc" checked]
@@ -181,6 +136,51 @@
                             | *
                         .form-controls
                           input#cvv.field[type="text" name="cvv"]
+                  .form-row.form-row-divider
+                  .form-row
+                    label.form-label[for="field-addr"]
+                      | Billing Address
+                      span.form-asterisk
+                        | *
+                    .form-controls
+                      input#field-addr.cc-req.field[type="text" value=@address[:addrLine1] name="field-addr" required]
+                  .form-row
+                    label.form-label[for="field-addr2"]
+                      | Address 2
+                    .form-controls
+                      input#field-addr2.field[type="text" value=@address[:addrLine2] name="field-addr2"]
+                  .form-row
+                    .form-cols
+                      .form-col.form-col-1of3
+                        label.form-label[for="field-city"]
+                          | City
+                          span.form-asterisk
+                            | *
+                        .form-controls
+                          input#field-city.cc-req.field[type="text" value=@address[:city] name="field-city" required]
+                      .form-col.form-col-1of3
+                        label.form-label[for="field-state"]
+                          | State
+                          span.form-asterisk
+                            | *
+                        .form-controls
+                          input#field-state.cc-req.field[type="text" value=@address[:state] name="field-state" required]
+                      .form-col.form-col-1of3
+                        label.form-label[for="field-country"]
+                          | Country
+                          span.form-asterisk
+                            | *
+                        .form-controls
+                          input#field-country.cc-req.field[type="text" value=(@address[:country] || "United States") name="field-country" required]
+                  .form-row
+                    .form-cols
+                      .form-col.form-col-1of3
+                        label.form-label[for="field-zip"]
+                          | Zipcode
+                          span.form-asterisk
+                            | *
+                      .form-controls
+                        input#field-zip.cc-req.field[type="text" value=@address[:zipCode] name="field-zip" required]
                 .paypal-element
                   input#paypal-sid[type='hidden' name='sid' value=Rails.configuration.twocheckout_seller_id]
                   input[type='hidden' name='mode' value='2CO']
