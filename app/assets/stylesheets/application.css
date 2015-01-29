@@ -193,3 +193,13 @@ margin-bottom: 0.75em;
 #progress-bar {
     display: none;
 }
+
+.devise form {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    width: 35%;
+}
+
+.devise {
+    text-align: center; }
