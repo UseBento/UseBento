@@ -5,10 +5,11 @@
       .left_section
         h2
           | My Projects
-      .right_section
-        a.btn_large.purple[href="/services/select"]
-          | START A NEW PROJECT 
-          i.fa.fa-angle-right
+        .right_section
+          - if !current_user.admin
+            a.btn_large.purple[href="/services/select"]
+              | START A NEW PROJECT 
+              i.fa.fa-angle-right
       .clear
       - if current_user.admin
         .table_box
@@ -163,7 +164,7 @@
               thead
                 tr.tbl_row.subtitle
                   td[width="23%"]
-                    | Project Name
+                    | Project Namef
                     span.sort-carot
                   td[width="26%"]
                     | Project Type
