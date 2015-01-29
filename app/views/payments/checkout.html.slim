@@ -33,8 +33,10 @@
                   td
                     = '$' + @project.get_price.to_s
                 tr
-                  td
+                  /td
                     = @percent_orig.to_s + '% deposit'
+                  td
+                    | Deposit
                   td
                     = '$' + @amount.round(2).to_s
           .checkout-sum-up-group
