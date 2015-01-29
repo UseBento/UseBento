@@ -160,7 +160,8 @@ function setup_paypal_direct() {
             var project_id    = $('#project-id').val();
             
             function success(data) {
-                progress_bar.css('display', 'none');
+                if (progress_bar)
+                    progress_bar.css('display', 'none');
                 var message_li = 
                         build_el(
                             li('',
@@ -187,22 +188,24 @@ function setup_paypal_direct() {
             if (!message_form_has_data())
                 return;
             
-            var progress_bar = $('#progress-bar');
-            progress_bar.css('display', 'block');
-            progress_bar.progressbar({value: 0});
+            var progress_bar = $('input[name^="file-upload-"]')[0] && $('#progress-bar');
+            if (progress_bar) {
+                progress_bar.css('display', 'block');
+                progress_bar.progressbar({value: 0}); }
             $.ajax({type: 'POST',
                      xhr: function(){
                          var xhr = new window.XMLHttpRequest();
-                         xhr.upload.onprogress =
-                             function(evt){
-                                 if (evt.lengthComputable) 
-                                     progress_bar.progressbar({value: ((evt.loaded / evt.total) 
-								       * 85)}); };
-                         xhr.onprogress =
-                             function(evt){
-                                 if (evt.lengthComputable) 
-                                     progress_bar.progressbar({value: (85 + ((evt.loaded / evt.total) 
-									     * 15))}); };
+                         if (progress_bar) {
+                             xhr.upload.onprogress =
+                                 function(evt){
+                                     if (evt.lengthComputable) 
+                                         progress_bar.progressbar({value: ((evt.loaded / evt.total) 
+								           * 85)}); };
+                             xhr.onprogress =
+                                 function(evt){
+                                     if (evt.lengthComputable) 
+                                         progress_bar.progressbar({value: (85 + ((evt.loaded / evt.total) 
+									         * 15))}); }; }
                          return xhr; },
                     url:  '/projects/' + project_id + '/message.json',
                     data: data,
