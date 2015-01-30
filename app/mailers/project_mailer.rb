@@ -1,5 +1,5 @@
 class ProjectMailer < ActionMailer::Base
-  default from: "info@usebento.com"
+  default from: "Bento <info@usebento.com>"
   
   def new_project_mail(project) 
     @user       = project.user
@@ -28,7 +28,6 @@ class ProjectMailer < ActionMailer::Base
     @admin      = User.get_admin
 
     mail(to:      @admin.email,
-         from:    @owner.email,
          subject: "New message from " + @owner.full_name)
   end
 end

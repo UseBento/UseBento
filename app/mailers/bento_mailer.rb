@@ -1,5 +1,5 @@
 class BentoMailer < ActionMailer::Base
-  default from: "info@usebento.com"
+  default from: "Bento <info@usebento.com>"
   
   def contact_us(name, email, subject, message)
     @full_name     = name
@@ -9,7 +9,7 @@ class BentoMailer < ActionMailer::Base
     @admin         = User.get_admin
     
     mail(to:       @admin.email,
-         from:     @email,
+         from:     name + " <" + @email + ">",
          subject:  @subject)
   end
 
@@ -21,7 +21,7 @@ class BentoMailer < ActionMailer::Base
     @admin         = User.get_admin
     
     mail(to:       @admin.email,
-         from:     @email,
+         from:     name + " <" + @email + ">",
          subject:  "Agency: " + @agency + " sent a message")
   end
   
@@ -35,7 +35,7 @@ class BentoMailer < ActionMailer::Base
     @admin         = User.get_admin
 
     mail(to:        @admin.email,
-         from:      @email,
+         from:      name + " <" + @email + ">",
          subject:   @full_name + " applied to Bento")
   end
 
@@ -45,7 +45,6 @@ class BentoMailer < ActionMailer::Base
     @admin    = User.get_admin
     
     mail(to:        @email,
-         from:      @admin.email,
          subject:   "Bento Application Received")
   end
 end
