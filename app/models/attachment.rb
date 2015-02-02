@@ -13,11 +13,11 @@ class Attachment
     "/attachment/" + 
       self.message.project.id + "/" +
       self.message.id + "/" + self.id + "/" +
-      self.name                                  
+                                   (self.name  || "")
   end
 
   def mime
-    MIME::Types.type_for(self.name)[0] || MIME::Type.new("file/" + self.name)
+    MIME::Types.type_for(self.name)[0] || MIME::Type.new("file/" + (self.name || ""))
   end
   
   def is_image?
@@ -26,7 +26,7 @@ class Attachment
   
   def filesize
     my_size = self.attachment.size
-    if (my_size == 0)
+    if (my_size == 0 || !my_size)
       return "0b"
     else
       sizes = {b:  1,

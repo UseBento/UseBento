@@ -47,4 +47,10 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  CarrierWave.configure do |config|
+               config.storage = :grid_fs
+               config.root = Rails.root.join('tmp')
+               config.cache_dir = "uploads"
+             end
 end
