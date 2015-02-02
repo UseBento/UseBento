@@ -22,13 +22,14 @@ class MessagesController < ApplicationController
     files.map do |key, file|
            attachment = 
              @message.attachments.create({uploaded_date:   DateTime.now,
-                                          name:            file.original_filename,
-                                          data:            BSON::Binary.new(file.read)})
+                                          name:            file.original_filename})
+           attachment.save
+           attachment.attachment = file
            attachment.save
          end
 
     @project.updated_at = DateTime.now
-    @project.save
+    @project.save!
 
     respond_to do |format|
       format.html { redirect_to @project }
@@ -45,8 +46,8 @@ class MessagesController < ApplicationController
     @message    = @project.messages.find(params[:message_id])
     @attachment = @message.attachments.find(params[:attachment_id])
     
-    send_data(@attachment.data.data, 
-              :type => @attachment.mime,
-              :disposition => 'inline')
+    send_data(@attachment.attachment.read, 
+              :type          => @attachment.mime,
+              :disposition   => 'inline')
   end
 end
