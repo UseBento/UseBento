@@ -57,7 +57,7 @@
                     p.img_txt
                       | Click file to download
                       br
-                      = link_to attachment.name, attachment.url
+                      = link_to attachment.name, attachment.url, :target => "_blank"
                       = " " + attachment.filesize
           li#message-form-li
             .post_img

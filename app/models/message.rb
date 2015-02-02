@@ -33,7 +33,7 @@ class Message
                  else
                    html += ("<p class=\"img_txt\">" +
                             "Click file to download<br />" +
-                            "<a href=\"" + 
+                            "<a target=\"_blank\" href=\"" + 
                             URI.encode_www_form_component(attachment.url) +
                                 "\">" + sanitize(attachment.name) + 
                                 "</a> " + 
