@@ -10,6 +10,8 @@
           a.btn_large.purple[href="/services/select"]
             | START A NEW PROJECT 
             i.fa.fa-angle-right
+        - else
+          = raw "&nbsp;"
       .clear
       - if current_user.admin
         .table_box
