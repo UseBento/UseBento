@@ -83,6 +83,8 @@ class ProjectsController < ApplicationController
   end
   
   def new
+    return self.update if params[:project_id]
+
     @service             = Service.where(name: params[:service_name]).first
     @project             = Project.new
     @project.service     = @service
