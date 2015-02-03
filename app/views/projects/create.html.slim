@@ -28,7 +28,7 @@
           input[type="hidden" name="service_name" value=@service.name]
           = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) 
           - if @editing
-            input[type="hidden" name="editing" value="true"]
+            input#editing[type="hidden" name="editing" value="true"]
           .form-body
             .form-row
               .form-cols

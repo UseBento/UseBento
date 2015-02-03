@@ -112,8 +112,9 @@ class Project
 
   def update_answer(name, new_answer)
     answer = self.answer_for(name)
-    if answer
+    if answer && answer.project == self
       answer.answer = new_answer
+      answer.save
     end
   end
 
