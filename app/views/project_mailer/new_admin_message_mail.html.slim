@@ -3,8 +3,7 @@ html[lang="en"]
   head
   body
     p
-      | Hey, 
-      = @owner.first_name
+      = "Hey " + @owner.first_name + ","
     p
       = @admin.full_name
       |  sent you a new message:

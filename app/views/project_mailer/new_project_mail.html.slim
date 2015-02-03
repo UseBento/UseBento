@@ -3,8 +3,7 @@ html[lang="en"]
   head
   body
     p
-      | Hey, 
-      = @admin.first_name
+      = "Hey " + @admin.first_name + ", "
     p
       = @project.business_name
       |  started a new project of  
