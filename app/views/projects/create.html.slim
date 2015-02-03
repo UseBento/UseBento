@@ -28,7 +28,7 @@
           input[type="hidden" name="service_name" value=@service.name]
           = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) 
           - if @editing
-            input[type="hidden" name="editing" value="true"]
+            input#editing[type="hidden" name="editing" value="true"]
           .form-body
             .form-row
               .form-cols
@@ -96,7 +96,7 @@
               .form-errors
                 = get_error('target_audience')
               .form-controls
-                input#field-target.field[type="text" name="target_audience" value=(@project.answer_for('target_audience').answer || current_user ? current_user.default_target_audience : "") required data-validation-type="['presence']"]
+                input#field-target.field[type="text" name="target_audience" value=(@project.answer_for('target_audience').answer || (current_user ? current_user.default_target_audience : "")) required data-validation-type="['presence']"]
             .form-row
               label.form-label[for="field-keywords"]
                 | What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
@@ -105,7 +105,7 @@
               .form-errors
                 = get_error('business_keywords')
               .form-controls
-                input#field-keywords.field[type="text" name="business_keywords" value=(@project.answer_for('business_keywords').answer || current_user ? current_user.default_keywords : "") required data-validation-type="['presence']"]
+                input#field-keywords.field[type="text" name="business_keywords" value=(@project.answer_for('business_keywords').answer || (current_user ? current_user.default_keywords : "")) required data-validation-type="['presence']"]
             = render partial: @service.partial_name
             - if @editing
               = render partial: 'long_questionaire_form'

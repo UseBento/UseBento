@@ -251,6 +251,7 @@ function setup_paypal_direct() {
             file_upload.trigger('click'); });
 
         function check_first() {
+            if ($('#editing')[0]) return;
             var radios = $.unique($('input[type="radio"]')
                                   .map(function(i, j) { 
                                       return j.name; }));
