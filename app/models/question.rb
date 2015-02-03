@@ -15,7 +15,8 @@ class Question
     valid           = true
     invalid_message = ""
 
-    if !self.required && answer.strip.length == 0
+    if !self.required && (!answer || answer.strip.length == 0)
+      answer = "" if !answer
       valid = true
 
     elsif (self.type == :email)
