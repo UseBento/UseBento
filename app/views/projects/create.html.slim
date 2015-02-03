@@ -105,6 +105,8 @@
               .form-controls
                 input#field-keywords.field[type="text" name="business_keywords" value=(@project.answer_for('business_keywords').answer || current_user ? current_user.default_keywords : "") required data-validation-type="['presence']"]
             = render partial: @service.partial_name
+            - if @editing
+              = render partial: 'long_questionaire_form'
           .form-actions
             input.btn.form-btn#project-submit[type="submit" value=(@service.price != 0 ? "GET STARTED - $" + @service.price.to_s : "Get Started")]
             input#page-price[type="hidden" value=(@service.price)]

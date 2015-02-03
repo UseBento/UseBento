@@ -17,6 +17,7 @@ class ProjectsController < ApplicationController
     end
     
     @errors  = []
+    @editing = true
     @service = @project.service
     @partial = @service.partial_name
     render "projects/create"

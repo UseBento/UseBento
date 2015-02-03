@@ -1,0 +1,28 @@
+.form-row
+  label.form-label[for="field-tagline"]
+    | If you have a tagline, what is it?
+  .form-errors
+    = get_error('tagline')
+  .form-controls
+    input#field-tagline.field[type="text" name="tagline" value=(@project.answer_for('tagline').answer)]
+.form-row
+  label.form-label[for="field-color-preferences"]
+    | Do you have any color preferences?
+  .form-errors
+    = get_error('color_preferences')
+  .form-controls
+    input#field-color-preferences.field[type="text" name="color_preferences" value=(@project.answer_for('color_preferences').answer)]
+.form-row
+  label.form-label[for="field-font_preferences"]
+    | Do you have any font preferences
+  .form-errors
+    = get_error('font_preferences')
+  .form-controls
+    input#field-font-preferences.field[type="text" name="font_preferences" value=(@project.answer_for('font_preferences').answer)]
+.form-row
+  label.form-label[for="field-other-requirements"]
+    | Do you have any other requirements
+  .form-errors
+    = get_error('other_requirements')
+  .form-controls
+    input#field-other-requirements.field[type="text" name="other_requirements" value=(@project.answer_for('other_requirements').answer)]

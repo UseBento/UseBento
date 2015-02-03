@@ -79,7 +79,7 @@
       .right_container
         ul.box_list
           li
-            = link_to "Edit Project", "/projects/" + @project.id.to_s + "/edit"
+            = link_to "Edit Questionaire", "/projects/" + @project.id.to_s + "/edit"
             - if current_user.admin
               br
               - if @project.archived?
