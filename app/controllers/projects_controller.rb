@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
   def view 
     @project = Project.find(params[:id])
     @project.get_awaiting_payments
+    @editing = false
     if !@project.has_access?(current_user)
       return redirect_to_login
     end
@@ -15,7 +16,8 @@ class ProjectsController < ApplicationController
     if !@project.has_access?(current_user)
       return redirect_to_login
     end
-    
+
+    @editing = true
     @errors  = []
     @editing = true
     @service = @project.service
@@ -84,6 +86,8 @@ class ProjectsController < ApplicationController
   end
   
   def new
+    return self.update if params[:editing]
+
     @service             = Service.where(name: params[:service_name]).first
     @project             = Project.new
     @project.service     = @service
