@@ -7,6 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 seeds = YAML.load_file('db/seeds.yml')
+global_questions = YAML.load_file('db/long_questions.yml')
 seeds["Services"].map { |service_def|
     service = Service.where(name: service_def['name']).first
     if (service)
@@ -33,7 +34,7 @@ seeds["Services"].map { |service_def|
                  completion_time: Range.new(service_def['completion_time'][0],
                                             service_def['completion_time'][1])})
     end
-    service_def['fields'].map { |field_def|
+    service_def['fields'].concat(global_questions).map { |field_def|
         question = service.questions.where(name: field_def['name']).first
         if question
           question.label    = field_def['label']

@@ -1,0 +1,16 @@
+- name: tagline
+  label: If you have a tagline, what is it?
+  type: :text
+  required: false
+- name: color_preferences
+  label: Do you have any color preferences
+  type: :text
+  required: false
+- name: font_preferences
+  label: Do you prefer any font?
+  type: :text
+  required: false
+- name: other_requirements
+  label: Do you have any other requirements
+  type: :text
+  required: false
