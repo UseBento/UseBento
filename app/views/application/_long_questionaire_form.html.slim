@@ -25,4 +25,14 @@
   .form-errors
     = get_error('other_requirements')
   .form-controls
-    input#field-other-requirements.field[type="text" name="other_requirements" value=(@project.answer_for('other_requirements').answer)]
+    textarea#field-other-requirements.textarea.textarea-small[type="text" cols="10" rows="3" name="other_requirements" value=(@project.answer_for('other_requirements').answer)]
+      = @project.answer_for('other_requirements').answer
+.form-row
+  .outlined-box
+    label
+      | Please provide any necessary files
+    button.btn.upload-btn#upload-btn
+      | Upload files 
+      .fa.fa-cloud-upload
+.form-row
+  #uploading-files

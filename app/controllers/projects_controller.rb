@@ -17,7 +17,6 @@ class ProjectsController < ApplicationController
       return redirect_to_login
     end
 
-    @editing = true
     @errors  = []
     @editing = true
     @service = @project.service

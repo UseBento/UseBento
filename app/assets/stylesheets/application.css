@@ -202,3 +202,27 @@ margin-bottom: 0.75em;
 
 .devise {
     text-align: center; }
+
+textarea.textarea.textarea-small {
+    height: 5em; }
+
+.outlined-box {
+    width: calc(100% - 3.3em);
+    border-radius: 0.14em;
+    border: 0.15em solid #dbe2f2;
+    padding: 1.5em;
+    padding-top: 0.75em; }
+
+.outlined-box label {
+    font-weight: bold;
+    clear: both;
+    display: block;
+    margin-bottom: 1.5em;
+    font-size: 1.15em; }
+
+button.btn.upload-btn {
+    background-color: #899eb9;
+    font-weight: normal !important;
+    padding-top: 1.25em;
+    padding-bottom: 1.25em;
+}
