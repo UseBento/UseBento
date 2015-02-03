@@ -31,8 +31,10 @@
   .outlined-box
     label
       | Please provide any necessary files
-    button.btn.upload-btn#upload-btn
+    button.btn.upload-btn#upload-btn[type="button"]
       | Upload files 
       .fa.fa-cloud-upload
+    input#file-upload.hidden[type="file"]
 .form-row
   #uploading-files
+    

@@ -250,6 +250,31 @@ function setup_paypal_direct() {
                 set_add_comment_state(); });
             file_upload.trigger('click'); });
 
+        $('#upload-btn').click(function(event) {
+            var file_upload = $('#file-upload');
+            file_upload.change(function() {
+                function remove_file() {
+                    file_upload.detach();
+                    file_icon.detach(); }
+
+                var filename    = file_upload.val().match(/[^\\]+$/)[0];
+                var file_icon   = build_el(
+                    div('attachment',
+                        [i('fa fa-paperclip paperclip'),
+                         i('close-link fa fa-times', [], remove_file),
+                         div('label', [filename])]));
+                $('#uploading-files').append(file_icon);
+
+                file_upload.attr('id', 'file-upload-' + file_upload_id.toString());
+                file_upload.attr('name', 'file-upload-' + file_upload_id.toString());
+                file_upload.parent().append(
+                    build_el(input({id:    'file-upload', 
+                                    type:  'file', 
+                                    style: 'display:none'})));
+                file_upload_id++; });
+            file_upload.trigger('click'); });
+            
+
         function check_first() {
             if ($('#editing')[0]) return;
             var radios = $.unique($('input[type="radio"]')

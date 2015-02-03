@@ -226,3 +226,44 @@ button.btn.upload-btn {
     padding-top: 1.25em;
     padding-bottom: 1.25em;
 }
+
+#uploading-files .attachment {
+    position: relative;
+    width: 5em;
+    height: 5em;
+    display: inline-block;
+    text-align: center;
+    margin-right: 1.5em;
+    background-color: #f5f5f9;
+    color: #767b91;
+    border: 0.1em solid #8a9eb7; }
+
+#uploading-files .attachment .label {
+    max-width: 4.3rem;
+    margin-left: 0.35em;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 0.7em; }
+
+#uploading-files .attachment .close-link{
+    position: absolute;
+    top: -0.3em;
+    right: -0.3em;
+    width: 1.15em;
+    height: 1.15em;
+    color: white;
+    background-color: #474b57;
+    z-index:10;
+    border-radius: 0.5em; }
+
+#uploading-files .attachment .close-link:hover{
+    cursor: pointer;
+    background-color: #899eb9; }
+
+#uploading-files .attachment .paperclip {
+    font-size: 2em;
+    color: #90a0ba;
+    margin-top: 0.4em;
+    margin-bottom: 0em; }
+    
