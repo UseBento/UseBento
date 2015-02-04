@@ -175,9 +175,14 @@ class ProjectsController < ApplicationController
   def invite
     @project    = Project.find(params[:id])
     email       = params[:email]
+    user        = User.where(email: email).first
     
     invitation  = @project.invited_users.create({accepted:   false,
                                                  email:      email})
+    if user
+      invitation.user = user
+      invitation.save
+    end
     
     respond_to do |format|
       format.html { redirect_to @project }

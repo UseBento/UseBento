@@ -101,9 +101,15 @@
                     a[href=("mailto:"+person.user.email)]
                       = person.user.email
                   - else
-                    img.avatar[src="/images/default_avatar.gif" alt=""]
+                    - if person.user
+                      img.avatar[src=person.user.avatar(request.host_with_port) alt=""]
+                    - else
+                      img.avatar[src="/images/default_avatar.gif" alt=""]
                     span
-                      = person.email
+                      - if person.user
+                        = person.full_name
+                      - else
+                        = person.email
                     span.invite-sent
                       | Invite Sent
             .clear
