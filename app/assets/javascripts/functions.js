@@ -353,7 +353,30 @@ function setup_paypal_direct() {
         $('#projects-list').tablesorter({sortList: [[0,0]]});
 //        $('#projects-list thead .tbl_row td:first-child').click();
 
+        $('#invite-coworkers').click(function() {
+            $('#enter-invite').removeClass('hidden');
+            $('#invite-coworkers').addClass('hidden'); });
 
+        $('#submit-invite').click(function() {
+            var email    = $('#enter-email').val();
+            var id       = $('#project-id').val();
+            
+            $.ajax({type:    'POST',
+                    url:     '/projects/' + id + '/invite.json',
+                    data:    {email: email},
+                    success:  function(data) {
+                        var row = build_el(
+                            div('people-entry col_four',
+                                [img({'class':  "avatar",
+                                      src:      '/images/default_avatar.gif',
+                                      alt:      ''}),
+                                 span('', [data.email]),
+                                 span('invite-sent', ['Invite Sent'])]));
+                        $('#people').append(row);
+
+                        $('#enter-invite').addClass('hidden');
+                        $('#invite-coworkers').removeClass('hidden'); }}); });
+            
         function run_on_popup() {
             $('#sign-up-form').submit(sign_up); 
             $('#log-in-form').submit(log_in);

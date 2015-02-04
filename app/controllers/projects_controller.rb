@@ -172,6 +172,19 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def invite
+    @project    = Project.find(params[:id])
+    email       = params[:email]
+    
+    invitation  = @project.invited_users.create({accepted:   false,
+                                                 email:      email})
+    
+    respond_to do |format|
+      format.html { redirect_to @project }
+      format.json { render :json => invitation }
+    end
+  end
+
   def get_error(name)
     filtered = @errors.select do |error|
                         error[:question].name == name

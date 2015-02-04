@@ -91,15 +91,27 @@
           li
             h5
               | People on this project
-            - for person in @project.people
-              .col_four#people
-                img.avatar[src=person.user.avatar(request.host_with_port) alt=""]
-                span
-                  = person.user.full_name
-                a[href=("mailto:"+person.user.email)]
-                  = person.user.email
+            #people
+              - for person in @project.people
+                .col_four.people-entry
+                  - if person.accepted
+                    img.avatar[src=person.user.avatar(request.host_with_port) alt=""]
+                    span
+                      = person.user.full_name
+                    a[href=("mailto:"+person.user.email)]
+                      = person.user.email
+                  - else
+                    img.avatar[src="/images/default_avatar.gif" alt=""]
+                    span
+                      = person.email
+                    span.invite-sent
+                      | Invite Sent
             .clear
             br
+            #enter-invite.hidden
+              input#enter-email[type="text" placeholder="email address"]
+              a#submit-invite
+                | Invite
             a.btn_med.gray#invite-coworkers
               | INVITE COWORKERS
           li#project-invoice
@@ -155,4 +167,5 @@
           a.btn_large.gray[href="#"]
             img[src="/images/download.png" alt=""]
             | DOWNLOAD FILES
+input.hidden#project-id[type="hidden" value=@project.id]
 = render partial: 'footer'

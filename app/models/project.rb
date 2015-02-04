@@ -36,14 +36,14 @@ class Project
     people = self.invited_users
 
     if (people.empty?)
-      invited_user         = self.invited_users.create({invited: true})
+      invited_user         = self.invited_users.create({accepted: true})
       invited_user.user    = self.user
       invited_user.save
       people = self.invited_users
     end
 
-    if (people.select {|person| person.user.admin}).empty?
-      invited_user         = self.invited_users.create({invited: true})
+    if (people.select {|person| person.user && person.user.admin}).empty?
+      invited_user         = self.invited_users.create({accepted: true})
       invited_user.user    = User.get_admin
       invited_user.save
       people = self.invited_users

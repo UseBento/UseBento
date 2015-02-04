@@ -203,7 +203,7 @@ margin-bottom: 0.75em;
 .devise {
     text-align: center; }
 
-#people .avatar {
+.people-entry .avatar {
     width: 2.5em;
     height: 2.5em;
     border-radius: 1.25em;
@@ -211,5 +211,25 @@ margin-bottom: 0.75em;
     margin-right: 0.75em;
 }
 
+#enter-invite #enter-email {
+    height: 1.5em;
+    border: 0.12em solid #bababa;
+    border-radius: 0.25em;
+    padding: 0.75em;
+    margin-right: 0.75em;
+    width: 60%;
+}
 
+#enter-invite #submit-invite {
+    cursor: pointer; }
 
+.hidden {
+    display: none!important; }
+
+.right_container ul.box_list li .col_four.people-entry span.invite-sent {
+    font-weight: normal;
+    font-family: 'Open Sans', Arial, sans-serif;
+    padding-top: 0.15em;
+    font-size: 15px;
+    color: #888;
+    font-style: italic; }

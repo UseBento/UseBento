@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get  'projects/:id/archive',         to: 'projects#archive'         
   get  'projects/:id/unarchive',       to: 'projects#unarchive'         
   get  'projects/:id/del_project',     to: 'projects#delete'         
+  post 'projects/:id/invite',          to: 'projects#invite'         
   post 'projects/:project_id/message', to: 'messages#post_message'         
   post 'projects/:project_id/update_payment', to: 'projects#update_payment'         
   get  'attachment/:project_id/:message_id/:attachment_id/:filename', to: 'messages#view_attachment', constraints: { :filename => /[^\/]+/ }
