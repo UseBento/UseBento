@@ -32,7 +32,7 @@ class Project
      unpaid_payments:  self.awaiting_payments}
   end
 
-  def get_people
+  def people
     people = self.invited_users
 
     if (people.empty?)
@@ -236,10 +236,6 @@ class Project
 
   def number_format
     self.number.to_s.rjust(4,'0')
-  end
-
-  def people
-    [self.user]
   end
 
   def get_features

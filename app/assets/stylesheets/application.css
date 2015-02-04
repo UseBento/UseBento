@@ -202,3 +202,14 @@ margin-bottom: 0.75em;
 
 .devise {
     text-align: center; }
+
+#people .avatar {
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 1.25em;
+    float: left; 
+    margin-right: 0.75em;
+}
+
+
+

@@ -92,11 +92,16 @@
             h5
               | People on this project
             - for person in @project.people
-              .col_four
+              .col_four#people
+                img.avatar[src=person.user.avatar(request.host_with_port) alt=""]
                 span
-                  = person.full_name
-                a[href=("mailto:"+person.email)]
-                  = person.email
+                  = person.user.full_name
+                a[href=("mailto:"+person.user.email)]
+                  = person.user.email
+            .clear
+            br
+            a.btn_med.gray#invite-coworkers
+              | INVITE COWORKERS
           li#project-invoice
             h5
               | PROJECT INVOICE
