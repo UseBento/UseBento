@@ -15,10 +15,11 @@ class Project
   belongs_to :user
   embeds_many :answers
   embeds_many :messages
+  embeds_many :invited_users
   validate :is_valid?
   has_many :payments
   has_many :awaiting_payments
-
+  
   def as_json(i=0)
     {start_date:       start_date,
      state:            state,
@@ -29,6 +30,26 @@ class Project
      price:            self.get_price,
      payments:         self.payments,
      unpaid_payments:  self.awaiting_payments}
+  end
+
+  def get_people
+    people = self.invited_users
+
+    if (people.empty?)
+      invited_user         = self.invited_users.create({invited: true})
+      invited_user.user    = self.user
+      invited_user.save
+      people = self.invited_users
+    end
+
+    if (people.select {|person| person.user.admin}).empty?
+      invited_user         = self.invited_users.create({invited: true})
+      invited_user.user    = User.get_admin
+      invited_user.save
+      people = self.invited_users
+    end
+
+    people
   end
 
   def get_awaiting_payments(all=false)
