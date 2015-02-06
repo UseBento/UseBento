@@ -184,6 +184,8 @@ class ProjectsController < ApplicationController
       invitation.save
     end
     
+    UserMailer.invited_to_project_mail(invitation, @project, current_user).deliver
+
     respond_to do |format|
       format.html { redirect_to @project }
       format.json { render :json => invitation }

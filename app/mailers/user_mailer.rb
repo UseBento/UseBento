@@ -14,7 +14,6 @@ class UserMailer < ActionMailer::Base
     @invitation  = invitation
     @project     = project
     @inviter     = inviter
-    @code        = invitation.get_code
 
     mail(to:       @invitation.email,
          subject:  @inviter.full_name + " invited you to join a project on Bento")
