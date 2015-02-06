@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  skip_before_action :authenticate_user!, only: :new
+  skip_before_action :authenticate_user!, only: [:new, :join]
 
   def view 
     @project = Project.find(params[:id])

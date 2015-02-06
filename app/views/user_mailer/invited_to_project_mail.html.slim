@@ -11,7 +11,7 @@ html[lang="en"]
       = @project.name
       |  on Bento.
     p
-      = link_to "Click here", @invitation
+      = link_to "Click here", root_url + "/accept_invitation/" + @project.id.to_s + "/" + @invitation.id.to_s
       |  to accept their invitation.
     p
       | -Bento
