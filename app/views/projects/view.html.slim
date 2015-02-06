@@ -107,7 +107,7 @@
                       img.avatar[src="/images/default_avatar.gif" alt=""]
                     span
                       - if person.user
-                        = person.full_name
+                        = person.user.full_name
                       - else
                         = person.email
                     span.invite-sent

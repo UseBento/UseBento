@@ -374,6 +374,7 @@ function setup_paypal_direct() {
                                  span('invite-sent', ['Invite Sent'])]));
                         $('#people').append(row);
 
+                        $('#enter-email').val('');
                         $('#enter-invite').addClass('hidden');
                         $('#invite-coworkers').removeClass('hidden'); }}); });
             
