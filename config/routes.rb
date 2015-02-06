@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get  'projects/new/:name',          to: 'services#create',      as: 'service'
   get  'projects/list',               to: 'projects#list'
   get  'projects/:id',                to: 'projects#view',        as: 'project'
+  get  'accept_invitation/:id',       to: 'projects#join',        as: 'invited_user'
   post 'projects/new',                to: 'projects#new'         
   get  'projects/:id/edit',           to: 'projects#edit'         
   get  'projects/:id/archive',         to: 'projects#archive'         

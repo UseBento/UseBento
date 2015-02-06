@@ -6,4 +6,8 @@ class InvitedUser
 
   embedded_in :project
   belongs_to :user
+
+  def get_code
+    self.project.id + "-" + self.id
+  end
 end
