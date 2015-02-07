@@ -98,8 +98,12 @@
                     img.avatar[src=person.user.avatar(request.host_with_port) alt=""]
                     span
                       = person.user.full_name
-                    a[href=("mailto:"+person.user.email)]
-                      = person.user.email
+                    - if person.user == User.get_admin
+                      a[href=("mailto:"+person.user.email)]
+                        = person.user.email
+                    - else
+                      a
+                        = raw "&nbsp;"
                   - else
                     - if person.user
                       img.avatar[src=person.user.avatar(request.host_with_port) alt=""]
