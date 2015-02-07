@@ -58,10 +58,10 @@ class ProjectsController < ApplicationController
   end
 
   def list
-    @open_projects   = (current_user.admin ? Project.all : current_user.projects)
+    @open_projects   = (current_user.admin ? Project.all : current_user.accessible_projects)
                        .where(:status.ne => :closed)
                        .order_by(:number.asc)
-    @closed_projects = (current_user.admin ? Project.all : current_user.projects)
+    @closed_projects = (current_user.admin ? Project.all : current_user.accessible_projects)
                        .where(:status => :closed)
                        .order_by(:number.asc)
   end

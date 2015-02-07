@@ -27,6 +27,9 @@ class User
   field :company,            type: String
   field :admin,              type: Boolean
 
+  has_many :projects
+  has_many :invited_users
+
   ## Confirmable
   # field :confirmation_token,   type: String
   # field :confirmed_at,         type: Time
@@ -41,8 +44,6 @@ class User
   def self.get_admin
     self.where(admin: true).first
   end
-
-  has_many :projects
 
   def full_name
     self.name.split.map(&:capitalize).join ' '
@@ -84,5 +85,10 @@ class User
   def default_target_audience
     project = last_project
     project ? project.answer_for('target_audience').answer : ""
+  end
+
+  def accessible_projects
+    Project.or({"user_id" => id},
+               {"invited_users.user_id" => id})
   end
 end
