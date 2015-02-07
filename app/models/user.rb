@@ -70,7 +70,7 @@ class User
 
     hash = Digest::MD5.hexdigest(self.email.strip.downcase)
     default_img = URI.encode_www_form_component(
-                    root_domain + "/images/default_avatar.gif")
+                    root_domain + "/images/avatars/" + self.name[0].upcase + ".png")
     "http://www.gravatar.com/avatar/" + hash + "?d=" + default_img
   end
   
