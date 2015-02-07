@@ -28,7 +28,6 @@ class User
   field :admin,              type: Boolean
 
   has_many :projects
-  has_many :invited_users
 
   ## Confirmable
   # field :confirmation_token,   type: String
@@ -42,7 +41,9 @@ class User
   # field :locked_at,       type: Time
 
   def self.get_admin
-    self.where(admin: true).first
+    admin_user   = User.where({admin: true, name: "Noah"}).first
+    admin_user   = User.where({admin: true}).first unless admin_user
+    admin_user
   end
 
   def full_name

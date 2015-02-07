@@ -306,8 +306,7 @@ class Project
                     "right. Looking forward to working with you and please let me " +
                     "know if you have any questions!")
 
-    admin_user   = User.where({admin: true, name: "Noah"}).first
-    admin_user   = User.where({admin: true}).first unless admin_user
+    admin_user   = User.get_admin
     message      = self.messages.create({body:        message_body,
                                          posted_date: DateTime.now})
     message.user = admin_user
