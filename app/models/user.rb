@@ -54,7 +54,7 @@ class User
     self.name.split.first.capitalize
   end
 
-  def self.generate(name, email, company) 
+  def self.generate(name, email, company)
     password = Devise.friendly_token.first(12)
     user     = User.create({email:        email,
                             name:         name,
