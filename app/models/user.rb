@@ -63,6 +63,10 @@ class User
     [user, password]
   end
 
+  def self.default_avatar_for(name)
+    "/images/avatars/" + name[0].upcase + ".png"
+  end
+
   def avatar(root_domain)
     if self.admin
       return "/images/chat.png"
@@ -70,7 +74,7 @@ class User
 
     hash = Digest::MD5.hexdigest(self.email.strip.downcase)
     default_img = URI.encode_www_form_component(
-                    root_domain + "/images/avatars/" + self.name[0].upcase + ".png")
+                    root_domain + User.default_avatar_for(name))
     "http://www.gravatar.com/avatar/" + hash + "?d=" + default_img
   end
   

@@ -368,7 +368,8 @@ function setup_paypal_direct() {
                         var row = build_el(
                             div('people-entry col_four',
                                 [img({'class':  "avatar",
-                                      src:      '/images/default_avatar.gif',
+                                      src:      ('/images/avatars/' + 
+                                                 email[0].toUpperCase() + '.png'),
                                       alt:      ''}),
                                  span('', [data.email]),
                                  span('invite-sent', ['Invite Sent'])]));
