@@ -4,7 +4,9 @@ class Project
   
   field :start_date,    type: DateTime
   field :state,         type: Symbol
-  field :status,        type: Symbol  # :pending, :assigned, :awaiting_payment, :closed
+  field :status,        type: Symbol  # :pending, :assigned, :awaiting_payment,
+                                      # :in_progress, :closed
+
   field :last_status,   type: Symbol  # set to keep track of last status before archiving
   field :number,        type: Integer
   field :deadline,      type: Date
@@ -288,6 +290,8 @@ class Project
       "btn_small blue"
     when :assigned
       "btn_small green"
+    when :in_progress
+      "btn_small green"
     when :awaiting_payment
       "btn_small blue"
     when :closed
@@ -311,5 +315,9 @@ class Project
                                          posted_date: DateTime.now})
     message.user = admin_user
     message.save
+  end
+
+  def status_label
+    status.to_s.gsub("_", " ")
   end
 end

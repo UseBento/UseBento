@@ -38,6 +38,7 @@ class Payment
       payment.save
 
       project.updated_at       = DateTime.now
+      project.status           = :in_progress       if project.status == :pending
       project.save
     rescue Twocheckout::TwocheckoutError => e
       raise e

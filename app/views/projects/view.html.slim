@@ -166,7 +166,10 @@
                     = '$' + number_with_delimiter(@project.next_payment_price, :delimiter => ',')
                 - unless current_user.admin
                   a.btn_large.purple[href=("/payments/checkout/" + @project.id.to_s + "/50")]
-                    | PAY INVOICE NOW
+                    - if @project.payments.empty?
+                      | PAY DEPOSIT
+                    - else
+                      | PAY FINAL INVOICE
       .clear
         /li
           p
