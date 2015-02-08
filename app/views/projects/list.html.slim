@@ -62,7 +62,7 @@
                     = project.print_pages
                   td
                     a[href="#" class=project.label_class]
-                      = project.status
+                      = project.status_label
       - else
         .table_box
           table[width="100%" border="0" cellspacing="0" cellpadding="0"]
@@ -104,7 +104,7 @@
                     = time_ago_in_words(project.updated_at) + " ago"
                   td
                     a[href="#" class=project.label_class]
-                      = project.status
+                      = project.status_label
       -if !@closed_projects.empty?
         - if current_user.admin
           .table_box
@@ -155,7 +155,7 @@
                       = project.print_pages
                     td
                       a[href="#" class=project.label_class]
-                        = project.status
+                        = project.status_label
         - else
           .table_box
             table[width="100%" border="0" cellspacing="0" cellpadding="0"]
@@ -197,5 +197,5 @@
                       = time_ago_in_words(project.updated_at) + " ago"
                     td
                       a[href="#" class=project.label_class]
-                        = project.status
+                        = project.status_label
 = render partial: "footer"
