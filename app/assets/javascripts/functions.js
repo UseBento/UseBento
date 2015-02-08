@@ -345,14 +345,20 @@ function setup_paypal_direct() {
             price = price * page_count;
             button.val('GET STARTED - $' + price); }
 
+        function update_development_type_visibility() {
+            $('#development-type')
+                .css('visibility',
+                     ($('#field-design-development').prop('checked') 
+                      ? 'visible'
+                      : 'hidden')); }
+            
         $('#pages-count').change(update_price);
         $('.header-type').change(update_price);
         $('#field-desktop-mobile, #field-desktop-only, #field-design-development, #field-design-only')
-            .change(update_price);
+            .change(o(update_development_type_visibility,
+                      update_price));
 
         $('#projects-list').tablesorter({sortList: [[0,0]]});
-//        $('#projects-list thead .tbl_row td:first-child').click();
-
 
         function run_on_popup() {
             $('#sign-up-form').submit(sign_up); 

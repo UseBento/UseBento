@@ -155,3 +155,6 @@ function depluralize(string) {
         return string.slice(0,-1); 
     return string; }
 
+function o(fn1, fn2) {
+    return function(param) {
+        return fn1(fn2(param)); }; }

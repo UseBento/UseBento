@@ -1488,3 +1488,6 @@ input[type="submit"][disabled] {
 .tablesorter-header {
     padding-right: 0;
 }
+
+#development-type {
+    visibility: hidden; }
