@@ -192,31 +192,33 @@ function setup_paypal_direct() {
             if (progress_bar) {
                 progress_bar.css('display', 'block');
                 progress_bar.progressbar({value: 0}); }
+
+            function upload_progress(evt) {
+                if (evt.lengthComputable) 
+                    progress_bar.progressbar({value: ((evt.loaded / evt.total) 
+						      * 85)}); }
+            function response_progress(evt){
+                if (evt.lengthComputable) 
+                    progress_bar.progressbar({value: (85 + ((evt.loaded / evt.total) 
+							    * 15))}); }
             $.ajax({type: 'POST',
-                     xhr: function(){
-                         var xhr = new window.XMLHttpRequest();
-                         if (progress_bar) {
-                             xhr.upload.onprogress =
-                                 function(evt){
-                                     if (evt.lengthComputable) 
-                                         progress_bar.progressbar({value: ((evt.loaded / evt.total) 
-								           * 85)}); };
-                             xhr.onprogress =
-                                 function(evt){
-                                     if (evt.lengthComputable) 
-                                         progress_bar.progressbar({value: (85 + ((evt.loaded / evt.total) 
-									         * 15))}); }; }
-                         return xhr; },
-                    url:  '/projects/' + project_id + '/message.json',
-                    data: data,
-                    enctype: 'multipart/form-data',
-                    processData: false,
-                    contentType: false,
-                    success: success}); }
+                    xhr: function() {
+                        var xhr = new window.XMLHttpRequest();
+                        if (progress_bar) {
+                            xhr.upload.onprogress    = upload_progress;
+                            xhr.onprogress           = response_progress; }
+                        return xhr; },
+                    url:          '/projects/' + project_id + '/message.json',
+                    data:          data,
+                    enctype:      'multipart/form-data',
+                    processData:   false,
+                    contentType:   false,
+                    success:       success}); }
 
         function reset_message_form() {
-            $('input[name^="file-upload-"]').map(function(i,input) {
-                $(input).remove(); }); };
+            $('input[name^="file-upload-"], .file-upload-container').map(
+                function(i,input) {
+                    $(input).remove(); }); };
 
         function message_form_has_data() {
             return $('input[type="file"][id^="file-upload-"]').length > 0
@@ -239,10 +241,25 @@ function setup_paypal_direct() {
             event.preventDefault();
             var file_upload = $('#file-upload');
             file_upload.change(function() {
-                file_upload.css('display', 'block');
+                var container, parent;
+                file_upload.css('display', 'inline-block');
                 file_upload.attr('id', 'file-upload-' + file_upload_id.toString());
                 file_upload.attr('name', 'file-upload-' + file_upload_id.toString());
-                file_upload.parent().append(
+
+                parent = $('.attachment_box');
+                file_upload.detach();
+                function remove_file_upload() {
+                    container.detach(); }
+                    
+                container = build_el(
+                    div('file-upload-container',
+                        [file_upload,
+                         ' ',
+                         a('clear-file-upload', ['x'],
+                           remove_file_upload)]));
+                parent.append(container);
+
+                parent.append(
                     build_el(input({id:    'file-upload', 
                                     type:  'file', 
                                     style: 'display:none'})));

@@ -1495,3 +1495,14 @@ input[type="submit"][disabled] {
 #project-cancel {
     opacity: 0.75;
     }
+
+.file-upload-container input {
+    display: inline-block; 
+    width: 12em;
+    clear:none;
+    margin-right: 1em; }
+
+.file-upload-container a.clear-file-upload {
+    font-weight: bold;
+    cursor: pointer;
+    color: #d21; }

@@ -124,6 +124,8 @@ function build_el(el) {
         el = {tag: "div"}; 
     if (typeof el == "string") 
         return $(document.createTextNode(el)); 
+    if (typeof el == "object" && el.jquery)
+        return el;
 
     var attrs = {};
     for (var i in el) 
