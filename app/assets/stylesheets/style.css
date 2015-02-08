@@ -1491,3 +1491,7 @@ input[type="submit"][disabled] {
 
 #development-type {
     visibility: hidden; }
+
+#project-cancel {
+    opacity: 0.75;
+    }

@@ -343,20 +343,21 @@ function setup_paypal_direct() {
                     price += 20; }
 
             price = price * page_count;
-            button.val('GET STARTED - $' + price); }
+            button.html('GET STARTED - $' + price); }
 
         function update_development_type_visibility() {
-            $('#development-type')
-                .css('visibility',
-                     ($('#field-design-development').prop('checked') 
-                      ? 'visible'
-                      : 'hidden')); }
+            if ($('#field-design-development').prop('checked')) {
+                $('#development-type').css('visibility', 'visible'); }
+            else {
+                $('#development-type').css('visibility', 'hidden'); 
+                $('#field-desktop-only').prop('checked', true); }}
+            
             
         $('#pages-count').change(update_price);
         $('.header-type').change(update_price);
         $('#field-desktop-mobile, #field-desktop-only, #field-design-development, #field-design-only')
-            .change(o(update_development_type_visibility,
-                      update_price));
+            .change(o(update_price,
+                      update_development_type_visibility));
 
         $('#projects-list').tablesorter({sortList: [[0,0]]});
 
