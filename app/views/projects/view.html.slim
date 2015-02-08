@@ -46,7 +46,7 @@
                 p.info_text
                   | Posted 
                   = message.format_date
-                - for attachment in message.attachments
+                - for attachment in message.valid_attachments
                   - if attachment.is_image?
                     p.responsive_img
                       a[href=attachment.url target="_blank"]

@@ -17,9 +17,14 @@ class Message
      posted:       self.format_date}
   end
 
+  def valid_attachments
+    attachments.select {|a| a.name}
+  end
+
   def attachments_as_html
     html = ""
-    attachments.map do |attachment|
+    attachments.each do |attachment|
+                 return if !attachment.name
                  if attachment.is_image?
                    html += ("<p class=\"responsive_img\">" + 
                             ("<a href=\"" + 
