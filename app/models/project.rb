@@ -21,7 +21,7 @@ class Project
   validate :is_valid?
   has_many :payments
   has_many :awaiting_payments
-  
+
   def as_json(i=0)
     {start_date:       start_date,
      state:            state,

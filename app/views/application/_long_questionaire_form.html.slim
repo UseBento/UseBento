@@ -1,32 +1,36 @@
 .form-row
-  label.form-label[for="field-tagline"]
-    | If you have a tagline, what is it?
+  label.form-label[for="field-target"]
+    | Who is your target audience? 
+    span.form-asterisk
+      |  *
   .form-errors
-    = get_error('tagline')
+    = get_error('target_audience')
   .form-controls
-    input#field-tagline.field[type="text" name="tagline" value=(@project.answer_for('tagline').answer)]
+    input#field-target.field[type="text" name="target_audience" value=(@project.answer_for('target_audience').answer || (current_user ? current_user.default_target_audience : "")) required data-validation-type="['presence']"]
 .form-row
-  label.form-label[for="field-color-preferences"]
-    | Do you have any color preferences?
+  label.form-label[for="field-keywords"]
+    | What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
+    span.form-asterisk
+      |  *
   .form-errors
-    = get_error('color_preferences')
+    = get_error('business_keywords')
   .form-controls
-    input#field-color-preferences.field[type="text" name="color_preferences" value=(@project.answer_for('color_preferences').answer)]
-.form-row
-  label.form-label[for="field-font_preferences"]
-    | Do you have any font preferences
-  .form-errors
-    = get_error('font_preferences')
-  .form-controls
-    input#field-font-preferences.field[type="text" name="font_preferences" value=(@project.answer_for('font_preferences').answer)]
-.form-row
-  label.form-label[for="field-other-requirements"]
-    | Do you have any other requirements
-  .form-errors
-    = get_error('other_requirements')
-  .form-controls
-    textarea#field-other-requirements.textarea.textarea-small[type="text" cols="10" rows="3" name="other_requirements" value=(@project.answer_for('other_requirements').answer)]
-      = @project.answer_for('other_requirements').answer
+    input#field-keywords.field[type="text" name="business_keywords" value=(@project.answer_for('business_keywords').answer || (current_user ? current_user.default_keywords : "")) required data-validation-type="['presence']"]
+
+- for action in [{name: 'desired_visitor_action', rows: 2}, {name: 'competitors', rows: 2}, {name: 'tagline', rows: 1}, {name: 'color_preferences', rows: 1}, {name: 'font_preferences', rows: 1}, {name: 'inspiration', rows: 3}, {name: 'definite_nos', rows: 2}, {name: 'other_info', rows: 2}]
+  - if @project.service.has_question(action[:name])
+    .form-row
+      label.form-label[for=("field-" + action[:name])]
+        = @project.service.lookup_question(action[:name]).label
+      .form-errors
+        = get_error(action[:name])
+      .form-controls
+        - if action[:rows] > 1
+          textarea.textarea.textarea-small[id=("field-" + action[:name]) type="text" cols="10" rows=action[:rows].to_s name=action[:name] value=(@project.answer_for(action[:name]).answer)]
+            = @project.answer_for(action[:name]).answer
+        - else
+          input.field[id=("field-" + action[:name]) type="text" name=action[:name] value=(@project.answer_for(action[:name]).answer)]
+
 .form-row
   .outlined-box
     label
