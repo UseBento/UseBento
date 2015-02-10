@@ -120,7 +120,6 @@
                   = "Get Started"
             - if @editing
               |  &nbsp; 
-              button.btn.form-btn#project-cancel[type="button" onclick=("window.location.href = " + JSON.dump(url_for(@project)))]
-                | Cancel
+              = link_to "Cancel", @project
             input#page-price[type="hidden" value=(@service.price)]
 = render partial: 'footer'

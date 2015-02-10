@@ -179,6 +179,8 @@ class ProjectsController < ApplicationController
     
     invitation  = @project.invited_users.create({accepted:   false,
                                                  email:      email})
+    invitation.inviter = current_user
+
     if user
       invitation.user = user
       invitation.save
