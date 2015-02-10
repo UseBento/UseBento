@@ -179,8 +179,9 @@ class ProjectsController < ApplicationController
     
     if user == current_user
       @error = "You can't invite yourself!"
-    elsif @project.invitations.where(user: user)
-      @error = "You already invited " + user.full_name
+    elsif (@project.invited_users.where(email: email).first ||
+           (user && @project.invited_users.where(user: user).first))
+      @error = "You already invited " + ((user && user.full_name) || email)
     else
       invitation  = @project.invited_users.create({accepted:   false,
                                                    email:      email})
