@@ -17,7 +17,7 @@
       .section-main
         header.section-head
           h2
-            | A Partner to Work With You and Your Clients
+            | A Partner to Help You Grow Your Business
         .section-body
           p
             | As an agency, being able to offer more of the services that your clients need helps you to continue to build a stronger client relationships and win more business. Bento was created to be your partner in providing the piece of mind that projects will get done efficiently and effectively while exceeding your client’s expectations. Our number one goal is to help you grow your business. 
@@ -73,7 +73,7 @@
               | Compliment Your Services
             p
               | We compliment the services you already offer to your clients. 
-  .section.section-agency-testimonials
+  /.section.section-agency-testimonials
     .shell
       .section-head
         h2
@@ -127,40 +127,45 @@
           | Talk With Us
       .section-body
         .form.form-contact
-          form.form-required[action="lib/form.php" method="post"]
+          form.form-required[action="/contact_agency#agency-contact" method="post"]
+            = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) 
             input[type="hidden" name="contact-form-agency"]
             .form-body
-              .form-row
-                .form-cols.clearfix
-                  .form-col.form-col-1of2
-                    label.form-label[for="field-name"]
-                      | Full Name 
-                      span.form-asterisk
-                        | *
-                    .form-controls
-                      input#field-name.field[type="text" name="field-name" required data-validation-type="['presence']"]
-                  .form-col.form-col-1of2
-                    label.form-label[for="field-e-mail"]
-                      | E-mail 
-                      span.form-asterisk
-                        | *
-                    .form-controls
-                      input#field-e-mail.field[type="email" name="field-e-mail" required data-validation-type="['email']"]
-              .form-row
-                label.form-label[for="field-agency"]
-                  | Agency 
-                  span.form-asterisk
-                    | *
-                .form-controls
-                  input#field-agency.field[type="text" name="field-agency" required data-validation-type="['presence']"]
-              .form-row
-                label.form-label[for="field-message"]
-                  | Message 
-                  span.form-asterisk
-                    | *
-                .form-controls
-                  textarea#field-message.textarea[name="field-message" cols="30" rows="10" required data-validation-type="['presence']"]
-            .form-actions
-              button.btn-callout[type="submit"]
-                | SEND MESSAGE
+              - if @message_sent
+                center[style="color:white"]
+                  | You're message has been sent, we will get back to you shortly.
+              - else
+                .form-row
+                  .form-cols.clearfix
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-name"]
+                        | Full Name 
+                        span.form-asterisk
+                          | *
+                      .form-controls
+                        input#field-name.field[type="text" name="field-name" required data-validation-type="['presence']"]
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-e-mail"]
+                        | E-mail 
+                        span.form-asterisk
+                          | *
+                      .form-controls
+                        input#field-e-mail.field[type="email" name="field-e-mail" required data-validation-type="['email']"]
+                .form-row
+                  label.form-label[for="field-agency"]
+                    | Agency 
+                    span.form-asterisk
+                      | *
+                  .form-controls
+                    input#field-agency.field[type="text" name="field-agency" required data-validation-type="['presence']"]
+                .form-row
+                  label.form-label[for="field-message"]
+                    | Message 
+                    span.form-asterisk
+                      | *
+                  .form-controls
+                    textarea#field-message.textarea[name="field-message" cols="30" rows="10" required data-validation-type="['presence']"]
+                .form-actions
+                  button.btn-callout[type="submit"]
+                    | SEND MESSAGE
 = render partial: 'footer'

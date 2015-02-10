@@ -8,9 +8,9 @@
     .project_detail_box
       .row_box
         h2
-          = current_user.company 
-          |  &mdash; 
-          = @project.service.title
+          = @project.name
+          /|  &mdash; 
+        /= @project.service.title
       .row_box.gray_brd
         .col_flex
           p
@@ -25,9 +25,9 @@
         .col_one
           p
             | Total: 
-          h5
+          h5#project-total
             = '$' + @project.get_price.to_s
-        .col_two
+        /.col_two
           p
             | Deadline: 
           h5
@@ -45,60 +45,143 @@
                 = raw message.body_as_html
                 p.info_text
                   | Posted 
-                  = time_ago_in_words message.posted_date
-                - for attachment in message.attachments
+                  = message.format_date
+                - for attachment in message.valid_attachments
                   - if attachment.is_image?
                     p.responsive_img
-                      img[src=attachment.url alt=""]
+                      a[href=attachment.url target="_blank"]
+                        img[src=attachment.url alt=""]
                     p.img_txt
                       = attachment.name
                   - else
                     p.img_txt
-                      = link_to attachment.name, attachment.url
+                      | Click file to download
+                      br
+                      = link_to attachment.name, attachment.url, :target => "_blank"
+                      = " " + attachment.filesize
           li#message-form-li
             .post_img
               img[src=current_user.avatar(request.host_with_port) alt=""]
             form#message-form.dtl_box[action=("/projects/" + @project.id.to_s + "/message") method="POST" enctype="multipart/form-data"]
-              = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) 
+              = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token)
               input#project-id[name="project_id" type="hidden" value=@project.id]
-              textarea#message-box.text_box[rows="" name="message_body" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"]
-                |  Add a comment or upload a file... 
+              textarea#message-box.text_box[rows="" placeholder="Add a comment or upload a file..." name="message_body" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"]
               .bottom_box
                 .attachment_box
+                  #progress-bar
                   a#file-link[href="#"]
                     img[src="/images/attachment.png" alt=""]
                     | Attach files from your computer.
                   input#file-upload[type="file" style="display:none;"]
                 .submit_box
                   input.cancel_btn[name="" type="reset" value="Cancel" style="display:none"]
-                  input.comment_btn.purple[name="" type="submit" value="ADD COMMENT"]
+                  input#add-comment.comment_btn.purple[name="" type="submit" value="ADD COMMENT" disabled]
       .right_container
         ul.box_list
-         li
+          li
             = link_to "Edit Project", "/projects/" + @project.id.to_s + "/edit"
-         li
+            - if current_user.admin
+              br
+              - if @project.archived?
+                = link_to "Unarchive Project", "/projects/" + @project.id.to_s + "/unarchive"
+              - else
+                = link_to "Archive Project", "/projects/" + @project.id.to_s + "/archive"
+              br
+              = link_to "Delete Project", "/projects/" + @project.id.to_s + "/del_project"
+          li
             h5
               | People on this project
-            - for person in @project.people
-              .col_four
-                span
-                  = person.full_name
-                a[href=("mailto:"+person.email)]
-                  = person.email
-        li
+            #people
+              - for person in @project.people
+                - if person.can_see?(current_user)
+                  div[class=("col_four people-entry " + (person.can_see_email?(current_user) ? "" : "no-email"))]
+                    - if person.accepted && person.user
+                      img.avatar[src=person.user.avatar(request.host_with_port) alt=""]
+                      span
+                        = person.user.full_name
+                      - if person.can_see_email?(current_user)
+                        a[href=("mailto:"+person.user.email)]
+                          = person.user.email
+                      - else
+                        = raw "&nbsp;"
+                    - else
+                      - if person.user
+                        img.avatar[src=person.user.avatar(request.host_with_port) alt=""]
+                      - else
+                        img.avatar[src=User.default_avatar_for(person.email) alt=""]
+                      span
+                        - if person.user
+                          = person.user.full_name
+                        - elsif person.can_see_email?(current_user)
+                          = person.email
+                        - else
+                          = raw "&nbsp;"
+                      span.invite-sent
+                        | Invite Sent
+            .clear
+            br
+            #enter-invite.hidden
+              input#enter-email[type="text" placeholder="email address"]
+              a#submit-invite
+                | Invite
+            a.btn_med.gray#invite-coworkers
+              | INVITE COWORKERS
+            strong#invite-errors
+          li#project-invoice
             h5
               | PROJECT INVOICE
-            p
-              = @project.current_payment.to_s + ' of ' + @project.total_payments.to_s + ' Payments: '
-              span
-                = '$' + number_with_delimiter(@project.next_payment_price, :delimiter => ',')
-            a.btn_large.purple[href=("/payments/checkout/" + @project.id.to_s + "/50")]
-              | PAY INVOICE NOW
-/          li
-/            p
-/              | You need to PAY all outstanding project invoices in order to DOWNLOAD the files.
-/            a.btn_large.gray[href="#"]
-/              img[src="/images/download.png" alt=""]
-/              | DOWNLOAD FILES
+            - if current_user.admin
+              | Project total: 
+              form.new-payment-amount[data-id='total']
+                input.form-control.field.new-payment-amount-field[type="text" value=('$' + @project.get_price.to_s)]
+                  a.submit-payment[data-id='total']
+                    |  save
+              span.current-payment-amount[data-id='total']
+                strong.payment-amount[data-id='total']
+                  = "$" + @project.get_price.to_s + " "
+                a.btn-edit-payment[data-id='total' data-amount=@project.get_price.to_s]
+                  |  Edit
+              br
+              - i = 1
+              - @project.get_awaiting_payments(true).map do |payment|
+                = i.to_s + " of " + @project.get_awaiting_payments(true).length.to_s + " payments: "
+                - if payment.class == Payment
+                    strong.payment-amount
+                      = '$' + payment.amount.to_s
+                    |  paid
+                - else
+                  form.new-payment-amount[data-id=payment.id]
+                    input.form-control.field.new-payment-amount-field[type="text" value=('$' + payment.amount.to_s)]
+                    a.submit-payment[data-id=payment.id]
+                      |  save
+                  span.current-payment-amount[data-id=payment.id]
+                    strong.payment-amount[data-id=payment.id]
+                      = "$" + payment.amount.to_s + " "
+                    a.btn-edit-payment[data-id=payment.id data-amount=payment.amount]
+                      |  Edit
+                  - i += 1
+                br
+            - else
+              - for payment in @project.payments
+                p
+                  = '$' + payment.amount.to_s + " - paid"
+              - if @project.next_payment_price
+                p
+                  = @project.current_payment.to_s + ' of ' + @project.total_payments.to_s + ' Payments: '
+                  span
+                    = '$' + number_with_delimiter(@project.next_payment_price, :delimiter => ',')
+                - unless current_user.admin
+                  a.btn_large.purple[href=("/payments/checkout/" + @project.id.to_s + "/50")]
+                    - if @project.payments.empty?
+                      | PAY DEPOSIT
+                    - else
+                      | PAY FINAL INVOICE
       .clear
+        /li
+          p
+            | You need to PAY all outstanding project invoices in order to DOWNLOAD the files.
+          a.btn_large.gray[href="#"]
+            img[src="/images/download.png" alt=""]
+            | DOWNLOAD FILES
+input.hidden#project-id[type="hidden" value=@project.id]
 = render partial: 'footer'

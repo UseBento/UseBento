@@ -6,12 +6,12 @@
           a.form-logo[href="#"]
           .separator
           h2
-            | Login to Your Bento Account
+            | Log In to Your Bento Account
         .form-body
           .form-errors#log-in-errors
           .form-row
             .form-controls
-              input#field-email.field[type="text" placeholder="Email *" name="field-email"]
+              input#field-email.field[type="text" placeholder="Email *" name="field-email" value=@saved_email]
           .form-row
             .form-controls
               input#field-password.field[type="password" placeholder="Password *" name="field-password"]

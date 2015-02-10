@@ -6,7 +6,7 @@ function get_tco_token() {
                    expYear:         $('#expr-date-year').val(),
                    cvv:             $('#cvv').val()};
 
-    TCO.loadPubKey('sandbox', function() {
+    TCO.loadPubKey($('#twocheckout_type').val(), function() {
         function success(response) {
             $('#twocheckout-token').val(response.response.token.token)
             $('#twocheckout-payment-method')
@@ -31,7 +31,7 @@ function setup_paypal_direct() {
 
     $('#tco-form').attr('action', 'https://www.2checkout.com/checkout/purchase');
     $('#tco-form')[0].submit(); }
-    
+
 (function($, window, document, undefined) {
     var $win = $(window);
     var $doc = $(document);
@@ -88,11 +88,18 @@ function setup_paypal_direct() {
                             if (waiting_for_login)
                                 waiting_for_login();
                             else {
+                                if (window.location.pathname == "/")
+                                    window.location.href = "/projects/list";
+
                                 var userlink = $('#userlink');
                                 userlink.attr('href', '/profile');
                                 userlink.attr('data-userid', data.id);
                                 userlink.html(data.username);
                                 $.magnificPopup.close(); 
+
+                                var projects_link = $('a[href="/services/select"]');
+                                projects_link.html('PROJECTS');
+                                projects_link.attr('href', '/projects/list');
 
                                 var full_name = $('#field-full-name');
                                 full_name.val(data.username);
@@ -153,6 +160,8 @@ function setup_paypal_direct() {
             var project_id    = $('#project-id').val();
             
             function success(data) {
+                if (progress_bar)
+                    progress_bar.css('display', 'none');
                 var message_li = 
                         build_el(
                             li('',
@@ -176,39 +185,90 @@ function setup_paypal_direct() {
             var data = {message_body: message};
             data     = new FormData($('#message-form')[0]);
 
+            if (!message_form_has_data())
+                return;
+            
+            var progress_bar = $('input[name^="file-upload-"]')[0] && $('#progress-bar');
+            if (progress_bar) {
+                progress_bar.css('display', 'block');
+                progress_bar.progressbar({value: 0}); }
+
+            function upload_progress(evt) {
+                if (evt.lengthComputable) 
+                    progress_bar.progressbar({value: ((evt.loaded / evt.total) 
+						      * 85)}); }
+            function response_progress(evt){
+                if (evt.lengthComputable) 
+                    progress_bar.progressbar({value: (85 + ((evt.loaded / evt.total) 
+							    * 15))}); }
             $.ajax({type: 'POST',
-                    url:  '/projects/' + project_id + '/message.json',
-                    data: data,
-                    enctype: 'multipart/form-data',
-                    processData: false,
-                    contentType: false,
-                    success: success}); }
+                    xhr: function() {
+                        var xhr = new window.XMLHttpRequest();
+                        if (progress_bar) {
+                            xhr.upload.onprogress    = upload_progress;
+                            xhr.onprogress           = response_progress; }
+                        return xhr; },
+                    url:          '/projects/' + project_id + '/message.json',
+                    data:          data,
+                    enctype:      'multipart/form-data',
+                    processData:   false,
+                    contentType:   false,
+                    success:       success}); }
 
         function reset_message_form() {
-            $('input[name^="file-upload-"]').map(function(i,input) {
-                $(input).remove(); }); };
+            $('input[name^="file-upload-"], .file-upload-container').map(
+                function(i,input) {
+                    $(input).remove(); }); };
 
+        function message_form_has_data() {
+            return $('input[type="file"][id^="file-upload-"]').length > 0
+                || $('#message-box').val() != ""; }
+
+        function set_add_comment_state(reset) {
+            var has_data = message_form_has_data();
+            if (reset !== undefined)
+                has_data = !reset;
+            $('.cancel_btn').css('display', has_data ? 'inline' : 'none');
+            $('#add-comment').prop('disabled', !has_data); }
         $('#message-form').submit(submit_project_message);
         $('#message-form').bind('reset', reset_message_form);
-        $('#message-box').change(function() {
-            $('.cancel_btn').css('display', 'inline'); });                
+        $('#message-box').change(curry(set_add_comment_state, false));
+        $('#message-box').keydown(curry(set_add_comment_state, false));
+        $('.cancel_btn').click(curry(set_add_comment_state, true));
 
         var file_upload_id = 1;
         $('#file-link').click(function(event) {
             event.preventDefault();
             var file_upload = $('#file-upload');
             file_upload.change(function() {
-                file_upload.css('display', 'block');
+                var container, parent;
+                file_upload.css('display', 'inline-block');
                 file_upload.attr('id', 'file-upload-' + file_upload_id.toString());
                 file_upload.attr('name', 'file-upload-' + file_upload_id.toString());
-                file_upload.parent().append(
+
+                parent = $('.attachment_box');
+                file_upload.detach();
+                function remove_file_upload() {
+                    container.detach(); }
+                    
+                container = build_el(
+                    div('file-upload-container',
+                        [file_upload,
+                         ' ',
+                         a('clear-file-upload', ['x'],
+                           remove_file_upload)]));
+                parent.append(container);
+
+                parent.append(
                     build_el(input({id:    'file-upload', 
                                     type:  'file', 
                                     style: 'display:none'})));
-                file_upload_id++; });
+                file_upload_id++; 
+                set_add_comment_state(); });
             file_upload.trigger('click'); });
 
         function check_first() {
+            if ($('#editing')[0]) return;
             var radios = $.unique($('input[type="radio"]')
                                   .map(function(i, j) { 
                                       return j.name; }));
@@ -276,24 +336,85 @@ function setup_paypal_direct() {
             var button         = $('#project-submit');
             var price          = parseInt($('#page-price').val());
             var page_counter   = $('#pages-count');
-            var page_count     = page_counter ? page_counter.val() : 1;
+            var page_count     = (page_counter ? page_counter.val() : 1) || 1;
             var responsive     = $('#field-desktop-mobile').prop('checked');
+            var plus_dev       = $('#field-design-development').prop('checked');
+            var responsive_price     = $('#responsive-price').val() || price;
+            var plus_dev_price       = $('#plus-dev-price').val() || price;
+            
+            if ($('input[name="service_name"]').val() == 'social_media_design') 
+                page_count = $('input.header-type')
+                    .map(function(i, ii) { 
+                        return $(ii).prop('checked'); })
+                    .filter(function(i, x) { 
+                        return x; }).length; 
 
             if (price === 0) return;
-            if (responsive) 
-                price += 20;
+            if (plus_dev) 
+                if (plus_dev_price)
+                    price = plus_dev_price;
+            if (responsive) {
+                if (responsive_price)
+                    price = responsive_price;
+                else 
+                    price += 20; }
 
             price = price * page_count;
-            button.val('GET STARTED - $' + price); }
+            button.html('GET STARTED - $' + price); }
 
+        function update_development_type_visibility() {
+            if ($('#field-design-development').prop('checked')) {
+                $('#development-type').css('visibility', 'visible'); }
+            else {
+                $('#development-type').css('visibility', 'hidden'); 
+                $('#field-desktop-only').prop('checked', true); }}
+            
+            
         $('#pages-count').change(update_price);
-        $('#field-desktop-mobile, #field-desktop-only').change(update_price);
+        $('.header-type').change(update_price);
+        $('#field-desktop-mobile, #field-desktop-only, #field-design-development, #field-design-only')
+            .change(o(update_price,
+                      update_development_type_visibility));
 
+        $('#projects-list').tablesorter({sortList: [[0,0]]});
+//        $('#projects-list thead .tbl_row td:first-child').click();
+
+        $('#invite-coworkers').click(function() {
+            $('#enter-invite').removeClass('hidden');
+            $('#invite-coworkers').addClass('hidden'); });
+
+        $('#submit-invite').click(function() {
+            var email    = $('#enter-email').val();
+            var id       = $('#project-id').val();
+            
+            $.ajax({type:    'POST',
+                    url:     '/projects/' + id + '/invite.json',
+                    data:    {email: email},
+                    success:  function(data) {
+                        if (data.error) 
+                            return $('#invite-errors').html(data.error);
+                        $('#invite-errors').html('');
+
+                        var row = build_el(
+                            div('people-entry col_four',
+                                [img({'class':  "avatar",
+                                      src:      ('/images/avatars/' + 
+                                                 email[0].toUpperCase() + '.png'),
+                                      alt:      ''}),
+                                 span('', [data.email]),
+                                 span('invite-sent', ['Invite Sent'])]));
+                        $('#people').append(row);
+
+                        $('#enter-email').val('');
+                        $('#enter-invite').addClass('hidden');
+                        $('#invite-coworkers').removeClass('hidden'); }}); });
+            
         function run_on_popup() {
             $('#sign-up-form').submit(sign_up); 
             $('#log-in-form').submit(log_in);
             $('#password-reset-form').submit(reset_password);
-            $('#field-email').val($('#field-e-mail').val());
+            $('#field-email').val($('#field-email').val() 
+                                  || $('#field-e-mail').val());
             link_popups(); }
 
         function link_popups() {
@@ -352,6 +473,68 @@ function setup_paypal_direct() {
 	});
 
 
+        $('form.new-payment-amount').submit(function(event) {
+            event.preventDefault();
+            var form   = $(this);
+            var id     = form.attr('data-id');
+            var input  = form.find('input.new-payment-amount-field');
+            var span   = $('span.current-payment-amount[data-id="' + id + '"]');
+            var price  = parseInt(input.val().match(/[0-9]+/));
+
+            $.ajax({type:    'POST',
+                    url:      window.location.pathname + '/update_payment.json',
+                    data:    {id: id, amount: price},
+                    success:  function(data) {
+                        form.css('display', 'none');
+                        span.css('display', 'inline');
+                        span.find('strong.payment-amount[data-id="' + id + '"]')
+                            .html('$' + price.toString()); 
+
+                        $('.new-payment-amount[data-id="total"] .new-payment-amount-field')
+                            .val('$' + data.price.toString());
+                        $('strong.payment-amount[data-id="total"], #project-total')
+                            .html('$' + data.price.toString());
+                        $('a.btn-edit-payment[data-id="total"]')
+                            .attr('data-amount', data.price.toString());
+
+                        data.unpaid_payments.map(function(payment) {
+                            var id = payment._id.$oid;
+                        $('.new-payment-amount[data-id="' + id + '"] .new-payment-amount-field')
+                            .val('$' + payment.amount.toString());
+                        $('strong.payment-amount[data-id="' + id + '"]')
+                            .html('$' + payment.amount.toString());
+                        $('a.btn-edit-payment[data-id="' + id + '"]')
+                            .attr('data-amount', payment.amount.toString()); }); }}); });
+        
+        $('.btn-edit-payment').click(function() {
+            var id = $(this).attr('data-id');
+            $('span.current-payment-amount[data-id="' + id + '"]')
+                .css('display', 'none');
+            $('form.new-payment-amount[data-id="' + id + '"]')
+                .css('display', 'inline'); });
+
+        $('a.submit-payment').click(function() {
+            $(this).parent().submit(); });
+
+        function validate_apply_form(event) {
+            var skills           = [$('#skill1'), 
+                                    $('#skill2'), 
+                                    $('#skill3')];
+            var selected_skills  = [];
+            
+            for (var i in skills) {
+                if (skills[i].val() && member(selected_skills, skills[i].val())) {
+                    event.preventDefault();
+                    return notify_duplicate_skill(skills[i]); }
+                selected_skills.push(skills[i].val()); }
+
+            return true; }
+
+        function notify_duplicate_skill(skill) {
+            $('#error').html("You can't enter the same skill twice!");
+            window.location.hash = '#error'; }
+
+        $('#apply-form').submit(validate_apply_form);
 
 	// mobile menu
 	$('.expand').on('click', function (event) {
@@ -363,6 +546,7 @@ function setup_paypal_direct() {
 	$('[name="payment-method"]').on('change', function() {
 	    var $form = $(this).closest('form');
 	    var oldClass = $form[0].className.match(/payment-method-\w*/);
+            $('.cc-req').prop('required', this.value == 'cc');
 
 	    $form.removeClass(oldClass && oldClass[0]).addClass('payment-method-' + this.value);
 	});

@@ -2,6 +2,14 @@ doctype html
 html[lang="en"]
   head
   body
-    h1 
-      = @user.company + " started a new " + @service.name + " project"
-    = link_to "View Project", project_url(@project), :only_path => false
+    p
+      = "Hey " + @admin.first_name + ", "
+    p
+      = @project.business_name
+      |  started a new project of  
+      = @project.service.title
+    p
+      = link_to "Go to the project page to assign a designer to the project", project_url(@project), :only_path => false
+    p
+      | -Bento
+

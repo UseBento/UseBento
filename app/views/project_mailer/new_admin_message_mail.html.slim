@@ -1,0 +1,15 @@
+doctype html
+html[lang="en"]
+  head
+  body
+    p
+      = "Hey " + @owner.first_name + ","
+    p
+      = @admin.full_name
+      |  sent you a new message:
+    blockquote
+      = raw @message.body_as_html(false, true)
+    p
+      = link_to "Respond to this message", project_url(@project), :only_path => false
+    p
+      | -Bento

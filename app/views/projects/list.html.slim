@@ -6,74 +6,196 @@
         h2
           | My Projects
       .right_section
-        a.btn_large.purple[href="/services/select"]
-          | START A NEW PROJECT 
-          i.fa.fa-angle-right
+        - if !current_user.admin
+          a.btn_large.purple[href="/services/select"]
+            | START A NEW PROJECT 
+            i.fa.fa-angle-right
+        - else
+          = raw "&nbsp;"
       .clear
-      .table_box
-        table[width="100%" border="0" cellspacing="0" cellpadding="0"]
-          tr
-            td.heading[colspan="6"]
-              | Ongoing Projects
-          tr.tbl_row.subtitle
-            td[width="20%"]
-              | Project Number
-            td[width="19%"]
-              | Company
-            td[width="16%"]
-              | Project Type
-            td[width="13%"]
-              | Deliverables
-            td[width="14%"]
-              | Date Started 
-            td[width="18%"]
-              | Project Status 
-          - for project in @open_projects do
-            tr.tbl_row.list-item[onclick=("window.location.href=\"/projects/" + project.id + "\"")]
-              td
-                = link_to project.number_format, project
-              td
-                = project.user.company
-              td
-                = project.service.title 
-              td
-                = project.print_pages
-              td
-                = project.format_start_date
-              td
-                a[href="#" class=project.label_class]
-                  = project.status
-      .table_box
-        table[width="100%" border="0" cellspacing="0" cellpadding="0"]
-          tr
-            td.heading[colspan="6"]
-              | Archived Projects
-          tr.tbl_row.subtitle
-            td[width="20%"]
-              | Project Number
-            td[width="19%"]
-              | Company
-            td[width="16%"]
-              | Project Type
-            td[width="13%"]
-              | Deliverables
-            td[width="14%"]
-              | Date Started 
-            td[width="18%"]
-              | Project Status 
-          - for project in @closed_projects do
-            tr.tbl_row.list-item[onclick=("window.location.href=\"/projects/" + project.id + "\"")]
-              td
-                = link_to project.number_format, project
-              td
-                = project.user.company
-              td
-                = project.service.title 
-              td
-                = project.print_pages
-              td
-                = project.format_start_date
-              td
-                a[href="#" class=project.label_class]
-                  = project.status
+      - if current_user.admin
+        .table_box
+          table[width="100%" border="0" cellspacing="0" cellpadding="0"]
+            tr
+              td.heading[colspan="6"]
+                | Ongoing Projects
+          table#projects-list.tablesorter[width="100%" border="0" cellspacing="0" cellpadding="0"]
+            thead
+              tr.tbl_row.subtitle
+                td[width="15%"]
+                  | Date Created
+                  span.sort-carot
+                td[width="17%"]
+                  | Company
+                  span.sort-carot
+                td[width="12%"]
+                  | Number
+                  span.sort-carot
+                td[width="12%"]
+                  | Name
+                  span.sort-carot
+                td[width="14%"]
+                  | Type
+                  span.sort-carot
+                td[width="14%"]
+                  | Deliverables
+                  span.sort-carot
+                td[width="11%"]
+                  | Status
+                  span.sort-carot
+            tbody
+              - for project in @open_projects do
+                tr.tbl_row.list-item[onclick=("window.location.href=\"/projects/" + project.id + "\"")]
+                  td
+                    span.hidden
+                      project.start_date.to_i
+                    = project.format_start_date
+                  td
+                    = project.business_name
+                  td
+                    = link_to project.number_format, project
+                  td
+                    = project.name
+                  td
+                    = project.service.title 
+                  td
+                    = project.print_pages
+                  td
+                    a[href="#" class=project.label_class]
+                      = project.status_label
+      - else
+        .table_box
+          table[width="100%" border="0" cellspacing="0" cellpadding="0"]
+            tr
+              td.heading[colspan="6"]
+                | Ongoing Projects
+          table#projects-list.tablesorter[width="100%" border="0" cellspacing="0" cellpadding="0"]
+            thead
+              tr.tbl_row.subtitle
+                td[width="23%"]
+                  | Project Name
+                  span.sort-carot
+                td[width="26%"]
+                  | Project Type
+                  span.sort-carot
+                td[width="16%"]
+                  | Date Started
+                  span.sort-carot
+                td[width="16%"]
+                  | Last Updated
+                  span.sort-carot
+                td[width="18%"]
+                  | Project Status 
+                  span.sort-carot
+            tbody
+              - for project in @open_projects do
+                tr.tbl_row.list-item[onclick=("window.location.href=\"/projects/" + project.id + "\"")]
+                  td
+                    = project.answer_for("project_name").answer
+                  td
+                    = project.service.title
+                  td
+                    span.hidden
+                      project.start_date.to_i
+                    = project.format_start_date 
+                  td
+                    span.hidden
+                      project.updated_at.to_i
+                    = time_ago_in_words(project.updated_at) + " ago"
+                  td
+                    a[href="#" class=project.label_class]
+                      = project.status_label
+      -if !@closed_projects.empty?
+        - if current_user.admin
+          .table_box
+            table[width="100%" border="0" cellspacing="0" cellpadding="0"]
+              tr
+                td.heading[colspan="6"]
+                  | Archived Projects
+            table#projects-list.tablesorter[width="100%" border="0" cellspacing="0" cellpadding="0"]
+              thead
+                tr.tbl_row.subtitle
+                  td[width="15%"]
+                    | Date Created
+                    span.sort-carot
+                  td[width="17%"]
+                    | Company
+                    span.sort-carot
+                  td[width="12%"]
+                    | Number
+                    span.sort-carot
+                  td[width="12%"]
+                    | Name
+                    span.sort-carot
+                  td[width="14%"]
+                    | Type
+                    span.sort-carot
+                  td[width="14%"]
+                    | Deliverables
+                    span.sort-carot
+                  td[width="11%"]
+                    | Status
+                    span.sort-carot
+              tbody
+                - for project in @closed_projects do
+                  tr.tbl_row.list-item[onclick=("window.location.href=\"/projects/" + project.id + "\"")]
+                    td
+                      span.hidden
+                        project.start_date.to_i
+                      = project.format_start_date
+                    td
+                      = project.business_name
+                    td
+                      = link_to project.number_format, project
+                    td
+                      = project.name
+                    td
+                      = project.service.title 
+                    td
+                      = project.print_pages
+                    td
+                      a[href="#" class=project.label_class]
+                        = project.status_label
+        - else
+          .table_box
+            table[width="100%" border="0" cellspacing="0" cellpadding="0"]
+              tr
+                td.heading[colspan="6"]
+                  | Archived Projects
+            table#projects-list.tablesorter[width="100%" border="0" cellspacing="0" cellpadding="0"]
+              thead
+                tr.tbl_row.subtitle
+                  td[width="23%"]
+                    | Project Namef
+                    span.sort-carot
+                  td[width="26%"]
+                    | Project Type
+                    span.sort-carot
+                  td[width="16%"]
+                    | Date Started
+                    span.sort-carot
+                  td[width="16%"]
+                    | Last Updated
+                    span.sort-carot
+                  td[width="18%"]
+                    | Project Status 
+                    span.sort-carot
+              tbody
+                - for project in @closed_projects do
+                  tr.tbl_row.list-item[onclick=("window.location.href=\"/projects/" + project.id + "\"")]
+                    td
+                      = project.answer_for("project_name").answer
+                    td
+                      = project.service.title
+                    td
+                      span.hidden
+                        project.start_date.to_i
+                      = project.format_start_date 
+                    td
+                      span.hidden
+                        project.updated_at.to_i
+                      = time_ago_in_words(project.updated_at) + " ago"
+                    td
+                      a[href="#" class=project.label_class]
+                        = project.status_label
 = render partial: "footer"

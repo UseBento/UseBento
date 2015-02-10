@@ -18,11 +18,11 @@ header.header
           = link_to "FOR AGENCIES", "/agencies"
         - unless page == 'project' && !user_signed_in? && false
           - unless user_signed_in?
-            li
+            li[ class=(page == 'profile' ? 'current' : '')]
               a.popup-link#userlink[href="/popups/login"]
                 | LOG IN
           - else
-            li
+            li[ class=(page == 'profile' ? 'current' : '')]
               a#userlink[href="/profile" data-userid=current_user.id]
                 = current_user.name
             li 

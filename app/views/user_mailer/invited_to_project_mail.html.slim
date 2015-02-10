@@ -1,0 +1,17 @@
+doctype html
+html[lang="en"]
+  head
+  body
+    - if @invitation.user
+      p
+        = @invitation.user.first_name
+        | ,
+    p
+      | You've been invited to join a project,  
+      = @project.name
+      |  on Bento.
+    p
+      = link_to "Click here", root_url + "/accept_invitation/" + @project.id.to_s + "/" + @invitation.id.to_s
+      |  to accept their invitation.
+    p
+      | -Bento

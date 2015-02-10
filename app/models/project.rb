@@ -4,20 +4,110 @@ class Project
   
   field :start_date,    type: DateTime
   field :state,         type: Symbol
-  field :status,        type: Symbol  # :pending, :assigned, :awaiting_payment, :closed
+  field :status,        type: Symbol  # :pending, :assigned, :awaiting_payment,
+                                      # :in_progress, :closed
+
+  field :last_status,   type: Symbol  # set to keep track of last status before archiving
   field :number,        type: Integer
   field :deadline,      type: Date
+  field :company,       type: String
+  field :total_price,   type: Integer
 
   belongs_to :service
   belongs_to :user
   embeds_many :answers
   embeds_many :messages
+  embeds_many :invited_users
   validate :is_valid?
   has_many :payments
+  has_many :awaiting_payments
+  
+  def as_json(i=0)
+    {start_date:       start_date,
+     state:            state,
+     status:           status,
+     number:           number,
+     company:          company,
+     deadline:         deadline,
+     price:            self.get_price,
+     payments:         self.payments,
+     unpaid_payments:  self.awaiting_payments}
+  end
 
+  def people
+    people = self.invited_users
 
+    if (people.empty?)
+      invited_user         = self.invited_users.create({accepted: true})
+      invited_user.user    = self.user
+      invited_user.save
+      people = self.invited_users
+    end
+
+    if (people.select {|person| person.user && person.user.admin}).empty?
+      invited_user         = self.invited_users.create({accepted: true})
+      invited_user.user    = User.get_admin
+      invited_user.save
+      people = self.invited_users
+    end
+
+    people
+  end
+
+  def get_awaiting_payments(all=false)
+    paid_payments     = self.payments.to_a
+    unpaid_payments   = self.awaiting_payments.to_a
+    amount            = self.get_price
+    logged_amount     = 0
+
+    paid_payments.each do |payment|
+                   logged_amount += payment.amount
+                 end
+    unpaid_payments.each do |payment|
+                     logged_amount += payment.amount
+                   end
+    
+    if (logged_amount < amount)
+      payments_needed = 2 - (paid_payments.length + unpaid_payments.length)
+      if (payments_needed > 0)
+        (1..payments_needed).each {|i|
+            unpaid_payments.push(
+                self.awaiting_payments.create({amount: ((amount - logged_amount) / 
+                                                        payments_needed),
+                                               paid:   false})) }
+      else
+        if unpaid_payments.length > 0
+          fix_awaiting_payment_amounts(paid_payments, unpaid_payments, amount)
+        end
+      end
+    elsif amount < logged_amount
+      if unpaid_payments.length > 0
+        fix_awaiting_payment_amounts(paid_payments, unpaid_payments, amount)
+      end
+    end      
+
+    paid_payments.concat unpaid_payments
+  end
+
+  def fix_awaiting_payment_amounts(paid_payments, unpaid_payments, amount)
+    paid_amount   = (paid_payments.to_a.map {|p| p.amount }).reduce(&:+) || 0
+    new_amount    = (amount - paid_amount) / unpaid_payments.length
+
+    unpaid_payments.each do |payment|
+                     payment.amount = new_amount
+                     payment.save
+                   end
+
+    if (new_amount * 2) < (amount - paid_amount)
+      unpaid_payments.last.amount += 1
+      unpaid_payments.last.save
+    end
+  end
+    
   def has_access?(user) 
-    (user.id == self.user.id) || user.admin
+    ((user.id == self.user.id) || 
+     user.admin || 
+     self.invited_users.where(accepted: true).where(user_id: user.id))
   end
 
   def validate_project
@@ -47,9 +137,19 @@ class Project
 
   def update_answer(name, new_answer)
     answer = self.answer_for(name)
-    if answer
+    if answer && answer.project == self
       answer.answer = new_answer
+      answer.save
     end
+  end
+
+  def self.normalize_company(company)
+    company.downcase.split(" ").join(" ")
+  end
+
+  def update_company
+    self.company = Project.normalize_company(self.business_name)
+    self.save
   end
 
   def is_valid?
@@ -59,6 +159,14 @@ class Project
   def answer_for(name)
     name = name.name if name.is_a? Question
     self.answers.where(name: name).first || Answer.new
+  end
+
+  def business_name
+    answer_for(:business_name).answer
+  end
+
+  def name
+    answer_for(:project_name).answer || ""
   end
 
   def print_pages
@@ -72,12 +180,22 @@ class Project
   end
 
   def get_pages
-    names = ['number_of_screens', 'slide_count', 'pages']
-    answers = names.map { |name|
-                answer = self.answer_for(name)
-                answer ? answer.answer : false }
-    answers = answers.select {|a| a}
-    answers.empty? ? 1 : answers[0].to_i
+    if self.service.name == "social_media_design"
+      fields = ["twitter_header_and_profile", 
+                "youtube_header_and_profile", 
+                "linkedin_header_and_profile", 
+                "facebook_header_and_profile"]
+      fields = fields.map {|f| self.answer_for(f).answer }
+      fields = fields.select {|f| f}
+      fields.length
+    else
+      names = ['number_of_screens', 'slide_count', 'pages']
+      answers = names.map { |name|
+                  answer = self.answer_for(name)
+                  answer ? answer.answer : false }
+      answers = answers.select {|a| a}
+      answers.empty? ? 1 : answers[0].to_i
+    end
   end
 
   def get_responsive
@@ -85,11 +203,35 @@ class Project
     answer ? answer.answer == 'desktop_plus_mobile' : false
   end
 
+  def get_plus_dev
+    answer = self.answer_for('service')
+    answer ? answer.answer == 'design_and_development' : false
+  end
+
   def get_price
+    return self.total_price if (self.total_price)
+    
     pages          = get_pages
-    price_per_page = self.service.price + (self.get_responsive ? 20 : 0)
+    price_per_page = self.service.price
+    if self.get_plus_dev
+      if self.service.plus_dev_price
+        price_per_page = self.service.plus_dev_price
+      end
+    end
+
+    if self.get_responsive
+      if self.service.responsive_price
+        price_per_page = self.service.responsive_price
+      else
+        price_per_page += 20
+      end
+    end
 
     price_per_page * pages
+  end
+
+  def archived?
+    self.status == :closed
   end
 
   def format_start_date
@@ -98,10 +240,6 @@ class Project
 
   def number_format
     self.number.to_s.rjust(4,'0')
-  end
-
-  def people
-    [self.user]
   end
 
   def get_features
@@ -137,11 +275,13 @@ class Project
   end
 
   def current_payment
+    self.awaiting_payments.first
     self.payments.count + 1
   end
 
   def next_payment_price
-    self.get_price / 2
+    next_payment = self.awaiting_payments.first
+    next_payment ? next_payment.amount : false
   end
 
   def label_class
@@ -150,10 +290,34 @@ class Project
       "btn_small blue"
     when :assigned
       "btn_small green"
+    when :in_progress
+      "btn_small green"
     when :awaiting_payment
       "btn_small blue"
     when :closed
       "btn_small gray"
     end
+  end
+
+  def initialize_project
+    message_body = ("Hi there! My name is Noah and I'm your project manager. " +
+                    "Its my job to make sure your project gets done quickly and " +
+                    "professionally. If you have any questions just write them in " +
+                    "the message field below and I'll get back to you ASAP. \n\n" +
+                    
+                    "If you're ready to get your project started now, just pay your " +
+                    "first invoice by clicking the \"Pay Invoice Now\" button on the " +
+                    "right. Looking forward to working with you and please let me " +
+                    "know if you have any questions!")
+
+    admin_user   = User.get_admin
+    message      = self.messages.create({body:        message_body,
+                                         posted_date: DateTime.now})
+    message.user = admin_user
+    message.save
+  end
+
+  def status_label
+    status.to_s.gsub("_", " ")
   end
 end

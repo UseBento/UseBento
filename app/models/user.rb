@@ -27,6 +27,8 @@ class User
   field :company,            type: String
   field :admin,              type: Boolean
 
+  has_many :projects
+
   ## Confirmable
   # field :confirmation_token,   type: String
   # field :confirmed_at,         type: Time
@@ -39,23 +41,30 @@ class User
   # field :locked_at,       type: Time
 
   def self.get_admin
-    self.where(admin: true).first
+    admin_user   = User.where({admin: true, name: "Noah"}).first
+    admin_user   = User.where({admin: true}).first unless admin_user
+    admin_user
   end
-
-  has_many :projects
 
   def full_name
     self.name.split.map(&:capitalize).join ' '
   end
 
-  def self.generate(name, email, company) 
+  def first_name
+    self.name.split.first.capitalize
+  end
+
+  def self.generate(name, email, company)
     password = Devise.friendly_token.first(12)
     user     = User.create({email:        email,
                             name:         name,
                             company:      company,
                             password:     password})
-    UserMailer.new_generated_user_mail(user, password).deliver
-    user
+    [user, password]
+  end
+
+  def self.default_avatar_for(name)
+    "/images/avatars/" + name[0].upcase + ".png"
   end
 
   def avatar(root_domain)
@@ -65,7 +74,7 @@ class User
 
     hash = Digest::MD5.hexdigest(self.email.strip.downcase)
     default_img = URI.encode_www_form_component(
-                    root_domain + "/images/default_avatar.gif")
+                    root_domain + User.default_avatar_for(name))
     "http://www.gravatar.com/avatar/" + hash + "?d=" + default_img
   end
   
@@ -81,5 +90,10 @@ class User
   def default_target_audience
     project = last_project
     project ? project.answer_for('target_audience').answer : ""
+  end
+
+  def accessible_projects
+    Project.or({"user_id" => id},
+               {"invited_users.user_id" => id})
   end
 end

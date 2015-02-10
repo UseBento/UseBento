@@ -20,6 +20,7 @@ Rails.application.configure do
   config.twocheckout_private_key = 'CA54A03A-0324-4810-9946-253A028D58C2'
   config.twocheckout_public_key  = '7EB9463F-A64C-4CF5-9B49-912A9912E3D7'
   config.twocheckout_seller_id   = 901261089
+  config.twocheckout_sandbox     = true
 
   # Do not eager load code on boot.
   config.eager_load = false
@@ -46,4 +47,10 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  CarrierWave.configure do |config|
+               config.storage = :grid_fs
+               config.root = Rails.root.join('tmp')
+               config.cache_dir = "uploads"
+             end
 end

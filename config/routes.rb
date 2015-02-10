@@ -1,27 +1,41 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "registrations"}
   get  'services/select'
   get  'services/add'
   get  'projects/new/:name',          to: 'services#create',      as: 'service'
   get  'projects/list',               to: 'projects#list'
   get  'projects/:id',                to: 'projects#view',        as: 'project'
-  post 'projects/new',                to: 'projects#new'         
-  get  'projects/:id/edit',           to: 'projects#edit'         
-  post 'projects/:project_id/message', to: 'messages#post_message'         
-  get  'attachment/:project_id/:message_id/:attachment_id/:filename', to: 'messages#view_attachment'
+  get  'accept_invitation/:project_id/:id', to: 'invitations#join'
+  post 'projects/new',                to: 'projects#new'
+  get  'projects/:id/edit',           to: 'projects#edit'
+  get  'projects/:id/archive',         to: 'projects#archive'
+  get  'projects/:id/unarchive',       to: 'projects#unarchive'
+  get  'projects/:id/del_project',     to: 'projects#delete'
+  post 'projects/:id/invite',          to: 'projects#invite'
+  post 'projects/:project_id/message', to: 'messages#post_message'
+  post 'projects/:project_id/update_payment', to: 'projects#update_payment'
+  get  'attachment/:project_id/:message_id/:attachment_id/:filename', to: 'messages#view_attachment', constraints: { :filename => /[^\/]+/ }
 
   root 'welcome#index'
   get  'contact',                     to: 'application#contact'
+  post 'send_contact',                to: 'application#send_contact'
+  post 'apply',                       to: 'application#send_apply'
+  post 'contact_agency',              to: 'application#contact_agency'
   get  'apply',                       to: 'application#apply'
   get  'agencies',                    to: 'application#agencies'
-  get  'payments/checkout/:project_id/:percent',           
+  get  'process_payment',             to: 'payments#process_pp_payment'
+  post 'process_payment',             to: 'payments#process_pp_payment'
+  get  'payments/checkout/:project_id/:amount',
        to: 'payments#checkout'
-  post 'payments/checkout/:project_id/:percent/process',   to: 'payments#process_payment'
+  post 'payments/checkout/:project_id/:amount/process',   to: 'payments#process_payment'
 
   devise_scope :user do
     get  'user_exists',                 to: 'users#exists'
-    get  'profile',                     to: 'users#profile'
-    post 'profile/update',              to: 'users#update_profile'
+
+    authenticate :user do
+      get  'profile',                     to: 'users#profile'
+      post 'profile/update',              to: 'users#update_profile'
+    end
   
     post 'users/sign_up',               to: 'users#sign_up'
     post 'users/log_in',                to: 'users#log_in'

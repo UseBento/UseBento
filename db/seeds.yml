@@ -30,16 +30,32 @@ Services:
       - name: target_audience
         label: Who is your target audience?
         type: :text
-        required: true
+        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
-        required: true
+        required: false
       - name: logotype
         label: Which logotype do you prefer?
         type: :enum
         values: [text_only, text_plus_icon]
         required: true
+      - name: tagline
+        label: If you have a tagline, what is it?
+        type: :text
+        required: false
+      - name: color_preferences
+        label: Do you have any color preferences
+        type: :text
+        required: false
+      - name: font_preferences
+        label: Do you prefer any font?
+        type: :text
+        required: false
+      - name: other_requirements
+        label: Do you have any other requirements
+        type: :text
+        required: false        
   - name: 'mobile_app'
     title: 'Mobile App Design & Development'
     description: 'Hand-picked experts to get your iOS app to market. <br />Development optimized for iPhone 4, 4s, 5, 5s, 6 and 6 plus.'
@@ -71,11 +87,11 @@ Services:
       - name: target_audience
         label: Who is your target audience?
         type: :text
-        required: true
+        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
-        required: true
+        required: false
       - name: type
         label: What type of application is this for?
         type: :enum
@@ -91,6 +107,30 @@ Services:
         type: :integer
         values: [1,100]
         required: true
+      - name: color_preferences
+        label: Do you have any color preferences
+        type: :text
+        required: false
+      - name: font_preferences
+        label: Do you prefer any font?
+        type: :text
+        required: false
+      - name: desired_visitor_action
+        label: What do you want the visitor to do when they use your app?
+        type: :text
+        required: false
+      - name: competitors
+        label: Please list any competitor apps.
+        type: :text
+        required: false
+      - name: inspiration
+        label: Please list any websites or apps that you like. What specific features of these other sites are appealing?
+        type: :text
+        required: false
+      - name: other_info
+        label: Anything else we should know.
+        type: :text
+        required: false
   - name: 'app_icon'
     title: 'App Icon Design'
     description: 'Hand-picked designers to create the perfect face for your app. <br /> Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
@@ -122,21 +162,37 @@ Services:
       - name: target_audience
         label: Who is your target audience?
         type: :text
-        required: true
+        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
-        required: true
+        required: false
       - name: type
         label: What type of application is this for?
         type: :enum
         values: [apple_ios, android]
         required: true
+      - name: tagline
+        label: If you have a tagline, what is it?
+        type: :text
+        required: false
+      - name: color_preferences
+        label: Do you have any color preferences
+        type: :text
+        required: false
+      - name: font_preferences
+        label: Do you prefer any font?
+        type: :text
+        required: false
+      - name: other_requirements
+        label: Do you have any other requirements
+        type: :text
+        required: false        
   - name: 'business_card'
     title: 'Business Card Design'
     description: 'Stand-out with a custom, professional business card. <br />Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
     rounds: 3
-    price: 300
+    price: 400
     unit: 'Card'
     completion_time: [3, 5]
     fields: 
@@ -163,16 +219,28 @@ Services:
       - name: target_audience
         label: Who is your target audience?
         type: :text
-        required: true
+        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
-        required: true
+        required: false
+      - name: color_preferences
+        label: Do you have any color preferences
+        type: :text
+        required: false
+      - name: font_preferences
+        label: Do you prefer any font?
+        type: :text
+        required: false
+      - name: other_requirements
+        label: Do you have any other requirements
+        type: :text
+        required: false        
   - name: 'stationary_design'
     title: 'Stationary Design'
     description: 'From letterheads to your complete corporate identity. <br />Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
     rounds: 3
-    price: 300
+    price: 400
     unit: 'Stationary'
     completion_time: [3, 5]
     fields: 
@@ -199,16 +267,28 @@ Services:
       - name: target_audience
         label: Who is your target audience?
         type: :text
-        required: true
+        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
-        required: true
+        required: false
+      - name: color_preferences
+        label: Do you have any color preferences
+        type: :text
+        required: false
+      - name: font_preferences
+        label: Do you prefer any font?
+        type: :text
+        required: false
+      - name: other_requirements
+        label: Do you have any other requirements
+        type: :text
+        required: false    
   - name: 'presentation_design'
     title: 'Presentation Design'
     description: 'Creation of new powerpoint or keynote presentation template. <br />Sourced images are an additional cost.'
     rounds: 3
-    price: 50
+    price: 100
     unit: 'Slide'
     completion_time: [3, 5]
     fields: 
@@ -235,11 +315,11 @@ Services:
       - name: target_audience
         label: Who is your target audience?
         type: :text
-        required: true
+        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
-        required: true
+        required: false
       - name: presentation_type
         label: Which presentation type do you prefer?
         type: :enum
@@ -250,11 +330,23 @@ Services:
         type: :integer
         values: [1,100]
         required: true
+      - name: color_preferences
+        label: Do you have any color preferences
+        type: :text
+        required: false
+      - name: font_preferences
+        label: Do you prefer any font?
+        type: :text
+        required: false
+      - name: other_requirements
+        label: Do you have any other requirements
+        type: :text
+        required: false    
   - name: 'social_media_design'
     title: 'Social Media Design'
     description: 'Hand-picked designers to enhance your social media profiles. <br />Final logos sent to you as .jpg, .png, .and .psd file formats.'
     rounds: 3
-    price: 150
+    price: 200
     completion_time: [3, 5]
     unit: 'Profile'
     fields: 
@@ -281,11 +373,11 @@ Services:
       - name: target_audience
         label: Who is your target audience?
         type: :text
-        required: true
+        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
-        required: true
+        required: false
       - name: facebook_header_and_profile
         label: Select design service(s) needed below
         type: :boolean
@@ -302,12 +394,26 @@ Services:
         label: Select design service(s) needed below
         type: :boolean
         required: true
+      - name: color_preferences
+        label: Do you have any color preferences
+        type: :text
+        required: false
+      - name: font_preferences
+        label: Do you prefer any font?
+        type: :text
+        required: false
+      - name: other_requirements
+        label: Do you have any other requirements
+        type: :text
+        required: false     
   - name: 'website_design_and_development'
     title: 'Website Design & Development'
     description: 'Hand-picked experts to create your website. <br />HTML website development optimized for all major browser clients.'
     rounds: 3
     unit: 'Page'
-    price: 1200
+    price: 650
+    plus_dev_price: 1050
+    responsive_price: 1200
     completion_time: [2, 3]
     fields: 
       - name: full_name
@@ -329,11 +435,11 @@ Services:
       - name: business_description
         label: Please describe your business.
         type: :long_text
-        required: true
+        required: false
       - name: target_audience
         label: Who is your target audience?
         type: :text
-        required: true
+        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
@@ -365,11 +471,41 @@ Services:
         type: :integer
         values: [1,100]
         required: true
+      - name: pages
+        label: What do you want visitors to do when they get to your site?
+        type: :text
+        required: false
+      - name: competitors
+        label: Please list any competitor's sites.
+        type: :text
+        required: false
+      - name: color_preferences
+        label: Do you have any color preferences
+        type: :text
+        required: false
+      - name: font_preferences
+        label: Do you prefer any font?
+        type: :text
+        required: false
+      - name: inspiration
+        label: Please list any websites you like. Include the URL. What specific features of these other sites are appealing?
+        type: :text
+        required: false
+      - name: definite_nos
+        label: Do you have any definite things that you don't want to have on your website?
+        type: :text
+        required: false
+      - name: other_info
+        label: Anything else we should know.
+        type: :text
+        required: false
   - name: 'email_design_and_development'
     title: 'Email Design & Development'
     description: 'A professional email template created just for your business.<br />Responsive HTML optimized for all major email clients.'
     rounds: 3
-    price: 500
+    price: 350
+    plus_dev_price: 500
+    responsive_price: 500
     unit: 'Email'
     completion_time: [3, 5]
     fields: 
@@ -396,11 +532,11 @@ Services:
       - name: target_audience
         label: Who is your target audience?
         type: :text
-        required: true
+        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
-        required: true
+        required: false
       - name: service
         label: Select your service below
         type: :enum
@@ -408,11 +544,29 @@ Services:
           - design_only
           - design_and_development
         required: true
+      - name: color_preferences
+        label: Do you have any color preferences
+        type: :text
+        required: false
+      - name: font_preferences
+        label: Do you prefer any font?
+        type: :text
+        required: false
+      - name: other_info
+        label: Anything else we should know.
+        type: :text
+        required: false
+      - name: desired_visitor_action
+        label: What do you wnat visitors to do when they get your email?
+        type: :text
+        required: false
   - name: 'landing_page_design_and_development'
     title: 'Landing Page Design & Development'
     description: 'High converting HTML landing pages by hand-picked experts. <br />HTML landing page development optimized for all major browser clients'
     rounds: 3
-    price: 1200
+    price: 650
+    plus_dev_price: 1050
+    responsive_price: 1200
     unit: 'Page'
     completion_time: [3, 5]
     fields: 
@@ -439,11 +593,11 @@ Services:
       - name: target_audience
         label: Who is your target audience?
         type: :text
-        required: true
+        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
-        required: true
+        required: false
       - name: service
         label: Select your service below
         type: :enum
@@ -466,11 +620,41 @@ Services:
         label: Select FREE services below
         type: :boolean
         required: true
+      - name: desired_visitor_action
+        label: What do you want the visitor to do when they get to your landing page?
+        type: :text
+        required: false
+      - name: competitors
+        label: Please list any competitor's landing pages or websites.
+        type: :text
+        required: false
+      - name: color_preferences
+        label: Do you have any color preferences
+        type: :text
+        required: false
+      - name: font_preferences
+        label: Do you prefer any font?
+        type: :text
+        required: false
+      - name: inspiration
+        label: Please list any landing pages that you like. Include the URL What specific features of these other sites are appealing?
+        type: :text
+        required: false
+      - name: definite_nos
+        label: Do you have any definite things that you don't want to have on your landing page?
+        type: :text
+        required: false
+      - name: other_info
+        label: Anything else we should know.
+        type: :text
+        required: false
   - name: 'wordpress_design_and_development'
     title: 'Wordpress Website Design & Development'
     description: 'Hand-picked experts to unleash the power of WordPress. <br />Wordpress development optimized for all major browser clients.'
     rounds: 3
-    price: 1500
+    price: 650
+    plus_dev_price: 1300
+    responsive_price: 1550
     unit: 'Page'
     completion_time: [2, 3]
     fields: 
@@ -497,11 +681,11 @@ Services:
       - name: target_audience
         label: Who is your target audience?
         type: :text
-        required: true
+        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
-        required: true
+        required: false
       - name: service
         label: Select your service below
         type: :enum
@@ -529,3 +713,31 @@ Services:
         type: :integer
         values: [1,100]
         required: true
+      - name: desired_visitor_action
+        label: What do you want the visitor to do when they get to your site?
+        type: :text
+        required: false
+      - name: competitors
+        label: Please list any competitors' sites.
+        type: :text
+        required: false
+      - name: color_preferences
+        label: Do you have any color preferences
+        type: :text
+        required: false
+      - name: font_preferences
+        label: Do you prefer any font?
+        type: :text
+        required: false
+      - name: inspiration
+        label: Please list any websites that you like. Include the URL. What specific features of these other sites are appealing?
+        type: :text
+        required: false
+      - name: definite_nos
+        label: Do you have any definite things that you don't want to have on your website?
+        type: :text
+        required: false
+      - name: other_info
+        label: Anything else we should know.
+        type: :text
+        required: false

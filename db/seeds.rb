@@ -7,13 +7,15 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 seeds = YAML.load_file('db/seeds.yml')
-seeds["Services"].map { |service_def|
+seeds["Services"].map do |service_def|
     service = Service.where(name: service_def['name']).first
     if (service)
       service.title             = service_def['title']
       service.description       = service_def['description']
       service.rounds            = service_def['rounds']
       service.price             = service_def['price']
+      service.plus_dev_price    = service_def['plus_dev_price']
+      service.responsive_price  = service_def['responsive_price']
       service.unit              = service_def['unit']
       service.completion_time   = Range.new(service_def['completion_time'][0],
                                             service_def['completion_time'][1])
@@ -26,10 +28,15 @@ seeds["Services"].map { |service_def|
                  rounds:          service_def['rounds'],
                  unit:            service_def['unit'],
                  price:           service_def['price'],
+                 plus_dev_price:  service_def['plus_dev_price'],
+                 responsive_price: service_def['responsive_price'],
                  completion_time: Range.new(service_def['completion_time'][0],
                                             service_def['completion_time'][1])})
     end
-    service_def['fields'].map { |field_def| 
+
+    field_names = []
+    service_def['fields'].map { |field_def|
+        field_names.push field_def['name']
         question = service.questions.where(name: field_def['name']).first
         if question
           question.label    = field_def['label']
@@ -43,4 +50,11 @@ seeds["Services"].map { |service_def|
                                     type:        field_def['type'],
                                     values:     (field_def['values'] || []),
                                     required:   (field_def['required'] || false)})
-        end }}
+        end }
+    service.questions.map do |question|
+      if !field_names.member?(question.name)
+        question.delete
+      end 
+    end
+end
+  

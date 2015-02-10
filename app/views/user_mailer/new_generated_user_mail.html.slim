@@ -2,11 +2,20 @@ doctype html
 html[lang="en"]
   head
   body
-    strong
-      | Welcome to Bento
     p
-      | Your account for  
-      = @user.email
-      |  has been created, your new password is:
+      = @user.first_name
+      | ,
+    p
+      | Welcome to Bento. Your temporary password is   
       = @password
-    = link_to "Login", root_url, :only_path => false
+      | . To change it just click 
+      = link_to "here", root_url + "/profile", :only_path => false
+      | .
+    p
+      | To get started on your project, go to your 
+      = link_to "project page", root_url + "/projects/" + @project.id.to_s
+      | .
+    p
+      | If you have any questions, simply reply to this email.  We look forward to working with you and assisting you with your design needs in a timely and professional manner.
+    p
+      | -Bento
