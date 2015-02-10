@@ -175,6 +175,14 @@
                       | PAY DEPOSIT
                     - else
                       | PAY FINAL INVOICE
+          - if @project.attachments.count > 0
+            li#attachments
+              h5
+                | FILE UPLOADS
+              - for attachment in @project.attachments
+                = link_to attachment.shortname, attachment.url, :target => "_blank"
+                = " " + attachment.filesize
+                br
       .clear
         /li
           p

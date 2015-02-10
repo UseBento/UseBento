@@ -11,10 +11,17 @@ class Attachment
   mount_uploader  :attachment, AttachmentUploader, mount_on: :attachment_filename
 
   def url
-    "/attachment/" + 
-      self.message.project.id + "/" +
-      self.message.id + "/" + self.id + "/" +
-                                   (self.name.gsub(/[^-_A-Za-z0-9]/, '_')  || "")
+    if message
+      "/attachment/" + 
+        self.message.project.id + "/" +
+        self.message.id + "/" + self.id + "/" +
+        (self.name.gsub(/[^-_A-Za-z0-9]/, '_')  || "")
+    elsif project
+      "/attachment/" + 
+        self.project.id + "/" +
+        self.id + "/" +
+        (self.name.gsub(/[^-_A-Za-z0-9]/, '_')  || "")
+    end
   end
 
   def mime
@@ -39,6 +46,14 @@ class Attachment
                return (my_size.to_f / size.to_f).round(2).to_s + label.to_s
              end
            end
+    end
+  end
+
+  def shortname
+    if name.length < 20
+      name
+    else
+      name.slice(0,20) + "..."
     end
   end
 end
