@@ -9,9 +9,11 @@ class InvitedUser
   belongs_to :user
 
   def can_see?(user)
-    (user.id == inviter_id || 
-     user.admin || 
-     (self.user && (self.user.admin ||
-                    self.user == user)))
+    (accepted ||
+     (user.admin || user.id == inviter_id))
+  end
+
+  def can_see_email?(user)
+    user.admin || (can_see?(user) && !accepted)
   end
 end
