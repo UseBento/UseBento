@@ -18,6 +18,7 @@ class Project
   embeds_many :answers
   embeds_many :messages
   embeds_many :invited_users
+  embeds_many :attachments
   validate :is_valid?
   has_many :payments
   has_many :awaiting_payments

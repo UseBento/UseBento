@@ -20,7 +20,7 @@
               |  &nbsp; in 
               = @service.completion_time.first.to_s + '-' + @service.completion_time.last.to_s
               |  business days 
-        form.form-required#project-form[action="/projects/new" method="post"]
+        form.form-required#project-form[action="/projects/new" method="post" enctype="multipart/form-data"]
           input[type="hidden" name="application-form"]
           input[type="hidden" name="project_id" value=@project.id]
           input#plus-dev-price[type="hidden" name="plus_dev_price" value=@service.plus_dev_price]
@@ -101,7 +101,7 @@
                 - else
                   = "Get Started"
             - if @editing
-              |  &nbsp; 
+              |  &nbsp; &nbsp; &nbsp;
               = link_to "Cancel", @project
             input#page-price[type="hidden" value=(@service.price)]
 = render partial: 'footer'

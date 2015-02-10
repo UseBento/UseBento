@@ -7,6 +7,7 @@ class Attachment
 
   attr_accessor   :attachment
   embedded_in     :message
+  embedded_in     :project
   mount_uploader  :attachment, AttachmentUploader, mount_on: :attachment_filename
 
   def url

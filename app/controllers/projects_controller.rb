@@ -69,6 +69,7 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:project_id])
     @service = @project.service
+    get_attachments(@project)
     
     params.map do |key, val|
             @project.update_answer(key, val)
