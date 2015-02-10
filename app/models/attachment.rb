@@ -13,7 +13,7 @@ class Attachment
     "/attachment/" + 
       self.message.project.id + "/" +
       self.message.id + "/" + self.id + "/" +
-                                   (self.name  || "")
+                                   (self.name.gsub(/[^-_A-Za-z0-9]/, '_')  || "")
   end
 
   def mime

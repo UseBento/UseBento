@@ -4,7 +4,9 @@ class Project
   
   field :start_date,    type: DateTime
   field :state,         type: Symbol
-  field :status,        type: Symbol  # :pending, :assigned, :awaiting_payment, :closed
+  field :status,        type: Symbol  # :pending, :assigned, :awaiting_payment,
+                                      # :in_progress, :closed
+
   field :last_status,   type: Symbol  # set to keep track of last status before archiving
   field :number,        type: Integer
   field :deadline,      type: Date
@@ -15,10 +17,11 @@ class Project
   belongs_to :user
   embeds_many :answers
   embeds_many :messages
+  embeds_many :invited_users
   validate :is_valid?
   has_many :payments
   has_many :awaiting_payments
-
+  
   def as_json(i=0)
     {start_date:       start_date,
      state:            state,
@@ -29,6 +32,26 @@ class Project
      price:            self.get_price,
      payments:         self.payments,
      unpaid_payments:  self.awaiting_payments}
+  end
+
+  def people
+    people = self.invited_users
+
+    if (people.empty?)
+      invited_user         = self.invited_users.create({accepted: true})
+      invited_user.user    = self.user
+      invited_user.save
+      people = self.invited_users
+    end
+
+    if (people.select {|person| person.user && person.user.admin}).empty?
+      invited_user         = self.invited_users.create({accepted: true})
+      invited_user.user    = User.get_admin
+      invited_user.save
+      people = self.invited_users
+    end
+
+    people
   end
 
   def get_awaiting_payments(all=false)
@@ -82,7 +105,9 @@ class Project
   end
     
   def has_access?(user) 
-    (user.id == self.user.id) || user.admin
+    ((user.id == self.user.id) || 
+     user.admin || 
+     self.invited_users.where(accepted: true).where(user_id: user.id))
   end
 
   def validate_project
@@ -217,10 +242,6 @@ class Project
     self.number.to_s.rjust(4,'0')
   end
 
-  def people
-    [self.user]
-  end
-
   def get_features
     features = []
     featured_answers = 
@@ -269,6 +290,8 @@ class Project
       "btn_small blue"
     when :assigned
       "btn_small green"
+    when :in_progress
+      "btn_small green"
     when :awaiting_payment
       "btn_small blue"
     when :closed
@@ -287,11 +310,14 @@ class Project
                     "right. Looking forward to working with you and please let me " +
                     "know if you have any questions!")
 
-    admin_user   = User.where({admin: true, name: "Noah"}).first
-    admin_user   = User.where({admin: true}).first unless admin_user
+    admin_user   = User.get_admin
     message      = self.messages.create({body:        message_body,
                                          posted_date: DateTime.now})
     message.user = admin_user
     message.save
+  end
+
+  def status_label
+    status.to_s.gsub("_", " ")
   end
 end

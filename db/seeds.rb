@@ -7,8 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 seeds = YAML.load_file('db/seeds.yml')
-global_questions = YAML.load_file('db/long_questions.yml')
-seeds["Services"].map { |service_def|
+seeds["Services"].map do |service_def|
     service = Service.where(name: service_def['name']).first
     if (service)
       service.title             = service_def['title']
@@ -34,7 +33,10 @@ seeds["Services"].map { |service_def|
                  completion_time: Range.new(service_def['completion_time'][0],
                                             service_def['completion_time'][1])})
     end
-    service_def['fields'].concat(global_questions).map { |field_def|
+
+    field_names = []
+    service_def['fields'].map { |field_def|
+        field_names.push field_def['name']
         question = service.questions.where(name: field_def['name']).first
         if question
           question.label    = field_def['label']
@@ -48,4 +50,11 @@ seeds["Services"].map { |service_def|
                                     type:        field_def['type'],
                                     values:     (field_def['values'] || []),
                                     required:   (field_def['required'] || false)})
-        end }}
+        end }
+    service.questions.map do |question|
+      if !field_names.member?(question.name)
+        question.delete
+      end 
+    end
+end
+  

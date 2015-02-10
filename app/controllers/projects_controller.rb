@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  skip_before_action :authenticate_user!, only: :new
+  skip_before_action :authenticate_user!, only: [:new, :join]
 
   def view 
     @project = Project.find(params[:id])
@@ -58,10 +58,10 @@ class ProjectsController < ApplicationController
   end
 
   def list
-    @open_projects   = (current_user.admin ? Project.all : current_user.projects)
+    @open_projects   = (current_user.admin ? Project.all : current_user.accessible_projects)
                        .where(:status.ne => :closed)
                        .order_by(:number.asc)
-    @closed_projects = (current_user.admin ? Project.all : current_user.projects)
+    @closed_projects = (current_user.admin ? Project.all : current_user.accessible_projects)
                        .where(:status => :closed)
                        .order_by(:number.asc)
   end
@@ -169,6 +169,26 @@ class ProjectsController < ApplicationController
         format.html { redirect_to @project }
         format.json { render :json => @project }
       end
+    end
+  end
+
+  def invite
+    @project    = Project.find(params[:id])
+    email       = params[:email]
+    user        = User.where(email: email).first
+    
+    invitation  = @project.invited_users.create({accepted:   false,
+                                                 email:      email})
+    if user
+      invitation.user = user
+      invitation.save
+    end
+    
+    UserMailer.invited_to_project_mail(invitation, @project, current_user).deliver
+
+    respond_to do |format|
+      format.html { redirect_to @project }
+      format.json { render :json => invitation }
     end
   end
 

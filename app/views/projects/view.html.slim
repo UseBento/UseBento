@@ -46,7 +46,7 @@
                 p.info_text
                   | Posted 
                   = message.format_date
-                - for attachment in message.attachments
+                - for attachment in message.valid_attachments
                   - if attachment.is_image?
                     p.responsive_img
                       a[href=attachment.url target="_blank"]
@@ -91,12 +91,41 @@
           li
             h5
               | People on this project
-            - for person in @project.people
-              .col_four
-                span
-                  = person.full_name
-                a[href=("mailto:"+person.email)]
-                  = person.email
+            #people
+              - for person in @project.people
+                - if person.can_see?(current_user)
+                  div[class=("col_four people-entry " + (person.can_see_email?(current_user) ? "" : "no-email"))]
+                    - if person.accepted && person.user
+                      img.avatar[src=person.user.avatar(request.host_with_port) alt=""]
+                      span
+                        = person.user.full_name
+                      - if person.can_see_email?(current_user)
+                        a[href=("mailto:"+person.user.email)]
+                          = person.user.email
+                      - else
+                        = raw "&nbsp;"
+                    - else
+                      - if person.user
+                        img.avatar[src=person.user.avatar(request.host_with_port) alt=""]
+                      - else
+                        img.avatar[src=User.default_avatar_for(person.email) alt=""]
+                      span
+                        - if person.user
+                          = person.user.full_name
+                        - elsif person.can_see_email?(current_user)
+                          = person.email
+                        - else
+                          = raw "&nbsp;"
+                      span.invite-sent
+                        | Invite Sent
+            .clear
+            br
+            #enter-invite.hidden
+              input#enter-email[type="text" placeholder="email address"]
+              a#submit-invite
+                | Invite
+            a.btn_med.gray#invite-coworkers
+              | INVITE COWORKERS
           li#project-invoice
             h5
               | PROJECT INVOICE
@@ -142,7 +171,10 @@
                     = '$' + number_with_delimiter(@project.next_payment_price, :delimiter => ',')
                 - unless current_user.admin
                   a.btn_large.purple[href=("/payments/checkout/" + @project.id.to_s + "/50")]
-                    | PAY INVOICE NOW
+                    - if @project.payments.empty?
+                      | PAY DEPOSIT
+                    - else
+                      | PAY FINAL INVOICE
       .clear
         /li
           p
@@ -150,4 +182,5 @@
           a.btn_large.gray[href="#"]
             img[src="/images/download.png" alt=""]
             | DOWNLOAD FILES
+input.hidden#project-id[type="hidden" value=@project.id]
 = render partial: 'footer'

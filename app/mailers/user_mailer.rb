@@ -9,4 +9,13 @@ class UserMailer < ActionMailer::Base
     mail(to:        user.email,
          subject:   "Welcome to Bento")
   end
+
+  def invited_to_project_mail(invitation, project, inviter)
+    @invitation  = invitation
+    @project     = project
+    @inviter     = inviter
+
+    mail(to:       @invitation.email,
+         subject:  @inviter.full_name + " invited you to join a project on Bento")
+  end
 end

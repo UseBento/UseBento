@@ -17,9 +17,14 @@ class Message
      posted:       self.format_date}
   end
 
+  def valid_attachments
+    attachments.select {|a| a.name}
+  end
+
   def attachments_as_html
     html = ""
-    attachments.map do |attachment|
+    attachments.each do |attachment|
+                 return if !attachment.name
                  if attachment.is_image?
                    html += ("<p class=\"responsive_img\">" + 
                             ("<a href=\"" + 
@@ -45,15 +50,18 @@ class Message
   end
 
   def body_as_html(with_attachments=false, with_quotes=false)
-    body = self.body.gsub(URI.regexp(['http', 'https']), 
-                          "<a href='\\0'>\\0</a>")
-
-    ("<p>" + (with_quotes ? "&ldquo;" : "") +
-     (body.split(/(\r?\n){2,}/).join("</p><p>")) + 
-       (with_quotes ? "&rdquo;" : "") +
-       "</p>") +
+    body          = self.body.gsub(URI.regexp(['http', 'https']), 
+                                   "<a href='\\0'>\\0</a>")
+    paragraphs    = body.split(/(\r?\n){2,}/).map { |p|
+                      p.strip
+                        .split(/\r\n/).join("<br />")
+                        .split(/[\r\n]/).join("<br />") }
+    "<p>" + 
+      (with_quotes ? "&ldquo;" : "") + 
+      (paragraphs.join("</p><p>")) + 
+      (with_quotes ? "&rdquo;" : "") +
+      "</p>" +
       (with_attachments ? self.attachments_as_html : '')
-
   end
 
   def format_date

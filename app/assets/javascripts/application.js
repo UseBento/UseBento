@@ -124,6 +124,8 @@ function build_el(el) {
         el = {tag: "div"}; 
     if (typeof el == "string") 
         return $(document.createTextNode(el)); 
+    if (typeof el == "object" && el.jquery)
+        return el;
 
     var attrs = {};
     for (var i in el) 
@@ -155,3 +157,6 @@ function depluralize(string) {
         return string.slice(0,-1); 
     return string; }
 
+function o(fn1, fn2) {
+    return function(param) {
+        return fn1(fn2(param)); }; }
