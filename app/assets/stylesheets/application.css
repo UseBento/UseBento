@@ -218,8 +218,15 @@ textarea.textarea.textarea-small {
     font-weight: bold;
     clear: both;
     display: block;
-    margin-bottom: 1.5em;
     font-size: 1.15em; }
+
+.outlined-box ul {
+    padding-top: 0.75em;
+    padding-left: 1.5em;
+    padding-bottom: 1em; }
+
+.outlined-box ul li{
+    list-style-type: circle; }
 
 button.btn.upload-btn {
     background-color: #899eb9;

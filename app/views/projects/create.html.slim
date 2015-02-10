@@ -88,25 +88,6 @@
               .form-controls
                 textarea#field-describe-business.textarea[type="text" cols="10" rows="10" name="business_description" required data-validation-type="['presence']"]
                   = @project.answer_for('business_description').answer
-            - if @editing
-              .form-row
-                label.form-label[for="field-target"]
-                  | Who is your target audience? 
-                  span.form-asterisk
-                    |  *
-                .form-errors
-                  = get_error('target_audience')
-                .form-controls
-                  input#field-target.field[type="text" name="target_audience" value=(@project.answer_for('target_audience').answer || (current_user ? current_user.default_target_audience : "")) required data-validation-type="['presence']"]
-              .form-row
-                label.form-label[for="field-keywords"]
-                  | What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
-                  span.form-asterisk
-                    |  *
-                .form-errors
-                  = get_error('business_keywords')
-              .form-controls
-                input#field-keywords.field[type="text" name="business_keywords" value=(@project.answer_for('business_keywords').answer || (current_user ? current_user.default_keywords : "")) required data-validation-type="['presence']"]
             = render partial: @service.partial_name
             - if @editing
               = render partial: 'long_questionaire_form'
