@@ -138,8 +138,8 @@ class Project
 
   def update_answer(name, new_answer)
     answer = self.answer_for(name)
-    if answer && answer.project == self
-      answer.answer = new_answer
+    if answer && answer.project == self || service.has_question(name)
+      answer.answer   = new_answer
       answer.save
     end
   end
@@ -159,7 +159,7 @@ class Project
 
   def answer_for(name)
     name = name.name if name.is_a? Question
-    self.answers.where(name: name).first || Answer.new
+    self.answers.where(name: name).first || answers.new({name: name})
   end
 
   def business_name
