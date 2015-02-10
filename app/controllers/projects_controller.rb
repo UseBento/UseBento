@@ -179,12 +179,13 @@ class ProjectsController < ApplicationController
     
     invitation  = @project.invited_users.create({accepted:   false,
                                                  email:      email})
-    invitation.inviter = current_user
+    invitation.inviter_id = current_user.id
 
     if user
       invitation.user = user
-      invitation.save
     end
+    invitation.save
+    
     
     UserMailer.invited_to_project_mail(invitation, @project, current_user).deliver
 
