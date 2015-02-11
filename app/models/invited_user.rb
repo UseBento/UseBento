@@ -10,7 +10,7 @@ class InvitedUser
 
   def can_see?(user)
     (accepted ||
-     (user.admin || user.id == inviter_id))
+     (user.admin || user.id.to_s == inviter_id))
   end
 
   def can_see_email?(user)

@@ -141,7 +141,6 @@ class UsersController < Devise::SessionsController
         save_login(params[:email])
     end
 
-    return render json: @user 
     respond_to do |format|
       format.html { redirect_to '/' }
       format.json { 

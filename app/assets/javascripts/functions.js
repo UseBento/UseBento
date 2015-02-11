@@ -416,6 +416,10 @@ function setup_paypal_direct() {
                     url:     '/projects/' + id + '/invite.json',
                     data:    {email: email},
                     success:  function(data) {
+                        if (data.error) 
+                            return $('#invite-errors').html(data.error);
+                        $('#invite-errors').html('');
+
                         var row = build_el(
                             div('people-entry col_four',
                                 [img({'class':  "avatar",

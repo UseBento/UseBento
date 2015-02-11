@@ -300,16 +300,19 @@ class Project
     end
   end
 
+  def filled_out_creative_brief?
+    brief_answers = ['desired_visitor_action', 'competitors', 'tagline', 
+     'color_preferences', 'font_preferences', 'inspiration', 
+     'definite_nos', 'other_info'].select do |name|
+                                    answer_for(name).answer
+                                  end
+    !brief_answers.empty?
+ end
+
   def initialize_project
-    message_body = ("Hi there! My name is Noah and I'm your project manager. " +
-                    "Its my job to make sure your project gets done quickly and " +
-                    "professionally. If you have any questions just write them in " +
-                    "the message field below and I'll get back to you ASAP. \n\n" +
-                    
-                    "If you're ready to get your project started now, just pay your " +
-                    "first invoice by clicking the \"Pay Invoice Now\" button on the " +
-                    "right. Looking forward to working with you and please let me " +
-                    "know if you have any questions!")
+    message_body = """Hi there! My name is Noah and I'm your project manager. It's my job to make sure your project gets done quickly and professionally. In order to find the right designer for you, please fill out the creative brief by clicking on the link on the right.
+
+Also, feel free to comment here with any questions that you may have."""
 
     admin_user   = User.get_admin
     message      = self.messages.create({body:        message_body,
