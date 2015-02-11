@@ -309,16 +309,22 @@ class Project
     !brief_answers.empty?
  end
 
-  def initialize_project
-    message_body = """Hi there! My name is Noah and I'm your project manager. It's my job to make sure your project gets done quickly and professionally. In order to find the right designer for you, please fill out the creative brief by clicking on the link on the right.
-
-Also, feel free to comment here with any questions that you may have."""
-
+  def bot_message(message_body)
     admin_user   = User.get_admin
     message      = self.messages.create({body:        message_body,
                                          posted_date: DateTime.now})
     message.user = admin_user
     message.save
+  end    
+
+  def filled_out_message
+    bot_message """Thanks for filling out the creative brief. We are now finding the right designer to work on this project and will get back to you shortly. Also, can you please pay the deposit for this project when you get a chance? This is fully refundable until we actually start your project."""
+  end
+
+  def initialize_project
+    bot_message """Hi there! My name is Noah and I'm your project manager. It's my job to make sure your project gets done quickly and professionally. In order to find the right designer for you, please fill out the creative brief by clicking on the link on the right.
+
+Also, feel free to comment here with any questions that you may have."""
   end
 
   def status_label

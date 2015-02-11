@@ -67,8 +67,9 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    @project = Project.find(params[:project_id])
-    @service = @project.service
+    @project     = Project.find(params[:project_id])
+    @service     = @project.service
+    filled_out   = @project.filled_out_creative_brief?
     get_attachments(@project)
     
     params.map do |key, val|
@@ -79,6 +80,7 @@ class ProjectsController < ApplicationController
     if @errors.length > 0
       render "projects/create"
     else
+      @project.filled_out_message if !filled_out && @project.filled_out_creative_brief?
       @project.save
       @project.update_company
       redirect_to @project
