@@ -310,3 +310,33 @@ button.btn.upload-btn {
 .no-email span {
     padding-top: 0.5em; }
 
+.site-popup .popup-body .popup-head h2{
+    font-weight: normal;
+    margin-bottom: 1em; }
+
+.site-popup .popup-body {
+    padding-top: 1em;
+    text-align: center; }
+
+.site-popup .popup-foot {
+    font-size: 0.9em;
+    line-height: 1.5;
+    padding: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    
+    padding-bottom: 1rem;
+    }
+
+.site-popup .btn {
+    margin-top: 1em; }
+
+.site-popup p {
+    padding-bottom: 1em;
+    }
+    
+.site-popup .separator {
+    height: 1px;
+    width: 100%;
+    border-top: 1px solid #eee; 
+    }

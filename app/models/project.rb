@@ -12,6 +12,7 @@ class Project
   field :deadline,      type: Date
   field :company,       type: String
   field :total_price,   type: Integer
+  field :shown_popup,   type: Boolean
 
   belongs_to :service
   belongs_to :user
@@ -307,7 +308,7 @@ class Project
                                     answer_for(name).answer
                                   end
     !brief_answers.empty?
- end
+  end
 
   def bot_message(message_body)
     admin_user   = User.get_admin
@@ -329,5 +330,14 @@ Also, feel free to comment here with any questions that you may have."""
 
   def status_label
     status.to_s.gsub("_", " ")
+  end
+
+  def need_to_show_popup
+    created_at.to_i > 1423629558 && !shown_popup
+  end
+
+  def showing_popup
+    shown_popup = true
+    save
   end
 end

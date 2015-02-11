@@ -200,6 +200,11 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def initial_popup
+    @project = Project.find(params[:id])
+    render 'initial_popup', layout: false
+  end
+
   def get_error(name)
     filtered = @errors.select do |error|
                         error[:question].name == name

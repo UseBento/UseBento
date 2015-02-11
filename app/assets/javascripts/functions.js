@@ -48,6 +48,10 @@ function setup_paypal_direct() {
         var signed_in           = false;
         var just_submit_project = true;
 
+        $('#project-popup')
+            .magnificPopup({type: 'ajax'})
+            .click();
+
         function sign_up(event) {
             event.preventDefault();
             var form       = $('#sign-up-form');
