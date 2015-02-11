@@ -91,17 +91,18 @@
             = render partial: @service.partial_name
             - if @editing
               = render partial: 'long_questionaire_form'
-          .form-actions
-            button.btn.form-btn#project-submit[type="submit"]
-              - if @editing
-                | Save Changes
-              - else
-                - if @service.price != 0 
-                  = "GET STARTED - $" + @service.price.to_s
+          - if current_user.admin || current_user == @project.user || !@project.created_at
+            .form-actions
+              button.btn.form-btn#project-submit[type="submit"]
+                - if @editing
+                  | Save Changes
                 - else
-                  = "Get Started"
-            - if @editing
-              |  &nbsp; &nbsp; &nbsp;
-              = link_to "Cancel", @project
+                  - if @service.price != 0 
+                    = "GET STARTED - $" + @service.price.to_s
+                  - else
+                    = "Get Started"
+              - if @editing
+                |  &nbsp; &nbsp; &nbsp;
+                = link_to "Cancel", @project
             input#page-price[type="hidden" value=(@service.price)]
 = render partial: 'footer'
