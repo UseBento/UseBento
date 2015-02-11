@@ -127,55 +127,56 @@
             a.btn_med.gray#invite-coworkers
               | INVITE COWORKERS
             strong#invite-errors
-          li#project-invoice
-            h5
-              | PROJECT INVOICE
-            - if current_user.admin
-              | Project total: 
-              form.new-payment-amount[data-id='total']
-                input.form-control.field.new-payment-amount-field[type="text" value=('$' + @project.get_price.to_s)]
-                  a.submit-payment[data-id='total']
-                    |  save
-              span.current-payment-amount[data-id='total']
-                strong.payment-amount[data-id='total']
-                  = "$" + @project.get_price.to_s + " "
-                a.btn-edit-payment[data-id='total' data-amount=@project.get_price.to_s]
-                  |  Edit
-              br
-              - i = 1
-              - @project.get_awaiting_payments(true).map do |payment|
-                = i.to_s + " of " + @project.get_awaiting_payments(true).length.to_s + " payments: "
-                - if payment.class == Payment
-                    strong.payment-amount
-                      = '$' + payment.amount.to_s
-                    |  paid
-                - else
-                  form.new-payment-amount[data-id=payment.id]
-                    input.form-control.field.new-payment-amount-field[type="text" value=('$' + payment.amount.to_s)]
-                    a.submit-payment[data-id=payment.id]
+          - if current_user == @project.user || current_user.admin
+            li#project-invoice
+              h5
+                | PROJECT INVOICE
+              - if current_user.admin
+                | Project total: 
+                form.new-payment-amount[data-id='total']
+                  input.form-control.field.new-payment-amount-field[type="text" value=('$' + @project.get_price.to_s)]
+                    a.submit-payment[data-id='total']
                       |  save
-                  span.current-payment-amount[data-id=payment.id]
-                    strong.payment-amount[data-id=payment.id]
-                      = "$" + payment.amount.to_s + " "
-                    a.btn-edit-payment[data-id=payment.id data-amount=payment.amount]
-                      |  Edit
-                  - i += 1
+                span.current-payment-amount[data-id='total']
+                  strong.payment-amount[data-id='total']
+                    = "$" + @project.get_price.to_s + " "
+                  a.btn-edit-payment[data-id='total' data-amount=@project.get_price.to_s]
+                    |  Edit
                 br
-            - else
-              - for payment in @project.payments
-                p
-                  = '$' + payment.amount.to_s + " - paid"
-              - if @project.next_payment_price
-                p
-                  = @project.current_payment.to_s + ' of ' + @project.total_payments.to_s + ' Payments: '
-                  span
-                    = '$' + number_with_delimiter(@project.next_payment_price, :delimiter => ',')
-                - unless current_user.admin
-                  a.btn_large.purple[href=("/payments/checkout/" + @project.id.to_s + "/50")]
-                    - if @project.payments.empty?
-                      | PAY DEPOSIT
-                    - else
-                      | PAY FINAL INVOICE
+                - i = 1
+                - @project.get_awaiting_payments(true).map do |payment|
+                  = i.to_s + " of " + @project.get_awaiting_payments(true).length.to_s + " payments: "
+                  - if payment.class == Payment
+                      strong.payment-amount
+                        = '$' + payment.amount.to_s
+                      |  paid
+                  - else
+                    form.new-payment-amount[data-id=payment.id]
+                      input.form-control.field.new-payment-amount-field[type="text" value=('$' + payment.amount.to_s)]
+                      a.submit-payment[data-id=payment.id]
+                        |  save
+                    span.current-payment-amount[data-id=payment.id]
+                      strong.payment-amount[data-id=payment.id]
+                        = "$" + payment.amount.to_s + " "
+                      a.btn-edit-payment[data-id=payment.id data-amount=payment.amount]
+                        |  Edit
+                    - i += 1
+                  br
+              - else
+                - for payment in @project.payments
+                  p
+                    = '$' + payment.amount.to_s + " - paid"
+                - if @project.next_payment_price
+                  p
+                    = @project.current_payment.to_s + ' of ' + @project.total_payments.to_s + ' Payments: '
+                    span
+                      = '$' + number_with_delimiter(@project.next_payment_price, :delimiter => ',')
+                  - unless current_user.admin
+                    a.btn_large.purple[href=("/payments/checkout/" + @project.id.to_s + "/50")]
+                      - if @project.payments.empty?
+                        | PAY DEPOSIT
+                      - else
+                        | PAY FINAL INVOICE
       .clear
         /li
           p
