@@ -443,7 +443,7 @@ Services:
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
-        required: true
+        required: false
       - name: service
         label: Select your service below
         type: :enum
