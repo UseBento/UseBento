@@ -300,7 +300,7 @@ class Project
   end
 
   def initialize_project
-    message_body = ("Hi there! My name is Noah and I'm your project manager. " +
+    message_body = ("Hi there! My name is Lucas and I'm your project manager. " +
                     "Its my job to make sure your project gets done quickly and " +
                     "professionally. If you have any questions just write them in " +
                     "the message field below and I'll get back to you ASAP. \n\n" +

@@ -41,7 +41,7 @@ class User
   # field :locked_at,       type: Time
 
   def self.get_admin
-    admin_user   = User.where({admin: true, name: "Noah"}).first
+    admin_user   = User.where({admin: true, name: "Lucas Hill"}).first
     admin_user   = User.where({admin: true}).first unless admin_user
     admin_user
   end
