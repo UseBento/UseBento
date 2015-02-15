@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post 'projects/:id/invite',          to: 'projects#invite'
   post 'projects/:project_id/message', to: 'messages#post_message'
   post 'projects/:project_id/update_payment', to: 'projects#update_payment'
+  get  'projects/:id/remove_user/:invite_id', to: 'projects#remove_invite'
   get  'attachment/:project_id/:message_id/:attachment_id/:filename', to: 'messages#view_attachment', constraints: { :filename => /[^\/]+/ }
 
   root 'welcome#index'

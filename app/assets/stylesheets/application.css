@@ -243,3 +243,10 @@ margin-bottom: 0.75em;
     display: block;
     padding-top: 0.5em;
 }
+
+.right {
+    float: right; }
+
+a.delete {
+    font-weight: bold;
+    color: #c11; }

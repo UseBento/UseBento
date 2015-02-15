@@ -197,6 +197,16 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def remove_invite
+    @project = Project.find(params[:id])
+    invite   = @project.invited_users.find(params[:invite_id])
+
+    if current_user.admin && (!invite.user || invite.user != @project.owner)
+      invite.delete
+    end
+    redirect_to @project
+  end
+
   def get_error(name)
     filtered = @errors.select do |error|
                         error[:question].name == name
