@@ -428,17 +428,46 @@ function setup_paypal_direct() {
             message_text.detach();
             wrapper.append(edit_area);
             wrapper.append(btn);
-            pencil.css('display', 'none'); }
+            pencil.css('display', 'none'); 
+
+            function update_message() {
+                $.ajax({type:     'POST',
+                        url:      '/projects/update_message.json',
+                        data:     {id:           message_id,
+                                   new_message:  edit_area.val(),
+                                   project_id:   $('#project-id').val()},
+                        
+                        success:  function(data) {
+                            pencil.css('display', 'block');
+                            edit_area.detach();
+                            message_raw.detach();
+                            message_text.html(data.body);
+                            message_raw.html(data.raw);
+                            message_text.append(message_raw);
+                            wrapper.append(message_text); }}); }
+
+            btn.click(update_message); }
+
+        function remove_message(message_id) {
+            $.ajax({type:     'POST',
+                    data:     {id:          message_id,
+                               project_id:  $('#project-id').val()},
+                    url:      '/projects/delete_message.json',
+                    success:  function(data) {
+                        $('li.project-message[data-id="' + message_id + '"]')
+                            .detach();
+                        $.magnificPopup.close(); }}); }
 
         function link_message_buttons() {
             $('li.project-message').map(function(i, li) {
                 li = $(li);
+                var id = li.attr('data-id');
                 if (li.attr('data-processed')) return;
 
                 li.find('.delete-message').magnificPopup();
                 li.find('.close-delete-message').click($.magnificPopup.close);
+                li.find('.confirm-delete-message').click(curry(remove_message, id));
                 
-                var id = li.attr('data-id');
                 li.find('.edit-message').click(curry(edit_message, id));
                 li.attr('data-processed', 'true'); }); }
 
