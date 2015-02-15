@@ -1,0 +1,49 @@
+li.project-message[data-id=message.id data-project-id=@project.id]
+  .delete-popup.mfp-hide[id=("delete-popup-" + message.id.to_s)]
+    .access
+      .form.form-access
+        form
+          .popup-body
+            .form-head
+              h2
+                | Are you sure?
+            .form-body
+              center
+                | Are you sure you want to delete this message?
+                br
+                br
+                button.btn.close-delete-message[type="button"]
+                  | No
+                |   &nbsp;  
+                button.btn.confirm-delete-message[type="button"]
+                  | Yes
+                .clear
+                br
+  .avtar
+    img[src=message.user.avatar(request.host_with_port) alt=""]
+  .dtl_box
+    a.right.fa.fa-close.delete-message[data-project-id=@project.id data-message-id=message.id href=("#delete-popup-" + message.id.to_s)]
+    a.right.fa.fa-pencil.edit-message[data-project-id=@project.id data-message-id=message.id]
+    h4
+      = message.user.full_name
+    .content-wrapper
+      .message-content
+        = raw message.body_as_html
+        .hidden.raw_content
+          = message.body
+    p.info_text
+      | Posted 
+      = message.format_date
+    - for attachment in message.valid_attachments
+      - if attachment.is_image?
+        p.responsive_img
+          a[href=attachment.url target="_blank"]
+            img[src=attachment.url alt=""]
+        p.img_txt
+          = attachment.name
+      - else
+        p.img_txt
+          | Click file to download
+          br
+          = link_to attachment.name, attachment.url, :target => "_blank"
+          = " " + attachment.filesize

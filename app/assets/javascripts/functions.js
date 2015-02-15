@@ -437,7 +437,71 @@ function setup_paypal_direct() {
                         $('#enter-email').val('');
                         $('#enter-invite').addClass('hidden');
                         $('#invite-coworkers').removeClass('hidden'); }}); });
-            
+
+        function save_message(message_id) {}
+
+        function edit_message(message_id) {
+            var message_el    = $('li.project-message[data-id="' + message_id + '"]');
+            var pencil        = message_el.find('.edit-message');
+            var wrapper       = message_el.find('.content-wrapper');
+            var message_text  = message_el.find('.message-content');
+            var message_raw   = message_el.find('.message-content .raw_content');
+            var edit_area     = build_el(textarea({'class':   'message-content-editing text_box',
+                                                   rows:       5},
+                                                  [message_raw.html()]));
+            var btn           = build_el(button({type:    'button',
+                                                 'class': 'btn btn-sm right'},
+                                                ['Save'],
+                                                curry(save_message, message_id)));
+                                                 
+            message_text.detach();
+            wrapper.append(edit_area);
+            wrapper.append(btn);
+            pencil.css('display', 'none'); 
+
+            function update_message() {
+                $.ajax({type:     'POST',
+                        url:      '/projects/update_message.json',
+                        data:     {id:           message_id,
+                                   new_message:  edit_area.val(),
+                                   project_id:   $('#project-id').val()},
+                        
+                        success:  function(data) {
+                            pencil.css('display', 'block');
+                            edit_area.detach();
+                            message_raw.detach();
+                            message_text.html(data.body);
+                            message_raw.html(data.raw);
+                            message_text.append(message_raw);
+                            wrapper.append(message_text); }}); }
+
+            btn.click(update_message); }
+
+        function remove_message(message_id) {
+            $.ajax({type:     'POST',
+                    data:     {id:          message_id,
+                               project_id:  $('#project-id').val()},
+                    url:      '/projects/delete_message.json',
+                    success:  function(data) {
+                        $('li.project-message[data-id="' + message_id + '"]')
+                            .detach();
+                        $.magnificPopup.close(); }}); }
+
+        function link_message_buttons() {
+            $('li.project-message').map(function(i, li) {
+                li = $(li);
+                var id = li.attr('data-id');
+                if (li.attr('data-processed')) return;
+
+                li.find('.delete-message').magnificPopup();
+                li.find('.close-delete-message').click($.magnificPopup.close);
+                li.find('.confirm-delete-message').click(curry(remove_message, id));
+                
+                li.find('.edit-message').click(curry(edit_message, id));
+                li.attr('data-processed', 'true'); }); }
+
+        link_message_buttons();
+                        
         function run_on_popup() {
             $('#sign-up-form').submit(sign_up); 
             $('#log-in-form').submit(log_in);

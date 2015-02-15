@@ -200,9 +200,20 @@ class ProjectsController < ApplicationController
     end
   end
 
+
   def initial_popup
     @project = Project.find(params[:id])
     render 'initial_popup', layout: false
+  end
+
+  def remove_invite
+    @project = Project.find(params[:id])
+    invite   = @project.invited_users.find(params[:invite_id])
+
+    if current_user.admin && (!invite.user || invite.user != @project.owner)
+      invite.delete
+    end
+    redirect_to @project
   end
 
   def get_error(name)

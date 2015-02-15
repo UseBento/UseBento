@@ -1,31 +1,5 @@
 .wrapper
-  header.header.header-top
-    a.expand[href="#"]
-    .shell
-      = link_to "Bento", "/", class: "logo"
-      nav.nav
-        ul
-          - unless user_signed_in?
-            li
-              = link_to "START YOUR PROJECT", "/services/select"
-          - else
-            li
-              = link_to "PROJECTS", "/projects/list"
-          li
-            = link_to "CONTACT US", "/contact"
-          li
-            = link_to "JOIN THE TEAM", "/apply"
-          li
-            = link_to "FOR AGENCIES", "/agencies"
-          - unless user_signed_in?
-            li
-              a.popup-link#userlink[href="/popups/login"]
-                | LOG IN
-          - else
-            li
-              = link_to current_user.name, "/profile"
-            li 
-              = link_to "logout", destroy_user_session_path, :method => :delete
+  = render partial: 'header', locals: {page: 'home-top'}
   .intro
     .intro-content
       .shell
@@ -40,33 +14,7 @@
         p
           a.btn[href="/services/select"]
             | START YOUR PROJECT NOW
-  header.header.header-secondary
-    .shell
-      a.expand[href="#"]
-      = link_to "Bento", "/", class: "logo"
-      nav.nav
-        ul
-          - unless user_signed_in?
-            li
-              = link_to "START YOUR PROJECT", "/services/select"
-          - else
-            li
-              = link_to "PROJECTS", "/projects/list"
-          li
-            = link_to "CONTACT US", "/contact"
-          li
-            = link_to "JOIN THE TEAM", "/apply"
-          li
-            = link_to "FOR AGENCIES", "/agencies"
-          - unless user_signed_in?
-            li
-              a.popup-link[href="/popups/login"]
-                | LOG IN
-          - else
-            li
-              = link_to current_user.name, "/profile"
-            li 
-              = link_to "logout", destroy_user_session_path, :method => :delete
+  = render partial: 'header', locals: {page: 'home-secondary'}
   section.section
     .shell
       header.section-head

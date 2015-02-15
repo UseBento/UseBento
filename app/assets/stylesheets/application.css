@@ -310,6 +310,7 @@ button.btn.upload-btn {
 .no-email span {
     padding-top: 0.5em; }
 
+
 .site-popup .popup-body .popup-head h2{
     font-weight: normal;
     margin-bottom: 1em; }
@@ -340,3 +341,25 @@ button.btn.upload-btn {
     width: 100%;
     border-top: 1px solid #eee; 
     }
+
+
+.section-head a.right-link {
+    float: right;
+    display: block;
+    padding-top: 0.5em;
+}
+
+.right {
+    margin-left: 0.66em;
+    float: right; }
+
+a.right {
+    cursor: pointer; }
+
+a.delete {
+    font-weight: bold;
+    color: #c11; }
+
+#error_explanation h2 { display: none; }
+#error_explanation ul li {list-style-type: none; }
+

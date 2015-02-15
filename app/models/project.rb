@@ -323,11 +323,11 @@ class Project
   end
 
   def initialize_project
-    bot_message """Hi there! My name is Noah and I'm your project manager. It's my job to make sure your project gets done quickly and professionally. In order to find the right designer for you, please fill out the creative brief by clicking on the link on the right.
+    bot_message """Hi there! My name is Lucas and I'm your project manager. It's my job to make sure your project gets done quickly and professionally. In order to find the right designer for you, please fill out the creative brief by clicking on the link on the right.
 
 Also, feel free to comment here with any questions that you may have."""
   end
-
+  
   def status_label
     status.to_s.gsub("_", " ")
   end

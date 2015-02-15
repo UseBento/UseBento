@@ -1,0 +1,28 @@
+- if person.can_see?(current_user)
+  div[class=("col_four people-entry " + (person.can_see_email?(current_user) ? "" : "no-email"))]
+    - if !person.user || (person.user != @project.user && person.user != User.get_admin)
+      a.delete.right[href=("/projects/" + @project.id + "/remove_user/" + person.id)]
+        | x
+    - if person.accepted && person.user
+      img.avatar[src=person.user.avatar(request.host_with_port) alt=""]
+      span
+        = person.user.full_name
+      - if person.can_see_email?(current_user)
+        a[href=("mailto:"+person.user.email)]
+          = person.user.short_email
+      - else
+        = raw "&nbsp;"
+    - else
+      - if person.user
+        img.avatar[src=person.user.avatar(request.host_with_port) alt=""]
+      - else
+        img.avatar[src=User.default_avatar_for(person.email) alt=""]
+      span
+        - if person.user
+          = person.user.full_name
+        - elsif person.can_see_email?(current_user)
+          = person.short_email
+        - else
+          = raw "&nbsp;"
+      span.invite-sent
+        | Invite Sent
