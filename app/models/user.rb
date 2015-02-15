@@ -46,6 +46,14 @@ class User
     admin_user
   end
 
+  def short_email
+    if email.length > 20
+      email.slice(0,20) + "..."
+    else
+      email
+    end
+  end
+
   def full_name
     self.name.split.map(&:capitalize).join ' '
   end

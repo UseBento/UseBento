@@ -101,7 +101,7 @@
                         = person.user.full_name
                       - if person.can_see_email?(current_user)
                         a[href=("mailto:"+person.user.email)]
-                          = person.user.email
+                          = person.user.short_email
                       - else
                         = raw "&nbsp;"
                     - else
@@ -113,7 +113,7 @@
                         - if person.user
                           = person.user.full_name
                         - elsif person.can_see_email?(current_user)
-                          = person.email
+                          = person.short_email
                         - else
                           = raw "&nbsp;"
                       span.invite-sent
