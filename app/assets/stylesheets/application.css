@@ -245,7 +245,11 @@ margin-bottom: 0.75em;
 }
 
 .right {
+    margin-left: 0.66em;
     float: right; }
+
+a.right {
+    cursor: pointer; }
 
 a.delete {
     font-weight: bold;

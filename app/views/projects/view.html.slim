@@ -36,29 +36,7 @@
       .left_container
         ul.list_comment
           - for message in @project.messages
-            li
-              .avtar
-                img[src=message.user.avatar(request.host_with_port) alt=""]
-              .dtl_box
-                h4
-                  = message.user.full_name
-                = raw message.body_as_html
-                p.info_text
-                  | Posted 
-                  = message.format_date
-                - for attachment in message.valid_attachments
-                  - if attachment.is_image?
-                    p.responsive_img
-                      a[href=attachment.url target="_blank"]
-                        img[src=attachment.url alt=""]
-                    p.img_txt
-                      = attachment.name
-                  - else
-                    p.img_txt
-                      | Click file to download
-                      br
-                      = link_to attachment.name, attachment.url, :target => "_blank"
-                      = " " + attachment.filesize
+            = render partial: 'message', locals: {message: message}
           li#message-form-li
             .post_img
               img[src=current_user.avatar(request.host_with_port) alt=""]
@@ -93,34 +71,7 @@
               | People on this project
             #people
               - for person in @project.people
-                - if person.can_see?(current_user)
-                  div[class=("col_four people-entry " + (person.can_see_email?(current_user) ? "" : "no-email"))]
-                    - if !person.user || (person.user != @project.user && person.user != User.get_admin)
-                      a.delete.right[href=("/projects/" + @project.id + "/remove_user/" + person.id)]
-                        | x
-                    - if person.accepted && person.user
-                      img.avatar[src=person.user.avatar(request.host_with_port) alt=""]
-                      span
-                        = person.user.full_name
-                      - if person.can_see_email?(current_user)
-                        a[href=("mailto:"+person.user.email)]
-                          = person.user.short_email
-                      - else
-                        = raw "&nbsp;"
-                    - else
-                      - if person.user
-                        img.avatar[src=person.user.avatar(request.host_with_port) alt=""]
-                      - else
-                        img.avatar[src=User.default_avatar_for(person.email) alt=""]
-                      span
-                        - if person.user
-                          = person.user.full_name
-                        - elsif person.can_see_email?(current_user)
-                          = person.short_email
-                        - else
-                          = raw "&nbsp;"
-                      span.invite-sent
-                        | Invite Sent
+                = render partial: 'invited_person', locals: {person: person}
             .clear
             br
             #enter-invite.hidden
