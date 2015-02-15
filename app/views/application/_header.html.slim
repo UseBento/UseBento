@@ -25,7 +25,7 @@ header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 
           - else
             li[ class=(page == 'profile' ? 'current' : '')]
               a#userlink[href="/profile" data-userid=current_user.id]
-                = current_user.name
+                | PROFILE
         - else
           li
             a.popup-link.hidden#userlink[href="/popups/login"]
