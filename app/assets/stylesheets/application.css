@@ -254,3 +254,6 @@ a.right {
 a.delete {
     font-weight: bold;
     color: #c11; }
+
+#error_explanation h2 { display: none; }
+#error_explanation ul li {list-style-type: none; }
