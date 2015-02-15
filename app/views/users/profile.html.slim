@@ -4,6 +4,7 @@
     .shell
       .form.form-apply.form-business-card
         .section-head.form-head
+          = link_to "LOGOUT", destroy_user_session_path, :method => :delete, class: 'right-link'
           h2
             | Your Profile
         form.form-required#project-form[action="/profile/update" method="post"]

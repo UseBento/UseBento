@@ -236,3 +236,10 @@ margin-bottom: 0.75em;
 
 .no-email span {
     padding-top: 0.5em; }
+
+
+.section-head a.right-link {
+    float: right;
+    display: block;
+    padding-top: 0.5em;
+}
