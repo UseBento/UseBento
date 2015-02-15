@@ -337,7 +337,7 @@ Also, feel free to comment here with any questions that you may have."""
   end
 
   def showing_popup
-    shown_popup = true
+    self.shown_popup = true
     save
   end
 end
