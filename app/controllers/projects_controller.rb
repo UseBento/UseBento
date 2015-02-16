@@ -19,8 +19,8 @@ class ProjectsController < ApplicationController
       return redirect_to_login
     end
 
-    @editing = true
     @errors  = []
+    @editing = true
     @service = @project.service
     @partial = @service.partial_name
     render "projects/create"
@@ -69,8 +69,10 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    @project = Project.find(params[:project_id])
-    @service = @project.service
+    @project     = Project.find(params[:project_id])
+    @service     = @project.service
+    filled_out   = @project.filled_out_creative_brief?
+    get_attachments(@project)
     
     params.map do |key, val|
             @project.update_answer(key, val)
@@ -80,6 +82,7 @@ class ProjectsController < ApplicationController
     if @errors.length > 0
       render "projects/create"
     else
+      @project.filled_out_message if !filled_out && @project.filled_out_creative_brief?
       @project.save
       @project.update_company
       redirect_to @project
@@ -212,6 +215,22 @@ class ProjectsController < ApplicationController
       format.html { redirect_to @project }
       format.json { render :json => @error ? {error: @error} : invitation }
     end
+  end
+
+
+  def initial_popup
+    @project = Project.find(params[:id])
+    render 'initial_popup', layout: false
+  end
+
+  def remove_invite
+    @project = Project.find(params[:id])
+    invite   = @project.invited_users.find(params[:invite_id])
+
+    if current_user.admin && (!invite.user || invite.user != @project.owner)
+      invite.delete
+    end
+    redirect_to @project
   end
 
   def get_error(name)

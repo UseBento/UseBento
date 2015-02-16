@@ -13,12 +13,14 @@ class Project
   field :deadline,      type: Date
   field :company,       type: String
   field :total_price,   type: Integer
+  field :shown_popup,   type: Boolean
 
   belongs_to :service
   belongs_to :user
   embeds_many :answers
   embeds_many :messages
   embeds_many :invited_users
+  embeds_many :attachments
   validate :is_valid?
   has_many :payments
   has_many :awaiting_payments
@@ -141,8 +143,8 @@ class Project
 
   def update_answer(name, new_answer)
     answer = self.answer_for(name)
-    if answer && answer.project == self
-      answer.answer = new_answer
+    if answer && answer.project == self || service.has_question(name)
+      answer.answer   = new_answer
       answer.save
     end
   end
@@ -162,7 +164,7 @@ class Project
 
   def answer_for(name)
     name = name.name if name.is_a? Question
-    self.answers.where(name: name).first || Answer.new
+    self.answers.where(name: name).first || answers.new({name: name})
   end
 
   def business_name
@@ -303,25 +305,43 @@ class Project
     end
   end
 
-  def initialize_project
-    message_body = ("Hi there! My name is Noah and I'm your project manager. " +
-                    "Its my job to make sure your project gets done quickly and " +
-                    "professionally. If you have any questions just write them in " +
-                    "the message field below and I'll get back to you ASAP. \n\n" +
-                    
-                    "If you're ready to get your project started now, just pay your " +
-                    "first invoice by clicking the \"Pay Invoice Now\" button on the " +
-                    "right. Looking forward to working with you and please let me " +
-                    "know if you have any questions!")
+  def filled_out_creative_brief?
+    brief_answers = ['desired_visitor_action', 'competitors', 'tagline', 
+     'color_preferences', 'font_preferences', 'inspiration', 
+     'definite_nos', 'other_info'].select do |name|
+                                    answer_for(name).answer
+                                  end
+    !brief_answers.empty?
+  end
 
+  def bot_message(message_body)
     admin_user   = User.get_admin
     message      = self.messages.create({body:        message_body,
                                          posted_date: DateTime.now})
     message.user = admin_user
     message.save
+  end    
+
+  def filled_out_message
+    bot_message """Thanks for filling out the creative brief. We are now finding the right designer to work on this project and will get back to you shortly. Also, can you please pay the deposit for this project when you get a chance? This is fully refundable until we actually start your project."""
   end
 
+  def initialize_project
+    bot_message """Hi there! My name is Lucas and I'm your project manager. It's my job to make sure your project gets done quickly and professionally. In order to find the right designer for you, please fill out the creative brief by clicking on the link on the right.
+
+Also, feel free to comment here with any questions that you may have."""
+  end
+  
   def status_label
     status.to_s.gsub("_", " ")
+  end
+
+  def need_to_show_popup
+    created_at.to_i > 1423629558 && !shown_popup
+  end
+
+  def showing_popup
+    self.shown_popup = true
+    save
   end
 end

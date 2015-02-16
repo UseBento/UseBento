@@ -63,4 +63,15 @@ class ApplicationController < ActionController::Base
       format.json { render json: {success: true} }
     end
   end
+
+  def get_attachments(parent)
+    files = params.select {|a,b| a.to_s.slice(0, 11) == "file-upload"}
+    files.map do |key, file|
+           attachment = 
+             parent.attachments.create({uploaded_date:   DateTime.now,
+                                        name:            file.original_filename})
+           attachment.attachment = file
+           attachment.save
+         end
+  end
 end

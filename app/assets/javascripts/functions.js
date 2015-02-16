@@ -48,6 +48,10 @@ function setup_paypal_direct() {
         var signed_in           = false;
         var just_submit_project = true;
 
+        $('#project-popup')
+            .magnificPopup({type: 'ajax'})
+            .click();
+
         function sign_up(event) {
             event.preventDefault();
             var form       = $('#sign-up-form');
@@ -268,6 +272,31 @@ function setup_paypal_direct() {
                 set_add_comment_state(); });
             file_upload.trigger('click'); });
 
+        $('#upload-btn').click(function(event) {
+            var file_upload = $('#file-upload');
+            file_upload.change(function() {
+                function remove_file() {
+                    file_upload.detach();
+                    file_icon.detach(); }
+
+                var filename    = file_upload.val().match(/[^\\]+$/)[0];
+                var file_icon   = build_el(
+                    div('attachment',
+                        [i('fa fa-paperclip paperclip'),
+                         i('close-link fa fa-times', [], remove_file),
+                         div('label', [filename])]));
+                $('#uploading-files').append(file_icon);
+
+                file_upload.attr('id', 'file-upload-' + file_upload_id.toString());
+                file_upload.attr('name', 'file-upload-' + file_upload_id.toString());
+                file_upload.parent().append(
+                    build_el(input({id:    'file-upload', 
+                                    type:  'file', 
+                                    style: 'display:none'})));
+                file_upload_id++; });
+            file_upload.trigger('click'); });
+            
+
         function check_first() {
             if ($('#editing')[0]) return;
             var radios = $.unique($('input[type="radio"]')
@@ -410,7 +439,71 @@ function setup_paypal_direct() {
                         $('#enter-email').val('');
                         $('#enter-invite').addClass('hidden');
                         $('#invite-coworkers').removeClass('hidden'); }}); });
-            
+
+        function save_message(message_id) {}
+
+        function edit_message(message_id) {
+            var message_el    = $('li.project-message[data-id="' + message_id + '"]');
+            var pencil        = message_el.find('.edit-message');
+            var wrapper       = message_el.find('.content-wrapper');
+            var message_text  = message_el.find('.message-content');
+            var message_raw   = message_el.find('.message-content .raw_content');
+            var edit_area     = build_el(textarea({'class':   'message-content-editing text_box',
+                                                   rows:       5},
+                                                  [message_raw.html()]));
+            var btn           = build_el(button({type:    'button',
+                                                 'class': 'btn btn-sm right'},
+                                                ['Save'],
+                                                curry(save_message, message_id)));
+                                                 
+            message_text.detach();
+            wrapper.append(edit_area);
+            wrapper.append(btn);
+            pencil.css('display', 'none'); 
+
+            function update_message() {
+                $.ajax({type:     'POST',
+                        url:      '/projects/update_message.json',
+                        data:     {id:           message_id,
+                                   new_message:  edit_area.val(),
+                                   project_id:   $('#project-id').val()},
+                        
+                        success:  function(data) {
+                            pencil.css('display', 'block');
+                            edit_area.detach();
+                            message_raw.detach();
+                            message_text.html(data.body);
+                            message_raw.html(data.raw);
+                            message_text.append(message_raw);
+                            wrapper.append(message_text); }}); }
+
+            btn.click(update_message); }
+
+        function remove_message(message_id) {
+            $.ajax({type:     'POST',
+                    data:     {id:          message_id,
+                               project_id:  $('#project-id').val()},
+                    url:      '/projects/delete_message.json',
+                    success:  function(data) {
+                        $('li.project-message[data-id="' + message_id + '"]')
+                            .detach();
+                        $.magnificPopup.close(); }}); }
+
+        function link_message_buttons() {
+            $('li.project-message').map(function(i, li) {
+                li = $(li);
+                var id = li.attr('data-id');
+                if (li.attr('data-processed')) return;
+
+                li.find('.delete-message').magnificPopup();
+                li.find('.close-delete-message').click($.magnificPopup.close);
+                li.find('.confirm-delete-message').click(curry(remove_message, id));
+                
+                li.find('.edit-message').click(curry(edit_message, id));
+                li.attr('data-processed', 'true'); }); }
+
+        link_message_buttons();
+                        
         function run_on_popup() {
             $('#sign-up-form').submit(sign_up); 
             $('#log-in-form').submit(log_in);

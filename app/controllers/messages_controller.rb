@@ -20,15 +20,7 @@ class MessagesController < ApplicationController
 
     @project.updated_at = DateTime.now
     @project.save!
-
-    files = params.select {|a,b| a.to_s.slice(0, 11) == "file-upload"}
-    files.map do |key, file|
-           attachment = 
-             @message.attachments.create({uploaded_date:   DateTime.now,
-                                          name:            file.original_filename})
-           attachment.attachment = file
-           attachment.save
-         end
+    attachments = get_attachments(@message)
 
     respond_to do |format|
       format.html { redirect_to @project }
@@ -48,5 +40,35 @@ class MessagesController < ApplicationController
     send_data(@attachment.attachment.read, 
               :type          => @attachment.mime,
               :disposition   => 'inline')
+  end
+
+  def update
+    @project     = Project.find(params[:project_id])
+    message      = @project.messages.find(params[:id])
+
+    return redirect_to @project if !(message.user == current_user || current_user.admin)
+      
+    new_message  = params[:new_message]
+    message.body = new_message
+    message.save
+
+    respond_to do |format|
+      format.html { redirect_to @project }
+      format.json { render json: {body: message.body_as_html(false, false),
+                                  raw:  new_message,
+                                  id:   message.id.to_s} }
+    end
+  end
+
+  def remove
+    @project     = Project.find(params[:project_id])
+    message      = @project.messages.find(params[:id])
+    return redirect_to @project if !(message.user == current_user || current_user.admin)
+    message.delete
+
+    respond_to do |format|
+      format.html { redirect_to @project }
+      format.json { render json: {success: true}}
+    end
   end
 end
