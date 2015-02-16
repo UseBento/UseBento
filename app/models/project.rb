@@ -56,6 +56,10 @@ class Project
     people
   end
 
+  def owner
+    self.user
+  end
+
   def get_awaiting_payments(all=false)
     paid_payments     = self.payments.to_a
     unpaid_payments   = self.awaiting_payments.to_a
