@@ -12,7 +12,7 @@ Things you may want to cover:
 * Configuration
 
 * Database creation
-
+    1. Install MongoDB
 * Database initialization
 
 * How to run the test suite

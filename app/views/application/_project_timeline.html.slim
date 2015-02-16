@@ -1,0 +1,14 @@
+#project_status
+
+	- for i in (0..@project_statuses.count)
+		- if @project.status_index >= i
+			.complete
+		- else
+			.incomplete
+
+		.status_step
+			- if current_user.admin
+				a[href=("/projects/" + @project.id.to_s + "/update_status/" + i.to_s)]
+					=@project_statuses[i]
+			- else
+				=@project_statuses[i]

@@ -6,6 +6,7 @@ class Project
   field :state,         type: Symbol
   field :status,        type: Symbol  # :pending, :assigned, :awaiting_payment,
                                       # :in_progress, :closed
+  field :status_index,   type: Integer, default: 0
 
   field :last_status,   type: Symbol  # set to keep track of last status before archiving
   field :number,        type: Integer
@@ -22,10 +23,13 @@ class Project
   has_many :payments
   has_many :awaiting_payments
   
+  STATUS_LIST = ['Project Started', 'Creative Brief', 'First Round Designs', 'Second Round Designs', 'Development', 'Files Delivered']
+  
   def as_json(i=0)
     {start_date:       start_date,
      state:            state,
      status:           status,
+     status_index:           status_index,
      number:           number,
      company:          company,
      deadline:         deadline,
