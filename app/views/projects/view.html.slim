@@ -45,7 +45,8 @@
             br
 
             = link_to "Edit Project", "/projects/" + @project.id.to_s + "/edit"
-
+            br
+            
             - if !@project.filled_out_creative_brief?
               = link_to "Fill Out Creative Brief", "/projects/" + @project.id.to_s + "/edit"
             - else
