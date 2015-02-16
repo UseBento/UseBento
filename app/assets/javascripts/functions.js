@@ -472,6 +472,7 @@ function setup_paypal_direct() {
                             pencil.css('display', 'block');
                             edit_area.detach();
                             message_raw.detach();
+                            btn.detach();
                             message_text.html(data.body);
                             message_raw.html(data.raw);
                             message_text.append(message_raw);
