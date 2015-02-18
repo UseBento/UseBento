@@ -8,31 +8,9 @@
     .project_detail_box
       .row_box
         h2
-          = @project.name
+          = @project.name + ' - ' + @project.service.name.gsub('_', ' ').capitalize
           /|  &mdash; 
         /= @project.service.title
-      .row_box.gray_brd
-        .col_flex
-          p
-            | Type:
-          h5
-            = @project.service.name.gsub('_', ' ').capitalize
-        .col_one
-          p
-            | Size: 
-          h5
-            = @project.print_pages
-        .col_one
-          p
-            | Total: 
-          h5#project-total
-            = '$' + @project.get_price.to_s
-        /.col_two
-          p
-            | Deadline: 
-          h5
-            = @project.deadline || 'Not set'
-        .clear
       .left_container
         ul.list_comment
           - for message in @project.messages
@@ -57,10 +35,23 @@
       .right_container
         ul.box_list
           li
+            h5 
+              | Project Details
+            = 'Size: ' + @project.print_pages
+            br 
+            = 'Total: $' + @project.get_price.to_s
+            br
+            = 'Deadline: ' + (@project.deadline || 'Not set')
+            br
+
+            = link_to "Edit Project", "/projects/" + @project.id.to_s + "/edit"
+            br
+            
             - if !@project.filled_out_creative_brief?
               = link_to "Fill Out Creative Brief", "/projects/" + @project.id.to_s + "/edit"
             - else
               = link_to "Edit Creative Brief", "/projects/" + @project.id.to_s + "/edit"
+
             - if current_user.admin
               br
               - if @project.archived?
@@ -69,6 +60,10 @@
                 = link_to "Archive Project", "/projects/" + @project.id.to_s + "/archive"
               br
               = link_to "Delete Project", "/projects/" + @project.id.to_s + "/del_project"
+          li
+            h5
+              | Project Milestones
+            = render partial: 'project_timeline'
           li
             h5
               | People on this project

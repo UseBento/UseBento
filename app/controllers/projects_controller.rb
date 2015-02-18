@@ -5,6 +5,8 @@ class ProjectsController < ApplicationController
   def view 
     @project = Project.find(params[:id])
     @project.get_awaiting_payments
+    @project_statuses = Project::STATUS_LIST
+
     @editing = false
     if !@project.has_access?(current_user)
       return redirect_to_login
@@ -86,7 +88,22 @@ class ProjectsController < ApplicationController
       redirect_to @project
     end
   end
-  
+
+  def update_status
+    @project = Project.find(params[:project_id])
+    status = params[:status]
+    puts "status " + @status.to_s
+
+    if !current_user.admin
+      return render :nothing => true, :status => 500
+    end
+
+    @project.status_index = status
+    @project.save
+    
+    redirect_to @project
+  end
+
   def new
     return self.update if params[:editing]
 
