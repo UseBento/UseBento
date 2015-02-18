@@ -44,9 +44,6 @@
             = 'Deadline: ' + (@project.deadline || 'Not set')
             br
 
-            = link_to "Edit Project", "/projects/" + @project.id.to_s + "/edit"
-            br
-            
             - if !@project.filled_out_creative_brief?
               = link_to "Fill Out Creative Brief", "/projects/" + @project.id.to_s + "/edit"
             - else
@@ -124,7 +121,7 @@
                     span
                       = '$' + number_with_delimiter(@project.next_payment_price, :delimiter => ',')
                   - unless current_user.admin
-                    a.btn_large.purple[href=("/payments/checkout/" + @project.id.to_s + "/50")]
+                    a.btn_med.gray[href=("/payments/checkout/" + @project.id.to_s + "/50")]
                       - if @project.payments.empty?
                         | PAY DEPOSIT
                       - else
