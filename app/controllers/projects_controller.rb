@@ -9,7 +9,13 @@ class ProjectsController < ApplicationController
 
     @editing = false
     if !@project.has_access?(current_user)
-      return redirect_to_login
+      invite = @project.was_invited?(current_user)
+      if invite
+        invite.accepted = true
+        invite.save
+      else
+        return redirect_to_login
+      end
     end
   end
 
