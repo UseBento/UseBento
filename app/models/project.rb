@@ -116,9 +116,9 @@ class Project
     
   def has_access?(user) 
     (user && 
-     (user.id == self.user.id) || 
-     user.admin || 
-     self.invited_users.where(accepted: true).where(user_id: user.id))
+     (user.id == self.user.id || 
+      user.admin || 
+      self.invited_users.where(accepted: true).where(user_id: user.id).first))
   end
 
   def validate_project

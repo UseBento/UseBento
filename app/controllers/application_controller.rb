@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def redirect_to_login
-    redirect_to "/#login"
+    redirect_to "/users/sign_in"
   end
 
   def contact
