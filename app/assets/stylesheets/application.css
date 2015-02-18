@@ -363,3 +363,5 @@ a.delete {
 #error_explanation h2 { display: none; }
 #error_explanation ul li {list-style-type: none; }
 
+.dtl_box a.right.fa {
+    color: #888; }
