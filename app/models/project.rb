@@ -40,6 +40,10 @@ class Project
      unpaid_payments:  self.awaiting_payments}
   end
 
+  def was_invited?(user)
+    self.invited_users.where(user_id: user.id).first
+  end
+
   def people
     people = self.invited_users
 
