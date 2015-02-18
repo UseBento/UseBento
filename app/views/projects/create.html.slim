@@ -45,19 +45,20 @@
                       input#field-full-name.field[type="hidden" name="full_name" value=current_user.full_name]
                     - else
                       input#field-full-name.field[type="text" name="full_name" required data-validation-type="['presence']" value=@project.answer_for('full_name').answer]
-                .form-col.form-col-1of2
-                  label.form-label[for="field-e-mail"]
-                    | Email Address
-                    span.form-asterisk
-                      |  *
-                  .form-errors
-                    = get_error('email')
-                  .form-controls
-                    - if user_signed_in?
-                      = current_user.email
-                      input#field-e-mail.field[type="hidden" name="email" value=current_user.email]
-                    - else
-                      input#field-e-mail.field[type="email" name="email" value=@project.answer_for('email').answer required data-validation-type="['email']"]
+                - if current_user.admin || current_user == @project.user || !@project.created_at
+                  .form-col.form-col-1of2
+                    label.form-label[for="field-e-mail"]
+                      | Email Address
+                      span.form-asterisk
+                        |  *
+                    .form-errors
+                      = get_error('email')
+                    .form-controls
+                      - if user_signed_in?
+                        = current_user.email
+                        input#field-e-mail.field[type="hidden" name="email" value=current_user.email]
+                      - else
+                        input#field-e-mail.field[type="email" name="email" value=@project.answer_for('email').answer required data-validation-type="['email']"]
             .form-row
               .form-cols
                 .form-col.form-col-1of2
@@ -105,4 +106,8 @@
                 |  &nbsp; &nbsp; &nbsp;
                 = link_to "Cancel", @project
             input#page-price[type="hidden" value=(@service.price)]
+- if !(current_user.admin || current_user == @project.user || !@project.created_at)
+  script
+    | $(document).ready(function() { $('input, textarea').prop('disabled', true); });
+      
 = render partial: 'footer'
