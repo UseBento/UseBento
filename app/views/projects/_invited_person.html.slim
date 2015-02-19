@@ -2,7 +2,7 @@
   div[data-person-id=person.id data-project-id=@project.id class=("col_four people-entry " + (person.can_see_email?(current_user) ? "" : "no-email"))]
     - if (!person.user || (person.user != @project.user && person.user != User.get_admin)) && ( current_user == @project.owner || current_user.admin)
       a.fa.fa-trash-o.delete.right.delete-person[ href=("#delete-popup-person-" + person.id.to_s)]
-        - if current_user.admin || current_user == person.user
+        - if current_user.admin || current_user != person.user
           .delete-popup.mfp-hide[id=("delete-popup-person-" + person.id.to_s)]
             .access
               .form.form-access
