@@ -504,7 +504,27 @@ function setup_paypal_direct() {
                 li.attr('data-processed', 'true'); }); }
 
         link_message_buttons();
-                        
+
+        function remove_person(invite_id, element) {
+            project_id = $('#project-id').val();
+            $.ajax({type:     'GET',
+                    url:      '/projects/' + project_id + '/remove_user/' + invite_id,
+                    success:  function(data) {
+                        $.magnificPopup.close();
+                        element.remove(); }}); }
+
+        function link_person_buttons() {
+            $('.people-entry').map(function(i, el) {
+                el = $(el);
+                var id = el.attr('data-person-id');
+                el.find('.delete-person').magnificPopup();
+                el.find('.close-delete-person').click($.magnificPopup.close);
+                el.find('.confirm-delete-person').click(curry(remove_person, id, el));
+            });
+        }
+
+        link_person_buttons();
+
         function run_on_popup() {
             $('#sign-up-form').submit(sign_up); 
             $('#log-in-form').submit(log_in);

@@ -251,7 +251,9 @@ class ProjectsController < ApplicationController
        (!invite.user || invite.user != @project.user)
       invite.delete
     end
-    redirect_to @project
+    respond_to do |format|
+      format.html { render json: {success: true}}
+    end
   end
 
   def get_error(name)
