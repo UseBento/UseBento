@@ -128,6 +128,10 @@ class Project
   def validate_project
     errors = []
     results = self.service.questions.map { |question|
+        if question.name == 'business_keywords' || question.name == 'target_audience'
+          self.service.questions.delete(question)
+          next
+        end 
         answer = answer_for(question)
         if !answer
           errors.push({valid:     false, 
