@@ -1,6 +1,6 @@
 #project_status
 
-	- for i in (0..@project_statuses.count)
+	- for i in (0..@project_statuses.count-1)
 		- if @project.status_index >= i
 			.complete
 		- else
