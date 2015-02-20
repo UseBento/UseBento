@@ -39,8 +39,9 @@
               | Project Details
             = 'Size: ' + @project.print_pages
             br 
-            = 'Total: $' + @project.get_price.to_s
-            br
+            - if current_user == @project.user || current_user.admin
+              = 'Total: $' + @project.get_price.to_s
+              br
             = 'Deadline: ' + (@project.deadline || 'Not set')
             br
 
