@@ -1,5 +1,20 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :authentication => :plain,
+    :address => "smtp.mailgun.org",
+    :port => 587,
+    :domain => "sandboxc84676d0390645d2abda73fd1b5115fd.mailgun.org",
+    :user_name => "postmaster@sandboxc84676d0390645d2abda73fd1b5115fd.mailgun.org",
+    :password => "95eyypl176p8"
+  }
+
+  config.twocheckout_private_key = 'CA54A03A-0324-4810-9946-253A028D58C2'
+  config.twocheckout_public_key  = '7EB9463F-A64C-4CF5-9B49-912A9912E3D7'
+  config.twocheckout_seller_id   = 901261089
+  config.twocheckout_sandbox     = true
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -44,8 +59,8 @@ Rails.application.configure do
   # Set to :debug to see everything in the log.
   config.log_level = :info
 
-  config.consider_all_requests_local       = true
-  
+  config.consider_all_requests_local = true
+
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
