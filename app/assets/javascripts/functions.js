@@ -514,9 +514,10 @@ function setup_paypal_direct() {
                                               [center(
                                                   '',
                                                   [message, br(), br(),
-                                                   button({'class': 'btn',
+                                                   button({'class': 'btn gray',
+                                                           style:   'margin-right:0.7em;',
                                                            type:    'button'},
-                                                          ['No'],
+                                                          ['Cancel'],
                                                           close_popup),
                                                    ' ',
                                                    button({'class': 'btn',
