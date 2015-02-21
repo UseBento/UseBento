@@ -21,13 +21,13 @@ class ProjectMailer < ActionMailer::Base
          subject: "New message from " + @admin.full_name)
   end
 
-  def new_user_message_mail(message, to, from) 
-    @message    = message
-    @project    = message.project
-    @to         = to
-    @from       = from
+  def new_user_message_mail(to_first_name, from_full_name, message_body, link_path, email)
+    @first_name  = to_first_name
+    @full_name   = from_full_name
+    @body        = message_body
+    @link_path   = link_path
 
-    mail(to:      @to.email,
-         subject: "New message from " + @from.full_name)
+    mail(to:      email,
+         subject: "New message from " + @full_name)
   end
 end

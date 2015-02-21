@@ -10,6 +10,21 @@ class Message
   embedded_in :project
   embeds_many :attachments
 
+  def send_emails(user, project_url)
+    participants = project.people.select {|p| p.accepted}
+    participants.map do |participant|
+                  if participant != user
+                    ProjectMailer.new_user_message_mail(
+                        participant.user.first_name,
+                        user.full_name,
+                        body_as_html(false, true),
+                        project_url,
+                        participant.user.email
+                      ).deliver_later
+                  end
+                end
+  end
+
   def serialize_message(request, rendered)
     {avatar:       self.user.avatar(request.host_with_port),
      user_name:    self.user.full_name,
@@ -80,3 +95,5 @@ class Message
     date_str
   end
 end
+
+    

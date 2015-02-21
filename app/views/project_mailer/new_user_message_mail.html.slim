@@ -3,14 +3,14 @@ html[lang="en"]
   head
   body
     p
-      = "Hey " + @to.first_name + ", "
+      = "Hey " + @first_name + ", "
     p
-      = @from.full_name
+      = @full_name
       |  sent you a new message:
     blockquote
-      = raw @message.body_as_html(false, true)
+      = raw @body
     p
-      = link_to "Respond here", project_url(@project), :only_path => false
+      = link_to "Respond here", @link_path, :only_path => false
     p
       | -Bento
 
