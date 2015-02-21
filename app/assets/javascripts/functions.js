@@ -493,7 +493,50 @@ function setup_paypal_direct() {
                 li.attr('data-processed', 'true'); }); }
 
         link_message_buttons();
-                        
+
+        function close_popup() {
+            $.magnificPopup.close(); }
+
+        function ask_are_you_sure(el, next, message, title) {
+            title       = title || "Are you sure?";
+            message     = message || "Are you sure you want to do this?";
+            var id      = "id-" + Math.random().toString().slice(2);
+            var popup   = build_el(
+                div({'class': 'delete-popup mfp-hide',
+                     id:      id},
+                    [div('access',
+                         [div('form form-access',
+                              [form('',
+                                    [div('popup-body',
+                                         [div('form-head',
+                                              [h2('', [title])]),
+                                          div('form-body',
+                                              [center(
+                                                  '',
+                                                  [message, br(), br(),
+                                                   button({'class': 'btn',
+                                                           type:    'button'},
+                                                          ['No'],
+                                                          close_popup),
+                                                   ' ',
+                                                   button({'class': 'btn',
+                                                           type:    'button'},
+                                                          ['Yes'],
+                                                          o(close_popup, next)),
+                                                   div('clear'),
+                                                   br()])])])])])])]));
+            $(document.body).append(popup);
+            el.attr('href', "#" + id);
+            el.magnificPopup(); }
+        
+        $('.people-entry a.delete.right').map(function(i, a) {
+            var href = $(a).attr('href');
+            ask_are_you_sure(
+                $(a), 
+                function() {
+                    window.location.href = href; },
+                "Are you sure you want to remove this person from the project?"); });
+
         function run_on_popup() {
             $('#sign-up-form').submit(sign_up); 
             $('#log-in-form').submit(log_in);
