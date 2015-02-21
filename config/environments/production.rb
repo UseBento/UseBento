@@ -14,6 +14,26 @@ Rails.application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
+  config.action_mailer.default_url_options = { :host => 'usebento.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :authentication => :plain,
+    :address => "smtp.mailgun.org",
+    :port => 587,
+    :domain => "sandboxc84676d0390645d2abda73fd1b5115fd.mailgun.org",
+    :user_name => "postmaster@sandboxc84676d0390645d2abda73fd1b5115fd.mailgun.org",
+    :password => ENV["MAILGUN_PW"]
+  }
+
+  config.twocheckout_private_key = ENV['TWOCHECKOUT_PRIVATE_KEY']
+  config.twocheckout_public_key  = 'B8167C00-A36C-11E4-A645-49923A5D4FFE'
+  config.twocheckout_seller_id   = 102406486
+  config.twocheckout_sandbox     = false
+
+  # Full error reports are disabled and caching is turned on.
+  config.consider_all_requests_local       = false
+  config.action_controller.perform_caching = true
+
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.
