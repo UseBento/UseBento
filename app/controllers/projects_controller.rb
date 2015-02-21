@@ -233,8 +233,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     invite   = @project.invited_users.find(params[:invite_id])
 
-    if (current_user == @project.user || current_user.admin) && 
-       (!invite.user || invite.user != @project.user)
+    if (invite.can_delete?(current_user))
       invite.delete
     end
     redirect_to @project

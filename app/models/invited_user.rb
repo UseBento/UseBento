@@ -24,4 +24,8 @@ class InvitedUser
   def can_see_email?(user)
     user.admin || (can_see?(user) && !accepted)
   end
+
+  def can_delete?(user)
+    user.admin || user.id.to_s == inviter_id
+  end
 end
