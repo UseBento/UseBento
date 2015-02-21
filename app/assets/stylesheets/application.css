@@ -365,3 +365,6 @@ a.delete {
 
 .dtl_box a.right.fa, .light-gray {
     color: #bcbbbb; }
+
+button.btn.btn-sm.message-save-button {
+    margin-right: -0.25em; }

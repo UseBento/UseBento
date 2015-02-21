@@ -441,7 +441,7 @@ function setup_paypal_direct() {
                                                    rows:       5},
                                                   [message_raw.html()]));
             var btn           = build_el(button({type:    'button',
-                                                 'class': 'btn btn-sm right'},
+                                                 'class': 'btn btn-sm right message-save-button'},
                                                 ['Save'],
                                                 curry(save_message, message_id)));
                                                  
