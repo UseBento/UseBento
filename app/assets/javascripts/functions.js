@@ -166,24 +166,13 @@ function setup_paypal_direct() {
             function success(data) {
                 if (progress_bar)
                     progress_bar.css('display', 'none');
-                var message_li = 
-                        build_el(
-                            li('',
-                               [div('avtar',
-                                    [img({src: data.avatar,
-                                          alt: ''})]),
-                                div('dtl_box',
-                                    [h4('', [data.user_name]),
-                                     span('message-body',
-                                          [unescape(data.body)]),
-                                     p('info_text',
-                                       ['Posted ' + data.posted])])])); 
 
+                var message_li = $('<div/>');
+                message_li.html(data.body);
                 message_li.insertBefore($('li#message-form-li')); 
-                message_li.children('.dtl_box')
-                    .children('.message-body')
-                    .html(unescape(data.body)); 
+
                 $('#message-box').val($('#message-box')[0].defaultValue); 
+                link_message_buttons();
                 reset_message_form(); }
 
             var data = {message_body: message};

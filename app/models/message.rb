@@ -10,10 +10,10 @@ class Message
   embedded_in :project
   embeds_many :attachments
 
-  def serialize_message(request)
+  def serialize_message(request, rendered)
     {avatar:       self.user.avatar(request.host_with_port),
      user_name:    self.user.full_name,
-     body:         self.body_as_html(true),
+     body:         rendered,
      posted:       self.format_date}
   end
 
