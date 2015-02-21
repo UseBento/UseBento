@@ -23,11 +23,18 @@ class MessagesController < ApplicationController
 
     @project.updated_at = DateTime.now
     @project.save!
-    attachments = get_attachments(@message)
+    attachments  = get_attachments(@message)
+    message_body = ""
+
+    message_body = render_to_string(partial:   'projects/message', 
+                                    layout:     false,
+                                    formats:    :html,
+                                    locals:    {message: @message})
+    
 
     respond_to do |format|
       format.html { redirect_to @project }
-      format.json { render json: @message.serialize_message(request) }
+      format.json { render json: @message.serialize_message(request, message_body) }
     end
   end
 

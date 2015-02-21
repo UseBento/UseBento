@@ -106,14 +106,21 @@ var button = tag_maker('button');
 var a =      tag_maker('a');
 var i =      tag_maker('i');
 var li =     tag_maker('li');
+var h1 =     tag_maker('h1');
+var h2 =     tag_maker('h2');
+var h3 =     tag_maker('h3');
 var h4 =     tag_maker('h4');
+var h5 =     tag_maker('h5');
+var h6 =     tag_maker('h6');
 var img =    tag_maker('img');
 var strong = tag_maker('strong');
 var p =      tag_maker('p');
 var select = tag_maker('select');
 var input  = tag_maker('input');
 var option = tag_maker('option');
+var center = tag_maker('center');
 var label  = tag_maker('label');
+var form   = tag_maker('form');
 var textarea = tag_maker('textarea');
 
 function br() {
