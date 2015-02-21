@@ -1,8 +1,28 @@
 - if person.can_see?(current_user)
-  div[class=("col_four people-entry " + (person.can_see_email?(current_user) ? "" : "no-email"))]
+  div[data-person-id=person.id data-project-id=@project.id class=("col_four people-entry " + (person.can_see_email?(current_user) ? "" : "no-email"))]
     - if person.can_delete?(current_user)
-      a.delete.right[href=("/projects/" + @project.id + "/remove_user/" + person.id)]
-        | x
+      a.fa.fa-trash-o.delete.right.delete-person[ href=("#delete-popup-person-" + person.id.to_s)]
+        - if current_user.admin || current_user != person.user
+          .delete-popup.mfp-hide[id=("delete-popup-person-" + person.id.to_s)]
+            .access
+              .form.form-access
+                form
+                  .popup-body
+                    .form-head
+                      h2
+                        | Are you sure?
+                    .form-body
+                      center
+                        | Are you sure you want to delete this person?
+                        br
+                        br
+                        button.btn.gray.close-delete-person[type="button"]
+                          | Cancel
+                        |   &nbsp;  
+                        button.btn.confirm-delete-person[type="button"]
+                          | Yes
+                        .clear
+                        br
     - if person.accepted && person.user
       img.avatar[src=person.user.avatar(request.host_with_port) alt=""]
       span

@@ -1206,19 +1206,20 @@ a.btn_small{
 }
 
 #project_status .complete {
-    background-image: url('/images/check.png');
-    height: 20px;
+    background: url('/images/check_both.png') 0 0;
+    height: 13px;
     width: 20px;
     float: left;
-    margin-right: 10px;
+    margin: 10px 10px 0px 5px;
 }
 
 
 #project_status .incomplete {
-    height: 20px;
+    background: url('/images/check_both.png') 20px 0;
+    height: 13px;
     width: 20px;
     float: left;
-    margin-right: 10px;
+    margin: 10px 15px 0px 0px;
 }
 
 .project_detail_box .gray_brd{

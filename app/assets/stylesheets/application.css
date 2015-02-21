@@ -357,8 +357,7 @@ a.right {
     cursor: pointer; }
 
 a.delete {
-    font-weight: bold;
-    color: #c11; }
+    color: #888; }
 
 #error_explanation h2 { display: none; }
 #error_explanation ul li {list-style-type: none; }

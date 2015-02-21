@@ -81,8 +81,17 @@ class ProjectsController < ApplicationController
     get_attachments(@project)
     
     params.map do |key, val|
-            @project.update_answer(key, val)
-          end
+      @project.update_answer(key, val)
+    end
+
+
+    if filled_out
+      status_index = Hash[Project::STATUS_LIST.map.with_index.to_a]
+      brief_index = status_index['Creative Brief']  
+      if brief_index > @project.status_index
+        @project.status_index = brief_index
+      end
+    end
 
     @errors = @project.validate_project
     if @errors.length > 0
@@ -97,14 +106,19 @@ class ProjectsController < ApplicationController
 
   def update_status
     @project = Project.find(params[:project_id])
-    status = params[:status]
-    puts "status " + @status.to_s
+    status = params[:status].to_i
 
-    if !current_user.admin
+    if !current_user.admin || status < 0
       return render :nothing => true, :status => 500
     end
 
-    @project.status_index = status
+    # Clicking on the current status will unselect it
+    if @project.status_index == status
+      @project.status_index = status - 1
+    else
+      @project.status_index = status
+    end
+
     @project.save
     
     redirect_to @project
@@ -236,7 +250,9 @@ class ProjectsController < ApplicationController
     if (invite.can_delete?(current_user))
       invite.delete
     end
-    redirect_to @project
+    respond_to do |format|
+      format.html { render json: {success: true}}
+    end
   end
 
   def get_error(name)

@@ -7,6 +7,8 @@
 # =======================
 # Ruby on Rails
 # =======================
+# Ignore env file
+/config/local_env.yml
 
 # Ignore bundler config.
 /.bundle
