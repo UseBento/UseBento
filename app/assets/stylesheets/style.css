@@ -127,7 +127,7 @@ html, body { height: 100%; }
 
 .wrapper { overflow: hidden; }
 .header { padding: 0 0; border-bottom:2px solid #ededed; position: relative; z-index: 2; background: #fff; }
-.header .logo { width: 120px; float:left; height:28px; font-size: 0; line-height: 0; text-indent: -4000px; background: url(images/logo2-2.png) no-repeat 0 0; margin: 31px 0; }
+.header .logo { width: 120px; float:left; height:28px; font-size: 0; line-height: 0; text-indent: -4000px; background: url(/images/logo2-2.png) no-repeat 0 0; margin: 31px 0; }
 .header .nav { float:right; font-family:'proxima_nova_rgbold', arial, serif; font-size:13px; text-transform: uppercase; }
 .header .nav ul { list-style: none outside none; }
 .header .nav li { float: left; padding-left: 50px;  }
@@ -139,7 +139,7 @@ html, body { height: 100%; }
 
 .header-top { position: absolute; top:0; left:0; width: 100%; z-index: 99; border-bottom:0; background: transparent; }
 .header-top .nav a { color: #fff; }
-.header-top .logo { background: url(images/logo-2-1.png) no-repeat 0 0;  }
+.header-top .logo { background: url(/images/logo-2-1.png) no-repeat 0 0;  }
 
 
 .header-secondary { position: fixed; top:-100%; left:0; width: 100%; z-index: 999; background: #fff; 
