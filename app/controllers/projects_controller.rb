@@ -84,20 +84,19 @@ class ProjectsController < ApplicationController
       @project.update_answer(key, val)
     end
 
-
-    if filled_out
-      status_index = Hash[Project::STATUS_LIST.map.with_index.to_a]
-      brief_index = status_index['Creative Brief']  
-      if brief_index > @project.status_index
-        @project.status_index = brief_index
-      end
-    end
-
     @errors = @project.validate_project
     if @errors.length > 0
       render "projects/create"
     else
-      @project.filled_out_message if !filled_out && @project.filled_out_creative_brief?
+      if !filled_out && @project.filled_out_creative_brief?
+        @project.filled_out_message
+        # Update project status if a creative brief was filled out
+        status_index = Hash[Project::STATUS_LIST.map.with_index.to_a]
+        brief_index = status_index['Creative Brief']  
+        if brief_index > @project.status_index
+          @project.status_index = brief_index
+        end
+      end
       @project.save
       @project.update_company
       redirect_to @project

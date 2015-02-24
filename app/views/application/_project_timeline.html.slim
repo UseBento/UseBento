@@ -2,9 +2,9 @@
 
 	- for i in (0..@project_statuses.count-1)
 		- if @project.status_index >= i
-			.complete
+			i.fa.fa-check.complete
 		- else
-			.incomplete
+			i.fa.fa-check.incomplete
 
 		.status_step
 			- if current_user.admin
