@@ -3,9 +3,9 @@ html[lang="en"]
   head
   body
     p
-      = "Hey " + @admin.first_name + ", "
+      = "Hey " + @to.first_name + ", "
     p
-      = @owner.full_name
+      = @from.full_name
       |  sent you a new message:
     blockquote
       = raw @message.body_as_html(false, true)

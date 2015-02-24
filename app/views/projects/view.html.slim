@@ -8,7 +8,7 @@
     .project_detail_box
       .row_box
         h2
-          = @project.name + ' - ' + @project.service.name.gsub('_', ' ').capitalize
+          = @project.name
           /|  &mdash; 
         /= @project.service.title
       .left_container
@@ -39,11 +39,11 @@
               | Project Details
             = 'Size: ' + @project.print_pages
             br 
-            = 'Total: $' + @project.get_price.to_s
-            br
-            = 'Deadline: ' + (@project.deadline || 'Not set')
-            br
-
+            - if current_user == @project.user || current_user.admin
+              = 'Total: $' + @project.get_price.to_s
+              br
+            /= 'Deadline: ' + (@project.deadline || 'Not set')
+            /br
             - if !@project.filled_out_creative_brief?
               = link_to "Fill Out Creative Brief", "/projects/" + @project.id.to_s + "/edit"
             - else

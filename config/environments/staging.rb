@@ -1,5 +1,20 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  config.action_mailer.default_url_options = { :host => 'li901-134.members.linode.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :authentication => :plain,
+    :address => "smtp.mailgun.org",
+    :port => 587,
+    :domain => "sandboxc84676d0390645d2abda73fd1b5115fd.mailgun.org",
+    :user_name => "postmaster@sandboxc84676d0390645d2abda73fd1b5115fd.mailgun.org",
+    :password => ENV['MAILGUN_PW']
+  }
+
+  config.twocheckout_private_key = ENV['TWOCHECKOUT_PRIVATE_KEY']
+  config.twocheckout_public_key  = '7EB9463F-A64C-4CF5-9B49-912A9912E3D7'
+  config.twocheckout_seller_id   = 901261089
+  config.twocheckout_sandbox     = true
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -8,27 +23,7 @@ Rails.application.configure do
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
-  config.eager_load = true
-
-  # Full error reports are disabled and caching is turned on.
-  config.consider_all_requests_local       = false
-  config.action_controller.perform_caching = true
-
-  config.action_mailer.default_url_options = { :host => 'usebento.com' }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :authentication => :plain,
-    :address => "smtp.mailgun.org",
-    :port => 587,
-    :domain => "sandboxc84676d0390645d2abda73fd1b5115fd.mailgun.org",
-    :user_name => "postmaster@sandboxc84676d0390645d2abda73fd1b5115fd.mailgun.org",
-    :password => ENV["MAILGUN_PW"]
-  }
-
-  config.twocheckout_private_key = ENV['TWOCHECKOUT_PRIVATE_KEY']
-  config.twocheckout_public_key  = 'B8167C00-A36C-11E4-A645-49923A5D4FFE'
-  config.twocheckout_seller_id   = 102406486
-  config.twocheckout_sandbox     = false
+  config.eager_load = false
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
@@ -64,6 +59,18 @@ Rails.application.configure do
   # Set to :debug to see everything in the log.
   config.log_level = :info
 
+  config.consider_all_requests_local = true
+
+  # Debug mode disables concatenation and preprocessing of assets.
+  # This option may cause significant delays in view rendering with a large
+  # number of complex assets.
+  config.assets.debug = true
+
+  # Adds additional error checking when serving assets at runtime.
+  # Checks for improperly declared sprockets dependencies.
+  # Raises helpful error messages.
+  config.assets.raise_runtime_errors = true
+
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
 
@@ -75,10 +82,6 @@ Rails.application.configure do
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"
-
-  # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).

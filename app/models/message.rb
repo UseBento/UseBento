@@ -10,10 +10,10 @@ class Message
   embedded_in :project
   embeds_many :attachments
 
-  def serialize_message(request)
+  def serialize_message(request, rendered)
     {avatar:       self.user.avatar(request.host_with_port),
      user_name:    self.user.full_name,
-     body:         self.body_as_html(true),
+     body:         rendered,
      posted:       self.format_date}
   end
 
@@ -51,7 +51,7 @@ class Message
 
   def body_as_html(with_attachments=false, with_quotes=false)
     body          = self.body.gsub(URI.regexp(['http', 'https']), 
-                                   "<a href='\\0'>\\0</a>")
+                                   "<a href='\\0' target=\"_blank\">\\0</a>")
     paragraphs    = body.split(/(\r?\n){2,}/).map { |p|
                       p.strip
                         .split(/\r\n/).join("<br />")

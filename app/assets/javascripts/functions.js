@@ -166,24 +166,13 @@ function setup_paypal_direct() {
             function success(data) {
                 if (progress_bar)
                     progress_bar.css('display', 'none');
-                var message_li = 
-                        build_el(
-                            li('',
-                               [div('avtar',
-                                    [img({src: data.avatar,
-                                          alt: ''})]),
-                                div('dtl_box',
-                                    [h4('', [data.user_name]),
-                                     span('message-body',
-                                          [unescape(data.body)]),
-                                     p('info_text',
-                                       ['Posted ' + data.posted])])])); 
 
+                var message_li = $('<div/>');
+                message_li.html(data.body);
                 message_li.insertBefore($('li#message-form-li')); 
-                message_li.children('.dtl_box')
-                    .children('.message-body')
-                    .html(unescape(data.body)); 
+
                 $('#message-box').val($('#message-box')[0].defaultValue); 
+                link_message_buttons();
                 reset_message_form(); }
 
             var data = {message_body: message};
@@ -452,7 +441,7 @@ function setup_paypal_direct() {
                                                    rows:       5},
                                                   [message_raw.html()]));
             var btn           = build_el(button({type:    'button',
-                                                 'class': 'btn btn-sm right'},
+                                                 'class': 'btn btn-sm right message-save-button'},
                                                 ['Save'],
                                                 curry(save_message, message_id)));
                                                  
@@ -504,7 +493,71 @@ function setup_paypal_direct() {
                 li.attr('data-processed', 'true'); }); }
 
         link_message_buttons();
-                        
+
+        function close_popup() {
+            $.magnificPopup.close(); }
+
+        function ask_are_you_sure(el, next, message, title) {
+            title       = title || "Are you sure?";
+            message     = message || "Are you sure you want to do this?";
+            var id      = "id-" + Math.random().toString().slice(2);
+            var popup   = build_el(
+                div({'class': 'delete-popup mfp-hide',
+                     id:      id},
+                    [div('access',
+                         [div('form form-access',
+                              [form('',
+                                    [div('popup-body',
+                                         [div('form-head',
+                                              [h2('', [title])]),
+                                          div('form-body',
+                                              [center(
+                                                  '',
+                                                  [message, br(), br(),
+                                                   button({'class': 'btn gray',
+                                                           style:   'margin-right:0.7em;',
+                                                           type:    'button'},
+                                                          ['Cancel'],
+                                                          close_popup),
+                                                   ' ',
+                                                   button({'class': 'btn',
+                                                           type:    'button'},
+                                                          ['Yes'],
+                                                          o(close_popup, next)),
+                                                   div('clear'),
+                                                   br()])])])])])])]));
+            $(document.body).append(popup);
+            el.attr('href', "#" + id);
+            el.magnificPopup(); }
+        
+        $('.people-entry a.delete.right').map(function(i, a) {
+            var href = $(a).attr('href');
+            ask_are_you_sure(
+                $(a), 
+                function() {
+                    window.location.href = href; },
+                "Are you sure you want to remove this person from the project?"); });
+
+        function remove_person(invite_id, element) {
+            project_id = $('#project-id').val();
+            $.ajax({type:     'GET',
+                    url:      '/projects/' + project_id + '/remove_user/' + invite_id,
+                    success:  function(data) {
+                        $.magnificPopup.close();
+                        element.remove(); }}); }
+
+        function link_person_buttons() {
+            $('.people-entry').map(function(i, el) {
+                el = $(el);
+                var id = el.attr('data-person-id');
+                el.find('.delete-person').magnificPopup();
+                el.find('.close-delete-person').click($.magnificPopup.close);
+                el.find('.confirm-delete-person').click(curry(remove_person, id, el));
+            });
+        }
+
+        link_person_buttons();
+
         function run_on_popup() {
             $('#sign-up-form').submit(sign_up); 
             $('#log-in-form').submit(log_in);

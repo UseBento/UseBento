@@ -357,11 +357,13 @@ a.right {
     cursor: pointer; }
 
 a.delete {
-    font-weight: bold;
-    color: #c11; }
+    color: #888; }
 
 #error_explanation h2 { display: none; }
 #error_explanation ul li {list-style-type: none; }
 
-.dtl_box a.right.fa {
-    color: #888; }
+.dtl_box a.right.fa, .light-gray {
+    color: #bcbbbb; }
+
+button.btn.btn-sm.message-save-button {
+    margin-right: -0.25em; }

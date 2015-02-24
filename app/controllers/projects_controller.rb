@@ -81,14 +81,22 @@ class ProjectsController < ApplicationController
     get_attachments(@project)
     
     params.map do |key, val|
-            @project.update_answer(key, val)
-          end
+      @project.update_answer(key, val)
+    end
 
     @errors = @project.validate_project
     if @errors.length > 0
       render "projects/create"
     else
-      @project.filled_out_message if !filled_out && @project.filled_out_creative_brief?
+      if !filled_out && @project.filled_out_creative_brief?
+        @project.filled_out_message
+        # Update project status if a creative brief was filled out
+        status_index = Hash[Project::STATUS_LIST.map.with_index.to_a]
+        brief_index = status_index['Creative Brief']  
+        if brief_index > @project.status_index
+          @project.status_index = brief_index
+        end
+      end
       @project.save
       @project.update_company
       redirect_to @project
@@ -97,14 +105,19 @@ class ProjectsController < ApplicationController
 
   def update_status
     @project = Project.find(params[:project_id])
-    status = params[:status]
-    puts "status " + @status.to_s
+    status = params[:status].to_i
 
-    if !current_user.admin
+    if !current_user.admin || status < 0
       return render :nothing => true, :status => 500
     end
 
-    @project.status_index = status
+    # Clicking on the current status will unselect it
+    if @project.status_index == status
+      @project.status_index = status - 1
+    else
+      @project.status_index = status
+    end
+
     @project.save
     
     redirect_to @project
@@ -233,11 +246,12 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     invite   = @project.invited_users.find(params[:invite_id])
 
-    if (current_user == @project.user || current_user.admin) && 
-       (!invite.user || invite.user != @project.user)
+    if (invite.can_delete?(current_user))
       invite.delete
     end
-    redirect_to @project
+    respond_to do |format|
+      format.html { render json: {success: true}}
+    end
   end
 
   def get_error(name)
