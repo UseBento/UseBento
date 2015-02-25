@@ -38,6 +38,7 @@ gem 'devise'
 
 gem 'mongoid', '~> 4.0.0', github: 'mongoid/mongoid'
 gem 'bson_ext'
+gem 'appsignal'
 gem 'mongoid-rails'
 gem 'valid_email'
 gem 'slim-rails'
