@@ -32,6 +32,7 @@ function setup_paypal_direct() {
     $('#tco-form').attr('action', 'https://www.2checkout.com/checkout/purchase');
     $('#tco-form')[0].submit(); }
 
+
 (function($, window, document, undefined) {
     var $win = $(window);
     var $doc = $(document);
@@ -158,6 +159,29 @@ function setup_paypal_direct() {
             .on('click.counter', '.counter-control-plus', function() {
                 setValue(value + 1); }); };
 
+        function add_message(message_body) {
+            var message       = $('#message-box').val();
+            
+            var message_li = $('<div/>');
+            message_li.html(message_body);
+            message_li.insertBefore($('li#message-form-li')); 
+
+            link_message_buttons();
+            reset_message_form(); }
+
+        var channel;
+        function messages_websocket() {
+            var project_id   = $('#project-id').val();
+            var dispatcher   = new WebSocketRails(window.location.host + '/websocket');
+            channel          = dispatcher.subscribe('project:' + project_id);
+
+            channel.bind('new_message', function(message) {
+                if (!$('li.project-message[data-id="' + message.id + '"]')[0])
+                    add_message(message.body); }); }
+
+        if ($('#message-box')  && $('#project-id').val())
+            messages_websocket();
+
         function submit_project_message(event) {
             event.preventDefault();
             var message       = $('#message-box').val();
@@ -167,13 +191,8 @@ function setup_paypal_direct() {
                 if (progress_bar)
                     progress_bar.css('display', 'none');
 
-                var message_li = $('<div/>');
-                message_li.html(data.body);
-                message_li.insertBefore($('li#message-form-li')); 
-
-                $('#message-box').val($('#message-box')[0].defaultValue); 
-                link_message_buttons();
-                reset_message_form(); }
+                add_message(data.body);
+                $('#message-box').val($('#message-box')[0].defaultValue); }
 
             var data = {message_body: message};
             data     = new FormData($('#message-form')[0]);

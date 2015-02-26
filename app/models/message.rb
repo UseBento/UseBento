@@ -13,6 +13,8 @@ class Message
   def serialize_message(request, rendered)
     {avatar:       self.user.avatar(request.host_with_port),
      user_name:    self.user.full_name,
+     user_id:      self.user.id.to_s,
+     id:           self.id.to_s,
      body:         rendered,
      posted:       self.format_date}
   end

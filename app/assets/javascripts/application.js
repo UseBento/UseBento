@@ -19,6 +19,7 @@
 //= require jquery.touchSwipe.min.js
 //= require jquery.carouFredSel-6.2.1-packed.js
 //= require functions.js
+//= require websocket_rails/main
 
 function do_nothing() {}
 
