@@ -890,21 +890,21 @@ input:checked + label .paypal-logo { background-position: 0 -29px; }
 /* Fonts */
 @font-face {
     font-family: 'AvenirNext';
-    src: url('../fonts/avenirnextltpro-regular-webfont.eot');
-    src: url('../fonts/avenirnextltpro-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/avenirnextltpro-regular-webfont.woff') format('woff'),
-         url('../fonts/avenirnextltpro-regular-webfont.ttf') format('truetype'),
-         url('../fonts/avenirnextltpro-regular-webfont.svg#AvenirNextLTPro-Regular') format('svg');
+    src: url('/fonts/avenirnextltpro-regular-webfont.eot');
+    src: url('/fonts/avenirnextltpro-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/avenirnextltpro-regular-webfont.woff') format('woff'),
+         url('/fonts/avenirnextltpro-regular-webfont.ttf') format('truetype'),
+         url('/fonts/avenirnextltpro-regular-webfont.svg#AvenirNextLTPro-Regular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Avenir Roman';
-    src: url('../fonts/12_avenir_55_roman_05173-webfont.eot');
-    src: url('../fonts/12_avenir_55_roman_05173-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/12_avenir_55_roman_05173-webfont.woff') format('woff'),
-         url('../fonts/12_avenir_55_roman_05173-webfont.ttf') format('truetype'),
-         url('../fonts/12_avenir_55_roman_05173-webfont.svg#avenirregular') format('svg');
+    src: url('/fonts/12_avenir_55_roman_05173-webfont.eot');
+    src: url('/fonts/12_avenir_55_roman_05173-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/12_avenir_55_roman_05173-webfont.woff') format('woff'),
+         url('/fonts/12_avenir_55_roman_05173-webfont.ttf') format('truetype'),
+         url('/fonts/12_avenir_55_roman_05173-webfont.svg#avenirregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -984,7 +984,7 @@ body { font-family: 'AvenirNext', sans-serif; color: #212f44; font-size: 14px; l
 
 .section-head { padding-bottom: 100px; }
 .form-head h2,
-.section-head h2 { font-family: 'Avenir Roman', sans-serif; font-weight: normal; color: #212f44; font-size: 33px; letter-spacing: 3px; position: relative; text-transform: uppercase; line-height: 1.67; padding-bottom: 14px; }
+.section-head h2 { font-family: 'AvenirNext', sans-serif; font-weight: normal; color: #212f44; font-size: 33px; letter-spacing: 3px; position: relative; text-transform: uppercase; line-height: 1.67; padding-bottom: 14px; }
 .section-head h2:after { content: ''; position: absolute; left: 50%; bottom: 0; border-top: 3px solid; width: 20px; margin-left: -10px; }
 .section-head p { font-size: 18px; }
 
