@@ -173,7 +173,7 @@ function setup_paypal_direct() {
         function messages_websocket() {
             var project_id   = $('#project-id').val();
             var dispatcher   = new WebSocketRails(window.location.host + '/websocket');
-            channel          = dispatcher.subscribe('project:asdf' + project_id);
+            channel          = dispatcher.subscribe_private('project:' + project_id);
 
             channel.bind('new_message', function(message) {
                 if (!$('li.project-message[data-id="' + message.id + '"]')[0])

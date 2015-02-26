@@ -4,21 +4,10 @@ WebsocketRails::EventMap.describe do
   end 
 
 
-  class AuthorizationController < WebsocketRails::BaseController
-    def authorize
-      channel      = WebsocketRails[message[:channel]]
-      project_id   = channel.split(":")[1]
-      project      = Project.find(project_id)
-
-      if project && project.user == current_user
-        accept_channel current_user
-      else
-        deny_channel({:message => 'authorization failed!'})
-      end
-    end
+  namespace :websocket_rails do
+    subscribe :client_connected, :to => AuthorizationController, :with_method => :client_connected
+    subscribe :subscribe_private, :to => AuthorizationController, :with_method => :authorize
   end
-      
-  subscribe :subscribe, :to => AuthorizationController, :with_method => :authorize
 
   # You can use this file to map incoming events to controller actions.
   # One event can be mapped to any number of controller actions. The
