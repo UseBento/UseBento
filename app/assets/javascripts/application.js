@@ -167,3 +167,5 @@ function depluralize(string) {
 function o(fn1, fn2) {
     return function(param) {
         return fn1(fn2(param)); }; }
+//= require websocket_rails/main
+
