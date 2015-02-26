@@ -48,8 +48,6 @@
         h2
           | OUR DESIGNERS CUT THROUGH THE CLUTTER
       .section-body
-        .features-image
-          img[src="css/images/features-image-people.png" width="425" height="347"]
         ul.features-alt.features-right.clearfix
           li.feature
             h3
@@ -66,14 +64,14 @@
               | STAY LEAN AND MOVE FAST
             p
               | Bento makes it simple for your marketing team to get scale up and down with ease.  Our global team ensures fast turnaround time and 24/7 access.
+        .features-image
+          img[src="css/images/features-image-people.png" width="425" height="347"]
   section.section
     .shell
       header.section-head
         h2
           | OUR DESIGNERS CUT THROUGH THE CLUTTER
       .section-body
-        .features-image
-          img[src="css/images/features-image-mac.png" width="690" height="665"]
         ul.features-alt.features-left.clearfix
           li.feature
             h3
@@ -90,6 +88,8 @@
               | dedicated account manager
             p
               | Bento makes it simple for your marketing team to get scale up and down with ease.  Our global team ensures fast turnaround time and 24/7 access.
+        .features-image.feature-image-pull-right.feature-image-pull-top
+          img[src="css/images/features-image-mac.png" width="690" height="665"]
   /.section-partners
     .shell
       h2
@@ -174,7 +174,7 @@
                 | Yammer
               p
                 | Wordpress Website
-  .section.section-services
+  section.section.section-dark.section-services
     .shell
       .section-head
         h2
@@ -186,18 +186,20 @@
           li.service
             a.service-thumbnail[href="/services/select#websites"]
               img[src="css/images/service-websites.jpg"]
-              span.btn
-                | View sample
+              .btn-holder
+                span.btn.btn-bordered
+                  | View sample
             .service-body
               h1
                 | Websites
               p
-                | HTML and Wordpress design and development. 
+                | HTML and Wordpress design and development.  dasdasdasdasdas
           li.service
             a.service-thumbnail[href="/services/select#websites"]
               img[src="css/images/service-landing-pages.jpg"]
-              span.btn
-                | View sample
+              .btn-holder
+                span.btn.btn-bordered
+                  | View sample
             .service-body
               h1
                 | LANDING PAGES
@@ -206,8 +208,9 @@
           li.service
             a.service-thumbnail[href="/services/select#websites"]
               img[src="css/images/service-emails.jpg"]
-              span.btn
-                | View sample
+              .btn-holder
+                span.btn.btn-bordered
+                  | View sample
             .service-body
               h1
                 | EMAILS
@@ -216,8 +219,9 @@
           li.service
             a.service-thumbnail[href="/services/select#websites"]
               img[src="css/images/service-social-media.jpg"]
-              span.btn
-                | View sample
+              .btn-holder
+                span.btn.btn-bordered
+                  | View sample
             .service-body
               h1
                 | SOCIAL MEDIA
@@ -226,8 +230,9 @@
           li.service
             a.service-thumbnail[href="/services/select#websites"]
               img[src="css/images/service-print.jpg"]
-              span.btn
-                | View sample
+              .btn-holder
+                span.btn.btn-bordered
+                  | View sample
             .service-body
               h1
                 | PRINT COllateral
@@ -236,8 +241,9 @@
           li.service
             a.service-thumbnail[href="/services/select#websites"]
               img[src="css/images/service-presentations.jpg"]
-              span.btn
-                | View sample
+              .btn-holder
+                span.btn.btn-bordered
+                  | View sample
             .service-body
               h1
                 | presentations
@@ -333,8 +339,6 @@
             a.popup-link.hidden#userlink[href="/popups/login"]
               | LOGIN
 
-    = link_to "Bento", "/", class: "logo"
-            
-
-    .copyright
-      | © Copyright 2014. All Rights Reserved 
+    a.logo[href="/"]
+      i.sprite-logo
+        | Bento

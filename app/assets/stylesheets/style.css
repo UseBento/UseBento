@@ -929,6 +929,11 @@ body { font-family: 'AvenirNext', sans-serif; color: #212f44; font-size: 14px; l
 .btn:hover { background: #dbc08c; }
 
 
+.btn-bordered { background: transparent; border: 2px solid; color: #fff; padding-left: 38px; padding-right: 38px; font-family: 'AvenirNext', sans-serif; font-weight: normal; }
+.btn-bordered:hover { background: #fff; color: #000; border-color: #fff; }
+
+.shell { width: 1170px; }
+
 /* Elements */
 .header .logo { text-indent: 0; background: transparent; }
 .header .logo-colorful { display: none; }
@@ -954,8 +959,9 @@ body { font-family: 'AvenirNext', sans-serif; color: #212f44; font-size: 14px; l
 .scroll-down-arrow:hover { color: #fff; }
 
 
-.section { background: #fff; }
-.section-black { background: #232323; }
+.section { background: #fff; padding-top: 64px; }
+.section-black { background: #232323; color: #fff; }
+.section-dark { background: #f0f4f7; }
 
 .features { margin: 0 -30px; }
 .features li { width: 33.33%; padding: 0 30px; }
@@ -964,10 +970,69 @@ body { font-family: 'AvenirNext', sans-serif; color: #212f44; font-size: 14px; l
 
 .features h3 { font-size: 16px; color: inherit; text-transform: uppercase; font-weight: normal; padding-bottom: 17px; letter-spacing: 1.5px; }
 
+.features-alt { max-width: 460px; list-style: none outside none; padding-left: 15px; }
+.features-alt .feature { position: relative; }
+.features-alt .feature + .feature { margin-top: 80px; }
+.features-alt .feature:after { content: '•'; position: absolute; top: .5em; right: 100%; margin-right: 10px; }
+.features-alt h3 { font-size: 21px; text-transform: uppercase; font-weight: normal; padding-bottom: 17px; letter-spacing: 1px; }
+.features-right { float: right; }
+.features-left { float: left; }
+.features-image { overflow: hidden; padding: 60px 60px 0; }
+.features-image img { max-width: 100%; height: auto; }
+.feature-image-pull-right { margin-right: -130px; padding-right: 0; overflow: visible; text-align: right; }
+.feature-image-pull-top { padding-top: 0; }
+
 .section-head { padding-bottom: 100px; }
 .form-head h2,
-.section-head h2 { font-family: 'Avenir Roman', sans-serif; font-weight: normal; color: #212f44; font-size: 33px; letter-spacing: 3px; position: relative; }
+.section-head h2 { font-family: 'Avenir Roman', sans-serif; font-weight: normal; color: #212f44; font-size: 33px; letter-spacing: 3px; position: relative; text-transform: uppercase; line-height: 1.67; padding-bottom: 14px; }
 .section-head h2:after { content: ''; position: absolute; left: 50%; bottom: 0; border-top: 3px solid; width: 20px; margin-left: -10px; }
+.section-head p { font-size: 18px; }
+
+.section-black { color: #fff; }
+.section-black .section-head h2 { color: #fff; }
+
+
+.section-services { border: 0 none; }
+
+.services { margin: -54px -27px; font-size: 0; }
+.service { width: 33.33%; height: auto; border: 0 none; padding: 34px 27px; margin: 0; font-size: 14px;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+.service a { padding: 0; height: auto; }
+.service-thumbnail:after { display: none; }
+.service-thumbnail { display: block; position: relative; background: #000; -webkit-backface-visibility: hidden; }
+.service-thumbnail img { width: 100%; height: auto; -webkit-backface-visibility: hidden;
+    -webkit-transition: 300ms;
+         -o-transition: 300ms;
+            transition: 300ms;
+}
+.service-thumbnail .btn-holder { position: absolute; z-index: 2; top: 50%; left: 0; right: 0; opacity: 0; margin-top: -32px;
+    -webkit-transition: 300ms;
+         -o-transition: 300ms;
+            transition: 300ms;
+}
+
+.service-thumbnail:hover img { opacity: .5; }
+.service-thumbnail:hover .btn-holder { opacity: 1; }
+
+.service-body { overflow: hidden; height: 103px; }
+.service h1 { font-family: inherit; font-size: 16px; color: inherit; text-transform: uppercase; letter-spacing: 1px; margin-top: 20px; margin-bottom: 10px; }
+
+
+.service ~ .service { margin: 0; }
+
+
+.section-start { text-align: center; }
+.section-start .section-head h2:after { display: none; }
+.section-start .section-actions { padding-top: 0; position: relative; top: -30px; }
+
+.footer { height: auto; background: #232323; border-top: 1px solid #919191; text-align: center; padding: 78px 0 130px; }
+.footer .nav { text-align: center; font-size: 14px; letter-spacing: 0.05em; padding-bottom: 65px; }
+.footer .nav ul { list-style: none outside none; }
+.footer .nav li { display: inline-block; padding: 0 30px; }
+.footer .nav a { color: #fff; }
 
 /* ===========================
     #End of Redesign
@@ -1007,6 +1072,20 @@ body { font-family: 'AvenirNext', sans-serif; color: #212f44; font-size: 14px; l
     .slider-projects { max-width: 750px; }
 
 
+
+/* ===========================
+    #Redesign
+============================ */
+    
+    .service:nth-child(4n) { margin: 0; }
+
+    .feature-image-pull-right { margin-right: -200px; }
+
+/* ===========================
+    #End of Redesign
+============================ */
+
+
 }
 
 @media (max-width: 1023px) {
@@ -1024,6 +1103,18 @@ body { font-family: 'AvenirNext', sans-serif; color: #212f44; font-size: 14px; l
     .features-list-item-icon { width: 78px; }
 
     .products-grid-item { width: 33%; }
+
+
+/* ===========================
+    #Redesign
+============================ */
+    
+    .features-alt { max-width: 600px; margin: 0 auto; float: none; padding-bottom: 40px; }
+    .features-image { text-align: center; margin: 0; padding: 0; }
+
+/* ===========================
+    #End of Redesign
+============================ */
 }
 
 @media (max-width: 980px) {
@@ -1056,6 +1147,23 @@ body { font-family: 'AvenirNext', sans-serif; color: #212f44; font-size: 14px; l
     .list-radios-custom { display:block; }
     .list-radios-custom li { float:none; }
     .list-radios-custom li:first-child { border-right:0; border-bottom:1px solid #dce3ef;  }
+
+/* ===========================
+    #Redesign
+============================ */
+    
+    .scroll-down-arrow { bottom: 10px; }
+    .scroll-down-arrow:after { height: 11px; }
+
+
+    .footer { padding: 50px 0; }
+
+    .footer .nav { margin: 0 auto; }
+    .footer .nav li { padding: 0 10px; }
+
+/* ===========================
+    #End of Redesign
+============================ */
 }
 
 @media (max-width: 815px) {
@@ -1107,7 +1215,30 @@ body { font-family: 'AvenirNext', sans-serif; color: #212f44; font-size: 14px; l
     .form-col:first-child { float:none; padding-bottom:25px;  }
     .form-col { float:none; width: auto; }
     .form-col.form-col-1of3 { float:none; padding-bottom:25px;  }
-    .form-col.form-col-1of3 { float: none; padding-left: 0; }}
+    .form-col.form-col-1of3 { float: none; padding-left: 0; }
+
+
+/* ===========================
+    #Redesign
+============================ */
+
+    .form-head h2,
+    .section-head h2 { font-size: 26px; }
+    
+    .scroll-down-arrow { bottom: 50px; }
+    .scroll-down-arrow:after { height: 51px; }
+
+    .services { margin: 0; padding: 0 20px; }
+    .service { width: auto; float: none; padding: 0; width: 100%; }
+    .service-body { display: block; }
+
+    .section-start .section-actions { top: 0; }
+
+
+/* ===========================
+    #End of Redesign
+============================ */
+}
 
 @media (max-width: 480px) {
     .btn { display:block; box-sizing: border-box; width: 100%; }
@@ -1117,6 +1248,16 @@ body { font-family: 'AvenirNext', sans-serif; color: #212f44; font-size: 14px; l
 
 @media (max-width: 410px) {
     .service { width: 290px; }
+/* ===========================
+    #Redesign
+============================ */
+
+    .service { width: 100%; }
+
+
+/* ===========================
+    #End of Redesign
+============================ */
 }
 
 .popup-body {
