@@ -917,7 +917,6 @@ input:checked + label .paypal-logo { background-position: 0 -29px; }
 .sprite-chart { width: 48px; height: 35px; background-position: -97px 0px; }
 .sprite-clock { width: 44px; height: 44px; background-position: -43px 0px; }
 .sprite-logo-colorful { width: 139px; height: 33px; background-position: 0px -61px; }
-.sprite-logo { width: 139px; height: 33px; background-position: 0px -104px; }
 .sprite-mini-arrow-down { width: 10px; height: 6px; background-position: -97px -45px; }
 
 
@@ -1793,3 +1792,6 @@ input[type="submit"][disabled] {
     .footer-homepage .nav { margin: 0 auto; }
     .footer-homepage .nav li { padding: 0 10px; }
 
+[class^="sprite-"] { background-image: url(../css/images/sprite.png); background-repeat: no-repeat; background-size: 145px 137px; }
+[class^="sprite-"] { display: inline-block; vertical-align: middle; font-size: 0; line-height: 0; text-indent: -4000px; }
+.sprite-logo { width: 139px; height: 33px; background-position: 0px -104px; }
