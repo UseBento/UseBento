@@ -1,11 +1,12 @@
 class AuthorizationController < WebsocketRails::BaseController
   def authorize
+    puts message[:channel]
     channel      = WebsocketRails[message[:channel]]
-    project_id   = channel.split(":")[1]
+    project_id   = message[:channel].split(":")[1]
     project      = Project.find(project_id)
       
     channel.make_private
-    
+
     if project && project.user == current_user
       accept_channel current_user
     else
