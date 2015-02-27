@@ -192,6 +192,21 @@ function setup_paypal_direct() {
                      success: function(data) {
                              add_message(data.body, data.id); }}); }); 
 
+            channel.bind('message_updated', function(message) {
+                var id    = message.message_id; 
+                var pid   = message.project_id;
+                var el    = $('li.project-message[data-id="' + id + '"]');
+                if (pid != project_id || !el) return;
+
+                $.ajax(
+                    {type: 'get', 
+                     url: '/projects/' + pid + '/message/' + id + '.json',
+                     success: function(data) {
+                         el.html(data.body);
+                         el.attr('data-processed', null);
+                         link_message_buttons();
+                         reset_message_form(); }}); });
+
             channel.bind('new_message', function(message) {
                 if (!$('li.project-message[data-id="' + message.id + '"]')[0])
                     add_message(message.body, message.id); }); }
@@ -504,7 +519,11 @@ function setup_paypal_direct() {
                             message_text.html(data.body);
                             message_raw.html(data.raw);
                             message_text.append(message_raw);
-                            wrapper.append(message_text); }}); }
+                            wrapper.append(message_text); 
+
+                            channel.trigger('message_updated',
+                                           {message_id: message_id,
+                                            project_id: $('#project-id').val()}); }}); }
 
             btn.click(update_message); }
 
