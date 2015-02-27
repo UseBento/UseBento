@@ -12,14 +12,18 @@ class MessagesController < ApplicationController
     @message.user = current_user
     @message.save
 
-    participants = @project.people.select {|p| p.accepted}
-    participants.map do |participant|
-                  if participant != current_user
-                    ProjectMailer.new_user_message_mail(@message, 
-                                                        participant.user, 
-                                                        current_user).deliver
-                  end
-                end
+    # participants = @project.people.select {|p| p.accepted}
+    # participants.map do |participant|
+    #               if participant != current_user
+    #                 ProjectMailer.new_user_message_mail(@message, 
+    #                                                     participant.user, 
+    #                                                     current_user).deliver
+    #               end
+    #             end
+
+    MessageWorker.perform_async(params[:project_id].to_s,
+                                @message.id.to_s,
+                                current_user.id.to_s)
 
     @project.updated_at = DateTime.now
     @project.save!
