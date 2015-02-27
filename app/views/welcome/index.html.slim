@@ -4,92 +4,46 @@
     .intro-content
       .shell
         h2
-          | MARKETING DESIGN MADE EASY
+          | You Build Your Business.  
+          br
+          | We'll Make it Look Beautiful.
         p
-          | Premium designers on demand for all your marketing needs.
+          | Tell us what type of design work you need and our handpicked designers and developers
+          br
+          | will work alongside our account manager to get it done fast and beautifully.
         p
           a.btn[href="/services/select"]
-            | GET STARTED
-
-        a.scroll-down-arrow[href="#"]
-          i.sprite-mini-arrow-down
+            | START YOUR PROJECT NOW
   = render partial: 'header', locals: {page: 'home-secondary'}
   section.section
     .shell
       header.section-head
         h2
-          | DESIGN MAKES YOUR MARKETING BETTER
+          | How Our Process Works
+        p
+          | Our process is simple, proven, and always results in work you are guaranteed to be happy with.
       .section-body
         ul.features.clearfix
           li.feature
-            .feature-image
-              span.sprite-chart
+            .feature-imge
+              i.ico-note
             h3
-              | increase your company’s roi
-            p
-              | We work with only the best designers in the world who we personally vette.  On average, we accept only 1 in 16 design applicants to ensure the highest level of quality.
+              | Pick a Project Type and Supply a Brief
           li.feature
-            .feature-image
-              span.sprite-badge
+            .feature-imge
+              i.ico-buble
             h3
-              | be more effective at your job
-            p
-              | Spend more time building your business and less time finding and managing designers.  Budget exactly what you need and become a marketing superstar.
+              | Provide Visual Comments and Approve the Work
           li.feature
-            .feature-image
-              span.sprite-clock
+            .feature-imge
+              i.ico-code
             h3
-              | STAY LEAN AND MOVE FAST
-            p
-              | Bento makes it simple for your marketing team to get scale up and down with ease.  Our global team ensures fast turnaround time and 24/7 access.
-  section.section.section-black
-    .shell
-      header.section-head
-        h2
-          | OUR DESIGNERS CUT THROUGH THE CLUTTER
-      .section-body
-        ul.features-alt.features-right.clearfix
+              | Email or Site is Developed
           li.feature
+            .feature-imge
+              i.ico-cloud
             h3
-              | VETTED, PREMIUM DESIGNERS
-            p
-              | We work with only the best designers in the world who we personally vette.  On average, we accept only 1 in 16 design applicants to ensure the highest level of quality.
-          li.feature
-            h3
-              | FULLY FOCUSED ON MARKETING
-            p
-              | Marketing design is all we do.  Our team has over 27 years leading marketing teams and is fully focused making the best strategy and work for your project.
-          li.feature
-            h3
-              | STAY LEAN AND MOVE FAST
-            p
-              | Bento makes it simple for your marketing team to get scale up and down with ease.  Our global team ensures fast turnaround time and 24/7 access.
-        .features-image
-          img[src="css/images/features-image-people.png" width="425" height="347"]
-  section.section
-    .shell
-      header.section-head
-        h2
-          | OUR DESIGNERS CUT THROUGH THE CLUTTER
-      .section-body
-        ul.features-alt.features-left.clearfix
-          li.feature
-            h3
-              | we understand your brand
-            p
-              | We work with only the best designers in the world who we personally vette.  On average, we accept only 1 in 16 design applicants to ensure the highest level of quality.
-          li.feature
-            h3
-              | one platform for your project
-            p
-              | Marketing design is all we do.  Our team has over 27 years leading marketing teams and is fully focused making the best strategy and work for your project.
-          li.feature
-            h3
-              | dedicated account manager
-            p
-              | Bento makes it simple for your marketing team to get scale up and down with ease.  Our global team ensures fast turnaround time and 24/7 access.
-        .features-image.feature-image-pull-right.feature-image-pull-top
-          img[src="css/images/features-image-mac.png" width="690" height="665"]
+              | Your Files are Finalized and Ready for Download
   /.section-partners
     .shell
       h2
@@ -105,7 +59,7 @@
           img[src="/images/partners/partner-airbnb.png" alt="" width="132" height="42"]
         li
           img[src="/images/partners/partner-facebook.png" alt="" width="173" height="35"]
-  /.section.section-casestudy
+  .section.section-casestudy
     .shell
       .section-head
         h2
@@ -174,93 +128,49 @@
                 | Yammer
               p
                 | Wordpress Website
-  section.section.section-dark.section-services
+  /.section.section-services
     .shell
       .section-head
         h2
-          | We’RE ready to work on your
-          br
-          | marketing projects today
+          | Types of Projects We Work On
+        p
+          | Here are some of the types of projects that we can help you with.
       .section-body
         ul.services
           li.service
-            a.service-thumbnail[href="/services/select#websites"]
-              img[src="css/images/service-websites.jpg"]
-              .btn-holder
-                span.btn.btn-bordered
-                  | View sample
-            .service-body
-              h1
-                | Websites
-              p
-                | HTML and Wordpress design and development.  dasdasdasdasdas
+            a[href="/services/select#branding"]
+              i.ico.ico-logos
+            h1
+              | Logos / Branding
           li.service
-            a.service-thumbnail[href="/services/select#websites"]
-              img[src="css/images/service-landing-pages.jpg"]
-              .btn-holder
-                span.btn.btn-bordered
-                  | View sample
-            .service-body
-              h1
-                | LANDING PAGES
-              p
-                | Landing page design and development.
+            a[href="/services/select#branding"]
+              i.ico.ico-presentation
+            h1
+              | Presentations
           li.service
-            a.service-thumbnail[href="/services/select#websites"]
-              img[src="css/images/service-emails.jpg"]
-              .btn-holder
-                span.btn.btn-bordered
-                  | View sample
-            .service-body
-              h1
-                | EMAILS
-              p
-                | HTML email design and development.
+            a[href="/services/select#branding"]
+              i.ico.ico-banner
+            h1
+              | Banner Ads
           li.service
-            a.service-thumbnail[href="/services/select#websites"]
-              img[src="css/images/service-social-media.jpg"]
-              .btn-holder
-                span.btn.btn-bordered
-                  | View sample
-            .service-body
-              h1
-                | SOCIAL MEDIA
-              p
-                | Ads, tweets, banners, headers.
+            a[href="/services/select#websites"]
+              i.ico.ico-rocket
+            h1
+              | HTML Emails
           li.service
-            a.service-thumbnail[href="/services/select#websites"]
-              img[src="css/images/service-print.jpg"]
-              .btn-holder
-                span.btn.btn-bordered
-                  | View sample
-            .service-body
-              h1
-                | PRINT COllateral
-              p
-                | All types of printed materials.
+            a[href="/services/select#websites"]
+              i.ico.ico-code-lg
+            h1
+              | HTML Websites
           li.service
-            a.service-thumbnail[href="/services/select#websites"]
-              img[src="css/images/service-presentations.jpg"]
-              .btn-holder
-                span.btn.btn-bordered
-                  | View sample
-            .service-body
-              h1
-                | presentations
-              p
-                | Powerpoint, Keynote with your branding.
-  .section.section-black.section-start
-    .shell
-      .section-head
-        h2
-          | ready to automate your design projects?
-        p
-          | We are so confident that we offer a 100%, no questions asked refund policy.
-      .section-body
-        .section-actions
-          a.btn[href="/services/select"]
-            | START YOUR PROJECT
-  /.section.section-testimonilas
+            a[href="/services/select#websites"]
+              i.ico.ico-wp
+            h1
+              | Wordpress
+      .section-actions
+        a.btn[href="/services/select"]
+          | START YOUR PROJECT TODAY
+  .section.section-testimonilas
     .shell
       .section-head
         h2
@@ -293,7 +203,7 @@
                   | Jena Dodd
                 p
                   |  Marketing - Outcast Agency
-  /.section.section-callout
+  .section.section-callout
     .shell
       .callout
         h2
@@ -308,37 +218,6 @@
   #footer-push
 .footer
   .shell
-    nav.nav
-      ul
-        - unless user_signed_in?
-          li
-            = link_to "START YOUR PROJECT", "/services/select"
-        - else
-          li
-            = link_to "PROJECTS", "/projects/list"
-        - unless user_signed_in?
-          li
-            = link_to "FOR AGENCIES", "/agencies"
-          li
-            = link_to "JOIN THE TEAM", "/apply"
-        li
-          = link_to "CONTACT US", "/contact"
-        li
-          = link_to "BLOG", "/blog"
-        - unless !user_signed_in? && false
-          - unless user_signed_in?
-            li
-              a.popup-link#userlink[href="/popups/login"]
-                | LOGIN
-          - else
-            li
-              a#userlink[href="/profile" data-userid=current_user.id]
-                | PROFILE
-        - else
-          li
-            a.popup-link.hidden#userlink[href="/popups/login"]
-              | LOGIN
+    .copyright
+      | © Copyright 2014. All Rights Reserved 
 
-    a.logo[href="/"]
-      i.sprite-logo
-        | Bento
