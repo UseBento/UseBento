@@ -149,8 +149,8 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    sidekiq (3.3.0)
-      celluloid (>= 0.16.0)
+    sidekiq (3.2.1)
+      celluloid (>= 0.15.2)
       connection_pool (>= 2.0.0)
       json
       redis (>= 3.0.6)
@@ -226,7 +226,7 @@ DEPENDENCIES
   rails (= 4.1.8)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
-  sidekiq
+  sidekiq (= 3.2.1)
   slim-rails
   spring
   turbolinks
