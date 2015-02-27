@@ -984,7 +984,7 @@ body { font-family: 'AvenirNext', sans-serif; color: #212f44; font-size: 14px; l
 
 .section-head { padding-bottom: 100px; }
 .form-head h2,
-.section-head h2 { font-family: 'Avenir Roman', sans-serif; font-weight: normal; color: #212f44; font-size: 33px; letter-spacing: 3px; position: relative; line-height: 1.67; padding-bottom: 14px; }
+.section-head h2 { font-family: 'AvenirNext', sans-serif; font-weight: normal; color: #212f44; font-size: 33px; letter-spacing: 3px; position: relative; line-height: 1.67; padding-bottom: 14px; }
 .section-head-home h2:after { content: ''; position: absolute; left: 50%; bottom: 0; border-top: 3px solid; width: 20px; margin-left: -10px; }
 .section-head p { font-size: 18px; }
 
