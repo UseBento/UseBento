@@ -16,7 +16,7 @@
   = render partial: 'header', locals: {page: 'home-secondary'}
   section.section
     .shell
-      header.section-head
+      header.section-head.section-head-home
         h2
           | DESIGN MAKES YOUR MARKETING BETTER
       .section-body
@@ -25,14 +25,14 @@
             .feature-image
               span.sprite-chart
             h3
-              | increase your company’s roi
+              | INCREASE YOUR COMPANY’S ROI
             p
               | We work with only the best designers in the world who we personally vette.  On average, we accept only 1 in 16 design applicants to ensure the highest level of quality.
           li.feature
             .feature-image
               span.sprite-badge
             h3
-              | be more effective at your job
+              | BE MORE EFFECTIVE AT YOUR JOB
             p
               | Spend more time building your business and less time finding and managing designers.  Budget exactly what you need and become a marketing superstar.
           li.feature
@@ -44,7 +44,7 @@
               | Bento makes it simple for your marketing team to get scale up and down with ease.  Our global team ensures fast turnaround time and 24/7 access.
   section.section.section-black
     .shell
-      header.section-head
+      header.section-head.section-head-home
         h2
           | OUR DESIGNERS CUT THROUGH THE CLUTTER
       .section-body
@@ -65,27 +65,27 @@
             p
               | Bento makes it simple for your marketing team to get scale up and down with ease.  Our global team ensures fast turnaround time and 24/7 access.
         .features-image
-          img[src="css/images/features-image-people.png" width="425" height="347"]
+          img[src="css/images/features-image-people.png" width="517" height="346"]
   section.section
     .shell
-      header.section-head
+      header.section-head.section-head-home
         h2
           | OUR DESIGNERS CUT THROUGH THE CLUTTER
       .section-body
         ul.features-alt.features-left.clearfix
           li.feature
             h3
-              | we understand your brand
+              | WE UNDERSTAND YOUR BRAND
             p
               | We work with only the best designers in the world who we personally vette.  On average, we accept only 1 in 16 design applicants to ensure the highest level of quality.
           li.feature
             h3
-              | one platform for your project
+              | ONE PLATFORM FOR YOUR PROJECT
             p
               | Marketing design is all we do.  Our team has over 27 years leading marketing teams and is fully focused making the best strategy and work for your project.
           li.feature
             h3
-              | dedicated account manager
+              | DEDICATED ACCOUNT MANAGER
             p
               | Bento makes it simple for your marketing team to get scale up and down with ease.  Our global team ensures fast turnaround time and 24/7 access.
         .features-image.feature-image-pull-right.feature-image-pull-top
@@ -109,7 +109,7 @@
     .shell
       .section-head
         h2
-          | Some of the Work We Have Done
+          | SOME OF THE WORK WE HAVE DONE
         p
           | Here is some fo the work that we have done lately for our clients.
       .section-body
@@ -178,72 +178,72 @@
     .shell
       .section-head
         h2
-          | We’RE ready to work on your
+          | WE’RE READY TO WORK ON YOUR
           br
           | marketing projects today
       .section-body
         ul.services
           li.service
-            a.service-thumbnail[href="/services/select#websites"]
+            a.service-thumbnail.popup-link[href="portfolio/ipictures-theme.html"]
               img[src="css/images/service-websites.jpg"]
               .btn-holder
                 span.btn.btn-bordered
-                  | View sample
+                  | VIEW SAMPLE
             .service-body
               h1
                 | Websites
               p
                 | HTML and Wordpress design and development.  dasdasdasdasdas
           li.service
-            a.service-thumbnail[href="/services/select#websites"]
+            a.service-thumbnail.popup-link[href="portfolio/secret-recipe-app.html"]
               img[src="css/images/service-landing-pages.jpg"]
               .btn-holder
                 span.btn.btn-bordered
-                  | View sample
+                  | VIEW SAMPLE
             .service-body
               h1
                 | LANDING PAGES
               p
                 | Landing page design and development.
           li.service
-            a.service-thumbnail[href="/services/select#websites"]
+            a.service-thumbnail.popup-link[href="portfolio/ipictures-theme.html"]
               img[src="css/images/service-emails.jpg"]
               .btn-holder
                 span.btn.btn-bordered
-                  | View sample
+                  | VIEW SAMPLE
             .service-body
               h1
                 | EMAILS
               p
                 | HTML email design and development.
           li.service
-            a.service-thumbnail[href="/services/select#websites"]
+            a.service-thumbnail.popup-link[href="portfolio/ipictures-theme.html"]
               img[src="css/images/service-social-media.jpg"]
               .btn-holder
                 span.btn.btn-bordered
-                  | View sample
+                  | VIEW SAMPLE
             .service-body
               h1
                 | SOCIAL MEDIA
               p
                 | Ads, tweets, banners, headers.
           li.service
-            a.service-thumbnail[href="/services/select#websites"]
+            a.service-thumbnail.popup-link[href="portfolio/ipictures-theme.html"]
               img[src="css/images/service-print.jpg"]
               .btn-holder
                 span.btn.btn-bordered
-                  | View sample
+                  | VIEW SAMPLE
             .service-body
               h1
                 | PRINT COllateral
               p
                 | All types of printed materials.
           li.service
-            a.service-thumbnail[href="/services/select#websites"]
+            a.service-thumbnail.popup-link[href="portfolio/ipictures-theme.html"]
               img[src="css/images/service-presentations.jpg"]
               .btn-holder
                 span.btn.btn-bordered
-                  | View sample
+                  | VIEW SAMPLE
             .service-body
               h1
                 | presentations
@@ -253,7 +253,7 @@
     .shell
       .section-head
         h2
-          | ready to automate your design projects?
+          | READY TO AUTOMATE YOUR DESIGN PROJECTS?
         p
           | We are so confident that we offer a 100%, no questions asked refund policy.
       .section-body
@@ -323,8 +323,6 @@
             = link_to "JOIN THE TEAM", "/apply"
         li
           = link_to "CONTACT US", "/contact"
-        li
-          = link_to "BLOG", "/blog"
         - unless !user_signed_in? && false
           - unless user_signed_in?
             li
