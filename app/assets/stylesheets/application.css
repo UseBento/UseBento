@@ -10,7 +10,14 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
+ *= require jquery.selectbox
+ *= require magnific-popup
+ *= require payments
+ *= require projects
+ *= require services
+ *= require users
+ *= require style
+ *= require style-redesign
  *= require_self
  */
 

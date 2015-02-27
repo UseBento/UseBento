@@ -61,3 +61,10 @@
 #   # config.allowed_origins = ['http://localhost:3000']
 
 # end
+
+WebsocketRails.setup do |config|
+  config.standalone = true
+  config.synchronize = true
+  config.broadcast_subscriber_events = true
+  config.redis_options = {:host => 'localhost', :port => '6379'}
+end

@@ -6,8 +6,8 @@ Rails.application.configure do
     :authentication => :plain,
     :address => "smtp.mailgun.org",
     :port => 587,
-    :domain => "sandboxc84676d0390645d2abda73fd1b5115fd.mailgun.org",
-    :user_name => "postmaster@sandboxc84676d0390645d2abda73fd1b5115fd.mailgun.org",
+    :domain => "sandboxa88c11e826b4458aa502808f7ec49c2b.mailgun.org",
+    :user_name => "postmaster@sandboxa88c11e826b4458aa502808f7ec49c2b.mailgun.org",
     :password => ENV['MAILGUN_PW']
   }
 
@@ -64,12 +64,12 @@ Rails.application.configure do
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
-  config.assets.debug = true
+  config.assets.debug = false
 
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
-  config.assets.raise_runtime_errors = true
+  config.assets.raise_runtime_errors = false
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
