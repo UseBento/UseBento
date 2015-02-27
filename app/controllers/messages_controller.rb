@@ -29,19 +29,31 @@ class MessagesController < ApplicationController
                                     layout:     false,
                                     formats:    :html,
                                     locals:    {message:  @message,
-                                                to_owner: false})
-    serialized = @message.serialize_message(request, message_body) 
-    WebsocketRails['project:' + @project.id.to_s].trigger(:new_message, serialized)
-
-    message_body = render_to_string(partial:   'projects/message', 
-                                    layout:     false,
-                                    formats:    :html,
-                                    locals:    {message:  @message,
                                                 to_owner: true})
 
     respond_to do |format|
       format.html { redirect_to @project }
       format.json { render json: @message.serialize_message(request, message_body)  }
+    end
+  end
+
+  def view
+    @project = Project.find(params[:project_id])
+    if (!@project.has_access?(current_user))
+      redirect_to_login
+    end
+
+    @message = @project.messages.find(params[:message_id])
+    message_body = render_to_string(partial:   'projects/message', 
+                                    layout:     false,
+                                    formats:    :html,
+                                    locals:    {message:  @message,
+                                                to_owner: true})
+    serialized = @message.serialize_message(request, message_body) 
+    
+    respond_to do |format|
+      format.html { redirect_to @project }
+      format.json { render json: @message.serialize_message(request, message_body) }
     end
   end
 
