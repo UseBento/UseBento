@@ -335,7 +335,7 @@ input.btn { display: inline-block; height:60px; }
 
 .section-services { background-color: #fff; border-top:1px solid #dce3ef; text-align:center; }
 .services { overflow: hidden; list-style: none outside none; }
-.service { position: relative; float: left; width: 384px; height: 280px; margin-bottom: 22px; background: #f3f3f3; border: 1px solid #d5dfe8; text-align: center; }
+.service { position: relative; float: left; width: 384px; height: 280px; margin-bottom: 22px; background: #f1f1f1; border: 1px solid #d5dfe8; text-align: center; }
 .service ~ .service { margin-left: 20px; }
 .service:nth-child(4n) { margin-left: 0; }
 .service a { display: block; box-sizing: border-box; height: 100%; padding-top: 30px; }
@@ -1020,7 +1020,7 @@ body { font-family: 'AvenirNext', sans-serif; color: #212f44; font-size: 14px; l
 .service-thumbnail:hover .btn-holder { opacity: 1; }
 
 .service-body { overflow: hidden; height: 103px; }
-.service h1 { font-family: inherit; font-size: 16px; color: inherit; text-transform: uppercase; letter-spacing: 1px; margin-top: 20px; margin-bottom: 10px; }
+.service h1 { font-family: avenirnext; font-size: 18px; color: inherit; text-transform: uppercase; letter-spacing: 1px; margin-top: 20px; margin-bottom: 10px; }
 
 
 .service ~ .service { margin: 0; }
