@@ -20,8 +20,8 @@ Rails.application.configure do
     :authentication => :plain,
     :address => "smtp.mailgun.org",
     :port => 587,
-    :domain => "sandboxc84676d0390645d2abda73fd1b5115fd.mailgun.org",
-    :user_name => "postmaster@sandboxc84676d0390645d2abda73fd1b5115fd.mailgun.org",
+    :domain => "bento.com",
+    :user_name => "postmaster@usebento.com",
     :password => ENV["MAILGUN_PW"]
   }
 
