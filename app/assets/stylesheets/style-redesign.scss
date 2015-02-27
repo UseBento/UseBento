@@ -1779,3 +1779,17 @@ input[type="submit"][disabled] {
     cursor: pointer;
     color: #d21; }
 }
+.footer-homepage, #footer-push { height: 92px; }
+.footer-homepage { background-color: #181e28;  font-size:13px; color: #fff; padding: 31px 0; box-sizing: border-box;  }
+
+
+.footer-homepage { height: auto; background: #232323; border-top: 1px solid #919191; text-align: center; padding: 78px 0 130px; }
+.footer-homepage .nav { text-align: center; font-size: 14px; letter-spacing: 0.05em; padding-bottom: 65px; }
+.footer-homepage .nav ul { list-style: none outside none; }
+.footer-homepage .nav li { display: inline-block; padding: 0 30px; }
+.footer-homepage .nav a { color: #fff; }
+    .footer-homepage { padding: 50px 0; }
+
+    .footer-homepage .nav { margin: 0 auto; }
+    .footer-homepage .nav li { padding: 0 10px; }
+
