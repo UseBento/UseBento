@@ -175,7 +175,10 @@ function setup_paypal_direct() {
         var dispatcher;
         function messages_websocket() {
             var project_id   = $('#project-id').val();
-            dispatcher       = new WebSocketRails(window.location.hostname + ':3001/websocket');
+            var socket_url   = (window.location.host == window.location.hostname
+                                ? window.location.hostname + ":3001/websocket"
+                                : window.location.host + "/websocket");
+            dispatcher       = new WebSocketRails(socket_url);
             channel          = dispatcher.subscribe('project:' + project_id);
 
             channel.bind('message_posted', function(message) {
