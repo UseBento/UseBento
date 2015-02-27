@@ -14,7 +14,7 @@
       .left_container
         ul.list_comment
           - for message in @project.messages
-            = render partial: 'message', locals: {message: message}
+            = render partial: 'message', locals: {message: message, to_owner: true}
           li#message-form-li
             .post_img
               img[src=current_user.avatar(request.host_with_port) alt=""]
