@@ -207,6 +207,13 @@ function setup_paypal_direct() {
                          link_message_buttons();
                          reset_message_form(); }}); });
 
+            channel.bind('message_removed', function(message) {
+                var id    = message.message_id; 
+                var pid   = message.project_id;
+                var el    = $('li.project-message[data-id="' + id + '"]');
+                if (pid != project_id || !el) return;
+                el.detach(); });
+
             channel.bind('new_message', function(message) {
                 if (!$('li.project-message[data-id="' + message.id + '"]')[0])
                     add_message(message.body, message.id); }); }
@@ -533,6 +540,10 @@ function setup_paypal_direct() {
                                project_id:  $('#project-id').val()},
                     url:      '/projects/delete_message.json',
                     success:  function(data) {
+                        channel.trigger('message_removed',
+                                        {message_id: message_id,
+                                         project_id: $('#project-id').val()});
+
                         $('li.project-message[data-id="' + message_id + '"]')
                             .detach();
                         $.magnificPopup.close(); }}); }
