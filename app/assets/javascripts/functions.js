@@ -529,14 +529,6 @@ function setup_paypal_direct() {
             $(document.body).append(popup);
             el.attr('href', "#" + id);
             el.magnificPopup(); }
-        
-        $('.people-entry a.delete.right').map(function(i, a) {
-            var href = $(a).attr('href');
-            ask_are_you_sure(
-                $(a), 
-                function() {
-                    window.location.href = href; },
-                "Are you sure you want to remove this person from the project?"); });
 
         function remove_person(invite_id, element) {
             project_id = $('#project-id').val();

@@ -3,6 +3,10 @@ class InvitationsController < ApplicationController
     @project       = Project.find(params[:project_id])
     @invitation    = @project.invited_users.find(params[:id])
     
+    if not @invitation or not @project
+      return
+    end
+
     if @invitation.user
       @invitation.accepted = true
       @invitation.save
