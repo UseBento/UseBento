@@ -980,7 +980,7 @@ body { font-family: 'AvenirNext', sans-serif; color: #212f44; font-size: 14px; l
 .features-right { float: right; }
 .features-left { float: left; }
 .features-image { overflow: hidden; padding: 60px 60px 0; }
-.features-image img { max-width: 100%; height: auto; }
+.features-image img { max-width: 100%; height: auto; padding-top: 30px;}
 .feature-image-pull-right { margin-right: -130px; padding-right: 0; overflow: visible; text-align: right; }
 .feature-image-pull-top { padding-top: 0; margin-bottom: -100px; }
 
@@ -1793,7 +1793,7 @@ input[type="submit"][disabled] {
     .footer-homepage { padding: 50px 0; }
 
     .footer-homepage .nav { margin: 0 auto; }
-    .footer-homepage .nav li { padding: 0 10px; }
+    .footer-homepage .nav li { padding: 0 30px; }
 
 [class^="sprite-"] { background-image: url(../css/images/sprite.png); background-repeat: no-repeat; background-size: 145px 137px; }
 [class^="sprite-"] { display: inline-block; vertical-align: middle; font-size: 0; line-height: 0; text-indent: -4000px; }
