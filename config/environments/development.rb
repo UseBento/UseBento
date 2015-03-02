@@ -62,4 +62,5 @@ WebsocketRails.setup do |config|
   config.standalone = false
   config.synchronize = false
   config.broadcast_subscriber_events = true
+  config.redis_options = {}
 end
