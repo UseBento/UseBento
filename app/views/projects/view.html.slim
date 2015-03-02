@@ -6,10 +6,21 @@
         img[src="/images/back_arrow.png" alt=""]
         |  Back to My Projects
     .project_detail_box
-      .row_box
-        h2
-          = @project.name
-          /|  &mdash; 
+      - if @project.get_private_chat.can_view? current_user
+        .row_box_split
+          .left_title
+            h2
+              = @project.name
+          .right_chats
+            a#group-chat.chat-row.selected
+              | Group Chat
+            a#private-chat.chat-row
+              | Private Designer Chat
+      - else
+        .row_box
+          h2
+            = @project.name
+          /|  &mdash;
         /= @project.service.title
       .left_container
         ul.list_comment
@@ -35,10 +46,10 @@
       .right_container
         ul.box_list
           li
-            h5 
+            h5
               | Project Details
             = 'Size: ' + @project.print_pages
-            br 
+            br
             - if current_user == @project.user || current_user.admin
               = 'Total: $' + @project.get_price.to_s
               br
@@ -81,7 +92,7 @@
               h5
                 | PROJECT INVOICE
               - if current_user.admin
-                | Project total: 
+                | Project total:
                 form.new-payment-amount[data-id='total']
                   input.form-control.field.new-payment-amount-field[type="text" value=('$' + @project.get_price.to_s)]
                     a.submit-payment[data-id='total']

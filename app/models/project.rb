@@ -21,6 +21,7 @@ class Project
   embeds_many :messages
   embeds_many :invited_users
   embeds_many :attachments
+  embeds_one  :private_chat
   validate :is_valid?
   has_many :payments
   has_many :awaiting_payments
@@ -48,6 +49,10 @@ class Project
     self.people.select do |p|
                  p.user && p.user.admin
                end
+  end
+
+  def get_private_chat
+    self.private_chat || self.create_private_chat({})
   end
 
   def people
