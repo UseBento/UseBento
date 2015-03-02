@@ -26,6 +26,8 @@ class InvitedUser
   end
 
   def can_delete?(user)
-    user.admin || user.id.to_s == inviter_id
+    return false if !(user.admin || user.id.to_s == inviter_id)
+    return false if self.user == project.user
+    !(self.user && self.user.admin && self.project.invited_admins.count == 1)
   end
 end
