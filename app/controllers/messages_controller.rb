@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
-  
+
   def post_message
     @project = Project.find(params[:project_id])
     if !@project.has_access?(current_user)
@@ -12,24 +12,20 @@ class MessagesController < ApplicationController
     @message.user = current_user
     @message.save
 
-    # participants = @project.people.select {|p| p.accepted}
-    # participants.map do |participant|
-    #               if participant != current_user
-    #                 ProjectMailer.new_user_message_mail(@message, 
-    #                                                     participant.user, 
-    #                                                     current_user).deliver
-    #               end
-    #             end
-
-    MessageWorker.perform_async(params[:project_id].to_s,
-                                @message.id.to_s,
-                                current_user.id.to_s)
+     participants = @project.people.select {|p| p.accepted}
+     participants.map do |participant|
+                   if participant != current_user
+                     ProjectMailer.new_user_message_mail(@message,
+                                                         participant.user,
+                                                         current_user).deliver
+                   end
+                 end
 
     @project.updated_at = DateTime.now
     @project.save!
     attachments  = get_attachments(@message)
 
-    message_body = render_to_string(partial:   'projects/message', 
+    message_body = render_to_string(partial:   'projects/message',
                                     layout:     false,
                                     formats:    :html,
                                     locals:    {message:  @message,
@@ -48,13 +44,13 @@ class MessagesController < ApplicationController
     end
 
     @message = @project.messages.find(params[:message_id])
-    message_body = render_to_string(partial:   'projects/message', 
+    message_body = render_to_string(partial:   'projects/message',
                                     layout:     false,
                                     formats:    :html,
                                     locals:    {message:  @message,
                                                 to_owner: true})
-    serialized = @message.serialize_message(request, message_body) 
-    
+    serialized = @message.serialize_message(request, message_body)
+
     respond_to do |format|
       format.html { redirect_to @project }
       format.json { render json: @message.serialize_message(request, message_body) }
@@ -69,8 +65,8 @@ class MessagesController < ApplicationController
 
     @message    = @project.messages.find(params[:message_id])
     @attachment = @message.attachments.find(params[:attachment_id])
-    
-    send_data(@attachment.attachment.read, 
+
+    send_data(@attachment.attachment.read,
               :type          => @attachment.mime,
               :disposition   => 'inline')
   end
@@ -80,7 +76,7 @@ class MessagesController < ApplicationController
     message      = @project.messages.find(params[:id])
 
     return redirect_to @project if !(message.user == current_user || current_user.admin)
-      
+
     new_message  = params[:new_message]
     message.body = new_message
     message.save
