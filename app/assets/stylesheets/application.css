@@ -394,15 +394,15 @@ button.btn.btn-sm.message-save-button {
     display:block;
     color: #525f71;
     font-size: 14px;
-    height: 50%;
+    padding-top: 3px;
+    height: calc(50% - 3px);
     padding-left: 15px; }
 
 .project_detail_box .row_box_split .right_chats a.chat-row#group-chat {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    height: 50%; }
+    right: 0; }
 
 .project_detail_box .row_box_split .right_chats a.chat-row.selected {
     background-color:#d9e9f9; }
@@ -416,5 +416,12 @@ button.btn.btn-sm.message-save-button {
     position: absolute;
     top: 50%;
     left: 0;
-    right: 0;
-    height: 50%; }
+    right: 0; }
+
+.table-row {
+    display: table-row; }
+
+.left_container, .right_container {
+    display: table-cell;
+    float: none !important;
+    vertical-align: top; }

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get  'projects/new/:name',                  to: 'services#create',      as: 'service'
   get  'projects/list',                       to: 'projects#list'
   get  'projects/:id',                        to: 'projects#view',        as: 'project'
+  get  'projects/:id/private_chat',           to: 'projects#private_chat'
   get  'accept_invitation/:project_id/:id',   to: 'invitations#join'
   post 'projects/new',                        to: 'projects#new'
   get  'projects/:id/edit',                   to: 'projects#edit'
@@ -43,7 +44,7 @@ Rails.application.routes.draw do
       get  'profile',                     to: 'users#profile'
       post 'profile/update',              to: 'users#update_profile'
     end
-  
+
     post 'users/sign_up',               to: 'users#sign_up'
     post 'users/log_in',                to: 'users#log_in'
     post 'users/reset',                 to: 'users#reset'

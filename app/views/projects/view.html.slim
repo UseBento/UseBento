@@ -11,140 +11,149 @@
           .left_title
             h2
               = @project.name
+              - if @chat == :private
+                |  &mdash; Private Designer Chat
           .right_chats
-            a#group-chat.chat-row.selected
-              | Group Chat
-            a#private-chat.chat-row
-              | Private Designer Chat
+            - if @chat == :group
+              a#group-chat.chat-row.selected[href=("/projects/" + @project.id.to_s)]
+                | Group Chat
+              a#private-chat.chat-row[href=("/projects/" + @project.id.to_s + "/private_chat")]
+                | Private Designer Chat
+            - else
+              a#group-chat.chat-row[href=("/projects/" + @project.id.to_s)]
+                | Group Chat
+              a#private-chat.chat-row.selected[href=("/projects/" + @project.id.to_s + "/private_chat")]
+                | Private Designer Chat
       - else
         .row_box
           h2
             = @project.name
           /|  &mdash;
         /= @project.service.title
-      .left_container
-        ul.list_comment
-          - for message in @project.messages
-            = render partial: 'message', locals: {message: message, to_owner: true}
-          li#message-form-li
-            .post_img
-              img[src=current_user.avatar(request.host_with_port) alt=""]
-            form#message-form.dtl_box[action=("/projects/" + @project.id.to_s + "/message") method="POST" enctype="multipart/form-data"]
-              = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token)
-              input#project-id[name="project_id" type="hidden" value=@project.id]
-              textarea#message-box.text_box[rows="" placeholder="Add a comment or upload a file..." name="message_body" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"]
-              .bottom_box
-                .attachment_box
-                  #progress-bar
-                  a#file-link[href="#"]
-                    img[src="/images/attachment.png" alt=""]
-                    | Attach files from your computer.
-                  input#file-upload[type="file" style="display:none;"]
-                .submit_box
-                  input.cancel_btn[name="" type="reset" value="Cancel" style="display:none"]
-                  input#add-comment.comment_btn.purple[name="" type="submit" value="SEND" disabled]
-      .right_container
-        ul.box_list
-          li
-            h5
-              | Project Details
-            = 'Size: ' + @project.print_pages
-            br
-            - if current_user == @project.user || current_user.admin
-              = 'Total: $' + @project.get_price.to_s
+      .table-row
+        .left_container
+          ul.list_comment
+            - for message in @messages
+              = render partial: 'message', locals: {message: message, to_owner: true}
+            li#message-form-li
+              .post_img
+                img[src=current_user.avatar(request.host_with_port) alt=""]
+              form#message-form.dtl_box[action=("/projects/" + @project.id.to_s + "/message") method="POST" enctype="multipart/form-data"]
+                = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token)
+                input#project-id[name="project_id" type="hidden" value=@project.id]
+                textarea#message-box.text_box[rows="" placeholder="Add a comment or upload a file..." name="message_body" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"]
+                .bottom_box
+                  .attachment_box
+                    #progress-bar
+                    a#file-link[href="#"]
+                      img[src="/images/attachment.png" alt=""]
+                      | Attach files from your computer.
+                    input#file-upload[type="file" style="display:none;"]
+                  .submit_box
+                    input.cancel_btn[name="" type="reset" value="Cancel" style="display:none"]
+                    input#add-comment.comment_btn.purple[name="" type="submit" value="SEND" disabled]
+        .right_container
+          ul.box_list
+            li
+              h5
+                | Project Details
+              = 'Size: ' + @project.print_pages
               br
-            /= 'Deadline: ' + (@project.deadline || 'Not set')
-            /br
-            - if !@project.filled_out_creative_brief?
-              = link_to "Fill Out Creative Brief", "/projects/" + @project.id.to_s + "/edit"
-            - else
-              = link_to "Edit Creative Brief", "/projects/" + @project.id.to_s + "/edit"
+              - if current_user == @project.user || current_user.admin
+                = 'Total: $' + @project.get_price.to_s
+                br
+              /= 'Deadline: ' + (@project.deadline || 'Not set')
+              /br
+              - if !@project.filled_out_creative_brief?
+                = link_to "Fill Out Creative Brief", "/projects/" + @project.id.to_s + "/edit"
+              - else
+                = link_to "Edit Creative Brief", "/projects/" + @project.id.to_s + "/edit"
 
-            - if current_user.admin
-              br
-              - if @project.archived?
-                = link_to "Unarchive Project", "/projects/" + @project.id.to_s + "/unarchive"
-              - else
-                = link_to "Archive Project", "/projects/" + @project.id.to_s + "/archive"
-              br
-              = link_to "Delete Project", "/projects/" + @project.id.to_s + "/del_project"
-          li
-            h5
-              | Project Milestones
-            = render partial: 'project_timeline'
-          li
-            h5
-              | People on this project
-            #people
-              - for person in @project.people
-                = render partial: 'invited_person', locals: {person: person}
-            .clear
-            br
-            #enter-invite.hidden
-              input#enter-email[type="text" placeholder="email address"]
-              a#submit-invite
-                | Invite
-            a.btn_med.gray#invite-coworkers
-              | INVITE COWORKERS
-            strong#invite-errors
-          - if current_user == @project.user || current_user.admin
-            li#project-invoice
-              h5
-                | PROJECT INVOICE
               - if current_user.admin
-                | Project total:
-                form.new-payment-amount[data-id='total']
-                  input.form-control.field.new-payment-amount-field[type="text" value=('$' + @project.get_price.to_s)]
-                    a.submit-payment[data-id='total']
-                      |  save
-                span.current-payment-amount[data-id='total']
-                  strong.payment-amount[data-id='total']
-                    = "$" + @project.get_price.to_s + " "
-                  a.btn-edit-payment[data-id='total' data-amount=@project.get_price.to_s]
-                    |  Edit
                 br
-                - i = 1
-                - @project.get_awaiting_payments(true).map do |payment|
-                  = i.to_s + " of " + @project.get_awaiting_payments(true).length.to_s + " payments: "
-                  - if payment.class == Payment
-                      strong.payment-amount
-                        = '$' + payment.amount.to_s
-                      |  paid
-                  - else
-                    form.new-payment-amount[data-id=payment.id]
-                      input.form-control.field.new-payment-amount-field[type="text" value=('$' + payment.amount.to_s)]
-                      a.submit-payment[data-id=payment.id]
-                        |  save
-                    span.current-payment-amount[data-id=payment.id]
-                      strong.payment-amount[data-id=payment.id]
-                        = "$" + payment.amount.to_s + " "
-                      a.btn-edit-payment[data-id=payment.id data-amount=payment.amount]
-                        |  Edit
-                    - i += 1
-                  br
-              - else
-                - for payment in @project.payments
-                  p
-                    = '$' + payment.amount.to_s + " - paid"
-                - if @project.next_payment_price
-                  p
-                    = @project.current_payment.to_s + ' of ' + @project.total_payments.to_s + ' Payments: '
-                    span
-                      = '$' + number_with_delimiter(@project.next_payment_price, :delimiter => ',')
-                  - unless current_user.admin
-                    a.btn_med.gray[href=("/payments/checkout/" + @project.id.to_s + "/50")]
-                      - if @project.payments.empty?
-                        | PAY DEPOSIT
-                      - else
-                        | PAY FINAL INVOICE
-          - if @project.attachments.count > 0
-            li#attachments
+                - if @project.archived?
+                  = link_to "Unarchive Project", "/projects/" + @project.id.to_s + "/unarchive"
+                - else
+                  = link_to "Archive Project", "/projects/" + @project.id.to_s + "/archive"
+                br
+                = link_to "Delete Project", "/projects/" + @project.id.to_s + "/del_project"
+            li
               h5
-                | FILE UPLOADS
-              - for attachment in @project.attachments
-                = link_to attachment.shortname, attachment.url, :target => "_blank"
-                = " " + attachment.filesize
-                br
+                | Project Milestones
+              = render partial: 'project_timeline'
+            li
+              h5
+                | People on this project
+              #people
+                - for person in @project.people
+                  = render partial: 'invited_person', locals: {person: person}
+              .clear
+              br
+              #enter-invite.hidden
+                input#enter-email[type="text" placeholder="email address"]
+                a#submit-invite
+                  | Invite
+              a.btn_med.gray#invite-coworkers
+                | INVITE COWORKERS
+              strong#invite-errors
+            - if current_user == @project.user || current_user.admin
+              li#project-invoice
+                h5
+                  | PROJECT INVOICE
+                - if current_user.admin
+                  | Project total:
+                  form.new-payment-amount[data-id='total']
+                    input.form-control.field.new-payment-amount-field[type="text" value=('$' + @project.get_price.to_s)]
+                      a.submit-payment[data-id='total']
+                        |  save
+                  span.current-payment-amount[data-id='total']
+                    strong.payment-amount[data-id='total']
+                      = "$" + @project.get_price.to_s + " "
+                    a.btn-edit-payment[data-id='total' data-amount=@project.get_price.to_s]
+                      |  Edit
+                  br
+                  - i = 1
+                  - @project.get_awaiting_payments(true).map do |payment|
+                    = i.to_s + " of " + @project.get_awaiting_payments(true).length.to_s + " payments: "
+                    - if payment.class == Payment
+                        strong.payment-amount
+                          = '$' + payment.amount.to_s
+                        |  paid
+                    - else
+                      form.new-payment-amount[data-id=payment.id]
+                        input.form-control.field.new-payment-amount-field[type="text" value=('$' + payment.amount.to_s)]
+                        a.submit-payment[data-id=payment.id]
+                          |  save
+                      span.current-payment-amount[data-id=payment.id]
+                        strong.payment-amount[data-id=payment.id]
+                          = "$" + payment.amount.to_s + " "
+                        a.btn-edit-payment[data-id=payment.id data-amount=payment.amount]
+                          |  Edit
+                      - i += 1
+                    br
+                - else
+                  - for payment in @project.payments
+                    p
+                      = '$' + payment.amount.to_s + " - paid"
+                  - if @project.next_payment_price
+                    p
+                      = @project.current_payment.to_s + ' of ' + @project.total_payments.to_s + ' Payments: '
+                      span
+                        = '$' + number_with_delimiter(@project.next_payment_price, :delimiter => ',')
+                    - unless current_user.admin
+                      a.btn_med.gray[href=("/payments/checkout/" + @project.id.to_s + "/50")]
+                        - if @project.payments.empty?
+                          | PAY DEPOSIT
+                        - else
+                          | PAY FINAL INVOICE
+            - if @project.attachments.count > 0
+              li#attachments
+                h5
+                  | FILE UPLOADS
+                - for attachment in @project.attachments
+                  = link_to attachment.shortname, attachment.url, :target => "_blank"
+                  = " " + attachment.filesize
+                  br
       .clear
         /li
           p
