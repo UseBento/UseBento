@@ -41,6 +41,11 @@ class Project
      unpaid_payments:  self.awaiting_payments}
   end
 
+  def lookup_message(id)
+    (self.messages.find(id) ||
+     self.get_private_chat.messages.find(id))
+  end
+
   def was_invited?(user)
     self.invited_users.where(user_id: user.id).first
   end

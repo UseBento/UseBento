@@ -7,6 +7,9 @@ class MessagesController < ApplicationController
       redirect_to_login
     end
 
+    @project.updated_at = DateTime.now
+    @project.save
+
     @room     = params['chat-room'];
     @people   = @room == 'private' ? @project.get_private_chat.people : @project.people
     @messages = @room == 'private' ? @project.get_private_chat.messages : @project.messages
@@ -24,10 +27,7 @@ class MessagesController < ApplicationController
                    end
                  end
 
-    @project.updated_at = DateTime.now
-    @project.save!
     attachments  = get_attachments(@message)
-
     message_body = render_to_string(partial:   'projects/message',
                                     layout:     false,
                                     formats:    :html,
@@ -36,7 +36,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to @project }
-      format.json { render json: @message.serialize_message(request, message_body)  }
+      format.json { render json: @message.serialize_message(request, message_body) }
     end
   end
 
@@ -46,8 +46,7 @@ class MessagesController < ApplicationController
       redirect_to_login
     end
 
-    @message = (@project.messages.find(params[:message_id]) ||
-                @project.get_private_chat.messages.find(params[:message_id]))
+    @message = @project.lookup_message(params[:message_id])
     message_body = render_to_string(partial:   'projects/message',
                                     layout:     false,
                                     formats:    :html,
@@ -67,7 +66,7 @@ class MessagesController < ApplicationController
       redirect_to_login
     end
 
-    @message    = @project.messages.find(params[:message_id])
+    @message    = @project.lookup_message(params[:message_id])
     @attachment = @message.attachments.find(params[:attachment_id])
 
     send_data(@attachment.attachment.read,

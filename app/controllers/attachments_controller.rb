@@ -8,13 +8,13 @@ class AttachmentsController < ApplicationController
     end
 
     if (params[:message_id])
-      @message    = @project.messages.find(params[:message_id])
+      @message    = @project.lookup_message(params[:message_id])
       @attachment = @message.attachments.find(params[:attachment_id])
     else
       @attachment = @project.attachments.find(params[:attachment_id])
     end
-    
-    send_data(@attachment.attachment.read, 
+
+    send_data(@attachment.attachment.read,
               :type          => @attachment.mime,
               :disposition   => 'inline')
   end
