@@ -10,7 +10,7 @@ function get_tco_token() {
         function success(response) {
             $('#twocheckout-token').val(response.response.token.token)
             $('#twocheckout-payment-method')
-                .val(JSON.stringify(response.response.paymentMethod)); 
+                .val(JSON.stringify(response.response.paymentMethod));
             $('#tco-form')[0].submit(); }
 
         function failure() {
@@ -27,7 +27,7 @@ function setup_paypal_direct() {
     $('#paypal-country').val($('#field-country').val());
     $('#paypal-zip').val($('#field-zip').val());
     $('#paypal-email').val($('#field-email').val());
-    $('#paypal-phone').val($('#field-phone').val()); 
+    $('#paypal-phone').val($('#field-phone').val());
 
     $('#tco-form').attr('action', 'https://www.2checkout.com/checkout/purchase');
     $('#tco-form')[0].submit(); }
@@ -43,7 +43,7 @@ function setup_paypal_direct() {
             if ($('#paypal').prop('checked'))
                 setup_paypal_direct();
             else
-                get_tco_token(); }); 
+                get_tco_token(); });
 
         var waiting_for_login   = false;
         var signed_in           = false;
@@ -69,7 +69,7 @@ function setup_paypal_direct() {
                            company:   company},
                     success: function(data) {
                         if (data.error)
-                            $('#sign-up-errors').html(data.error); 
+                            $('#sign-up-errors').html(data.error);
                         else {
                             if (waiting_for_login)
                                 waiting_for_login();
@@ -81,7 +81,7 @@ function setup_paypal_direct() {
             var form       = $('#log-in-form');
             var email      = $('#log-in-form #field-email').val();
             var password   = $('#log-in-form #field-password').val();
-            
+
             $.ajax({type: 'POST',
                     url:  '/users/log_in.json',
                     data: {email:      email,
@@ -100,7 +100,7 @@ function setup_paypal_direct() {
                                 userlink.attr('href', '/profile');
                                 userlink.attr('data-userid', data.id);
                                 userlink.html(data.username);
-                                $.magnificPopup.close(); 
+                                $.magnificPopup.close();
 
                                 var projects_link = $('a[href="/services/select"]');
                                 projects_link.html('PROJECTS');
@@ -117,15 +117,15 @@ function setup_paypal_direct() {
                                 email.parent().append(data.email);
 
                                 var company = $('#field-name-business');
-                                if (!company.val()) 
+                                if (!company.val())
                                     company.val(data.company);
 
                                 var target = $('#field-target');
-                                if (!target.val()) 
+                                if (!target.val())
                                     target.val(data.audience);
 
                                 var keywords = $('#field-keywords');
-                                if (!keywords.val()) 
+                                if (!keywords.val())
                                     keywords.val(data.keywords); }}}}); }
 
         function reset_password(event) {
@@ -166,10 +166,13 @@ function setup_paypal_direct() {
 
             var message_li = $('<div/>');
             message_li.html(message_body);
-            message_li.insertBefore($('li#message-form-li')); 
+            message_li.insertBefore($('li#message-form-li'));
 
             link_message_buttons();
             reset_message_form(); }
+
+        function project_chatroom() {
+            return $('#chat-room').val(); }
 
         var channel;
         var dispatcher;
@@ -179,27 +182,28 @@ function setup_paypal_direct() {
                                 ? window.location.hostname + ":3001/websocket"
                                 : window.location.host + "/websocket");
             dispatcher       = new WebSocketRails(socket_url);
-            channel          = dispatcher.subscribe('project:' + project_id);
+            channel          = dispatcher.subscribe('project:' + project_chatroom()
+                                                    + ":" + project_id);
 
             channel.bind('message_posted', function(message) {
-                var id    = message.message_id; 
+                var id    = message.message_id;
                 var pid   = message.project_id;
                 if (pid != project_id) return;
 
                 $.ajax(
-                    {type: 'get', 
+                    {type: 'get',
                      url: '/projects/' + pid + '/message/' + id + '.json',
                      success: function(data) {
-                             add_message(data.body, data.id); }}); }); 
+                             add_message(data.body, data.id); }}); });
 
             channel.bind('message_updated', function(message) {
-                var id    = message.message_id; 
+                var id    = message.message_id;
                 var pid   = message.project_id;
                 var el    = $('li.project-message[data-id="' + id + '"]');
                 if (pid != project_id || !el) return;
 
                 $.ajax(
-                    {type: 'get', 
+                    {type: 'get',
                      url: '/projects/' + pid + '/message/' + id + '.json',
                      success: function(data) {
                          el.html(data.body);
@@ -208,7 +212,7 @@ function setup_paypal_direct() {
                          reset_message_form(); }}); });
 
             channel.bind('message_removed', function(message) {
-                var id    = message.message_id; 
+                var id    = message.message_id;
                 var pid   = message.project_id;
                 var el    = $('li.project-message[data-id="' + id + '"]');
                 if (pid != project_id || !el) return;
@@ -218,19 +222,20 @@ function setup_paypal_direct() {
                 if (!$('li.project-message[data-id="' + message.id + '"]')[0])
                     add_message(message.body, message.id); }); }
 
-        if ($('#message-box')  && $('#project-id').val())
+        if ($('#message-box') && $('#project-id').val())
             messages_websocket();
 
         function submit_project_message(event) {
             event.preventDefault();
             var message       = $('#message-box').val();
             var project_id    = $('#project-id').val();
-            
+            var chatroom      = project_chatroom();
+
             function success(data) {
                 if (progress_bar)
                     progress_bar.css('display', 'none');
-                
-                channel.trigger('message_posted', 
+
+                channel.trigger('message_posted',
                         {message_id: data.id,
                         project_id:  project_id});
                 add_message(data.body);
@@ -241,19 +246,19 @@ function setup_paypal_direct() {
 
             if (!message_form_has_data())
                 return;
-            
+
             var progress_bar = $('input[name^="file-upload-"]')[0] && $('#progress-bar');
             if (progress_bar) {
                 progress_bar.css('display', 'block');
                 progress_bar.progressbar({value: 0}); }
 
             function upload_progress(evt) {
-                if (evt.lengthComputable) 
-                    progress_bar.progressbar({value: ((evt.loaded / evt.total) 
+                if (evt.lengthComputable)
+                    progress_bar.progressbar({value: ((evt.loaded / evt.total)
                               * 85)}); }
             function response_progress(evt){
-                if (evt.lengthComputable) 
-                    progress_bar.progressbar({value: (85 + ((evt.loaded / evt.total) 
+                if (evt.lengthComputable)
+                    progress_bar.progressbar({value: (85 + ((evt.loaded / evt.total)
                                 * 15))}); }
             $.ajax({type: 'POST',
                     xhr: function() {
@@ -305,7 +310,7 @@ function setup_paypal_direct() {
                 file_upload.detach();
                 function remove_file_upload() {
                     container.detach(); }
-                    
+
                 container = build_el(
                     div('file-upload-container',
                         [file_upload,
@@ -315,10 +320,10 @@ function setup_paypal_direct() {
                 parent.append(container);
 
                 parent.append(
-                    build_el(input({id:    'file-upload', 
-                                    type:  'file', 
+                    build_el(input({id:    'file-upload',
+                                    type:  'file',
                                     style: 'display:none'})));
-                file_upload_id++; 
+                file_upload_id++;
                 set_add_comment_state(); });
             file_upload.trigger('click'); });
 
@@ -340,17 +345,17 @@ function setup_paypal_direct() {
                 file_upload.attr('id', 'file-upload-' + file_upload_id.toString());
                 file_upload.attr('name', 'file-upload-' + file_upload_id.toString());
                 file_upload.parent().append(
-                    build_el(input({id:    'file-upload', 
-                                    type:  'file', 
+                    build_el(input({id:    'file-upload',
+                                    type:  'file',
                                     style: 'display:none'})));
                 file_upload_id++; });
             file_upload.trigger('click'); });
-            
+
 
         function check_first() {
             if ($('#editing')[0]) return;
             var radios = $.unique($('input[type="radio"]')
-                                  .map(function(i, j) { 
+                                  .map(function(i, j) {
                                       return j.name; }));
             radios.map(function(i, name) {
                 var inputs = $('input[type="radio"][name="' + name + '"]');
@@ -382,9 +387,9 @@ function setup_paypal_direct() {
                 $('#userlink').click(); }}
 
         function setup_project_form() {
-            var project_form     = $('#project-form'); 
+            var project_form     = $('#project-form');
             var project_submit   = $('#project-submit');
-            
+
             if (project_form) {
                 just_submit_project = false;
                 project_form.submit(function(event) {
@@ -408,7 +413,7 @@ function setup_paypal_direct() {
             $.ajax({type:    'GET',
                     url:     '/user_exists.json?email=' + encodeURIComponent(email),
                     success:  function(data) {
-                        return data.exists 
+                        return data.exists
                             ? if_exists()
                             : otherwise(); }}); }
 
@@ -422,22 +427,22 @@ function setup_paypal_direct() {
             var plus_dev       = $('#field-design-development').prop('checked');
             var responsive_price     = $('#responsive-price').val() || price;
             var plus_dev_price       = $('#plus-dev-price').val() || price;
-            
-            if ($('input[name="service_name"]').val() == 'social_media_design') 
+
+            if ($('input[name="service_name"]').val() == 'social_media_design')
                 page_count = $('input.header-type')
-                    .map(function(i, ii) { 
+                    .map(function(i, ii) {
                         return $(ii).prop('checked'); })
-                    .filter(function(i, x) { 
-                        return x; }).length; 
+                    .filter(function(i, x) {
+                        return x; }).length;
 
             if (price === 0) return;
-            if (plus_dev) 
+            if (plus_dev)
                 if (plus_dev_price)
                     price = plus_dev_price;
             if (responsive) {
                 if (responsive_price)
                     price = responsive_price;
-                else 
+                else
                     price += 20; }
 
             price = price * page_count;
@@ -447,10 +452,10 @@ function setup_paypal_direct() {
             if ($('#field-design-development').prop('checked')) {
                 $('#development-type').css('visibility', 'visible'); }
             else {
-                $('#development-type').css('visibility', 'hidden'); 
+                $('#development-type').css('visibility', 'hidden');
                 $('#field-desktop-only').prop('checked', true); }}
-            
-            
+
+
         $('#pages-count').change(update_price);
         $('.header-type').change(update_price);
         $('#field-desktop-mobile, #field-desktop-only, #field-design-development, #field-design-only')
@@ -467,19 +472,19 @@ function setup_paypal_direct() {
         $('#submit-invite').click(function() {
             var email    = $('#enter-email').val();
             var id       = $('#project-id').val();
-            
+
             $.ajax({type:    'POST',
                     url:     '/projects/' + id + '/invite.json',
                     data:    {email: email},
                     success:  function(data) {
-                        if (data.error) 
+                        if (data.error)
                             return $('#invite-errors').html(data.error);
                         $('#invite-errors').html('');
 
                         var row = build_el(
                             div('people-entry col_four',
                                 [img({'class':  "avatar",
-                                      src:      ('/images/avatars/' + 
+                                      src:      ('/images/avatars/' +
                                                  email[0].toUpperCase() + '.png'),
                                       alt:      ''}),
                                  span('', [data.email]),
@@ -505,11 +510,11 @@ function setup_paypal_direct() {
                                                  'class': 'btn btn-sm right message-save-button'},
                                                 ['Save'],
                                                 curry(save_message, message_id)));
-                                                 
+
             message_text.detach();
             wrapper.append(edit_area);
             wrapper.append(btn);
-            pencil.css('display', 'none'); 
+            pencil.css('display', 'none');
 
             function update_message() {
                 $.ajax({type:     'POST',
@@ -517,7 +522,7 @@ function setup_paypal_direct() {
                         data:     {id:           message_id,
                                    new_message:  edit_area.val(),
                                    project_id:   $('#project-id').val()},
-                        
+
                         success:  function(data) {
                             pencil.css('display', 'block');
                             edit_area.detach();
@@ -526,7 +531,7 @@ function setup_paypal_direct() {
                             message_text.html(data.body);
                             message_raw.html(data.raw);
                             message_text.append(message_raw);
-                            wrapper.append(message_text); 
+                            wrapper.append(message_text);
 
                             channel.trigger('message_updated',
                                            {message_id: message_id,
@@ -557,7 +562,7 @@ function setup_paypal_direct() {
                 li.find('.delete-message').magnificPopup();
                 li.find('.close-delete-message').click($.magnificPopup.close);
                 li.find('.confirm-delete-message').click(curry(remove_message, id));
-                
+
                 li.find('.edit-message').click(curry(edit_message, id));
                 li.attr('data-processed', 'true'); }); }
 
@@ -620,10 +625,10 @@ function setup_paypal_direct() {
         link_person_buttons();
 
         function run_on_popup() {
-            $('#sign-up-form').submit(sign_up); 
+            $('#sign-up-form').submit(sign_up);
             $('#log-in-form').submit(log_in);
             $('#password-reset-form').submit(reset_password);
-            $('#field-email').val($('#field-email').val() 
+            $('#field-email').val($('#field-email').val()
                                   || $('#field-e-mail').val());
             link_popups(); }
 
@@ -637,7 +642,7 @@ function setup_paypal_direct() {
 
                 $img
                     .height($img.width() * $img.attr('height') / $img.attr('width'))
-                
+
                     .on('load', function() {
                     $img.css('height', '');
                     });
@@ -655,7 +660,7 @@ function setup_paypal_direct() {
                 next: this.content.find('.slider-next'),
                 swipe: true
                 });
-                        
+
                         run_on_popup();
             }
             }
@@ -670,7 +675,7 @@ function setup_paypal_direct() {
                     .attr('type', 'password');
                 $('#show-password-link').attr('class', '');
                 $('#show-password-link').html('Show Passwords'); }
-            else{ 
+            else{
                 $('input#field-password, input#field-new-password, input#field-new-password-confirm')
                     .attr('type', 'text');
                 $('#show-password-link').attr('class', 'hide-passwords');
@@ -698,7 +703,7 @@ function setup_paypal_direct() {
                         form.css('display', 'none');
                         span.css('display', 'inline');
                         span.find('strong.payment-amount[data-id="' + id + '"]')
-                            .html('$' + price.toString()); 
+                            .html('$' + price.toString());
 
                         $('.new-payment-amount[data-id="total"] .new-payment-amount-field')
                             .val('$' + data.price.toString());
@@ -715,7 +720,7 @@ function setup_paypal_direct() {
                             .html('$' + payment.amount.toString());
                         $('a.btn-edit-payment[data-id="' + id + '"]')
                             .attr('data-amount', payment.amount.toString()); }); }}); });
-        
+
         $('.btn-edit-payment').click(function() {
             var id = $(this).attr('data-id');
             $('span.current-payment-amount[data-id="' + id + '"]')
@@ -727,11 +732,11 @@ function setup_paypal_direct() {
             $(this).parent().submit(); });
 
         function validate_apply_form(event) {
-            var skills           = [$('#skill1'), 
-                                    $('#skill2'), 
+            var skills           = [$('#skill1'),
+                                    $('#skill2'),
                                     $('#skill3')];
             var selected_skills  = [];
-            
+
             for (var i in skills) {
                 if (skills[i].val() && member(selected_skills, skills[i].val())) {
                     event.preventDefault();
@@ -778,7 +783,7 @@ function setup_paypal_direct() {
 
     var $form = $(this);
     $('.message-status').addClass('hide');
-    
+
     $form.find('input[type="submit"]').attr('disabled', 'disabled');
 
     var request = $.ajax({
@@ -814,7 +819,7 @@ function setup_paypal_direct() {
 
     request.always(function(jqXHR, error, status) {
         $form.find('input[type="submit"]').removeAttr('disabled');
-    });     
+    });
     };
 
     if (window.location.hash == "#login")

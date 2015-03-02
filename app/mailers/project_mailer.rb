@@ -1,17 +1,17 @@
 class ProjectMailer < ActionMailer::Base
   default from: "Bento <info@usebento.com>"
-  
-  def new_project_mail(project) 
+
+  def new_project_mail(project)
     @user       = project.user
     @service    = project.service
     @project    = project
     @admin      = User.get_admin
 
-    mail(to:      @admin.email, 
+    mail(to:      @admin.email,
          subject: @user.company + " started a new " + @service.name + " project")
   end
 
-  def new_admin_message_mail(message) 
+  def new_admin_message_mail(message)
     @message    = message
     @project    = message.project
     @owner      = @project.user
@@ -21,9 +21,9 @@ class ProjectMailer < ActionMailer::Base
          subject: "New message from " + @admin.full_name)
   end
 
-  def new_user_message_mail(message, to, from) 
+  def new_user_message_mail(message, to, from)
     @message    = message
-    @project    = message.project
+    @project    = message.parent_project
     @to         = to
     @from       = from
 

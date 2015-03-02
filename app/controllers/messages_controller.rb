@@ -7,17 +7,20 @@ class MessagesController < ApplicationController
       redirect_to_login
     end
 
-    @message = @project.messages.create({body:  params[:message_body],
-                                         posted_date: DateTime.now})
+    @room     = params['chat-room'];
+    @people   = @room == 'private' ? @project.get_private_chat.people : @project.people
+    @messages = @room == 'private' ? @project.get_private_chat.messages : @project.messages
+    @message  = @messages.create({body:  params[:message_body],
+                                  posted_date: DateTime.now})
     @message.user = current_user
     @message.save
 
-     participants = @project.people.select {|p| p.accepted}
-     participants.map do |participant|
-                   if participant != current_user
-                     ProjectMailer.new_user_message_mail(@message,
-                                                         participant.user,
-                                                         current_user).deliver
+    participants = @people.select {|p| p.accepted}
+    participants.map do |participant|
+                  if participant != current_user
+                    ProjectMailer.new_user_message_mail(@message,
+                                                        participant.user,
+                                                        current_user).deliver
                    end
                  end
 
@@ -43,7 +46,8 @@ class MessagesController < ApplicationController
       redirect_to_login
     end
 
-    @message = @project.messages.find(params[:message_id])
+    @message = (@project.messages.find(params[:message_id]) ||
+                @project.get_private_chat.messages.find(params[:message_id]))
     message_body = render_to_string(partial:   'projects/message',
                                     layout:     false,
                                     formats:    :html,
