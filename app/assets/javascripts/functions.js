@@ -174,16 +174,30 @@ function setup_paypal_direct() {
         function project_chatroom() {
             return $('#chat-room').val(); }
 
+        function inc_other_unread_count() {
+            var tag    = $('span.unread-tag');
+            var count  = parseInt(tag.html());
+            tag.html(count + 1);
+            tag.attr('data-count', count + 1); }
+
         var channel;
+        var other_channel;
         var dispatcher;
         function messages_websocket() {
+            var room         = project_chatroom();
+            var other_room   = room == 'private' ? 'group' : 'private';
             var project_id   = $('#project-id').val();
             var socket_url   = (window.location.host == window.location.hostname
                                 ? window.location.hostname + ":3001/websocket"
                                 : window.location.host + "/websocket");
             dispatcher       = new WebSocketRails(socket_url);
-            channel          = dispatcher.subscribe('project:' + project_chatroom()
+            channel          = dispatcher.subscribe('project:' + room
                                                     + ":" + project_id);
+            other_channel    = dispatcher.subscribe('project:' + other_room
+                                                    + ":" + project_id);
+
+            other_channel.bind('message_posted', function(message) {
+                inc_other_unread_count(); });
 
             channel.bind('message_posted', function(message) {
                 var id    = message.message_id;
