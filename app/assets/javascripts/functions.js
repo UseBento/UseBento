@@ -32,7 +32,6 @@ function setup_paypal_direct() {
     $('#tco-form').attr('action', 'https://www.2checkout.com/checkout/purchase');
     $('#tco-form')[0].submit(); }
 
-
 (function($, window, document, undefined) {
     var $win = $(window);
     var $doc = $(document);
@@ -191,10 +190,11 @@ function setup_paypal_direct() {
                                 ? window.location.hostname + ":3001/websocket"
                                 : window.location.host + "/websocket");
             dispatcher       = new WebSocketRails(socket_url);
-            channel          = dispatcher.subscribe('project:' + room
-                                                    + ":" + project_id);
-            other_channel    = dispatcher.subscribe('project:' + other_room
-                                                    + ":" + project_id);
+	    dispatcher.on_open = function(data) {
+            other_channel    = dispatcher.subscribe('project-' + other_room
+                                                    + "-" + project_id);
+            channel          = dispatcher.subscribe('project-' + room
+                                                    + "-" + project_id);
 
             other_channel.bind('message_posted', function(message) {
                 inc_other_unread_count(); });
@@ -234,7 +234,7 @@ function setup_paypal_direct() {
 
             channel.bind('new_message', function(message) {
                 if (!$('li.project-message[data-id="' + message.id + '"]')[0])
-                    add_message(message.body, message.id); }); }
+                    add_message(message.body, message.id); }); }; }
 
         if ($('#message-box') && $('#project-id').val())
             messages_websocket();
