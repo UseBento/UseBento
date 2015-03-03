@@ -10,6 +10,10 @@ class PrivateChat
     user.admin || self.invited_users.where(user_id: user.id).first
   end
 
+  def unread_messages_count(user)
+    messages.count - messages.where(read_by: user.id.to_s).count
+  end
+
   def people
     people = self.invited_users
 

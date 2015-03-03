@@ -425,3 +425,17 @@ button.btn.btn-sm.message-save-button {
     display: table-cell;
     float: none !important;
     vertical-align: top; }
+
+span.unread-tag {
+    margin-left: 18px;
+    display:inline-block;
+    border-radius: 9px;
+    background-color: #f20022;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-weight: bold;
+    height: 19px;
+    padding-top: 0px;
+    line-height: 17px;
+    color: white; }
+}

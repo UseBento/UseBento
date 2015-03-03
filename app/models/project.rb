@@ -60,6 +60,10 @@ class Project
     self.private_chat || self.create_private_chat({})
   end
 
+  def unread_messages_count(user)
+    messages.count - messages.where(read_by: user.id.to_s).count
+  end
+
   def people
     people = self.invited_users
 

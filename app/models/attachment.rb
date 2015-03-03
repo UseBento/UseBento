@@ -3,7 +3,6 @@ class Attachment
 
   field :uploaded_date,    type: DateTime
   field :name,             type: String
-#  field :data,             type: BSON::Binary
 
   attr_accessor   :attachment
   embedded_in     :message

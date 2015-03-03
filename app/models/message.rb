@@ -5,6 +5,7 @@ class Message
 
   field :body,           type: String
   field :posted_date,    type: DateTime
+  field :read_by,        type: Array
 
   belongs_to :user
   embedded_in :project
@@ -26,6 +27,12 @@ class Message
 
   def parent_project
     self.project || self.private_chat.project
+  end
+
+  def read(user)
+    self.read_by = [] if !self.read_by
+    self.read_by.push(user.id.to_s)
+    save!
   end
 
   def attachments_as_html

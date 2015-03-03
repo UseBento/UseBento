@@ -1,4 +1,5 @@
 li.project-message[data-id=message.id data-project-id=@project.id]
+  - message.read(current_user)
   - if to_owner && (current_user.admin || current_user == message.user)
     .delete-popup.mfp-hide[id=("delete-popup-" + message.id.to_s)]
       .access
@@ -15,7 +16,7 @@ li.project-message[data-id=message.id data-project-id=@project.id]
                   br
                   button.btn.gray.close-delete-message[type="button"]
                     | Cancel
-                  |   &nbsp;  
+                  |   &nbsp;
                   button.btn.confirm-delete-message[type="button"]
                     | Yes
                   .clear
@@ -34,7 +35,7 @@ li.project-message[data-id=message.id data-project-id=@project.id]
         .hidden.raw_content
           = message.body
     p.info_text
-      | Posted 
+      | Posted
       = message.format_date
     - for attachment in message.valid_attachments
       - if attachment.is_image?
