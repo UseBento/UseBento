@@ -966,7 +966,7 @@ body { font-family: 'AvenirNext', sans-serif; color: #212f44; font-size: 14px; l
 .section-dark { background: #f1f1f1; }
 
 .features { margin: 0 -30px; }
-.features li { width: 33.33%; padding: 0 26px; }
+.features li { width: 50%; padding: 0 26px; }
 .feature:before { display: none; }
 .feature-image { background: #f5f5f5; width: 84px; height: 84px; line-height: 84px; border-radius: 50%; margin: 0 auto 33px; }
 
@@ -994,15 +994,15 @@ body { font-family: 'AvenirNext', sans-serif; color: #212f44; font-size: 14px; l
 .section-black .section-head h2 { color: #fff; }
 
 
-.section-services { border: 0 none; }
+.section-services { border: 0 none; padding-bottom: 140px;}
 
 .services { margin: -54px -27px; font-size: 0; }
-.service { width: 33.33%; height: auto; border: 0 none; padding: 27px 10px; margin: 0; font-size: 14px;
+.service { width: 33.33%; height: auto; border: 0 none; padding: 27px; margin: 0; font-size: 14px;
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;
             box-sizing: border-box;
 }
-.service a { padding: 0; height: auto; }
+.service a { padding: 0; height: auto; border: 1px solid lightgray;}
 .service-thumbnail:after { display: none; }
 .service-thumbnail { display: block; position: relative; background: #000; -webkit-backface-visibility: hidden; }
 .service-thumbnail img { width: 100%; height: auto; -webkit-backface-visibility: hidden;
