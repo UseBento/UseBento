@@ -19,13 +19,15 @@
                 | Group Chat
               a#private-chat.chat-row[href=("/projects/" + @project.id.to_s + "/private_chat")]
                 | Private Designer Chat
-                span.unread-tag
-                  = @project.private_chat.unread_messages_count(current_user)
+                - count = @project.private_chat.unread_messages_count(current_user)
+                span.unread-tag[data-count=count]
+                  = count
             - else
               a#group-chat.chat-row[href=("/projects/" + @project.id.to_s)]
                 | Group Chat
-                span.unread-tag
-                  = @project.unread_messages_count(current_user)
+                - count = @project.unread_messages_count(current_user)
+                span.unread-tag[data-count=count]
+                  = count
               a#private-chat.chat-row.selected[href=("/projects/" + @project.id.to_s + "/private_chat")]
                 | Private Designer Chat
       - else

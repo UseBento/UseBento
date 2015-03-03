@@ -438,4 +438,6 @@ span.unread-tag {
     padding-top: 0px;
     line-height: 17px;
     color: white; }
-}
+
+span.unread-tag[data-count="0"] {
+    display: none; }
