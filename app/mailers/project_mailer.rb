@@ -23,6 +23,7 @@ class ProjectMailer < ActionMailer::Base
 
   def new_user_message_mail(message, to, from)
     @message    = message
+    @attachments = message.attachments
     @project    = message.parent_project
     @to         = to
     @from       = from

@@ -17,6 +17,8 @@ class MessagesController < ApplicationController
                                   posted_date: DateTime.now})
     @message.user = current_user
     @message.save
+    
+    attachments  = get_attachments(@message)
 
     participants = @people.select {|p| p.accepted}
     participants.map do |participant|
@@ -27,7 +29,6 @@ class MessagesController < ApplicationController
                    end
                  end
 
-    attachments  = get_attachments(@message)
     message_body = render_to_string(partial:   'projects/message',
                                     layout:     false,
                                     formats:    :html,

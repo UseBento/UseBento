@@ -181,7 +181,7 @@ function setup_paypal_direct() {
             tag.attr('data-count', count + 1); }
 
         var channel;
-        var other_channel;
+        //var other_channel;
         var dispatcher;
         function messages_websocket() {
             var room         = project_chatroom();
@@ -193,11 +193,11 @@ function setup_paypal_direct() {
             dispatcher       = new WebSocketRails(socket_url);
             channel          = dispatcher.subscribe('project:' + room
                                                     + ":" + project_id);
-            other_channel    = dispatcher.subscribe('project:' + other_room
-                                                    + ":" + project_id);
+            //other_channel    = dispatcher.subscribe('project:' + other_room
+            //                                        + ":" + project_id);
 
-            other_channel.bind('message_posted', function(message) {
-                inc_other_unread_count(); });
+            //other_channel.bind('message_posted', function(message) {
+            //    inc_other_unread_count(); });
 
             channel.bind('message_posted', function(message) {
                 var id    = message.message_id;
