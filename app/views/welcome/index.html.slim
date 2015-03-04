@@ -1,49 +1,86 @@
-.wrapper
+#homepage.wrapper
   = render partial: 'header', locals: {page: 'home-top'}
   .intro
     .intro-content
       .shell
         h2
-          | You Build Your Business.  
-          br
-          | We'll Make it Look Beautiful.
+          | WORLD-CLASS DESIGNERS ON DEMAND
         p
-          | Tell us what type of design work you need and our handpicked designers and developers
-          br
-          | will work alongside our account manager to get it done fast and beautifully.
+          | Handpicked designers ready to work on your projects now.
         p
           a.btn[href="/services/select"]
-            | START YOUR PROJECT NOW
+            | GET STARTED
+
   = render partial: 'header', locals: {page: 'home-secondary'}
   section.section
     .shell
-      header.section-head
+      header.section-head.section-head-home
         h2
-          | How Our Process Works
-        p
-          | Our process is simple, proven, and always results in work you are guaranteed to be happy with.
+          | GOOD DESIGN MATTERS TO YOUR BUSINESS
       .section-body
         ul.features.clearfix
           li.feature
-            .feature-imge
-              i.ico-note
+            .feature-image
+              span.sprite-chart
             h3
-              | Pick a Project Type and Supply a Brief
+              | STAND OUT AND GET NOTICED
+            p
+              | In today's competitive landscape design can be the key to separating your company from the rest of the pack.  It cuts through the clutter and makes your brand unique and professional in the eyes of your customers.
           li.feature
-            .feature-imge
-              i.ico-buble
+            .feature-image
+              span.sprite-badge
             h3
-              | Provide Visual Comments and Approve the Work
+              | GROW YOUR CUSTOMERS
+            p
+              | Design changes how your business interacts with customers. It validates your product, messaging and new ideas.  It also helps you develop empathy and identify problems.  
+  section.section.section-black
+    .shell
+      header.section-head.section-head-home
+        h2
+          | WORK WITH ONLY THE BEST
+      .section-body
+        ul.features-alt.features-right.clearfix
           li.feature
-            .feature-imge
-              i.ico-code
             h3
-              | Email or Site is Developed
+              | VETTED, PREMIUM DESIGNERS
+            p
+              | We work with only the best designers in the world who we personally vette.  On average, we accept only 1 in 16 design applicants to ensure the highest level of quality.
           li.feature
-            .feature-imge
-              i.ico-cloud
             h3
-              | Your Files are Finalized and Ready for Download
+              | AN EXPERIECED STARTUP TEAM
+            p
+              | Our designers and team have worked with some of the world's largest brands and startups.  This translates to you getting the best strategy and work for your project.
+          li.feature
+            h3
+              | A DEDICATED ACCOUNT MANAGER
+            p
+              | Each and every company with Bento is assigned an account manager to assist with the fulfillment and running of your project. This ensures speed and quality.
+        .features-image
+          img[src="css/images/features-image-people.png" width="517" height="346"]
+  section.section
+    .shell
+      header.section-head.section-head-home
+        h2
+          | BENTO MAKES YOUR JOB EASY
+      .section-body
+        ul.features-alt.features-left.clearfix
+          li.feature
+            h3
+              | WE UNDERSTAND YOUR BRAND
+            p
+              | We have a proven briefing process that gets to the heart of your brand.  As well your work is saved to your company's account where any future designer can utilize the assets.
+          li.feature
+            h3
+              | EASILY MANAGE YOUR PROJECTS
+            p
+              | The entire design process takes place in our turnkey platform.  From briefing to feedback, design has never been so simple.
+          li.feature
+            h3
+              | STAY LEAN AND MOVE FAST
+            p
+              | Bento makes it simple for your  team to scale your work up and down with ease.  Our global team ensures fast turnaround time and 24/7 access.
+        .features-image.feature-image-pull-right.feature-image-pull-top
+          img[src="css/images/features-image-mac.png" width="690" height="665"]
   /.section-partners
     .shell
       h2
@@ -59,11 +96,11 @@
           img[src="/images/partners/partner-airbnb.png" alt="" width="132" height="42"]
         li
           img[src="/images/partners/partner-facebook.png" alt="" width="173" height="35"]
-  .section.section-casestudy
+  /.section.section-casestudy
     .shell
       .section-head
         h2
-          | Some of the Work We Have Done
+          | SOME OF THE WORK WE HAVE DONE
         p
           | Here is some fo the work that we have done lately for our clients.
       .section-body
@@ -128,49 +165,61 @@
                 | Yammer
               p
                 | Wordpress Website
-  /.section.section-services
+  section.section.section-dark.section-services
     .shell
-      .section-head
+      header.section-head.section-head-home
         h2
-          | Types of Projects We Work On
-        p
-          | Here are some of the types of projects that we can help you with.
+          | SOME OF THE WORK WE HAVE DONE
       .section-body
         ul.services
           li.service
-            a[href="/services/select#branding"]
-              i.ico.ico-logos
-            h1
-              | Logos / Branding
+            a.service-thumbnail.popup-link[href="portfolio/1.html"]
+              img[src="css/images/service-1.jpg"]
+              .btn-holder
+                span.btn.btn-bordered
+                  | VIEW PROJECT
           li.service
-            a[href="/services/select#branding"]
-              i.ico.ico-presentation
-            h1
-              | Presentations
+            a.service-thumbnail.popup-link[href="portfolio/2.html"]
+              img[src="css/images/service-2.jpg"]
+              .btn-holder
+                span.btn.btn-bordered
+                  | VIEW PROJECT
           li.service
-            a[href="/services/select#branding"]
-              i.ico.ico-banner
-            h1
-              | Banner Ads
+            a.service-thumbnail.popup-link[href="portfolio/3.html"]
+              img[src="css/images/service-3.jpg"]
+              .btn-holder
+                span.btn.btn-bordered
+                  | VIEW PROJECT
           li.service
-            a[href="/services/select#websites"]
-              i.ico.ico-rocket
-            h1
-              | HTML Emails
+            a.service-thumbnail.popup-link[href="portfolio/4.html"]
+              img[src="css/images/service-4.jpg"]
+              .btn-holder
+                span.btn.btn-bordered
+                  | VIEW PROJECT
           li.service
-            a[href="/services/select#websites"]
-              i.ico.ico-code-lg
-            h1
-              | HTML Websites
+            a.service-thumbnail.popup-link[href="portfolio/5.html"]
+              img[src="css/images/service-5.jpg"]
+              .btn-holder
+                span.btn.btn-bordered
+                  | VIEW PROJECT
           li.service
-            a[href="/services/select#websites"]
-              i.ico.ico-wp
-            h1
-              | Wordpress
-      .section-actions
-        a.btn[href="/services/select"]
-          | START YOUR PROJECT TODAY
-  .section.section-testimonilas
+            a.service-thumbnail.popup-link[href="portfolio/6.html"]
+              img[src="css/images/service-6.jpg"]
+              .btn-holder
+                span.btn.btn-bordered
+                  | VIEW PROJECT
+  .section.section-black.section-start
+    .shell
+      .section-head
+        h2
+          | READY TO AUTOMATE YOUR DESIGN PROJECTS?
+        p
+          | We are so confident that we offer a 100%, no questions asked refund policy.
+      .section-body
+        .section-actions
+          a.btn[href="/services/select"]
+            | START YOUR PROJECT
+  /.section.section-testimonilas
     .shell
       .section-head
         h2
@@ -203,7 +252,7 @@
                   | Jena Dodd
                 p
                   |  Marketing - Outcast Agency
-  .section.section-callout
+  /.section.section-callout
     .shell
       .callout
         h2
@@ -216,7 +265,38 @@
           a.btn-callout[href="/apply"]
             | APPLY NOW
   #footer-push
-.footer
+.footer-homepage.footer
   .shell
-    .copyright
-      | © Copyright 2014. All Rights Reserved 
+    nav.nav
+      ul
+        - unless user_signed_in?
+          li
+            = link_to "START YOUR PROJECT", "/services/select"
+        - else
+          li
+            = link_to "PROJECTS", "/projects/list"
+        - unless user_signed_in?
+          li
+            = link_to "FOR AGENCIES", "/agencies"
+          li
+            = link_to "JOIN THE TEAM", "/apply"
+        li
+          = link_to "CONTACT US", "/contact"
+        - unless !user_signed_in? && false
+          - unless user_signed_in?
+            li
+              a.popup-link#userlink[href="/popups/login"]
+                | LOGIN
+          - else
+            li
+              a#userlink[href="/profile" data-userid=current_user.id]
+                | PROFILE
+        - else
+          li
+            a.popup-link.hidden#userlink[href="/popups/login"]
+              | LOGIN
+
+    a.logo[href="/"]
+      i.sprite-logo
+        | Bento
+

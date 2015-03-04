@@ -12,8 +12,8 @@ Rails.application.configure do
     :authentication => :plain,
     :address => "smtp.mailgun.org",
     :port => 587,
-    :domain => "sandboxc84676d0390645d2abda73fd1b5115fd.mailgun.org",
-    :user_name => "postmaster@sandboxc84676d0390645d2abda73fd1b5115fd.mailgun.org",
+    :domain => "sandboxa88c11e826b4458aa502808f7ec49c2b.mailgun.org",
+    :user_name => "postmaster@sandboxa88c11e826b4458aa502808f7ec49c2b.mailgun.org",
     :password => ENV["MAILGUN_PW"]
   }
 
@@ -48,9 +48,19 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
+  config.middleware.delete Rack::Lock
+
   CarrierWave.configure do |config|
                config.storage = :grid_fs
                config.root = Rails.root.join('tmp')
                config.cache_dir = "uploads"
              end
+end
+
+
+WebsocketRails.setup do |config|
+  config.standalone = false
+  config.synchronize = false
+  config.broadcast_subscriber_events = true
+  config.redis_options = {}
 end

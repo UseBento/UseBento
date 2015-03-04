@@ -1,5 +1,6 @@
 li.project-message[data-id=message.id data-project-id=@project.id]
-  - if current_user.admin || current_user == message.user
+  - message.read(current_user)
+  - if to_owner && (current_user.admin || current_user == message.user)
     .delete-popup.mfp-hide[id=("delete-popup-" + message.id.to_s)]
       .access
         .form.form-access
@@ -15,7 +16,7 @@ li.project-message[data-id=message.id data-project-id=@project.id]
                   br
                   button.btn.gray.close-delete-message[type="button"]
                     | Cancel
-                  |   &nbsp;  
+                  |   &nbsp;
                   button.btn.confirm-delete-message[type="button"]
                     | Yes
                   .clear
@@ -23,7 +24,7 @@ li.project-message[data-id=message.id data-project-id=@project.id]
   .avtar
     img[src=message.user.avatar(request.host_with_port) alt=""]
   .dtl_box
-    - if current_user.admin || current_user == message.user
+    - if to_owner && (current_user.admin || current_user == message.user)
       a.right.fa.fa-trash-o.delete-message[data-project-id=@project.id data-message-id=message.id href=("#delete-popup-" + message.id.to_s)]
       a.right.fa.fa-pencil.edit-message[data-project-id=@project.id data-message-id=message.id]
     h4
@@ -34,7 +35,7 @@ li.project-message[data-id=message.id data-project-id=@project.id]
         .hidden.raw_content
           = message.body
     p.info_text
-      | Posted 
+      | Posted
       = message.format_date
     - for attachment in message.valid_attachments
       - if attachment.is_image?

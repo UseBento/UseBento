@@ -1,9 +1,8 @@
 class Attachment
   include Mongoid::Document
-  
+
   field :uploaded_date,    type: DateTime
   field :name,             type: String
-#  field :data,             type: BSON::Binary
 
   attr_accessor   :attachment
   embedded_in     :message
@@ -12,12 +11,12 @@ class Attachment
 
   def url
     if message
-      "/attachment/" + 
-        self.message.project.id + "/" +
+      "/attachment/" +
+        self.message.parent_project.id + "/" +
         self.message.id + "/" + self.id + "/" +
         (self.name.gsub(/[^-_A-Za-z0-9]/, '_')  || "")
     elsif project
-      "/attachment/" + 
+      "/attachment/" +
         self.project.id + "/" +
         self.id + "/" +
         (self.name.gsub(/[^-_A-Za-z0-9]/, '_')  || "")
@@ -27,11 +26,11 @@ class Attachment
   def mime
     MIME::Types.type_for(self.name)[0] || MIME::Type.new("file/" + (self.name || ""))
   end
-  
+
   def is_image?
     ['image/jpeg', 'image/gif', 'image/png'].member? self.mime.content_type
   end
-  
+
   def filesize
     my_size = self.attachment.size
     if (my_size == 0 || !my_size)

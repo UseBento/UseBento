@@ -19,6 +19,7 @@
 //= require jquery.touchSwipe.min.js
 //= require jquery.carouFredSel-6.2.1-packed.js
 //= require functions.js
+//= require websocket_rails/main
 
 function do_nothing() {}
 
@@ -167,3 +168,5 @@ function depluralize(string) {
 function o(fn1, fn2) {
     return function(param) {
         return fn1(fn2(param)); }; }
+//= require websocket_rails/main
+

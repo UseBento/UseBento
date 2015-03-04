@@ -12,13 +12,13 @@ class ApplicationController < ActionController::Base
   end
 
   def send_contact
-    BentoMailer.contact_us(params['field-name'], 
+    BentoMailer.contact_us(params['field-name'],
                            params['field-e-mail'],
                            params['field-subject'],
                            params['field-message']).deliver
 
     respond_to do |format|
-      format.html { 
+      format.html {
           @message_sent = true
           render 'contact' }
       format.json { render json: {success: true} }
@@ -26,13 +26,13 @@ class ApplicationController < ActionController::Base
   end
 
   def contact_agency
-    BentoMailer.contact_agency(params['field-name'], 
+    BentoMailer.contact_agency(params['field-name'],
                                params['field-e-mail'],
                                params['field-agency'],
                                params['field-message']).deliver
 
     respond_to do |format|
-      format.html { 
+      format.html {
           @message_sent = true
           render 'agencies' }
       format.json { render json: {success: true} }
@@ -40,8 +40,8 @@ class ApplicationController < ActionController::Base
   end
 
   def send_apply
-    skills = [params['skill'], 
-              params['skill2'], 
+    skills = [params['skill'],
+              params['skill2'],
               params['skill3']].select do |skill|
                                  skill
                                end
@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
                                 params['field-e-mail']).deliver
 
     respond_to do |format|
-      format.html { 
+      format.html {
           @message_sent = true
           render 'apply' }
       format.json { render json: {success: true} }
@@ -65,13 +65,14 @@ class ApplicationController < ActionController::Base
   end
 
   def get_attachments(parent)
-    files = params.select {|a,b| a.to_s.slice(0, 11) == "file-upload"}
+    files = params.select {|a,b| a.to_s.slice(0, 12) == "file-upload-"}
+    logger.debug(files);
     files.map do |key, file|
-           attachment = 
-             parent.attachments.create({uploaded_date:   DateTime.now,
+           attachment = Attachment.new({uploaded_date:   DateTime.now,
                                         name:            file.original_filename})
            attachment.attachment = file
-           attachment.save
+           parent.attachments.push(attachment)
+           logger.debug('made new file');
          end
   end
 end
