@@ -32,7 +32,6 @@ function setup_paypal_direct() {
     $('#tco-form').attr('action', 'https://www.2checkout.com/checkout/purchase');
     $('#tco-form')[0].submit(); }
 
-
 (function($, window, document, undefined) {
     var $win = $(window);
     var $doc = $(document);
@@ -191,50 +190,52 @@ function setup_paypal_direct() {
                                 ? window.location.hostname + ":3001/websocket"
                                 : window.location.host + "/websocket");
             dispatcher       = new WebSocketRails(socket_url);
-            channel          = dispatcher.subscribe('project:' + room
-                                                    + ":" + project_id);
-            //other_channel    = dispatcher.subscribe('project:' + other_room
-            //                                        + ":" + project_id);
+	        dispatcher.on_open = function(data) {
+                //other_channel    = dispatcher.subscribe('project-' + other_room
+                //                                        + "-" + project_id);
+                channel          = dispatcher.subscribe('project-' + room
+                                                        + "-" + project_id);
 
-            //other_channel.bind('message_posted', function(message) {
-            //    inc_other_unread_count(); });
+                //other_channel.bind('message_posted', function(message) {
+                //    inc_other_unread_count(); });
 
-            channel.bind('message_posted', function(message) {
-                var id    = message.message_id;
-                var pid   = message.project_id;
-                if (pid != project_id) return;
+                channel.bind('message_posted', function(message) {
+                    var id    = message.message_id;
+                    var pid   = message.project_id;
+                    if (pid != project_id) return;
 
-                $.ajax(
-                    {type: 'get',
-                     url: '/projects/' + pid + '/message/' + id + '.json',
-                     success: function(data) {
-                             add_message(data.body, data.id); }}); });
+                    $.ajax(
+                        {type: 'get',
+                         url: '/projects/' + pid + '/message/' + id + '.json',
+                         success: function(data) {
+                                 add_message(data.body, data.id); }}); });
 
-            channel.bind('message_updated', function(message) {
-                var id    = message.message_id;
-                var pid   = message.project_id;
-                var el    = $('li.project-message[data-id="' + id + '"]');
-                if (pid != project_id || !el) return;
+                channel.bind('message_updated', function(message) {
+                    var id    = message.message_id;
+                    var pid   = message.project_id;
+                    var el    = $('li.project-message[data-id="' + id + '"]');
+                    if (pid != project_id || !el) return;
 
-                $.ajax(
-                    {type: 'get',
-                     url: '/projects/' + pid + '/message/' + id + '.json',
-                     success: function(data) {
-                         el.html(data.body);
-                         el.attr('data-processed', null);
-                         link_message_buttons();
-                         reset_message_form(); }}); });
+                    $.ajax(
+                        {type: 'get',
+                         url: '/projects/' + pid + '/message/' + id + '.json',
+                         success: function(data) {
+                             el.html(data.body);
+                             el.attr('data-processed', null);
+                             link_message_buttons();
+                             reset_message_form(); }}); });
 
-            channel.bind('message_removed', function(message) {
-                var id    = message.message_id;
-                var pid   = message.project_id;
-                var el    = $('li.project-message[data-id="' + id + '"]');
-                if (pid != project_id || !el) return;
-                el.detach(); });
+                channel.bind('message_removed', function(message) {
+                    var id    = message.message_id;
+                    var pid   = message.project_id;
+                    var el    = $('li.project-message[data-id="' + id + '"]');
+                    if (pid != project_id || !el) return;
+                    el.detach(); });
 
-            channel.bind('new_message', function(message) {
-                if (!$('li.project-message[data-id="' + message.id + '"]')[0])
-                    add_message(message.body, message.id); }); }
+                channel.bind('new_message', function(message) {
+                    if (!$('li.project-message[data-id="' + message.id + '"]')[0])
+                        add_message(message.body, message.id); }); }; 
+            }
 
         if ($('#message-box') && $('#project-id').val())
             messages_websocket();

@@ -102,5 +102,5 @@ WebsocketRails.setup do |config|
   config.standalone = true
   config.synchronize = true
   config.broadcast_subscriber_events = true
-  config.redis_options = {:host => '127.0.0.1', :port => '6379'}
+  config.redis_options = {:host => 'localhost', :port => '6379'}
 end
