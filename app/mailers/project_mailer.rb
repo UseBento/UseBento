@@ -11,18 +11,6 @@ class ProjectMailer < ActionMailer::Base
          subject: @user.company + " started a new " + @service.name + " project")
   end
 
-  def new_project_request_mail(name, email, company, company_size, description)
-    @name          = name
-    @email         = email
-    @company       = company
-    @company_size  = company_size
-    @description   = description
-    @admin         = User.get_admin
-
-    mail(to:      @admin.email,
-         subject: @company + " wants to start a new project")
-  end
-
   def new_admin_message_mail(message)
     @message    = message
     @project    = message.project
