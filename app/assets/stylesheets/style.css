@@ -267,7 +267,7 @@ input.btn { display: inline-block; height:60px; }
 }
 
 .section-head { text-align:center; padding-bottom:80px; }
-.section-head-little-gutter { padding-bottom: 35px; }
+.section-head-little-gutter { padding-bottom: 40px; }
 
 .form-head h2,
 .section-head h2 { font-weight: 300; color: #525f71; font-size:36px; padding-bottom:21px; line-height:40px;  }

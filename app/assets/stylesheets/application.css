@@ -453,6 +453,10 @@ span.unread-tag[data-count="0"] {
     color: #fcfcfc;
     font-weight: normal; }
 
+.header .nav .current a {
+  color: #fff;
+}
+
 .wrapper.dark, .wrapper.dark .section {
     background-color: #f1f1f1; }
 
@@ -469,7 +473,6 @@ font-size: 28px; }
 
 
 .shell.start-project .section-body.start-form {
-width: 816px;
 padding: 50px;
 padding-bottom: 30px;
 background-color: #FCFDFF;
@@ -515,7 +518,9 @@ background-color: #B0996D;
 color: #FFF;
 font-family: "AvenirNext";
 font-size: 15px;
-font-weight: 300; }
+font-weight: 600; }
+
+.btn:hover { background: #dbc08c; }
 
 .align-right {
     text-align: right; }
