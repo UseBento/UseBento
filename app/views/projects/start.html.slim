@@ -1,0 +1,91 @@
+.wrapper.dark
+  = render partial: 'dark_header', locals: {page: 'start_project'}
+  .section.section-project
+    .shell.start-project
+      .section-head.section-head-little-gutter
+        h3
+          | Please fill out the information below and
+          br
+          | we will contact you to learn more about your project
+      .section-body.start-form
+        form.form-required[action="/projects/finish_start" method="post"]
+          = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token)
+          .form-body
+            .form-row
+              .form-cols
+                .form-col.form-col-1of2
+                  label.form-label[for="field-full-name"]
+                    | Full Name
+                  .form-controls
+                    input#field-full-name.field[type="text" name="full_name" required]
+                .form-col.form-col-1of2
+                  label.form-label[for="field-email-address"]
+                    | Email Address
+                  .form-controls
+                    input#field-email-address.field[type="text" name="email_address" required]
+            .form-row
+              .form-cols
+                .form-col.form-col-1of2
+                  label.form-label[for="field-company"]
+                    | Company Name
+                  .form-controls
+                    input#field-company.field[type="text" name="company" required]
+                .form-col.form-col-1of2
+                  label.form-label[for="field-company-size"]
+                    | Company Size
+                  .form-controls
+                    select#field-company-size.field[name="company_size" required]
+                      option[value="1-10"]
+                        | 1-10
+                      option[value="11-50"]
+                        | 11-50
+                      option[value="51-200"]
+                        | 51-200
+                      option[value="201-500"]
+                        | 201-500
+                      option[value="501-1000"]
+                        | 501-1000
+                      option[value="1000+"]
+                        | 1000+
+            .form-row
+              label.form-label[for="field-description"]
+                | Briefly describe your project (1-2 sentences).
+              .form-controls
+                textarea#field-description.field[name="description" required]
+            .form-row.align-right
+              button[type="submit"]
+                | SEND NOW
+  #footer-push
+.footer-homepage.footer
+  .shell
+    nav.nav
+      ul
+        li class='current'
+          = link_to "START YOUR PROJECT", "/projects/start"
+        - if user_signed_in?
+          li
+            = link_to "PROJECTS", "/projects/list"
+        - unless user_signed_in?
+          li
+            = link_to "FOR AGENCIES", "/agencies"
+          li
+            = link_to "JOIN THE TEAM", "/apply"
+        li
+          = link_to "CONTACT US", "/contact"
+        - unless !user_signed_in? && false
+          - unless user_signed_in?
+            li
+              a.popup-link#userlink[href="/popups/login"]
+                | LOGIN
+          - else
+            li
+              a#userlink[href="/profile" data-userid=current_user.id]
+                | PROFILE
+        - else
+          li
+            a.popup-link.hidden#userlink[href="/popups/login"]
+              | LOGIN
+
+    a.logo[href="/"]
+      i.sprite-logo
+        | Bento

@@ -1,6 +1,19 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  skip_before_action :authenticate_user!, only: [:new, :join]
+  skip_before_action :authenticate_user!, only: [:new, :join, :start, :finish_start]
+
+  def start
+  end
+
+  def finish_start
+    @name          = params[:full_name]
+    @email         = params[:email_address]
+    @company       = params[:company]
+    @company_size  = params[:company_size]
+    @description   = params[:description]
+
+    ProjectMailer.new_project_request_mail(@name, @email, @company, @company_size, @description).deliver
+  end
 
   def view
     @project = Project.find(params[:id])

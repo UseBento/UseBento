@@ -1,4 +1,4 @@
-header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 'header-secondary ' : '')) + 'header')]
+header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 'header-secondary ' : '')) + 'header header-dark')]
   a.expand[href="#"]
   .shell
     a.logo[href="/"]
@@ -9,7 +9,7 @@ header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 
         i.sprite-logo-colorful
     nav.nav
       ul
-        - if (!user_signed_in? || page == 'start_project')
+        - if (user_signed_in? || page == 'start_project')
           li class=(page == 'start_project' ? 'current' : '')
             = link_to "START YOUR PROJECT", "/projects/start"
         - if user_signed_in?
