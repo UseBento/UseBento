@@ -1,5 +1,4 @@
 class MessageWorker
-  include Sidekiq::Worker
 
   def perform(project_id, message_id, user_id)
     @project   = Project.find(project_id)
