@@ -9,10 +9,10 @@ header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 
         i.sprite-logo-colorful
     nav.nav
       ul
-        - unless user_signed_in?
-          li class=(page == 'project' ? 'current' : '')
-            = link_to "START YOUR PROJECT", "/services/select"
-        - else
+        - if (!user_signed_in? || page == 'start_project')
+          li class=(page == 'start_project' ? 'current' : '')
+            = link_to "START YOUR PROJECT", "/projects/start"
+        - if user_signed_in?
           li class=(page == 'project' ? 'current' : '')
             = link_to "PROJECTS", "/projects/list"
         - unless user_signed_in?
@@ -33,5 +33,3 @@ header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 
           li
             a.popup-link.hidden#userlink[href="/popups/login"]
               | LOGIN
-
-            

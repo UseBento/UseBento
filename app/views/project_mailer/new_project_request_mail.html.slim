@@ -1,0 +1,16 @@
+doctype html
+html[lang="en"]
+  head
+  body
+    p
+      = "Hey " + @admin.first_name + ", "
+    p
+      = @name + " <" + @email + "> "
+      |  wants to start a new project for
+      = " " + @company + " "
+      | of size
+      = " " + @company_size
+    p
+      = @description
+    p
+      | -Bento
