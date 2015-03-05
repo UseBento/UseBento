@@ -7,8 +7,8 @@
           | My Projects
       .right_section
         - if !current_user.admin
-          a.btn_large.purple[href="/services/select"]
-            | START A NEW PROJECT 
+          a.btn_large.purple[href="/projects/start"]
+            | START A NEW PROJECT
             i.fa.fa-angle-right
         - else
           = raw "&nbsp;"
@@ -57,7 +57,7 @@
                   td
                     = project.name
                   td
-                    = project.service.title 
+                    = project.service.title
                   td
                     = project.print_pages
                   td
@@ -85,7 +85,7 @@
                   | Last Updated
                   span.sort-carot
                 td[width="18%"]
-                  | Project Status 
+                  | Project Status
                   span.sort-carot
             tbody
               - for project in @open_projects do
@@ -97,7 +97,7 @@
                   td
                     span.hidden
                       project.start_date.to_i
-                    = project.format_start_date 
+                    = project.format_start_date
                   td
                     span.hidden
                       project.updated_at.to_i
@@ -150,7 +150,7 @@
                     td
                       = project.name
                     td
-                      = project.service.title 
+                      = project.service.title
                     td
                       = project.print_pages
                     td
@@ -178,7 +178,7 @@
                     | Last Updated
                     span.sort-carot
                   td[width="18%"]
-                    | Project Status 
+                    | Project Status
                     span.sort-carot
               tbody
                 - for project in @closed_projects do
@@ -190,7 +190,7 @@
                     td
                       span.hidden
                         project.start_date.to_i
-                      = project.format_start_date 
+                      = project.format_start_date
                     td
                       span.hidden
                         project.updated_at.to_i

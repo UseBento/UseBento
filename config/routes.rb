@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations"}
-  get  'services/select',                     to: 'projects#start'
+  get  'services/select'
   get  'services/add'
   get  'projects/start',                      to: 'projects#start'
   post 'projects/finish_start',               to: 'projects#finish_start'
-  get  'projects/new/:name',                  to: 'projects#start',      as: 'service'
+  get  'projects/new/:name',                  to: 'services#create',      as: 'service'
   get  'projects/list',                       to: 'projects#list'
   get  'projects/:id',                        to: 'projects#view',        as: 'project'
   get  'projects/:id/private_chat',           to: 'projects#private_chat'

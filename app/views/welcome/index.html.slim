@@ -32,7 +32,7 @@
             h3
               | GROW YOUR CUSTOMERS
             p
-              | Design changes how your business interacts with customers. It validates your product, messaging and new ideas.  It also helps you develop empathy and identify problems.  
+              | Design changes how your business interacts with customers. It validates your product, messaging and new ideas.  It also helps you develop empathy and identify problems.
   section.section.section-black
     .shell
       header.section-head.section-head-home
@@ -258,45 +258,10 @@
         h2
           | Want to Join the Team?
         p
-          | We are looking for amazing designers who like to work on a variety of 
+          | We are looking for amazing designers who like to work on a variety of
           br
           |  projects and want to grow with us. If that’s you then apply now.
         p
           a.btn-callout[href="/apply"]
             | APPLY NOW
-  #footer-push
-.footer-homepage.footer
-  .shell
-    nav.nav
-      ul
-        - unless user_signed_in?
-          li
-            = link_to "START YOUR PROJECT", "/services/select"
-        - else
-          li
-            = link_to "PROJECTS", "/projects/list"
-        - unless user_signed_in?
-          li
-            = link_to "FOR AGENCIES", "/agencies"
-          li
-            = link_to "JOIN THE TEAM", "/apply"
-        li
-          = link_to "CONTACT US", "/contact"
-        - unless !user_signed_in? && false
-          - unless user_signed_in?
-            li
-              a.popup-link#userlink[href="/popups/login"]
-                | LOGIN
-          - else
-            li
-              a#userlink[href="/profile" data-userid=current_user.id]
-                | PROFILE
-        - else
-          li
-            a.popup-link.hidden#userlink[href="/popups/login"]
-              | LOGIN
-
-    a.logo[href="/"]
-      i.sprite-logo
-        | Bento
-
+= render partial: 'dark_footer'

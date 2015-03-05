@@ -454,7 +454,7 @@ span.unread-tag[data-count="0"] {
     color: #fcfcfc;
     font-weight: normal; }
 
-.header .nav .current a {
+.header-dark.header .nav .current a {
   color: #fff;
 }
 
@@ -472,6 +472,36 @@ line-height: 1.25;
 font-size: 28px; }
 
 
+.shell.start-project .section-body.start-form button.brown:hover {
+    -webkit-transition: 200ms;
+         -o-transition: 200ms;
+            transition: 200ms;
+background-color: #dbc08c;
+}
+.shell.start-project .section-body.start-form button.brown {
+    -webkit-transition: 500ms;
+         -o-transition: 500ms;
+            transition: 500ms;
+}
+
+
+.btn.brown:hover {
+    -webkit-transition: 200ms;
+         -o-transition: 200ms;
+            transition: 200ms;
+background-color: #dbc08c;
+}
+.btn.brown {
+    -webkit-transition: 500ms;
+         -o-transition: 500ms;
+            transition: 500ms;
+border: 0;
+background-color: #B0996D;
+color: #FFF;
+font-family: "AvenirNext";
+font-size: 15px;
+font-weight: 600; }
+}
 
 .shell.start-project .section-body.start-form {
 padding: 50px;
