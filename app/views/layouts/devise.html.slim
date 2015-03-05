@@ -3,7 +3,7 @@ html[lang="en"]
   = render partial: 'htmlhead'
   body
     .wrapper
-      = render partial: 'header', locals: {page: 'project'}
+      = render partial: 'dark_header', locals: {page: 'project'}
       .section.section-project
         .cart-bar
           ul.cart-bar-items
@@ -15,13 +15,13 @@ html[lang="en"]
                   span.cart-qty-bubble
                     | 0
                 span.link-inner
-                  |  EDIT ORDER 
+                  |  EDIT ORDER
             li
               a[href="checkout.html"]
                 span.link-inner
                   i.tick-icon
-                  |  Checkout 
+                  |  Checkout
         .shell.devise
           .section-head.section-head-little-gutter
           = yield
-  = render partial: 'footer'
+  = render partial: 'dark_footer'

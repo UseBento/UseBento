@@ -443,6 +443,7 @@ span.unread-tag[data-count="0"] {
     display: none; }
 
 .header-dark {
+    border-bottom: 0;
     background-color: #232323; }
 
 .header.header-dark .logo {
@@ -525,6 +526,31 @@ font-weight: 600; }
 .align-right {
     text-align: right; }
 
+.footer-homepage .copyright {
+    margin-top: 0;
+    color: #919191;
+}
+
+.footer-homepage, .header.header-dark .nav li a {
+    font-family: AvenirNextRegular; }
+
+.footer-homepage .nav {
+padding-bottom: 30px;
+}
+
+.header.header-dark .nav li.current a {
+color: #fff;
+}
+.header.header-dark .nav li a {
+color: #939393;
+}
+
+.header.header-dark .nav li a:hover {
+    color:#fff;
+    font-weight: bold; }
+
+.header.header-dark .nav a:before {
+    border-top: 0; }
 
 @media only screen and (max-width: 850px),
        only screen and (max-device-width: 850px) {

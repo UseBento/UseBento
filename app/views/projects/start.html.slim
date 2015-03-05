@@ -55,37 +55,4 @@
             .form-row.align-right
               button[type="submit"]
                 | SEND NOW
-  #footer-push
-.footer-homepage.footer
-  .shell
-    nav.nav
-      ul
-        li class='current'
-          = link_to "START YOUR PROJECT", "/projects/start"
-        - if user_signed_in?
-          li
-            = link_to "PROJECTS", "/projects/list"
-        - unless user_signed_in?
-          li
-            = link_to "FOR AGENCIES", "/agencies"
-          li
-            = link_to "JOIN THE TEAM", "/apply"
-        li
-          = link_to "CONTACT US", "/contact"
-        - unless !user_signed_in? && false
-          - unless user_signed_in?
-            li
-              a.popup-link#userlink[href="/popups/login"]
-                | LOGIN
-          - else
-            li
-              a#userlink[href="/profile" data-userid=current_user.id]
-                | PROFILE
-        - else
-          li
-            a.popup-link.hidden#userlink[href="/popups/login"]
-              | LOGIN
-
-    a.logo[href="/"]
-      i.sprite-logo
-        | Bento
+= render partial: 'dark_footer'

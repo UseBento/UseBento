@@ -1,5 +1,5 @@
 .wrapper
-  = render partial: 'header', locals: {page: 'agencies'}
+  = render partial: 'dark_header', locals: {page: 'agencies'}
   .intro.intro-secondary
     img.intro-bg[src="css/images/work.jpg" alt="" width="1600" height="564"]
     .intro-content
@@ -20,7 +20,7 @@
             | A Partner to Help You Grow Your Business
         .section-body
           p
-            | As an agency, being able to offer more of the services that your clients need helps you to continue to build a stronger client relationships and win more business. Bento was created to be your partner in providing the piece of mind that projects will get done efficiently and effectively while exceeding your client’s expectations. Our number one goal is to help you grow your business. 
+            | As an agency, being able to offer more of the services that your clients need helps you to continue to build a stronger client relationships and win more business. Bento was created to be your partner in providing the piece of mind that projects will get done efficiently and effectively while exceeding your client’s expectations. Our number one goal is to help you grow your business.
           a.btn.scroll-to[href="#agency-contact"]
             | LEARN MORE
       .section-image
@@ -64,7 +64,7 @@
             h4
               | Trusted Partner
             p
-              | Trusted technology and design partner to offer value to your clients. 
+              | Trusted technology and design partner to offer value to your clients.
         li
           .features-list-item-icon
             span.feature-icon-server
@@ -72,7 +72,7 @@
             h4
               | Compliment Your Services
             p
-              | We compliment the services you already offer to your clients. 
+              | We compliment the services you already offer to your clients.
   /.section.section-agency-testimonials
     .shell
       .section-head
@@ -83,7 +83,7 @@
       ul.agency-testimonials
         li
           .testimonial-body
-            |  “Suspendisse interdum quam sed ipsum sagittis malesuada a sagittis nisi. Duis gravida quam nisl, quis luctus orci posuere sit amet.” 
+            |  “Suspendisse interdum quam sed ipsum sagittis malesuada a sagittis nisi. Duis gravida quam nisl, quis luctus orci posuere sit amet.”
           .testimonial-head
             .testimonial-image
               img[src="images/testimonials/agency-01.png" alt="" width="70" height="70"]
@@ -91,12 +91,12 @@
               h5
                 | Jeremy Parker
               p
-                | Public Relations - 
+                | Public Relations -
                 a[href="#"]
                   | Envato
         li
           .testimonial-body
-            |  “Suspendisse interdum quam sed ipsum sagittis malesuada a sagittis nisi. Duis gravida quam nisl, quis luctus orci posuere sit amet.” 
+            |  “Suspendisse interdum quam sed ipsum sagittis malesuada a sagittis nisi. Duis gravida quam nisl, quis luctus orci posuere sit amet.”
           .testimonial-head
             .testimonial-image
               img[src="images/testimonials/agency-01.png" alt="" width="70" height="70"]
@@ -104,12 +104,12 @@
               h5
                 | Jeremy Parker
               p
-                | Public Relations - 
+                | Public Relations -
                 a[href="#"]
                   | Envato
         li
           .testimonial-body
-            |  “Suspendisse interdum quam sed ipsum sagittis malesuada a sagittis nisi. Duis gravida quam nisl, quis luctus orci posuere sit amet.” 
+            |  “Suspendisse interdum quam sed ipsum sagittis malesuada a sagittis nisi. Duis gravida quam nisl, quis luctus orci posuere sit amet.”
           .testimonial-head
             .testimonial-image
               img[src="images/testimonials/agency-01.png" alt="" width="70" height="70"]
@@ -117,7 +117,7 @@
               h5
                 | Jeremy Parker
               p
-                | Public Relations - 
+                | Public Relations -
                 a[href="#"]
                   | Envato
   #agency-contact.section.section-callout.section-contact
@@ -128,7 +128,7 @@
       .section-body
         .form.form-contact
           form.form-required[action="/contact_agency#agency-contact" method="post"]
-            = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) 
+            = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token)
             input[type="hidden" name="contact-form-agency"]
             .form-body
               - if @message_sent
@@ -139,28 +139,28 @@
                   .form-cols.clearfix
                     .form-col.form-col-1of2
                       label.form-label[for="field-name"]
-                        | Full Name 
+                        | Full Name
                         span.form-asterisk
                           | *
                       .form-controls
                         input#field-name.field[type="text" name="field-name" required data-validation-type="['presence']"]
                     .form-col.form-col-1of2
                       label.form-label[for="field-e-mail"]
-                        | E-mail 
+                        | E-mail
                         span.form-asterisk
                           | *
                       .form-controls
                         input#field-e-mail.field[type="email" name="field-e-mail" required data-validation-type="['email']"]
                 .form-row
                   label.form-label[for="field-agency"]
-                    | Agency 
+                    | Agency
                     span.form-asterisk
                       | *
                   .form-controls
                     input#field-agency.field[type="text" name="field-agency" required data-validation-type="['presence']"]
                 .form-row
                   label.form-label[for="field-message"]
-                    | Message 
+                    | Message
                     span.form-asterisk
                       | *
                   .form-controls
@@ -168,4 +168,4 @@
                 .form-actions
                   button.btn-callout[type="submit"]
                     | SEND MESSAGE
-= render partial: 'footer'
+= render partial: 'dark_footer'
