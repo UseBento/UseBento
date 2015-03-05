@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   get  'services/select'
   get  'services/add'
   get  'projects/start',                      to: 'projects#start'
-  post 'projects/finish_start',               to: 'projects#finish_start'
   get  'projects/new/:name',                  to: 'services#create',      as: 'service'
   get  'projects/list',                       to: 'projects#list'
   get  'projects/:id',                        to: 'projects#view',        as: 'project'
