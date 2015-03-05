@@ -466,9 +466,12 @@ font-weight:normal;
 line-height: 1.25;
 font-size: 28px; }
 
+
+
 .shell.start-project .section-body.start-form {
 width: 816px;
 padding: 50px;
+padding-bottom: 30px;
 background-color: #FCFDFF;
 border: 1px solid #D1D1D1; }
 
@@ -483,16 +486,25 @@ margin-bottom: 20px; }
 
 
 .shell.start-project .section-body.start-form input,
+.shell.start-project .section-body.start-form select,
 .shell.start-project .section-body.start-form textarea {
 color: #212F44;
 font-family: "AvenirNext";
 font-size: 18px;
 width: 100%;
+width: calc(100% - 15px);
+margin-top: 8px;
+padding-left: 15px;
+border-radius: 0;
 height: 54px;
 background-color: #F4F6FA;
 border: 1px solid #DDD; }
 
+.shell.start-project .section-body.start-form select {
+    width: 100%; }
+
 .shell.start-project .section-body.start-form textarea {
+    padding-top: 20px;
     height: 170px; }
 
 .shell.start-project .section-body.start-form button {
@@ -507,3 +519,13 @@ font-weight: 300; }
 
 .align-right {
     text-align: right; }
+
+
+@media only screen and (max-width: 850px),
+       only screen and (max-device-width: 850px) {
+.shell.start-project .section-body.start-form {
+    padding: 30px;
+width: calc(100% - 80px); }
+.shell.start-project {
+    width: 100%; }
+}
