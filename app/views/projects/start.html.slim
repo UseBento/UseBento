@@ -1,0 +1,59 @@
+.wrapper.dark
+  = render partial: 'dark_header', locals: {page: 'start_project'}
+  .section.section-project
+    .shell.start-project
+      .section-head.section-head-little-gutter
+        h3
+          | Please fill out the information below and
+          br
+          | we will contact you to learn more about your project
+      .section-body.start-form
+        form.form-required[action="/projects/finish_start" method="post"]
+          = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token)
+          .form-body
+            .form-row
+              .form-cols
+                .form-col.form-col-1of2
+                  label.form-label[for="field-full-name"]
+                    | Full Name
+                  .form-controls
+                    input#field-full-name.field[type="text" name="full_name" required]
+                .form-col.form-col-1of2
+                  label.form-label[for="field-email-address"]
+                    | Email Address
+                  .form-controls
+                    input#field-email-address.field[type="text" name="email_address" required]
+            .form-row
+              .form-cols
+                .form-col.form-col-1of2
+                  label.form-label[for="field-company"]
+                    | Company Name
+                  .form-controls
+                    input#field-company.field[type="text" name="company" required]
+                .form-col.form-col-1of2
+                  label.form-label[for="field-company-size"]
+                    | Company Size
+                  .form-controls
+                    input#field-company-size.field[type="text" name="company_size" required]
+            .form-row
+              label.form-label[for="field-description"]
+                | Briefly describe your project (1-2 sentences).
+              .form-controls
+                textarea#field-description.field[name="description" required]
+            .form-row.align-right
+              button[type="submit"]
+                | SEND NOW
+  #footer-push
+.footer
+  .shell
+    .copyright
+      | © Copyright 2014. All Rights Reserved
+.side-panel-holder.loading
+  .side-panel-overlay
+  .side-panel
+    .side-panel-error-container
+      button.side-panel-close
+      .side-panel-error-message
+        h4
+          | An error occurred. Please contact the administrator.
+    .side-panel-content

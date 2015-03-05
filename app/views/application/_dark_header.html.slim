@@ -1,0 +1,35 @@
+header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 'header-secondary ' : '')) + 'header header-dark')]
+  a.expand[href="#"]
+  .shell
+    a.logo[href="/"]
+      | Bento
+      span.logo-bw
+        i.sprite-logo
+      span.logo-colorful
+        i.sprite-logo-colorful
+    nav.nav
+      ul
+        - if (user_signed_in? || page == 'start_project')
+          li class=(page == 'start_project' ? 'current' : '')
+            = link_to "START YOUR PROJECT", "/projects/start"
+        - if user_signed_in?
+          li class=(page == 'project' ? 'current' : '')
+            = link_to "PROJECTS", "/projects/list"
+        - unless user_signed_in?
+          li class=(page == 'agencies' ? 'current' : '')
+            = link_to "FOR AGENCIES", "/agencies"
+          li class=(page == 'apply' ? 'current' : '')
+            = link_to "JOIN THE TEAM", "/apply"
+        - unless page == 'project' && !user_signed_in? && false
+          - unless user_signed_in?
+            li[ class=(page == 'profile' ? 'current' : '')]
+              a.popup-link#userlink[href="/popups/login"]
+                | LOGIN
+          - else
+            li[ class=(page == 'profile' ? 'current' : '')]
+              a#userlink[href="/profile" data-userid=current_user.id]
+                | PROFILE
+        - else
+          li
+            a.popup-link.hidden#userlink[href="/popups/login"]
+              | LOGIN
