@@ -95,37 +95,41 @@ function setup_paypal_direct() {
                                 if (window.location.pathname == "/")
                                     window.location.href = "/projects/list";
 
-                                var userlink = $('#userlink');
-                                userlink.attr('href', '/profile');
-                                userlink.attr('data-userid', data.id);
-                                userlink.html(data.username);
+                                $('#userlink')
+                                    .attr('href', '/profile')
+                                    .attr('data-userid', data.id)
+                                    .html('PROFILE');
                                 $.magnificPopup.close();
 
-                                var projects_link = $('a[href="/services/select"]');
-                                projects_link.html('PROJECTS');
-                                projects_link.attr('href', '/projects/list');
+                                $('a[href="/agencies"]')
+                                    .html('PROJECTS')
+                                    .attr('href', '/projects/list');
 
-                                var full_name = $('#field-full-name');
-                                full_name.val(data.username);
-                                full_name.attr('type', 'hidden');
-                                full_name.parent().append(data.username);
+                                $('a[href="/apply"]')
+                                    .css('display', 'none');
 
-                                var email = $('#field-e-mail');
-                                email.val(data.email);
-                                email.attr('type', 'hidden');
-                                email.parent().append(data.email);
+                                if (window.location.pathname != "/projects/start") {
+                                    $('#field-full-name')
+                                        .val(data.username)
+                                        .attr('type', 'hidden')
+                                        .parent().append(data.username);
 
-                                var company = $('#field-name-business');
-                                if (!company.val())
-                                    company.val(data.company);
+                                    $('#field-e-mail')
+                                        .val(data.email)
+                                        .attr('type', 'hidden')
+                                        .parent().append(data.email);
 
-                                var target = $('#field-target');
-                                if (!target.val())
-                                    target.val(data.audience);
+                                    var company = $('#field-name-business');
+                                    if (!company.val())
+                                        company.val(data.company);
 
-                                var keywords = $('#field-keywords');
-                                if (!keywords.val())
-                                    keywords.val(data.keywords); }}}}); }
+                                    var target = $('#field-target');
+                                    if (!target.val())
+                                        target.val(data.audience);
+
+                                    var keywords = $('#field-keywords');
+                                    if (!keywords.val())
+                                        keywords.val(data.keywords); }}}}}); }
 
         function reset_password(event) {
             event.preventDefault();
@@ -190,7 +194,7 @@ function setup_paypal_direct() {
                                 ? window.location.hostname + ":3001/websocket"
                                 : window.location.host + "/websocket");
             dispatcher       = new WebSocketRails(socket_url);
-	        dispatcher.on_open = function(data) {
+                dispatcher.on_open = function(data) {
                 //other_channel    = dispatcher.subscribe('project-' + other_room
                 //                                        + "-" + project_id);
                 channel          = dispatcher.subscribe('project-' + room
@@ -234,7 +238,7 @@ function setup_paypal_direct() {
 
                 channel.bind('new_message', function(message) {
                     if (!$('li.project-message[data-id="' + message.id + '"]')[0])
-                        add_message(message.body, message.id); }); }; 
+                        add_message(message.body, message.id); }); };
             }
 
         if ($('#message-box') && $('#project-id').val())
