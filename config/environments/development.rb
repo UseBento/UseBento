@@ -56,11 +56,3 @@ Rails.application.configure do
                config.cache_dir = "uploads"
              end
 end
-
-
-WebsocketRails.setup do |config|
-  config.standalone = false
-  config.synchronize = false
-  config.broadcast_subscriber_events = true
-  config.redis_options = {}
-end

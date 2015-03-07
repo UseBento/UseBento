@@ -37,7 +37,7 @@
 #   # config.keep_subscribers_when_private = false
 
 #   # Set to true if you wish to broadcast channel subscriber_join and
-#   # subscriber_part events. All subscribers of a channel will be 
+#   # subscriber_part events. All subscribers of a channel will be
 #   # notified when other clients join and part the channel. If you are
 #   # using the UserManager, the current_user object will be sent along
 #   # with the event.
@@ -62,8 +62,12 @@
 
 # end
 WebsocketRails.setup do |config|
-  config.standalone = true
-  config.synchronize = true
+  config.synchronize = false
   config.broadcast_subscriber_events = true
-  config.redis_options = {:host => 'localhost', :port => '6379'}
+  if Rails.env == "development"
+    config.standalone = false
+  else
+    config.standalone = true
+    config.redis_options = {:host => 'localhost', :port => '6379'}
+  end
 end
