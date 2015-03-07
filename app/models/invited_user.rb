@@ -6,6 +6,7 @@ class InvitedUser
   field :inviter_id,  type: String
 
   embedded_in :project
+  embedded_in :private_chat
   belongs_to :user
 
   def short_email
@@ -25,9 +26,13 @@ class InvitedUser
     user.admin || (can_see?(user) && !accepted)
   end
 
+  def get_project
+    self.project || self.private_chat.project
+  end
+
   def can_delete?(user)
     return false if !(user.admin || user.id.to_s == inviter_id)
-    return false if self.user == project.user
-    !(self.user && self.user.admin && self.project.invited_admins.count == 1)
+    return false if self.user == get_project.user
+    !(self.user && self.user.admin && get_project.invited_admins.count == 1)
   end
 end

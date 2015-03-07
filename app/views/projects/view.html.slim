@@ -90,7 +90,7 @@
               h5
                 | People on this project
               #people
-                - for person in @project.people
+                - for person in (@chat == :group ? @project.people : @project.get_private_chat.people)
                   = render partial: 'invited_person', locals: {person: person}
               .clear
               br
