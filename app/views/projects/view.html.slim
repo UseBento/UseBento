@@ -167,6 +167,7 @@
             img[src="/images/download.png" alt=""]
             | DOWNLOAD FILES
 input.hidden#project-id[type="hidden" value=@project.id]
+input.hidden#chat[type="hidden" value=@chat.to_s]
 - if @project.need_to_show_popup
   = @project.showing_popup
   a[href=("/projects/" + @project.id.to_s + "/popup") class="hidden" id="project-popup"]

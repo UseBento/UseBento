@@ -491,9 +491,13 @@ function setup_paypal_direct() {
         $('#submit-invite').click(function() {
             var email    = $('#enter-email').val();
             var id       = $('#project-id').val();
+            var chat     = $('#chat').val();
+            var url      = ('/projects/' + id + '/'
+                            + (chat == 'group' ? '' : 'private/')
+                            + 'invite.json');
 
             $.ajax({type:    'POST',
-                    url:     '/projects/' + id + '/invite.json',
+                    url:      url,
                     data:    {email: email},
                     success:  function(data) {
                         if (data.error)

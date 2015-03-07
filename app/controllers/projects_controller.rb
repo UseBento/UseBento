@@ -251,29 +251,28 @@ class ProjectsController < ApplicationController
 
   def invite
     @project    = Project.find(params[:id])
-    email       = params[:email]
-    user        = User.where(email: email).first
 
-    if user == current_user
-      @error = "You can't invite yourself!"
-    elsif (@project.invited_users.where(email: email).first ||
-           (user && @project.invited_users.where(user: user).first))
-      @error = "You already invited " + ((user && user.full_name) || email)
-    else
-      invitation  = @project.invited_users.create({accepted:   false,
-                                                   email:      email})
-      invitation.inviter_id  = current_user.id
-      invitation.user        = user if user
-      invitation.save
+    invitation = InvitedUser.send_invite(@project, current_user, params[:email])
+    @error     = invitation if invitation.class != InvitedUser
 
-      UserMailer.invited_to_project_mail(invitation, @project, current_user).deliver
-    end
     respond_to do |format|
       format.html { redirect_to @project }
       format.json { render :json => @error ? {error: @error} : invitation }
     end
   end
 
+  def invite_to_private
+    @project        = Project.find(params[:id])
+    @private_chat   = @project.private_chat
+
+    invitation = InvitedUser.send_invite(@private_chat, current_user, params[:email])
+    @error     = invitation if invitation.class != InvitedUser
+
+    respond_to do |format|
+      format.html { redirect_to @project }
+      format.json { render :json => @error ? {error: @error} : invitation }
+    end
+  end
 
   def initial_popup
     @project = Project.find(params[:id])
