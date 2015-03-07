@@ -195,24 +195,21 @@ function setup_paypal_direct() {
                                 : window.location.host + "/websocket");
             dispatcher       = new WebSocketRails(socket_url);
                 dispatcher.on_open = function(data) {
-                //other_channel    = dispatcher.subscribe('project-' + other_room
-                //                                        + "-" + project_id);
-                channel          = dispatcher.subscribe('project-' + room
-                                                        + "-" + project_id);
-
-                //other_channel.bind('message_posted', function(message) {
-                //    inc_other_unread_count(); });
+                channel          = dispatcher.subscribe('project-' + project_id);
 
                 channel.bind('message_posted', function(message) {
-                    var id    = message.message_id;
-                    var pid   = message.project_id;
-                    if (pid != project_id) return;
+                    if (message.room != room) {
+                        inc_other_unread_count(); }
+                    else {
+                        var id    = message.message_id;
+                        var pid   = message.project_id;
+                        if (pid != project_id) return;
 
-                    $.ajax(
-                        {type: 'get',
-                         url: '/projects/' + pid + '/message/' + id + '.json',
-                         success: function(data) {
-                                 add_message(data.body, data.id); }}); });
+                        $.ajax(
+                            {type: 'get',
+                             url: '/projects/' + pid + '/message/' + id + '.json',
+                             success: function(data) {
+                                 add_message(data.body, data.id); }}); }});
 
                 channel.bind('message_updated', function(message) {
                     var id    = message.message_id;
@@ -255,8 +252,9 @@ function setup_paypal_direct() {
                     progress_bar.css('display', 'none');
 
                 channel.trigger('message_posted',
-                        {message_id: data.id,
-                        project_id:  project_id});
+                        {message_id:  data.id,
+                         room:        project_chatroom(),
+                         project_id:  project_id});
                 add_message(data.body);
                 $('#message-box').val($('#message-box')[0].defaultValue); }
 
