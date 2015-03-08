@@ -23,6 +23,14 @@ class InvitationsController < ApplicationController
     end
 
     if params[:chat] == 'private'
+      if !@project.project.has_access?(@invitation.user)
+        invitation  = @project.project.invited_users.create({accepted:   false,
+                                                             email:      @invitation.email})
+        invitation.inviter_id  = @invitation.inviter_id
+        invitation.user        = @invitation.user
+        invitation.accepted    = true
+        invitation.save
+      end
       redirect_to '/projects/' + @project.project.id + '/private_chat'
     else
       redirect_to @project
