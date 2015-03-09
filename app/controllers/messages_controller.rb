@@ -23,13 +23,15 @@ class MessagesController < ApplicationController
                                     formats:    :html,
                                     locals:    {message:  @message,
                                                 to_owner: true})
-    url          = ('/projects/' + @project.id +
+    url          = root_url + ('/projects/' + @project.id +
                     (@room == 'private' ? '/private_chat' : ''))
+
+    attachments  = get_attachments(@message)
 
     @message.send_emails(current_user, url, @room)
     @project.updated_at = DateTime.now
     @project.save!
-    attachments  = get_attachments(@message)
+    
 
     respond_to do |format|
       format.html { redirect_to @project }
