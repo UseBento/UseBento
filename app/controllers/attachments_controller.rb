@@ -4,7 +4,7 @@ class AttachmentsController < ApplicationController
   def view_attachment
     @project = Project.find(params[:project_id])
     if !@project.has_access?(current_user)
-      redirect_to_login
+      return redirect_to_login
     end
 
     if (params[:message_id])

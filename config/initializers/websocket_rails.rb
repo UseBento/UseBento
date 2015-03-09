@@ -61,6 +61,7 @@
 #   # config.allowed_origins = ['http://localhost:3000']
 
 # end
+
 WebsocketRails.setup do |config|
   config.synchronize = false
   config.broadcast_subscriber_events = true
