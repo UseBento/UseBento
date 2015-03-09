@@ -64,6 +64,9 @@
 WebsocketRails.setup do |config|
   config.synchronize = false
   config.broadcast_subscriber_events = true
+  if Rails.env == "production"
+    config.standalone_port = 3002
+  end
   if Rails.env == "development"
     config.standalone = false
   else
