@@ -2,14 +2,13 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations"}
   get  'services/select'
   get  'services/add'
+  get  'projects/new/:name',                  to: 'services#create',      as: 'service'
+
   get  'projects/start',                      to: 'projects#start'
   post 'projects/finish_start',               to: 'projects#finish_start'
-  get  'projects/new/:name',                  to: 'services#create',      as: 'service'
   get  'projects/list',                       to: 'projects#list'
   get  'projects/:id',                        to: 'projects#view',        as: 'project'
   get  'projects/:id/private_chat',           to: 'projects#private_chat'
-  get  'accept_invitation/:project_id/:id',   to: 'invitations#join'
-  get  'accept_invitation/:project_id/:chat/:id',   to: 'invitations#join'
   post 'projects/new',                        to: 'projects#new'
   get  'projects/:id/edit',                   to: 'projects#edit'
   get  'projects/:id/archive',                to: 'projects#archive'
@@ -18,23 +17,31 @@ Rails.application.routes.draw do
   post 'projects/:id/invite',                 to: 'projects#invite'
   post 'projects/:id/:chat/invite',           to: 'projects#invite_to_private'
   get  'projects/:id/popup',                  to: 'projects#initial_popup'
-  post 'projects/:project_id/message',        to: 'messages#post_message'
   post 'projects/:project_id/update_payment', to: 'projects#update_payment'
   get  'projects/:id/remove_user/:invite_id', to: 'projects#remove_invite'
+  get 'projects/:project_id/update_status/:status',   to: 'projects#update_status'
+
+  get  'accept_invitation/:project_id/:id',   to: 'invitations#join'
+  get  'accept_invitation/:project_id/:chat/:id',   to: 'invitations#join'
+
+  post 'projects/:project_id/message',        to: 'messages#post_message'
   post 'projects/delete_message',             to: 'messages#remove'
   post 'projects/update_message',             to: 'messages#update'
   get 'projects/:project_id/message/:message_id',     to: 'messages#view'
-  get 'projects/:project_id/update_status/:status',   to: 'projects#update_status'
+
   get  'attachment/:project_id/:message_id/:attachment_id/:filename', to: 'attachments#view_attachment', constraints: { :filename => /[^\/]+/ }
   get  'attachment/:project_id/:attachment_id/:filename', to: 'attachments#view_attachment', constraints: { :filename => /[^\/]+/ }
 
   root 'welcome#index'
+  get  'fbads',                       to: 'welcome#fbads'
+
   get  'contact',                     to: 'application#contact'
   post 'send_contact',                to: 'application#send_contact'
   post 'apply',                       to: 'application#send_apply'
   post 'contact_agency',              to: 'application#contact_agency'
   get  'apply',                       to: 'application#apply'
   get  'agencies',                    to: 'application#agencies'
+
   get  'process_payment',             to: 'payments#process_pp_payment'
   post 'process_payment',             to: 'payments#process_pp_payment'
   get  'payments/checkout/:project_id/:amount',
