@@ -193,8 +193,10 @@ function setup_paypal_direct() {
             var socket_url   = (window.location.host == window.location.hostname
                                 ? window.location.hostname + ":3001/websocket"
                                 : window.location.host + "/websocket");
+
+            function connect_socket() {
             dispatcher       = new WebSocketRails(socket_url);
-                dispatcher.on_open = function(data) {
+            dispatcher.on_open = function(data) {
                 channel          = dispatcher.subscribe('project-' + project_id);
 
                 channel.bind('message_posted', function(message) {
@@ -236,7 +238,13 @@ function setup_paypal_direct() {
                 channel.bind('new_message', function(message) {
                     if (!$('li.project-message[data-id="' + message.id + '"]')[0])
                         add_message(message.body, message.id); }); };
-            }
+
+                setTimeout(function() {
+                    if (dispatcher.state == "disconnected")
+                        connect_socket(); },
+                           3000); }
+
+            connect_socket(); }
 
         if ($('#message-box') && $('#project-id').val())
             messages_websocket();
