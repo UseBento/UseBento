@@ -184,7 +184,6 @@ function setup_paypal_direct() {
             tag.attr('data-count', count + 1); }
 
         var channel;
-        //var other_channel;
         var dispatcher;
         function messages_websocket() {
             var room         = project_chatroom();
@@ -192,7 +191,7 @@ function setup_paypal_direct() {
             var project_id   = $('#project-id').val();
             var socket_url   = (window.location.host == window.location.hostname
                                 ? window.location.hostname + ":3001/websocket"
-                                : window.location.host + "1/websocket");
+                                : window.location.host + "/websocket");
 
             function connect_socket() {
             dispatcher       = new WebSocketRails(socket_url);
@@ -241,7 +240,7 @@ function setup_paypal_direct() {
 
                 setTimeout(function() {
                     if (dispatcher.state == "disconnected")
-                        ;/*connect_socket();*/ },
+                        connect_socket(); },
                            3000); }
 
             connect_socket(); }
