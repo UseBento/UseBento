@@ -192,7 +192,7 @@ function setup_paypal_direct() {
             var project_id   = $('#project-id').val();
             var socket_url   = (window.location.host == window.location.hostname
                                 ? window.location.hostname + ":3001/websocket"
-                                : window.location.host + "/websocket");
+                                : window.location.host + "1/websocket");
 
             function connect_socket() {
             dispatcher       = new WebSocketRails(socket_url);
@@ -241,7 +241,7 @@ function setup_paypal_direct() {
 
                 setTimeout(function() {
                     if (dispatcher.state == "disconnected")
-                        connect_socket(); },
+                        ;/*connect_socket();*/ },
                            3000); }
 
             connect_socket(); }
@@ -259,10 +259,13 @@ function setup_paypal_direct() {
                 if (progress_bar)
                     progress_bar.css('display', 'none');
 
-                channel.trigger('message_posted',
-                        {message_id:  data.id,
-                         room:        project_chatroom(),
-                         project_id:  project_id});
+                try {
+                    channel.trigger('message_posted',
+                                    {message_id:  data.id,
+                                     room:        project_chatroom(),
+                                     project_id:  project_id}); }
+                catch (e) {}
+
                 add_message(data.body);
                 $('#message-box').val($('#message-box')[0].defaultValue); }
 
@@ -562,9 +565,14 @@ function setup_paypal_direct() {
                             message_text.append(message_raw);
                             wrapper.append(message_text);
 
-                            channel.trigger('message_updated',
-                                           {message_id: message_id,
-                                            project_id: $('#project-id').val()}); }}); }
+                            try {
+                                channel.trigger('message_updated',
+                                                {message_id: message_id,
+                                                 project_id: $('#project-id').val()}); }
+                            catch (e) {
+                                // fail gracefully if socket disconnected or
+                                // channel.trigger fails
+                            }}}); }
 
             btn.click(update_message); }
 
@@ -574,9 +582,14 @@ function setup_paypal_direct() {
                                project_id:  $('#project-id').val()},
                     url:      '/projects/delete_message.json',
                     success:  function(data) {
-                        channel.trigger('message_removed',
-                                        {message_id: message_id,
-                                         project_id: $('#project-id').val()});
+                        try {
+                            channel.trigger('message_removed',
+                                            {message_id: message_id,
+                                             project_id: $('#project-id').val()}); }
+                        catch (e) {
+                            // fail gracefully if socket disconnected or
+                            // channel.trigger fails
+                        }
 
                         $('li.project-message[data-id="' + message_id + '"]')
                             .detach();
