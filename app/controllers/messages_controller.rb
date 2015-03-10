@@ -18,6 +18,8 @@ class MessagesController < ApplicationController
     @message.user = current_user
     @message.save
 
+    attachments  = get_attachments(@message)
+
     message_body = render_to_string(partial:   'projects/message',
                                     layout:     false,
                                     formats:    :html,
@@ -26,12 +28,10 @@ class MessagesController < ApplicationController
     url          = root_url + ('/projects/' + @project.id +
                     (@room == 'private' ? '/private_chat' : ''))
 
-    attachments  = get_attachments(@message)
-
     @message.send_emails(current_user, url, @room)
     @project.updated_at = DateTime.now
     @project.save!
-    
+
 
     respond_to do |format|
       format.html { redirect_to @project }
