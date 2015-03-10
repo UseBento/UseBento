@@ -194,49 +194,49 @@ function setup_paypal_direct() {
                                 : window.location.host + "/websocket");
 
             function connect_socket() {
-            dispatcher       = new WebSocketRails(socket_url);
-            dispatcher.on_open = function(data) {
-                channel          = dispatcher.subscribe('project-' + project_id);
+                dispatcher         = new WebSocketRails(socket_url);
+                dispatcher.on_open = function(data) {
+                    channel = dispatcher.subscribe('project-' + project_id);
 
-                channel.bind('message_posted', function(message) {
-                    if (message.room != room) {
-                        inc_other_unread_count(); }
-                    else {
+                    channel.bind('message_posted', function(message) {
+                        if (message.room != room) {
+                            inc_other_unread_count(); }
+                        else {
+                            var id    = message.message_id;
+                            var pid   = message.project_id;
+                            if (pid != project_id) return;
+
+                            $.ajax(
+                                {type: 'get',
+                                 url: '/projects/' + pid + '/message/' + id + '.json',
+                                 success: function(data) {
+                                     add_message(data.body, data.id); }}); }});
+
+                    channel.bind('message_updated', function(message) {
                         var id    = message.message_id;
                         var pid   = message.project_id;
-                        if (pid != project_id) return;
+                        var el    = $('li.project-message[data-id="' + id + '"]');
+                        if (pid != project_id || !el) return;
 
                         $.ajax(
                             {type: 'get',
                              url: '/projects/' + pid + '/message/' + id + '.json',
                              success: function(data) {
-                                 add_message(data.body, data.id); }}); }});
+                                 el.html(data.body);
+                                 el.attr('data-processed', null);
+                                 link_message_buttons();
+                                 reset_message_form(); }}); });
 
-                channel.bind('message_updated', function(message) {
-                    var id    = message.message_id;
-                    var pid   = message.project_id;
-                    var el    = $('li.project-message[data-id="' + id + '"]');
-                    if (pid != project_id || !el) return;
+                    channel.bind('message_removed', function(message) {
+                        var id    = message.message_id;
+                        var pid   = message.project_id;
+                        var el    = $('li.project-message[data-id="' + id + '"]');
+                        if (pid != project_id || !el) return;
+                        el.detach(); });
 
-                    $.ajax(
-                        {type: 'get',
-                         url: '/projects/' + pid + '/message/' + id + '.json',
-                         success: function(data) {
-                             el.html(data.body);
-                             el.attr('data-processed', null);
-                             link_message_buttons();
-                             reset_message_form(); }}); });
-
-                channel.bind('message_removed', function(message) {
-                    var id    = message.message_id;
-                    var pid   = message.project_id;
-                    var el    = $('li.project-message[data-id="' + id + '"]');
-                    if (pid != project_id || !el) return;
-                    el.detach(); });
-
-                channel.bind('new_message', function(message) {
-                    if (!$('li.project-message[data-id="' + message.id + '"]')[0])
-                        add_message(message.body, message.id); }); };
+                    channel.bind('new_message', function(message) {
+                        if (!$('li.project-message[data-id="' + message.id + '"]')[0])
+                            add_message(message.body, message.id); }); };
 
                 setTimeout(function() {
                     if (dispatcher.state == "disconnected")
