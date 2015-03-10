@@ -59,7 +59,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = true
 
   # Set to :debug to see everything in the log.
   config.log_level = :info
@@ -92,12 +92,4 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-end
-
-WebsocketRails.setup do |config|
-  config.standalone = true
-  config.synchronize = true
-  config.standalone_port = 3002
-  config.broadcast_subscriber_events = true
-  config.redis_options = {:host => 'localhost', :port => '6379'}
 end

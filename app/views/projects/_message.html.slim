@@ -36,7 +36,7 @@ li.project-message[data-id=message.id data-project-id=@project.id]
           = message.body
     p.info_text
       | Posted
-      = message.format_date
+      = " " + message.format_date
     - for attachment in message.valid_attachments
       - if attachment.is_image?
         p.responsive_img

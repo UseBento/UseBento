@@ -20,26 +20,18 @@ class MessagesController < ApplicationController
 
     attachments  = get_attachments(@message)
 
+    message_body = render_to_string(partial:   'projects/message',
+                                    layout:     false,
+                                    formats:    :html,
+                                    locals:    {message:  @message,
+                                                to_owner: true})
+    url          = root_url + ('/projects/' + @project.id +
+                    (@room == 'private' ? '/private_chat' : ''))
 
-    # participants = @people.select {|p| p.accepted}
-    # participants.map do |participant|
-    #               if participant != current_user
-    #                 ProjectMailer.new_user_message_mail(@message,
-    #                                                     participant.user,
-    #                                                     current_user).deliver
-    #                end
-    #              end
-
-     message_body = render_to_string(partial:   'projects/message',
-                                     layout:     false,
-                                     formats:    :html,
-                                     locals:    {message:  @message,
-                                                 to_owner: true})
-
-    @message.send_emails(current_user, project_url(@project))
+    @message.send_emails(current_user, url, @room)
     @project.updated_at = DateTime.now
     @project.save!
-    attachments  = get_attachments(@message)
+
 
     respond_to do |format|
       format.html { redirect_to @project }

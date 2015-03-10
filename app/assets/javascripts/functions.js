@@ -184,7 +184,6 @@ function setup_paypal_direct() {
             tag.attr('data-count', count + 1); }
 
         var channel;
-        //var other_channel;
         var dispatcher;
         function messages_websocket() {
             var room         = project_chatroom();
@@ -193,53 +192,58 @@ function setup_paypal_direct() {
             var socket_url   = (window.location.host == window.location.hostname
                                 ? window.location.hostname + ":3001/websocket"
                                 : window.location.host + "/websocket");
-            dispatcher       = new WebSocketRails(socket_url);
+
+            function connect_socket() {
+                dispatcher         = new WebSocketRails(socket_url);
                 dispatcher.on_open = function(data) {
-                //other_channel    = dispatcher.subscribe('project-' + other_room
-                //                                        + "-" + project_id);
-                channel          = dispatcher.subscribe('project-' + room
-                                                        + "-" + project_id);
+                    channel = dispatcher.subscribe('project-' + project_id);
 
-                //other_channel.bind('message_posted', function(message) {
-                //    inc_other_unread_count(); });
+                    channel.bind('message_posted', function(message) {
+                        if (message.room != room) {
+                            inc_other_unread_count(); }
+                        else {
+                            var id    = message.message_id;
+                            var pid   = message.project_id;
+                            if (pid != project_id) return;
 
-                channel.bind('message_posted', function(message) {
-                    var id    = message.message_id;
-                    var pid   = message.project_id;
-                    if (pid != project_id) return;
+                            $.ajax(
+                                {type: 'get',
+                                 url: '/projects/' + pid + '/message/' + id + '.json',
+                                 success: function(data) {
+                                     add_message(data.body, data.id); }}); }});
 
-                    $.ajax(
-                        {type: 'get',
-                         url: '/projects/' + pid + '/message/' + id + '.json',
-                         success: function(data) {
-                                 add_message(data.body, data.id); }}); });
+                    channel.bind('message_updated', function(message) {
+                        var id    = message.message_id;
+                        var pid   = message.project_id;
+                        var el    = $('li.project-message[data-id="' + id + '"]');
+                        if (pid != project_id || !el) return;
 
-                channel.bind('message_updated', function(message) {
-                    var id    = message.message_id;
-                    var pid   = message.project_id;
-                    var el    = $('li.project-message[data-id="' + id + '"]');
-                    if (pid != project_id || !el) return;
+                        $.ajax(
+                            {type: 'get',
+                             url: '/projects/' + pid + '/message/' + id + '.json',
+                             success: function(data) {
+                                 el.html(data.body);
+                                 el.attr('data-processed', null);
+                                 link_message_buttons();
+                                 reset_message_form(); }}); });
 
-                    $.ajax(
-                        {type: 'get',
-                         url: '/projects/' + pid + '/message/' + id + '.json',
-                         success: function(data) {
-                             el.html(data.body);
-                             el.attr('data-processed', null);
-                             link_message_buttons();
-                             reset_message_form(); }}); });
+                    channel.bind('message_removed', function(message) {
+                        var id    = message.message_id;
+                        var pid   = message.project_id;
+                        var el    = $('li.project-message[data-id="' + id + '"]');
+                        if (pid != project_id || !el) return;
+                        el.detach(); });
 
-                channel.bind('message_removed', function(message) {
-                    var id    = message.message_id;
-                    var pid   = message.project_id;
-                    var el    = $('li.project-message[data-id="' + id + '"]');
-                    if (pid != project_id || !el) return;
-                    el.detach(); });
+                    channel.bind('new_message', function(message) {
+                        if (!$('li.project-message[data-id="' + message.id + '"]')[0])
+                            add_message(message.body, message.id); }); };
 
-                channel.bind('new_message', function(message) {
-                    if (!$('li.project-message[data-id="' + message.id + '"]')[0])
-                        add_message(message.body, message.id); }); };
-            }
+                setTimeout(function() {
+                    if (dispatcher.state == "disconnected")
+                        connect_socket(); },
+                           3000); }
+
+            connect_socket(); }
 
         if ($('#message-box') && $('#project-id').val())
             messages_websocket();
@@ -254,9 +258,13 @@ function setup_paypal_direct() {
                 if (progress_bar)
                     progress_bar.css('display', 'none');
 
-                channel.trigger('message_posted',
-                        {message_id: data.id,
-                        project_id:  project_id});
+                try {
+                    channel.trigger('message_posted',
+                                    {message_id:  data.id,
+                                     room:        project_chatroom(),
+                                     project_id:  project_id}); }
+                catch (e) {}
+
                 add_message(data.body);
                 $('#message-box').val($('#message-box')[0].defaultValue); }
 
@@ -491,9 +499,13 @@ function setup_paypal_direct() {
         $('#submit-invite').click(function() {
             var email    = $('#enter-email').val();
             var id       = $('#project-id').val();
+            var chat     = $('#chat').val();
+            var url      = ('/projects/' + id + '/'
+                            + (chat == 'group' ? '' : 'private/')
+                            + 'invite.json');
 
             $.ajax({type:    'POST',
-                    url:     '/projects/' + id + '/invite.json',
+                    url:      url,
                     data:    {email: email},
                     success:  function(data) {
                         if (data.error)
@@ -552,9 +564,14 @@ function setup_paypal_direct() {
                             message_text.append(message_raw);
                             wrapper.append(message_text);
 
-                            channel.trigger('message_updated',
-                                           {message_id: message_id,
-                                            project_id: $('#project-id').val()}); }}); }
+                            try {
+                                channel.trigger('message_updated',
+                                                {message_id: message_id,
+                                                 project_id: $('#project-id').val()}); }
+                            catch (e) {
+                                // fail gracefully if socket disconnected or
+                                // channel.trigger fails
+                            }}}); }
 
             btn.click(update_message); }
 
@@ -564,9 +581,14 @@ function setup_paypal_direct() {
                                project_id:  $('#project-id').val()},
                     url:      '/projects/delete_message.json',
                     success:  function(data) {
-                        channel.trigger('message_removed',
-                                        {message_id: message_id,
-                                         project_id: $('#project-id').val()});
+                        try {
+                            channel.trigger('message_removed',
+                                            {message_id: message_id,
+                                             project_id: $('#project-id').val()}); }
+                        catch (e) {
+                            // fail gracefully if socket disconnected or
+                            // channel.trigger fails
+                        }
 
                         $('li.project-message[data-id="' + message_id + '"]')
                             .detach();

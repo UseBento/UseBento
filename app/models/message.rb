@@ -12,14 +12,31 @@ class Message
   embedded_in :private_chat
   embeds_many :attachments
 
-  def send_emails(user, project_url)
-    participants = project.people.select {|p| p.accepted}
+  def send_emails(user, project_url, room)
+    if room == 'private'
+      participants = parent_project.private_chat.people.select {|p| p.accepted}
+    else
+      participants = parent_project.people.select {|p| p.accepted}
+    end
     participants.map do |participant|
                   if participant != user
+                    # If there was an attachement we need add extra copy
+                    body = ""
+                    attachment_message = ""
+
+                    if self.attachments.count > 0
+                      attachment_message = user.first_name + ' has added a file to ' + parent_project.name
+                    end
+
+                    if !self.body.blank?
+                      body = body_as_html(false, true)
+                    end
+                    body += " " + attachment_message
+
                     ProjectMailer.new_user_message_mail(
                         participant.user.first_name,
                         user.full_name,
-                        body_as_html(false, true),
+                        body,
                         project_url,
                         participant.user.email
                       ).deliver_later
@@ -109,5 +126,3 @@ class Message
     date_str
   end
 end
-
-    

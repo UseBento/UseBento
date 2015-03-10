@@ -4,37 +4,68 @@
     .intro-content
       .shell
         h2
-          | WORLD-CLASS DESIGNERS ON DEMAND
+          | MARKETING NEVER LOOKED SO GOOD
         p
-          | Handpicked designers ready to work on your projects now.
+          | Web Pages &bull; Emails &bull; Social Media Ads &bull; Printed Collateral &bull; Presentations
+          br
+          | Designed uniquely for your startup.
         p
           a.btn[href="/projects/start"]
-            | GET STARTED
+            | TRY IT FOR FREE
 
   = render partial: 'header', locals: {page: 'home-secondary'}
   section.section
     .shell
       header.section-head.section-head-home
         h2
-          | GOOD DESIGN MATTERS TO YOUR BUSINESS
+          | TRUST YOUR WORK TO US
       .section-body
         ul.features.clearfix
-          li.feature
+          li.feature.third
             .feature-image
               span.sprite-chart
             h3
-              | STAND OUT AND GET NOTICED
+              | EXPERIENCED TEAM
             p
-              | In today's competitive landscape design can be the key to separating your company from the rest of the pack.  It cuts through the clutter and makes your brand unique and professional in the eyes of your customers.
-          li.feature
+              | Our CEO has over 15 years of experience overseeing marketing designed for startups as Creative Director at Yammer.
+
+          li.feature.third
             .feature-image
               span.sprite-badge
             h3
-              | GROW YOUR CUSTOMERS
+              | WORLD-CLASS DESIGNERS
             p
-              | Design changes how your business interacts with customers. It validates your product, messaging and new ideas.  It also helps you develop empathy and identify problems.
-  section.section.section-black
-    .shell
+              | We only work with the best designers on the planet who are focused only on marketing projects.
+
+          li.feature.third
+            .feature-image
+              img[src="css/images/clock.png" alt="" width="44" height="44"]
+            h3
+              | COST EFFECTIVE & FAST
+            p
+              | Our proven process gets your project done fast and for cheaper then going to an agency.
+
+          .clear
+          br.clear
+          br.clear
+
+          li.feature.third.offset
+            .feature-image
+              img[src="css/images/cycle.png" alt="" width="44" height="47"]
+            h3
+              | WE UNDERSTAND YOUR BRAND
+            p
+              | We use your previous work and brand guidelines to help us stay on-brand and on-time.
+
+          li.feature.third
+            .feature-image
+              img[src="css/images/thumb.png" alt="" width="49" height="49"]
+            h3
+              | 100% GUARANTEE
+            p
+              | We are so confident that we 100% guarantee all the work.  So go ahead and try us out.
+
+    /.shell
       header.section-head.section-head-home
         h2
           | WORK WITH ONLY THE BEST
@@ -57,7 +88,7 @@
               | Each and every company with Bento is assigned an account manager to assist with the fulfillment and running of your project. This ensures speed and quality.
         .features-image
           img[src="css/images/features-image-people.png" width="517" height="346"]
-  section.section
+  /.section.section
     .shell
       header.section-head.section-head-home
         h2
@@ -81,21 +112,7 @@
               | Bento makes it simple for your  team to scale your work up and down with ease.  Our global team ensures fast turnaround time and 24/7 access.
         .features-image.feature-image-pull-right.feature-image-pull-top
           img[src="css/images/features-image-mac.png" width="690" height="665"]
-  /.section-partners
-    .shell
-      h2
-        | Our Designers Have Worked With
-      ul.list-partners
-        li
-          img[src="/images/partners/partner-paypal.png" alt="" width="149" height="42"]
-        li
-          img[src="/images/partners/partner-yammer.png" alt="" width="168" height="35"]
-        li
-          img[src="/images/partners/partner-google.png" alt="" width="134" height="46"]
-        li
-          img[src="/images/partners/partner-airbnb.png" alt="" width="132" height="42"]
-        li
-          img[src="/images/partners/partner-facebook.png" alt="" width="173" height="35"]
+
   /.section.section-casestudy
     .shell
       .section-head
@@ -169,56 +186,45 @@
     .shell
       header.section-head.section-head-home
         h2
-          | SOME OF THE WORK WE HAVE DONE
+          | SOME OF OUR DESIGNERS
       .section-body
         ul.services
           li.service
-            a.service-thumbnail.popup-link[href="portfolio/1.html"]
+            a.service-thumbnail[href="https://dribbble.com/sananes" target="_blank"]
               img[src="css/images/service-1.jpg"]
               .btn-holder
                 span.btn.btn-bordered
-                  | VIEW PROJECT
+                  | VIEW PORTFOLIO
           li.service
-            a.service-thumbnail.popup-link[href="portfolio/2.html"]
+            a.service-thumbnail[href="https://dribbble.com/lilypad" target="_blank"]
               img[src="css/images/service-2.jpg"]
               .btn-holder
                 span.btn.btn-bordered
-                  | VIEW PROJECT
+                  | VIEW PORTFOLIO
           li.service
-            a.service-thumbnail.popup-link[href="portfolio/3.html"]
+            a.service-thumbnail[href="https://dribbble.com/zer0mike" target="_blank"]
               img[src="css/images/service-3.jpg"]
               .btn-holder
                 span.btn.btn-bordered
-                  | VIEW PROJECT
-          li.service
-            a.service-thumbnail.popup-link[href="portfolio/4.html"]
-              img[src="css/images/service-4.jpg"]
-              .btn-holder
-                span.btn.btn-bordered
-                  | VIEW PROJECT
-          li.service
-            a.service-thumbnail.popup-link[href="portfolio/5.html"]
-              img[src="css/images/service-5.jpg"]
-              .btn-holder
-                span.btn.btn-bordered
-                  | VIEW PROJECT
-          li.service
-            a.service-thumbnail.popup-link[href="portfolio/6.html"]
-              img[src="css/images/service-6.jpg"]
-              .btn-holder
-                span.btn.btn-bordered
-                  | VIEW PROJECT
+                  | VIEW PORTFOLIO
+  section.section
+    .shell
+      header.section-head.section-head-home.companies-we-work-with
+        h2
+          | COMPANIES WE WORK WITH
+      ul.list-partners
+        li
+          img#partners[src="/images/partners/logos.png" alt=""]
+
   .section.section-black.section-start
     .shell
       .section-head
         h2
-          | READY TO AUTOMATE YOUR DESIGN PROJECTS?
-        p
-          | We are so confident that we offer a 100%, no questions asked refund policy.
+          | READY TO AUTOMATE YOUR MARKETING PROJECTS?
       .section-body
         .section-actions
           a.btn[href="/projects/start"]
-            | START YOUR PROJECT
+            | LEARN MORE
   /.section.section-testimonilas
     .shell
       .section-head
