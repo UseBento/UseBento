@@ -19,7 +19,7 @@ class Message
       participants = parent_project.people.select {|p| p.accepted}
     end
     participants.map do |participant|
-                  if participant != user
+                  if participant.user != user
                     # If there was an attachement we need add extra copy
                     body = ""
                     attachment_message = ""
