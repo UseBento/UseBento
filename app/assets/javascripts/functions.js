@@ -866,6 +866,9 @@ function setup_paypal_direct() {
     if (window.location.hash == "#login")
         setTimeout(function() {$('#userlink').click(); }, 1000);
 
+    $('.section-casestudy img').css('display', 'inline-block');
+
+
 })(jQuery, window, document);
 
 

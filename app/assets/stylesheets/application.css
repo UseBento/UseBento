@@ -615,3 +615,6 @@ padding-bottom: 40px;
 
 #homepage .intro-content .shell p {
     line-height: 1.6; }
+
+#homepage.fbads .casestudies li {
+    width: 375px; }
