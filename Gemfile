@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.8'
+gem 'rails', '4.2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -44,3 +44,5 @@ gem 'valid_email'
 gem 'slim-rails'
 gem 'twocheckout'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem 'redis','3.2.0'
+gem 'websocket-rails'

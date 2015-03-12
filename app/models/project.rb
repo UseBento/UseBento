@@ -1,7 +1,7 @@
 class Project
   include Mongoid::Document
   include Mongoid::Timestamps
-  
+
   field :start_date,    type: DateTime
   field :state,         type: Symbol
   field :status,        type: Symbol  # :pending, :assigned, :awaiting_payment,
@@ -21,12 +21,13 @@ class Project
   embeds_many :messages
   embeds_many :invited_users
   embeds_many :attachments
+  embeds_one  :private_chat
   validate :is_valid?
   has_many :payments
   has_many :awaiting_payments
-  
+
   STATUS_LIST = ['Project Started', 'Creative Brief', 'First Round Designs', 'Second Round Designs', 'Development', 'Files Delivered']
-  
+
   def as_json(i=0)
     {start_date:       start_date,
      state:            state,
@@ -40,8 +41,27 @@ class Project
      unpaid_payments:  self.awaiting_payments}
   end
 
+  def lookup_message(id)
+    (self.messages.find(id) ||
+     self.get_private_chat.messages.find(id))
+  end
+
   def was_invited?(user)
     self.invited_users.where(user_id: user.id).first
+  end
+
+  def invited_admins
+    self.people.select do |p|
+                 p.user && p.user.admin
+               end
+  end
+
+  def get_private_chat
+    self.private_chat || self.create_private_chat({})
+  end
+
+  def unread_messages_count(user)
+    messages.count - messages.where(read_by: user.id.to_s).count
   end
 
   def people
@@ -80,13 +100,13 @@ class Project
     unpaid_payments.each do |payment|
                      logged_amount += payment.amount
                    end
-    
+
     if (logged_amount < amount)
       payments_needed = 2 - (paid_payments.length + unpaid_payments.length)
       if (payments_needed > 0)
         (1..payments_needed).each {|i|
             unpaid_payments.push(
-                self.awaiting_payments.create({amount: ((amount - logged_amount) / 
+                self.awaiting_payments.create({amount: ((amount - logged_amount) /
                                                         payments_needed),
                                                paid:   false})) }
       else
@@ -98,7 +118,7 @@ class Project
       if unpaid_payments.length > 0
         fix_awaiting_payment_amounts(paid_payments, unpaid_payments, amount)
       end
-    end      
+    end
 
     paid_payments.concat unpaid_payments
   end
@@ -117,11 +137,11 @@ class Project
       unpaid_payments.last.save
     end
   end
-    
-  def has_access?(user) 
-    (user && 
-     (user.id == self.user.id || 
-      user.admin || 
+
+  def has_access?(user)
+    (user &&
+     (user.id == self.user.id ||
+      user.admin ||
       self.invited_users.where(accepted: true).where(user_id: user.id).first))
   end
 
@@ -130,8 +150,8 @@ class Project
     results = self.service.questions.map { |question|
         answer = answer_for(question)
         if !answer
-          errors.push({valid:     false, 
-                       answer:    nil, 
+          errors.push({valid:     false,
+                       answer:    nil,
                        question:  question,
                        message:  "This field is required"})
         else
@@ -196,9 +216,9 @@ class Project
 
   def get_pages
     if self.service.name == "social_media_design"
-      fields = ["twitter_header_and_profile", 
-                "youtube_header_and_profile", 
-                "linkedin_header_and_profile", 
+      fields = ["twitter_header_and_profile",
+                "youtube_header_and_profile",
+                "linkedin_header_and_profile",
                 "facebook_header_and_profile"]
       fields = fields.map {|f| self.answer_for(f).answer }
       fields = fields.select {|f| f}
@@ -225,7 +245,7 @@ class Project
 
   def get_price
     return self.total_price if (self.total_price)
-    
+
     pages          = get_pages
     price_per_page = self.service.price
     if self.get_plus_dev
@@ -259,7 +279,7 @@ class Project
 
   def get_features
     features = []
-    featured_answers = 
+    featured_answers =
       {"ftp_upload"                => "FTP Upload",
        "google_analytics_setup"    => "Google Analytics Setup",
        "presentation_type"         => {"Powerpoint"             => "Powerpoint <>",
@@ -315,8 +335,8 @@ class Project
   end
 
   def filled_out_creative_brief?
-    brief_answers = ['desired_visitor_action', 'competitors', 'tagline', 
-     'color_preferences', 'font_preferences', 'inspiration', 
+    brief_answers = ['desired_visitor_action', 'competitors', 'tagline',
+     'color_preferences', 'font_preferences', 'inspiration',
      'definite_nos', 'other_info'].select do |name|
                                     answer_for(name).answer
                                   end
@@ -329,7 +349,7 @@ class Project
                                          posted_date: DateTime.now})
     message.user = admin_user
     message.save
-  end    
+  end
 
   def filled_out_message
     bot_message """Thanks for filling out the creative brief. We are now finding the right designer to work on this project and will get back to you shortly. Also, can you please pay the deposit for this project when you get a chance? This is fully refundable until we actually start your project."""
@@ -340,7 +360,7 @@ class Project
 
 Also, feel free to comment here with any questions that you may have."""
   end
-  
+
   def status_label
     status.to_s.gsub("_", " ")
   end

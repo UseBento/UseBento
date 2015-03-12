@@ -1,13 +1,29 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  skip_before_action :authenticate_user!, only: [:new, :join]
+  skip_before_action :authenticate_user!, only: [:new, :join, :start, :finish_start]
 
-  def view 
+  def start
+  end
+
+  def finish_start
+    @name          = params[:full_name]
+    @email         = params[:email_address]
+    @company       = params[:company]
+    @company_size  = params[:company_size]
+    @description   = params[:description]
+
+    ProjectMailer.new_project_request_mail(@name, @email, @company, @company_size, @description).deliver
+  end
+
+  def view
     @project = Project.find(params[:id])
     @project.get_awaiting_payments
     @project_statuses = Project::STATUS_LIST
 
-    @editing = false
+    @chat     = :group
+    @editing  = false
+    @messages = @project.messages
+
     if !@project.has_access?(current_user)
       invite = @project.was_invited?(current_user)
       if invite
@@ -17,6 +33,28 @@ class ProjectsController < ApplicationController
         return redirect_to_login
       end
     end
+  end
+
+  def private_chat
+    @project = Project.find(params[:id])
+    @project.get_awaiting_payments
+    @project_statuses = Project::STATUS_LIST
+
+    @chat     = :private
+    @editing  = false
+    @messages = @project.get_private_chat.messages
+
+    if !@project.has_access?(current_user)
+      invite = @project.was_invited?(current_user)
+      if invite
+        invite.accepted = true
+        invite.save
+      else
+        return redirect_to_login
+      end
+    end
+
+    render "projects/view"
   end
 
   def edit
@@ -79,7 +117,7 @@ class ProjectsController < ApplicationController
     @service     = @project.service
     filled_out   = @project.filled_out_creative_brief?
     get_attachments(@project)
-    
+
     params.map do |key, val|
       @project.update_answer(key, val)
     end
@@ -92,7 +130,7 @@ class ProjectsController < ApplicationController
         @project.filled_out_message
         # Update project status if a creative brief was filled out
         status_index = Hash[Project::STATUS_LIST.map.with_index.to_a]
-        brief_index = status_index['Creative Brief']  
+        brief_index = status_index['Creative Brief']
         if brief_index > @project.status_index
           @project.status_index = brief_index
         end
@@ -119,7 +157,7 @@ class ProjectsController < ApplicationController
     end
 
     @project.save
-    
+
     redirect_to @project
   end
 
@@ -165,7 +203,7 @@ class ProjectsController < ApplicationController
       @project.save
       @project.update_company
       @project.initialize_project
-      
+
       ProjectMailer.new_project_mail(@project).deliver
       if !existing_user
         UserMailer.new_generated_user_mail(@user, password, @project).deliver
@@ -203,7 +241,7 @@ class ProjectsController < ApplicationController
 
       @payment.amount = params[:amount]
       @payment.save
-       
+
       respond_to do |format|
         format.html { redirect_to @project }
         format.json { render :json => @project }
@@ -213,29 +251,28 @@ class ProjectsController < ApplicationController
 
   def invite
     @project    = Project.find(params[:id])
-    email       = params[:email]
-    user        = User.where(email: email).first
-    
-    if user == current_user
-      @error = "You can't invite yourself!"
-    elsif (@project.invited_users.where(email: email).first ||
-           (user && @project.invited_users.where(user: user).first))
-      @error = "You already invited " + ((user && user.full_name) || email)
-    else
-      invitation  = @project.invited_users.create({accepted:   false,
-                                                   email:      email})
-      invitation.inviter_id  = current_user.id
-      invitation.user        = user if user
-      invitation.save
-        
-      UserMailer.invited_to_project_mail(invitation, @project, current_user).deliver
-    end
+
+    invitation = InvitedUser.send_invite(@project, current_user, params[:email])
+    @error     = invitation if invitation.class != InvitedUser
+
     respond_to do |format|
       format.html { redirect_to @project }
       format.json { render :json => @error ? {error: @error} : invitation }
     end
   end
 
+  def invite_to_private
+    @project        = Project.find(params[:id])
+    @private_chat   = @project.private_chat
+
+    invitation = InvitedUser.send_invite(@private_chat, current_user, params[:email])
+    @error     = invitation if invitation.class != InvitedUser
+
+    respond_to do |format|
+      format.html { redirect_to @project }
+      format.json { render :json => @error ? {error: @error} : invitation }
+    end
+  end
 
   def initial_popup
     @project = Project.find(params[:id])

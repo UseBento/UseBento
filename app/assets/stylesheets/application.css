@@ -10,7 +10,14 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
+ *= require jquery.selectbox
+ *= require magnific-popup
+ *= require payments
+ *= require projects
+ *= require services
+ *= require users
+ *= require style
+ *= require style-redesign
  *= require_self
  */
 
@@ -19,7 +26,7 @@
     padding: 0;
     color: rgb(220,50,20);
     font-weight: bold;
-    font-size: 0.8em; 
+    font-size: 0.8em;
     position:relative;
     top: -0.5em;
 }
@@ -58,7 +65,7 @@ padding-top:1em;
 .list-item:hover {
     cursor: pointer;
     background-color: #F6f6f6; }
-    
+
 .intro-bg {
     z-index: -1;}
 
@@ -142,7 +149,7 @@ box-sizing: border-box;
 a.btn-edit-payment, a.submit-payment {
     cursor: pointer; }
 
-.devise .field input[type="checkbox"] { 
+.devise .field input[type="checkbox"] {
     display: inline-block;
     width: auto;
     padding: 0;
@@ -161,7 +168,7 @@ padding: 12px;
 box-sizing: border-box;
 }
 .devise .field br {
-    display: none; 
+    display: none;
 }
 .devise .field {
     margin-bottom: 1.25em;
@@ -186,7 +193,7 @@ cursor: pointer;
 -webkit-transition: all 0.3s;
 -o-transition: all 0.3s;
 transition: all 0.3s;
-margin-bottom: 0.75em; 
+margin-bottom: 0.75em;
 }
 
 #progress-bar {
@@ -274,13 +281,13 @@ button.btn.upload-btn {
     color: #90a0ba;
     margin-top: 0.4em;
     margin-bottom: 0em; }
-    
+
 
 .people-entry .avatar {
     width: 2.5em;
     height: 2.5em;
     border-radius: 1.25em;
-    float: left; 
+    float: left;
     margin-right: 0.75em;
 }
 
@@ -325,7 +332,7 @@ button.btn.upload-btn {
     padding: 1rem;
     padding-left: 2rem;
     padding-right: 2rem;
-    
+
     padding-bottom: 1rem;
     }
 
@@ -335,11 +342,11 @@ button.btn.upload-btn {
 .site-popup p {
     padding-bottom: 1em;
     }
-    
+
 .site-popup .separator {
     height: 1px;
     width: 100%;
-    border-top: 1px solid #eee; 
+    border-top: 1px solid #eee;
     }
 
 
@@ -367,3 +374,244 @@ a.delete {
 
 button.btn.btn-sm.message-save-button {
     margin-right: -0.25em; }
+
+.project_detail_box .row_box_split {
+    border-bottom: 1px solid #d7d7d7;
+    width:100%;
+    display:table; }
+
+.project_detail_box .row_box_split .left_title {
+    width: 775px;
+    border-right: 1px solid #d7d7d7;
+    display:table-cell;
+    padding: 21px 30px 21px 30px; }
+
+.project_detail_box .row_box_split .right_chats {
+    position:relative;
+    display: table-cell; }
+
+.project_detail_box .row_box_split .right_chats a.chat-row {
+    display:block;
+    color: #525f71;
+    font-size: 14px;
+    padding-top: 3px;
+    height: calc(50% - 3px);
+    padding-left: 15px; }
+
+.project_detail_box .row_box_split .right_chats a.chat-row#group-chat {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0; }
+
+.project_detail_box .row_box_split .right_chats a.chat-row.selected {
+    background-color:#d9e9f9; }
+
+.project_detail_box .row_box_split .right_chats a.chat-row:hover {
+    text-decoration: none;
+    cursor:pointer;
+    background-color:#d9e9f9; }
+
+.project_detail_box .row_box_split .right_chats a.chat-row#private-chat {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0; }
+
+.table-row {
+    display: table-row; }
+
+.left_container, .right_container {
+    display: table-cell;
+    float: none !important;
+    vertical-align: top; }
+
+span.unread-tag {
+    margin-left: 18px;
+    display:inline-block;
+    border-radius: 9px;
+    background-color: #f20022;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-weight: bold;
+    height: 19px;
+    padding-top: 0px;
+    line-height: 17px;
+    color: white; }
+
+span.unread-tag[data-count="0"] {
+    display: none; }
+
+.header-dark {
+    border-bottom: 0;
+    background-color: #232323; }
+
+.header.header-dark .logo {
+    background-image: none;
+    text-indent: 0; }
+
+.header.header-dark .nav a {
+    color: #fcfcfc;
+    font-weight: normal; }
+
+.header-dark.header .nav .current a {
+  color: #fff;
+}
+
+.wrapper.dark, .wrapper.dark .section {
+    background-color: #f1f1f1; }
+
+.shell.start-project {
+    width: 820px; }
+
+.shell.start-project h3 {
+color: #212F44;
+font-family: "AvenirNext";
+font-weight:normal;
+line-height: 1.25;
+font-size: 28px; }
+
+
+.shell.start-project .section-body.start-form button.brown:hover {
+    -webkit-transition: 200ms;
+         -o-transition: 200ms;
+            transition: 200ms;
+background-color: #dbc08c;
+}
+.shell.start-project .section-body.start-form button.brown {
+    -webkit-transition: 500ms;
+         -o-transition: 500ms;
+            transition: 500ms;
+}
+
+
+.btn.brown:hover {
+    -webkit-transition: 200ms;
+         -o-transition: 200ms;
+            transition: 200ms;
+background-color: #dbc08c;
+}
+.btn.brown {
+    -webkit-transition: 500ms;
+         -o-transition: 500ms;
+            transition: 500ms;
+border: 0;
+background-color: #B0996D;
+color: #FFF;
+font-family: "AvenirNext";
+font-size: 15px;
+font-weight: 600;
+}
+
+.shell.start-project .section-body.start-form {
+padding: 50px;
+padding-bottom: 30px;
+background-color: #FCFDFF;
+border: 1px solid #D1D1D1; }
+
+.shell.start-project .section-body.start-form label {
+opacity: 0.8;
+color: #212F44;
+font-family: "AvenirNext";
+font-size: 14px; }
+
+.shell.start-project .section-body.start-form .form-row {
+margin-bottom: 20px; }
+
+
+.shell.start-project .section-body.start-form input,
+.shell.start-project .section-body.start-form select,
+.shell.start-project .section-body.start-form textarea {
+color: #212F44;
+font-family: "AvenirNext";
+font-size: 18px;
+width: 100%;
+width: calc(100% - 15px);
+margin-top: 8px;
+padding-left: 15px;
+border-radius: 0;
+height: 54px;
+background-color: #F4F6FA;
+border: 1px solid #DDD; }
+
+.shell.start-project .section-body.start-form select {
+    width: 100%; }
+
+.shell.start-project .section-body.start-form textarea {
+    padding-top: 20px;
+    height: 170px; }
+
+.shell.start-project .section-body.start-form button {
+width: 240px;
+height: 50px;
+border: 0;
+background-color: #B0996D;
+color: #FFF;
+font-family: "AvenirNext";
+font-size: 15px;
+font-weight: 600; }
+
+.btn:hover { background: #dbc08c; }
+
+.align-right {
+    text-align: right; }
+
+.footer-homepage .copyright {
+    margin-top: 0;
+    color: #919191;
+}
+
+.footer-homepage, .header.header-dark .nav li a {
+    font-family: AvenirNextRegular; }
+
+.footer-homepage .nav {
+padding-bottom: 30px;
+}
+
+.header.header-dark .nav li.current a {
+color: #fff;
+}
+.header.header-dark .nav li a {
+color: #939393;
+}
+
+.header.header-dark .nav li a:hover {
+    color:#fff;
+    font-weight: bold; }
+
+.header.header-dark .nav a:before {
+    border-top: 0; }
+
+@media only screen and (max-width: 850px),
+       only screen and (max-device-width: 850px) {
+.shell.start-project .section-body.start-form {
+    padding: 30px;
+width: calc(100% - 80px); }
+.shell.start-project {
+    width: 100%; }
+}
+
+
+#homepage li.feature.third {
+    width: 33%;
+    display: inline-block; }
+
+#homepage li.feature.offset {
+    margin-left: 16.5%;
+    display: inline-block; }
+
+
+#homepage ul.features,
+ul.list-partners {
+    text-align: center; }
+
+#partners {
+    display: inline-block;
+    width: 100%; }
+
+#homepage .section-head.companies-we-work-with {
+padding-bottom: 40px;
+}
+
+#homepage .intro-content .shell p {
+    line-height: 1.6; }

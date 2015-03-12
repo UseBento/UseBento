@@ -1,5 +1,5 @@
 .wrapper
-  = render partial: 'header', locals: {page: 'apply'}
+  = render partial: 'dark_header', locals: {page: 'apply'}
   .section.section-contacts
     .shell
       .form.form-apply
@@ -10,7 +10,7 @@
             | Are you a world-class designer? We, at Bento, are looking for talented folks like yourself to help make the best designs in the world. If you think you have what it takes then apply below. We will respond as quickly as possible.
         form#apply-form.form-required[action="/apply" method="post"]
           input[type="hidden" name="application-form"]
-          = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) 
+          = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token)
           .form-body
             - if @message_sent
               center
@@ -20,21 +20,21 @@
                 .form-cols
                   .form-col.form-col-1of2
                     label.form-label[for="field-full-name"]
-                      | Full Name 
+                      | Full Name
                       span.form-asterisk
                         | *
                     .form-controls
                       input#field-full-name.field[type="text" name="field-full-name" required data-validation-type="['presence']"]
                   .form-col.form-col-1of2
                     label.form-label[for="field-e-mail"]
-                      | E-mail 
+                      | E-mail
                       span.form-asterisk
                         | *
                     .form-controls
                       input#field-e-mail.field[type="email" name="field-e-mail" required data-validation-type="['email']"]
               .form-row
                 label.form-label[for="field-portfolio-url"]
-                  | Portfolio URL 
+                  | Portfolio URL
                   span.form-asterisk
                     | *
                 .form-controls
@@ -107,5 +107,5 @@
                       option[value="UX Design"]
                         | UX Design
               .form-actions
-                input.btn.form-btn[type="submit" value="APPLY NOW"]
-= render partial: 'footer'
+                input.btn.brown.form-btn[type="submit" value="APPLY NOW"]
+= render partial: 'dark_footer'

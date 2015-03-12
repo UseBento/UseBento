@@ -1,27 +1,30 @@
 header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 'header-secondary ' : '')) + 'header')]
   a.expand[href="#"]
   .shell
-    = link_to "Bento", "/", class: "logo"
+    a.logo[href="/"]
+      | Bento
+      span.logo-bw
+        i.sprite-logo
+      span.logo-colorful
+        i.sprite-logo-colorful
     nav.nav
       ul
-        - unless user_signed_in?
-          li class=(page == 'project' ? 'current' : '')
-            = link_to "START YOUR PROJECT", "/services/select"
-        - else
+        - if (!user_signed_in? || page == 'start_project')
+          li class=(page == 'start_project' ? 'current' : '')
+            = link_to "START YOUR PROJECT", "/projects/start"
+        - if user_signed_in?
           li class=(page == 'project' ? 'current' : '')
             = link_to "PROJECTS", "/projects/list"
-        li class=(page == 'contact' ? 'current' : '')
-          = link_to "CONTACT US", "/contact"
         - unless user_signed_in?
-          li class=(page == 'apply' ? 'current' : '')
-            = link_to "JOIN THE TEAM", "/apply"
           li class=(page == 'agencies' ? 'current' : '')
             = link_to "FOR AGENCIES", "/agencies"
+          li class=(page == 'apply' ? 'current' : '')
+            = link_to "JOIN THE TEAM", "/apply"
         - unless page == 'project' && !user_signed_in? && false
           - unless user_signed_in?
             li[ class=(page == 'profile' ? 'current' : '')]
               a.popup-link#userlink[href="/popups/login"]
-                | LOG IN
+                | LOGIN
           - else
             li[ class=(page == 'profile' ? 'current' : '')]
               a#userlink[href="/profile" data-userid=current_user.id]
@@ -29,6 +32,4 @@ header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 
         - else
           li
             a.popup-link.hidden#userlink[href="/popups/login"]
-              | LOG IN
-
-            
+              | LOGIN
