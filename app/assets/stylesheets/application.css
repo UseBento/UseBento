@@ -582,39 +582,3 @@ color: #939393;
 .header.header-dark .nav a:before {
     border-top: 0; }
 
-@media only screen and (max-width: 850px),
-       only screen and (max-device-width: 850px) {
-.shell.start-project .section-body.start-form {
-    padding: 30px;
-width: calc(100% - 80px); }
-.shell.start-project {
-    width: 100%; }
-}
-
-
-#homepage li.feature.third {
-    width: 33%;
-    display: inline-block; }
-
-#homepage li.feature.offset {
-    margin-left: 16.5%;
-    display: inline-block; }
-
-
-#homepage ul.features,
-ul.list-partners {
-    text-align: center; }
-
-#partners {
-    display: inline-block;
-    width: 100%; }
-
-#homepage .section-head.companies-we-work-with {
-padding-bottom: 40px;
-}
-
-#homepage .intro-content .shell p {
-    line-height: 1.6; }
-
-#homepage.fbads .casestudies li {
-    width: 375px; }
