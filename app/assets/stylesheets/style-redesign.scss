@@ -313,7 +313,7 @@ input.btn { display: inline-block; height:60px; }
 .section-partners { background-color: #62aee8; color: #fff; padding: 60px 0; text-align:center; }
 .section-partners h2 { font-weight:300; font-size:32px; padding-bottom:50px; line-height:40px;  }
 .list-partners { text-align:center; margin: 0 -50px; }
-.list-partners li {  display: inline-block; padding: 0 50px; }
+.list-partners li {  display: inline-block; padding: 0 30px; }
 
 .casestudies { margin: 0 -10px; }
 .casestudy-image img { display:block; width: 100%; height: auto; }
@@ -965,8 +965,8 @@ body { font-family: 'AvenirNext', sans-serif; color: #212f44; font-size: 14px; l
 .section-black { background: #232323; color: #fff; }
 .section-dark { background: #f1f1f1; }
 
-.features { margin: 0 -30px; }
-.features li { width: 50%; padding: 0 26px; }
+.features { margin: 0 -30px; font-size: 0; text-align: center; vertical-align: top; }
+.features li { width: 33.33%; padding: 0 26px; font-size: 1rem; float: none; display: inline-block; }
 .feature:before { display: none; }
 .feature-image { background: #f5f5f5; width: 84px; height: 84px; line-height: 84px; border-radius: 50%; margin: 0 auto 33px; }
 
@@ -1023,7 +1023,7 @@ body { font-family: 'AvenirNext', sans-serif; color: #212f44; font-size: 14px; l
 .service h1 { font-family: avenirnext; font-size: 18px; color: inherit; text-transform: uppercase; letter-spacing: 1px; margin-top: 20px; margin-bottom: 10px; }
 
 
-.service ~ .service { margin: 0; }
+.service ~ .service { margin-left: 0; }
 
 
 .section-start { text-align: center; }
@@ -1157,6 +1157,11 @@ body { font-family: 'AvenirNext', sans-serif; color: #212f44; font-size: 14px; l
     .scroll-down-arrow { bottom: 10px; }
     .scroll-down-arrow:after { height: 11px; }
 
+    .features li {  width: 50%; }
+    .features .clear { display: none; }
+
+    .list-partners li { margin-bottom: 40px; }
+
 
     .footer { padding: 50px 0; }
 
@@ -1229,6 +1234,10 @@ body { font-family: 'AvenirNext', sans-serif; color: #212f44; font-size: 14px; l
 
     .scroll-down-arrow { bottom: 50px; }
     .scroll-down-arrow:after { height: 51px; }
+
+    .intro-content { padding: 120px 0 80px; }
+
+    .intro-content p:last-child { padding-bottom: 0; }
 
     .services { margin: 0; padding: 0 20px; }
     .service { width: auto; float: none; padding: 0; width: 100%; }
