@@ -37,6 +37,23 @@ function setup_paypal_direct() {
     var $doc = $(document);
 
     $doc.ready(function() {
+        $('#start-form #js-button button').click(function() {
+            if ($('#userlink').html() != 'LOGIN')
+                $('#start-form').submit();
+            else {
+                $('#start-form #js-button button').hide(); 
+                $('#login-signup-parts').show(); }});
+
+        $('#login-link').click(function() {
+            $('.signup-part').hide();
+            $('.login-part').show(); });
+
+        $('#signup-link').click(function() {
+            $('.login-part').hide();
+            $('.signup-part').show(); });
+        });
+
+    $doc.ready(function() {
         $('#tco-form').submit(function(event) {
             event.preventDefault();
             if ($('#paypal').prop('checked'))

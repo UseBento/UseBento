@@ -582,3 +582,12 @@ color: #939393;
 .header.header-dark .nav a:before {
     border-top: 0; }
 
+
+#login-signup-parts {
+    display: none; }
+
+.login-part { 
+    display: none; }
+
+a{
+ cursor: pointer; }
