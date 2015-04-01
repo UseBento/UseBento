@@ -6,13 +6,60 @@ class ProjectsController < ApplicationController
   end
 
   def finish_start
-    @name          = params[:full_name]
-    @email         = params[:email_address]
-    @company       = params[:company]
-    @company_size  = params[:company_size]
-    @description   = params[:description]
+    @type       = params[:project_type]
+    @service    = Service.where(name: params[:service]).first
+    @errors     = []
+    @project    = Project.new
+    @project.service     = @service
 
-    ProjectMailer.new_project_request_mail(@name, @email, @company, @company_size, @description).deliver
+    if params[:login_email_address]
+      user = User.find(params[:login_email_address])
+      if !user.valid_password?(params[:login_password])
+        return render 'projects/start', layout: 'application'
+      end
+      sign_in @user
+      sign_in @user, :bypass => true
+    elsif params[:signup_email_address]      
+      @user, password = User.generate(params[:signup_full_name],
+                                      params[:signup_email_address],
+                                      params[:signup_company],
+                                      params[:signup_company_size])
+      sign_in @user
+      sign_in @user, :bypass => true
+      UserMailer.new_generated_user_mail(@user, password, false).deliver
+    end
+    
+  end
+
+  def submit_start
+    @user                    = current_user
+    @service                 = Service.where(name: params[:service_name]).first
+    @project                 = Project.new
+    @project.service         = @service
+    @project.status          = :pending
+    @project.start_date      = DateTime.now.to_date
+    if current_user.company
+      last_project         = Project.where(company: Project.normalize_company(
+                                              current_user.company))
+                             .order_by(:number.desc).first
+      @project.number      = last_project ? last_project.number + 1 : 1
+    else
+      @project.number = 1
+    end
+
+    @project.add_answer(:business_name, current_user.company || current_user.name)
+    @project.add_answer(:email, current_user.email)
+    @project.add_answer(:full_name, current_user.full_name)
+    @project.add_answer(:project_name, params[:project_name])
+    @project.add_answer(:business_description, params[:business_description])
+    @project.user = @user
+    @project.save
+
+    @project.update_company
+    @project.initialize_project
+
+    ProjectMailer.new_project_mail(@project).deliver
+    redirect_to @project
   end
 
   def view

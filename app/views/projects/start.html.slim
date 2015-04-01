@@ -25,12 +25,15 @@
                     select#field-service.field[name="service" required]
                       option[value=""]
                         | Select Service
+                      - for service in Service.all
+                        option[value=service.name]
+                          = service.title
             br
             .form-row.align-right#js-button
               button.brown[type="button"]
                 | CONTINUE >
             #login-signup-parts
-              .form-row
+              .form-row#part
                 p
                   | Sign up for an account below or&nbsp;
                   a#login-link.signup-part
@@ -50,7 +53,7 @@
                       label.form-label[for="field-password"]
                         | Password
                       .form-controls
-                        input#field-full-name.field[type="text" name="login_full_name" required]
+                        input#field-full-name.field[type="password" name="login_password" required]
               #signup-part.signup-part
                 .form-row
                   .form-cols
@@ -90,6 +93,6 @@
                             | 1000+
               br
               .form-row.align-right
-               button.brown[type="submit"]
+               button.brown#submit-start-form[type="submit"]
                   | CONTINUE >
 = render partial: 'dark_footer'

@@ -37,18 +37,29 @@ function setup_paypal_direct() {
     var $doc = $(document);
 
     $doc.ready(function() {
+        var login_part   = $('#login-part');
+        var signup_part  = $('#signup-part');
+        login_part.detach();
+        signup_part.detach();
+
         $('#start-form #js-button button').click(function() {
             if ($('#userlink').html() != 'LOGIN')
-                $('#start-form').submit();
+                $('#submit-start-form').click();
             else {
+                signup_part.detach();
+                signup_part.insertAfter($('#part'));
                 $('#start-form #js-button button').hide(); 
                 $('#login-signup-parts').show(); }});
 
         $('#login-link').click(function() {
+            signup_part.detach();
+            login_part.insertAfter($('#part'));
             $('.signup-part').hide();
             $('.login-part').show(); });
 
         $('#signup-link').click(function() {
+            login_part.detach();
+            signup_part.insertAfter($('#part'));
             $('.login-part').hide();
             $('.signup-part').show(); });
         });

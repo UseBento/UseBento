@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get  'projects/start',                      to: 'projects#start'
   post 'projects/finish_start',               to: 'projects#finish_start'
+  post 'projects/submit_start',               to: 'projects#submit_start'
   get  'projects/list',                       to: 'projects#list'
   get  'projects/:id',                        to: 'projects#view',        as: 'project'
   get  'projects/:id/private_chat',           to: 'projects#private_chat'

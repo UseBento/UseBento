@@ -22,7 +22,7 @@ class Project
   embeds_many :invited_users
   embeds_many :attachments
   embeds_one  :private_chat
-  validate :is_valid?
+#  validate :is_valid?
   has_many :payments
   has_many :awaiting_payments
 
