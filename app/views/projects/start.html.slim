@@ -16,8 +16,9 @@
                     | Project Type
                   .form-controls
                     select#field-project-type.field[name="project_type" required]
-                      option[value="New"]
-                        | New
+                      - for type in ['New', 'Update Existing']
+                        option[value=type]
+                          = type
                 .form-col.form-col-1of2
                   label.form-label[for="field-project-type"]
                     | Service
@@ -25,9 +26,9 @@
                     select#field-service.field[name="service" required]
                       option[value=""]
                         | Select Service
-                      - for service in Service.all
-                        option[value=service.name]
-                          = service.title
+                      - for service in [['Website', 'website_design_and_development'], ['Landing Page', 'landing_page_design_and_development'], ['Email', 'email_design_and_development'], ['Social Media', 'social_media_design'], ['Collateral', 'stationary_design'], ['Presentation', 'presentation_design'], ['Ads', 'social_media_design'], ['Other', 'business_card']]
+                        option[value=service[1]]
+                          = service[0]
             br
             .form-row.align-right#js-button
               button.brown[type="button"]

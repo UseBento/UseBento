@@ -12,6 +12,7 @@ class Project
   field :number,        type: Integer
   field :deadline,      type: Date
   field :company,       type: String
+  field :project_type,  type: String
   field :total_price,   type: Integer
   field :shown_popup,   type: Boolean
 

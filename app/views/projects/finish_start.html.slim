@@ -7,7 +7,7 @@
           | JUST A BIT MORE INFORMATION
       form.form-required#start-form[action="/projects/submit_start" method="post"]
         = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token)
-        input[type="hidden" name="project_type" value=@project_type]
+        input[type="hidden" name="project_type" value=@type]
         input[type="hidden" name="service_name" value=@service.name]
         .section-body.start-form
           .form-body

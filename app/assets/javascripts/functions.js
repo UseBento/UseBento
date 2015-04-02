@@ -76,9 +76,9 @@ function setup_paypal_direct() {
         var signed_in           = false;
         var just_submit_project = true;
 
-        $('#project-popup')
+        /*$('#project-popup')
             .magnificPopup({type: 'ajax'})
-            .click();
+            .click();*/
 
         function sign_up(event) {
             event.preventDefault();

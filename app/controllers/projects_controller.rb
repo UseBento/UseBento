@@ -35,7 +35,9 @@ class ProjectsController < ApplicationController
     @user                    = current_user
     @service                 = Service.where(name: params[:service_name]).first
     @project                 = Project.new
+    @project.total_price     = 0
     @project.service         = @service
+    @project.project_type    = params[:project_type]
     @project.status          = :pending
     @project.start_date      = DateTime.now.to_date
     if current_user.company
