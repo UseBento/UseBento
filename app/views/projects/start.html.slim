@@ -5,6 +5,10 @@
       .section-head.section-head-little-gutter
         h3
           | TELL US ABOUT YOUR PROJECT
+        - if @error
+          br
+          strong
+            = @error
       form.form-required#start-form[action="/projects/finish_start" method="post"]
         = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token)
         .section-body.start-form

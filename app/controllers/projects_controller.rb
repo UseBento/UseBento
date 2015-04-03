@@ -13,8 +13,9 @@ class ProjectsController < ApplicationController
     @project.service     = @service
 
     if params[:login_email_address]
-      user = User.find(params[:login_email_address])
-      if !user.valid_password?(params[:login_password])
+      @user = User.where(email: params[:login_email_address]).first
+      if !@user || !@user.valid_password?(params[:login_password])
+        @error = "Invalid username or password"
         return render 'projects/start', layout: 'application'
       end
       sign_in @user
