@@ -4,10 +4,36 @@
     .shell.start-project
       .section-head.section-head-little-gutter
         h3
-          | Thank You.
-          br
-          br
-          | You're project details have been sent.
-          br
-          | We will get back to you shortly.
+          | JUST A BIT MORE INFORMATION
+      form.form-required#start-form[action="/projects/submit_start" method="post"]
+        = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token)
+        input[type="hidden" name="project_type" value=@type]
+        input[type="hidden" name="service_name" value=@service.name]
+        .section-body.start-form
+          .form-body
+            .form-row
+              .form-cols
+                .form-col.form-col-1of2
+                  label.form-label[for="field-name-project"]
+                    | Give your project a name.
+                  span.form-asterisk
+                    |  *
+                  .form-controls
+                    input#field-name-project.field[type="text" name="project_name" required data-validation-type="['presence']"]
+                .form-col.form-col-1of2
+                  label.form-label[for="field-deadline"]
+                    | Deadline
+                  .form-controls
+                    input#field-deadline.field[type="text" name="project_deadline" placeholder="MM/DD(/YY)" pattern="\d{1,2}/\d{1,2}(/\d{2,4})?"]
+            .form-row
+              label.form-label[for="field-describe-business"]
+                | Describe your project in a couple sentences.
+                span.form-asterisk
+                  |  *
+              .form-controls
+                textarea#field-describe-business.textarea[type="text" cols="10" rows="10" name="business_description" required data-validation-type="['presence']" placeholder="What is it? Who is it for? What do you want them to do?"]
+            br
+            .form-row.align-right
+              button.brown[type="submit"]
+                | CONTINUE >
 = render partial: 'dark_footer'

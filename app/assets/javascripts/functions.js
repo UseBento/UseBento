@@ -37,6 +37,34 @@ function setup_paypal_direct() {
     var $doc = $(document);
 
     $doc.ready(function() {
+        var login_part   = $('#login-part');
+        var signup_part  = $('#signup-part');
+        login_part.detach();
+        signup_part.detach();
+
+        $('#start-form #js-button button').click(function() {
+            if ($('#userlink').html() != 'LOGIN')
+                $('#submit-start-form').click();
+            else {
+                signup_part.detach();
+                signup_part.insertAfter($('#part'));
+                $('#start-form #js-button button').hide(); 
+                $('#login-signup-parts').show(); }});
+
+        $('#login-link').click(function() {
+            signup_part.detach();
+            login_part.insertAfter($('#part'));
+            $('.signup-part').hide();
+            $('.login-part').show(); });
+
+        $('#signup-link').click(function() {
+            login_part.detach();
+            signup_part.insertAfter($('#part'));
+            $('.login-part').hide();
+            $('.signup-part').show(); });
+        });
+
+    $doc.ready(function() {
         $('#tco-form').submit(function(event) {
             event.preventDefault();
             if ($('#paypal').prop('checked'))
@@ -48,9 +76,9 @@ function setup_paypal_direct() {
         var signed_in           = false;
         var just_submit_project = true;
 
-        $('#project-popup')
+        /*$('#project-popup')
             .magnificPopup({type: 'ajax'})
-            .click();
+            .click();*/
 
         function sign_up(event) {
             event.preventDefault();
@@ -182,6 +210,20 @@ function setup_paypal_direct() {
             var count  = parseInt(tag.html());
             tag.html(count + 1);
             tag.attr('data-count', count + 1); }
+
+        $('.can-see-invoice').click(function() {
+            var el    = $(this);
+            var can   = el.hasClass('can');
+            var pid   = el.attr('data-pid');
+            var uid   = el.attr('data-uid');
+
+            $.ajax({type:    'post',
+                    url:     '/projects/' + pid + '/update_can_see.json',
+                    data:    {uid:   uid,
+                              can:   !can},
+                    success:  function(data) {
+                        el.removeClass(can ? 'can' : 'cant');
+                        el.addClass(can ? 'cant' : 'can'); }}); });
 
         var channel;
         var dispatcher;

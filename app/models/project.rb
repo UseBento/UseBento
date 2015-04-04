@@ -10,10 +10,12 @@ class Project
 
   field :last_status,   type: Symbol  # set to keep track of last status before archiving
   field :number,        type: Integer
-  field :deadline,      type: Date
+  field :deadline,      type: String
   field :company,       type: String
+  field :project_type,  type: String
   field :total_price,   type: Integer
   field :shown_popup,   type: Boolean
+  field :can_see_invoice, type: Array
 
   belongs_to :service
   belongs_to :user
@@ -22,7 +24,7 @@ class Project
   embeds_many :invited_users
   embeds_many :attachments
   embeds_one  :private_chat
-  validate :is_valid?
+#  validate :is_valid?
   has_many :payments
   has_many :awaiting_payments
 
@@ -39,6 +41,23 @@ class Project
      price:            self.get_price,
      payments:         self.payments,
      unpaid_payments:  self.awaiting_payments}
+  end
+
+  def can_see_invoice?(user) 
+    if !self.can_see_invoice
+      self.can_see_invoice = []
+      self.save!
+    end
+    user == owner || self.can_see_invoice.member?(user.id)
+  end
+
+  def set_can_see_invoice(user, to)
+    if to
+      self.can_see_invoice = (self.can_see_invoice || []).append(user.id)
+    else
+      self.can_see_invoice = (self.can_see_invoice || []).select {|i| i != user.id}
+    end
+    self.save!
   end
 
   def lookup_message(id)
@@ -356,9 +375,8 @@ class Project
   end
 
   def initialize_project
-    bot_message """Hi there! My name is Lucas and I'm your project manager. It's my job to make sure your project gets done quickly and professionally. In order to find the right designer for you, please fill out the creative brief by clicking on the link on the right.
-
-Also, feel free to comment here with any questions that you may have."""
+    bot_message ("Hi there! My name is Lucas and I'm your project manager. You wrote the following for your project description: \n\n\"" + answer_for("business_description").answer + "\".\n\n" +
+                 "If you have any more details write them here.  Also, please attach any files that we will need such as a logo or style guide.")
   end
 
   def status_label

@@ -25,6 +25,7 @@ class User
 
   field :name,               type: String
   field :company,            type: String
+  field :company_size,       type: String
   field :admin,              type: Boolean
 
   has_many :projects
@@ -62,11 +63,12 @@ class User
     self.name.split.first.capitalize
   end
 
-  def self.generate(name, email, company)
+  def self.generate(name, email, company, company_size)
     password = Devise.friendly_token.first(12)
     user     = User.create({email:        email,
                             name:         name,
                             company:      company,
+                            company_size: company_size,
                             password:     password})
     [user, password]
   end

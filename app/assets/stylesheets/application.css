@@ -582,3 +582,37 @@ color: #939393;
 .header.header-dark .nav a:before {
     border-top: 0; }
 
+
+#login-signup-parts {
+    display: none; }
+
+.login-part { 
+    display: none; }
+
+a{
+ cursor: pointer; }
+
+.detail-label {
+    display: inline-block;
+    width: 7em; }
+
+
+.can-see-invoice {
+    cursor: pointer;
+    display: inline-block;
+    transition: all 0.25s linear; 
+    padding-right: 2em; }
+
+.can-see-invoice.cant {
+    color: #d2d2d2; }
+
+.can-see-invoice.cant:hover {
+    color: #525f71;
+    transition: all 0.5s linear; }
+
+.can-see-invoice.can {
+    color: #525f71; }
+
+.can-see-invoice.can:hover {
+    color: #d2d2d2;
+    transition: all 0.5s linear; }
