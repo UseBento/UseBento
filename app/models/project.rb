@@ -44,20 +44,20 @@ class Project
   end
 
   def can_see_invoice?(user) 
-    if !can_see_invoice
-      can_see_invoice = []
-      save
+    if !self.can_see_invoice
+      self.can_see_invoice = []
+      self.save!
     end
-    user == owner || can_see_invoice.member?(user.id)
+    user == owner || self.can_see_invoice.member?(user.id)
   end
 
   def set_can_see_invoice(user, to)
     if to
-      can_see_invoice = can_see_invoice.append(user.id)
+      self.can_see_invoice = (self.can_see_invoice || []).append(user.id)
     else
-      can_see_invoice = can_see_invoice.select {|i| i != user.id}
+      self.can_see_invoice = (self.can_see_invoice || []).select {|i| i != user.id}
     end
-    save
+    self.save!
   end
 
   def lookup_message(id)

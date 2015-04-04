@@ -211,6 +211,20 @@ function setup_paypal_direct() {
             tag.html(count + 1);
             tag.attr('data-count', count + 1); }
 
+        $('.can-see-invoice').click(function() {
+            var el    = $(this);
+            var can   = el.hasClass('can');
+            var pid   = el.attr('data-pid');
+            var uid   = el.attr('data-uid');
+
+            $.ajax({type:    'post',
+                    url:     '/projects/' + pid + '/update_can_see.json',
+                    data:    {uid:   uid,
+                              can:   !can},
+                    success:  function(data) {
+                        el.removeClass(can ? 'can' : 'cant');
+                        el.addClass(can ? 'cant' : 'can'); }}); });
+
         var channel;
         var dispatcher;
         function messages_websocket() {

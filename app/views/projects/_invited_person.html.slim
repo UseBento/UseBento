@@ -28,7 +28,7 @@
       span
         = person.user.full_name
         - if current_user.admin && person.accepted
-          i[class=("fa fa-credit-card can-see-invoice right " + (@project.can_see_invoice?(person.user) ? 'can' : 'cant'))]
+          i[class=("fa fa-credit-card can-see-invoice right " + (@project.can_see_invoice?(person.user) ? 'can' : 'cant')) data-pid=@project.id data-uid=person.user.id]
       - if person.can_see_email?(current_user)
         a[href=("mailto:"+person.user.email)]
           = person.user.short_email

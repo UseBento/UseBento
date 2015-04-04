@@ -2,6 +2,18 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!
   skip_before_action :authenticate_user!, only: [:new, :join, :start, :finish_start]
 
+  def update_can_see
+    project   = Project.find(params[:pid])
+    user      = User.find(params[:uid])
+
+    project.set_can_see_invoice(user, params[:can] == 'true')
+
+    respond_to do |format|
+      format.html { redirect_to project }
+      format.json { render :json => project.can_see_invoice }
+    end    
+  end
+
   def start
   end
 

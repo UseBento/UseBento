@@ -600,7 +600,7 @@ a{
 .can-see-invoice {
     cursor: pointer;
     display: inline-block;
-    transition: all 0.25s ease; 
+    transition: all 0.25s linear; 
     padding-right: 2em; }
 
 .can-see-invoice.cant {
@@ -608,11 +608,11 @@ a{
 
 .can-see-invoice.cant:hover {
     color: #525f71;
-    transition: all 0.5s ease; }
+    transition: all 0.5s linear; }
 
 .can-see-invoice.can {
     color: #525f71; }
 
 .can-see-invoice.can:hover {
     color: #d2d2d2;
-    transition: all 0.5s ease; }
+    transition: all 0.5s linear; }

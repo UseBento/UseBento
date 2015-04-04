@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get  'projects/:id/private_chat',           to: 'projects#private_chat'
   post 'projects/new',                        to: 'projects#new'
   get  'projects/:id/edit',                   to: 'projects#edit'
+  post 'projects/:pid/update_can_see',        to: 'projects#update_can_see'
   get  'projects/:id/archive',                to: 'projects#archive'
   get  'projects/:id/unarchive',              to: 'projects#unarchive'
   get  'projects/:id/del_project',            to: 'projects#delete'
