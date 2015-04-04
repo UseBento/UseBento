@@ -68,7 +68,7 @@
               br
               span.detail-label
                 = 'Deadline: ' 
-              =(@project.deadline.strftime("%m/%d/%y") || 'Unspecified')
+              =(@project.deadline ? @project.deadline.strftime("%m/%d/%y") : 'Unspecified')
               br
               span.detail-label
                 = 'Size: ' 

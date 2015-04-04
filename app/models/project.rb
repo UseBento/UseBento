@@ -357,9 +357,8 @@ class Project
   end
 
   def initialize_project
-    bot_message """Hi there! My name is Lucas and I'm your project manager. It's my job to make sure your project gets done quickly and professionally. In order to find the right designer for you, please fill out the creative brief by clicking on the link on the right.
-
-Also, feel free to comment here with any questions that you may have."""
+    bot_message ("You Wrote \"" + answer_for("business_description").answer + "\".\n\n" +
+                 "Also, please attach any necessary files below such as logos or styleguides.")
   end
 
   def status_label
