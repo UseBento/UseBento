@@ -44,6 +44,10 @@ class Project
   end
 
   def can_see_invoice?(user) 
+    if !can_see_invoice
+      can_see_invoice = []
+      save
+    end
     user == owner || can_see_invoice.member?(user.id)
   end
 

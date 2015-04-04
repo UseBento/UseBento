@@ -27,6 +27,8 @@
       img.avatar[src=person.user.avatar(request.host_with_port) alt=""]
       span
         = person.user.full_name
+        - if current_user.admin && person.accepted
+          i[class=("fa fa-credit-card can-see-invoice right " + (@project.can_see_invoice?(person.user) ? 'can' : 'cant'))]
       - if person.can_see_email?(current_user)
         a[href=("mailto:"+person.user.email)]
           = person.user.short_email
