@@ -10,7 +10,7 @@ class Project
 
   field :last_status,   type: Symbol  # set to keep track of last status before archiving
   field :number,        type: Integer
-  field :deadline,      type: Date
+  field :deadline,      type: String
   field :company,       type: String
   field :project_type,  type: String
   field :total_price,   type: Integer
