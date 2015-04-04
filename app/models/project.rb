@@ -15,6 +15,7 @@ class Project
   field :project_type,  type: String
   field :total_price,   type: Integer
   field :shown_popup,   type: Boolean
+  field :can_see_invoice, type: Array
 
   belongs_to :service
   belongs_to :user
@@ -40,6 +41,19 @@ class Project
      price:            self.get_price,
      payments:         self.payments,
      unpaid_payments:  self.awaiting_payments}
+  end
+
+  def can_see_invoice?(user) 
+    user == owner || can_see_invoice.member?(user.id)
+  end
+
+  def set_can_see_invoice(user, to)
+    if to
+      can_see_invoice = can_see_invoice.append(user.id)
+    else
+      can_see_invoice = can_see_invoice.select {|i| i != user.id}
+    end
+    save
   end
 
   def lookup_message(id)
