@@ -591,3 +591,7 @@ color: #939393;
 
 a{
  cursor: pointer; }
+
+.detail-label {
+    display: inline-block;
+    width: 6em; }

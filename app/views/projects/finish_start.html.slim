@@ -12,12 +12,19 @@
         .section-body.start-form
           .form-body
             .form-row
-              label.form-label[for="field-name-project"]
-                | Give your project a name.
-              span.form-asterisk
-                |  *
-              .form-controls
-                input#field-name-project.field[type="text" name="project_name" required data-validation-type="['presence']"]
+              .form-cols
+                .form-col.form-col-1of2
+                  label.form-label[for="field-name-project"]
+                    | Give your project a name.
+                  span.form-asterisk
+                    |  *
+                  .form-controls
+                    input#field-name-project.field[type="text" name="project_name" required data-validation-type="['presence']"]
+                .form-col.form-col-1of2
+                  label.form-label[for="field-deadline"]
+                    | Deadline
+                  .form-controls
+                    input#field-deadline.field[type="text" name="project_deadline" placeholder="MM/DD/YY"]
             .form-row
               label.form-label[for="field-describe-business"]
                 | Describe your project in a couple sentences.

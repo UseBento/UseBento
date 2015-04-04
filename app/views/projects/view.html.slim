@@ -62,10 +62,22 @@
             li
               h5
                 | Project Details
-              = 'Size: ' + @project.print_pages
+              span.detail-label
+                = 'Type: ' 
+              = (@project.project_type || 'New')
+              br
+              span.detail-label
+                = 'Deadline: ' 
+              =(@project.deadline.strftime("%m/%d/%y") || 'Unspecified')
+              br
+              span.detail-label
+                = 'Size: ' 
+              = @project.print_pages
               br
               - if current_user == @project.user || current_user.admin
-                = 'Total: $' + @project.get_price.to_s
+                span.detail-label
+                  = 'Total: '
+                = '$' + @project.get_price.to_s
                 br
               /= 'Deadline: ' + (@project.deadline || 'Not set')
               /br

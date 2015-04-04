@@ -38,6 +38,10 @@ class ProjectsController < ApplicationController
     @project                 = Project.new
     @project.total_price     = 0
     @project.service         = @service
+    begin
+      @project.deadline      = Date.strptime(params[:project_deadline], "%m/%d/%y")
+    rescue
+    end
     @project.project_type    = params[:project_type]
     @project.status          = :pending
     @project.start_date      = DateTime.now.to_date
