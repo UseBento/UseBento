@@ -67,12 +67,12 @@
               = (@project.project_type || 'New')
               br
               span.detail-label
-                = 'Deadline: ' 
-              = (@project.deadline ? @project.deadline.to_s : 'Unspecified')
-              br
-              span.detail-label
                 = 'Size: ' 
               = @project.print_pages
+              br
+              span.detail-label
+                = 'Deadline: ' 
+              = (@project.deadline ? @project.deadline.to_s : 'Unspecified')
               br
               - if current_user == @project.user || current_user.admin
                 span.detail-label
