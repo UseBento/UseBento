@@ -357,8 +357,8 @@ class Project
   end
 
   def initialize_project
-    bot_message ("You Wrote \"" + answer_for("business_description").answer + "\".\n\n" +
-                 "Also, please attach any necessary files below such as logos or styleguides.")
+    bot_message ("Hi there! My name is Lucas and I'm your project manager. You wrote the following for your project description: \n\n\"" + answer_for("business_description").answer + "\".\n\n" +
+                 "If you have any more details write them here.  Also, please attach any files that we will need such as a logo or style guide.")
   end
 
   def status_label
