@@ -38,7 +38,7 @@
       - if person.user
         img.avatar[src=person.user.avatar(request.host_with_port) alt=""]
       - else
-        img.avatar[src=User.default_avatar_for(person.email) alt=""]
+        img.avatar[src=User.default_avatar_for(person.email || "a") alt=""]
       span
         - if person.user
           = person.user.full_name

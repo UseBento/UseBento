@@ -113,7 +113,7 @@
               a.btn_med.gray#invite-coworkers
                 | INVITE COWORKERS
               strong#invite-errors
-            - if current_user == @project.user || current_user.admin
+            - if current_user == @project.user || current_user.admin || @project.can_see_invoice?(current_user)
               li#project-invoice
                 h5
                   | PROJECT INVOICE
