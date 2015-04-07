@@ -14,12 +14,12 @@ class Attachment
       "/attachment/" +
         self.message.parent_project.id + "/" +
         self.message.id + "/" + self.id + "/" +
-        (self.name.gsub(/[^-_A-Za-z0-9]/, '_')  || "")
+        (self.name.gsub(/[^-_A-Za-z0-9.]/, '_')  || "")
     elsif project
       "/attachment/" +
         self.project.id + "/" +
         self.id + "/" +
-        (self.name.gsub(/[^-_A-Za-z0-9]/, '_')  || "")
+        (self.name.gsub(/[^-_A-Za-z0-9.]/, '_')  || "")
     end
   end
 
