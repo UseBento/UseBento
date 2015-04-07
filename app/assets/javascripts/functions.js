@@ -814,6 +814,17 @@ function setup_paypal_direct() {
         $('a.submit-payment').click(function() {
             $(this).parent().submit(); });
 
+        $('a.btn-remove-payment').click(function() {
+            var id = $(this).attr('data-id');
+            
+            $.ajax({type:    'POST',
+                    url:      window.location.pathname + '/remove_payment.json',
+                    data:    {},
+                    success:  function(data) {
+                        $('*[data-id="' + id + '"]').detach();
+                        var total = $('.payment-amount[data-id="total"]').html();
+                        $('.payment-amount').html(total); }}); });
+        
         function validate_apply_form(event) {
             var skills           = [$('#skill1'),
                                     $('#skill2'),

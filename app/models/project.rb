@@ -15,6 +15,7 @@ class Project
   field :project_type,  type: String
   field :total_price,   type: Integer
   field :shown_popup,   type: Boolean
+  field :payments_count,  type: Integer
   field :can_see_invoice, type: Array
 
   belongs_to :service
@@ -43,6 +44,13 @@ class Project
      unpaid_payments:  self.awaiting_payments}
   end
 
+  def remove_payment
+    self.payments_count = 1
+    awaiting_payments.last.delete
+    awaiting_payments.first.amount = self.total_price
+    self.save
+  end
+  
   def can_see_invoice?(user) 
     if !self.can_see_invoice
       self.can_see_invoice = []
@@ -121,7 +129,7 @@ class Project
                    end
 
     if (logged_amount < amount)
-      payments_needed = 2 - (paid_payments.length + unpaid_payments.length)
+      payments_needed = (payments_count || 2) - (paid_payments.length + unpaid_payments.length)
       if (payments_needed > 0)
         (1..payments_needed).each {|i|
             unpaid_payments.push(

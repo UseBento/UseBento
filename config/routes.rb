@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   post 'projects/:id/:chat/invite',           to: 'projects#invite_to_private'
   get  'projects/:id/popup',                  to: 'projects#initial_popup'
   post 'projects/:project_id/update_payment', to: 'projects#update_payment'
+  post 'projects/:project_id/remove_payment', to: 'projects#remove_payment'
   get  'projects/:id/remove_user/:invite_id', to: 'projects#remove_invite'
   get 'projects/:project_id/update_status/:status',   to: 'projects#update_status'
 

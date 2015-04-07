@@ -275,6 +275,20 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def remove_payment
+    if !current_user.admin
+      redirect_to "/"
+    else
+      @project  = Project.find(params[:project_id])
+      @project.remove_payment
+
+      respond_to do |format|
+        format.html { redirect_to @project }
+        format.json { render :json => @project }
+      end
+    end
+  end
+  
   def update_total_price
     if !current_user.admin
       redirect_to "/"

@@ -131,7 +131,8 @@
                   br
                   - i = 1
                   - @project.get_awaiting_payments(true).map do |payment|
-                    = i.to_s + " of " + @project.get_awaiting_payments(true).length.to_s + " payments: "
+                    span[data-id=payment.id]
+                      = i.to_s + " of " + @project.get_awaiting_payments(true).length.to_s + " payments: "
                     - if payment.class == Payment
                         strong.payment-amount
                           = '$' + payment.amount.to_s
@@ -146,6 +147,10 @@
                           = "$" + payment.amount.to_s + " "
                         a.btn-edit-payment[data-id=payment.id data-amount=payment.amount]
                           |  Edit
+                        | &nbsp; 
+                        - if i == 2
+                          a.fa.fa-times.btn-remove-payment[data-id=payment.id data-amount=payment.amount]
+                            |  
                       - i += 1
                     br
                 - else
