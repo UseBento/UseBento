@@ -373,7 +373,7 @@ function setup_paypal_direct() {
                 var container, parent;
                 file_upload.css('display', 'inline-block');
                 file_upload.attr('id', 'file-upload-' + file_upload_id.toString());
-                file_upload.attr('name', 'file-upload-' + file_upload_id.toString());
+                file_upload.attr('name', 'file-upload-' + file_upload_id.toString() + "[]");
 
                 parent = $('.attachment_box');
                 file_upload.detach();
@@ -389,9 +389,10 @@ function setup_paypal_direct() {
                 parent.append(container);
 
                 parent.append(
-                    build_el(input({id:    'file-upload',
-                                    type:  'file',
-                                    style: 'display:none'})));
+                    build_el(input({id:        'file-upload',
+                                    type:      'file',
+                                    multiple:  'multiple',
+                                    style:     'display:none'})));
                 file_upload_id++;
                 set_add_comment_state(); });
             file_upload.trigger('click'); });
