@@ -96,11 +96,11 @@
                     = project.service.title
                   td
                     span.hidden
-                      project.start_date.to_i
+                      = project.start_date.to_i
                     = project.format_start_date
                   td
                     span.hidden
-                      project.updated_at.to_i
+                      = project.updated_at.to_i
                     = time_ago_in_words(project.updated_at) + " ago"
                   td
                     a[href="#" class=project.label_class]
