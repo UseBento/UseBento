@@ -190,7 +190,6 @@ class ProjectsController < ApplicationController
       render "projects/create"
     else
       if !filled_out && @project.filled_out_creative_brief?
-        @project.filled_out_message
         # Update project status if a creative brief was filled out
         status_index = Hash[Project::STATUS_LIST.map.with_index.to_a]
         brief_index = status_index['Creative Brief']
