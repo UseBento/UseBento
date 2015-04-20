@@ -165,7 +165,7 @@
                     - unless current_user.admin
                       a.btn_med.gray[href=("/payments/checkout/" + @project.id.to_s + "/50")]
                         - if @project.payments.empty?
-                          | PAY DEPOSIT
+                          | PAY INVOICE
                         - else
                           | PAY FINAL INVOICE
             - if @project.attachments.count > 0
