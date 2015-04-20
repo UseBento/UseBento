@@ -29,7 +29,7 @@ class Project
   has_many :payments
   has_many :awaiting_payments
 
-  STATUS_LIST = ['Project Started', 'Creative Brief', 'First Round Designs', 'Second Round Designs', 'Development', 'Files Delivered']
+  STATUS_LIST = ['Project Started', 'Creative Brief', 'First Round Designs', 'Second Round Designs', 'Files Delivered']
 
   def as_json(i=0)
     {start_date:       start_date,
