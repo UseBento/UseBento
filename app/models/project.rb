@@ -91,6 +91,14 @@ class Project
     messages.count - messages.where(read_by: user.id.to_s).count
   end
 
+  def dashboard_count(user)
+    count = self.unread_messages_count(user)
+    if self.private_chat.can_view?(user) || user.admin?
+      count += self.private_chat.unread_messages_count(user)
+    end
+    count
+  end
+
   def people
     people = self.invited_users
 

@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_cache_headers, only: [:list, :view]
   skip_before_action :authenticate_user!, only: [:new, :join, :start, :finish_start]
 
   def update_can_see
@@ -378,4 +379,12 @@ class ProjectsController < ApplicationController
     end
   end
   helper_method :get_error
+
+  private
+
+  def set_cache_headers
+    response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+  end
 end
