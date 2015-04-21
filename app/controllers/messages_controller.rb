@@ -75,7 +75,7 @@ class MessagesController < ApplicationController
 
   def update
     @project     = Project.find(params[:project_id])
-    message      = @project.messages.find(params[:id])
+    message      = @project.messages.find(params[:id]) || @project.private_chat.messages.find(params[:id])
 
     return redirect_to @project if !(message.user == current_user || current_user.admin)
 
@@ -93,7 +93,7 @@ class MessagesController < ApplicationController
 
   def remove
     @project     = Project.find(params[:project_id])
-    message      = @project.messages.find(params[:id])
+    message      = @project.messages.find(params[:id]) || @project.private_chat.messages.find(params[:id])
     return redirect_to @project if !(message.user == current_user || current_user.admin)
     message.delete
 
