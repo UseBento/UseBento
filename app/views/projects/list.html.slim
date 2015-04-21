@@ -63,6 +63,9 @@
                   td
                     a[href="#" class=project.label_class]
                       = project.status_label
+                    - count = project.private_chat.unread_messages_count(current_user) + project.unread_messages_count(current_user)
+                    span.unread-tag.notification[data-count=count]
+                      = count
       - else
         .table_box
           table[width="100%" border="0" cellspacing="0" cellpadding="0"]
@@ -105,6 +108,11 @@
                   td
                     a[href="#" class=project.label_class]
                       = project.status_label
+                    - count = project.unread_messages_count(current_user)
+                    - if project.private_chat.can_view?(current_user)
+                      - count += project.private_chat.unread_messages_count(current_user)
+                    span.unread-tag.notification[data-count=count]
+                      = count
       -if !@closed_projects.empty?
         - if current_user.admin
           .table_box
