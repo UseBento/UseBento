@@ -358,8 +358,7 @@ class ProjectsController < ApplicationController
 
   def remove_invite
     @project = Project.find(params[:id])
-    invite   = @project.invited_users.find(params[:invite_id])
-
+    invite   = @project.invited_users.find(params[:invite_id]) || @project.private_chat.invited_users.find(params[:invite_id])
     if (invite.can_delete?(current_user))
       invite.delete
     end
