@@ -446,6 +446,11 @@ span.unread-tag.notification {
     margin-left: -20px;
     margin-top: -5px;
     position: absolute;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    height: 18px;
+    font-size: 14px;
+    border-radius: 12px;
     }
 
 .header-dark {
