@@ -36,6 +36,10 @@ function setup_paypal_direct() {
     var $win = $(window);
     var $doc = $(document);
 
+    $win.load(function(){
+        $('.left_tablecell_div').scrollTop($('.left_tablecell_div').prop("scrollHeight"));
+    });
+
     $doc.ready(function() {
         var login_part   = $('#login-part');
         var signup_part  = $('#signup-part');
@@ -308,7 +312,8 @@ function setup_paypal_direct() {
                 catch (e) {}
 
                 add_message(data.body);
-                $('#message-box').val($('#message-box')[0].defaultValue); }
+                $('#message-box').val($('#message-box')[0].defaultValue);
+                $('.left_tablecell_div').scrollTop($('.left_tablecell_div').prop("scrollHeight")); }
 
             var data = {message_body: message};
             data     = new FormData($('#message-form')[0]);

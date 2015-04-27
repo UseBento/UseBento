@@ -1510,10 +1510,20 @@ a.btn_small{
     font-family: 'open_sansbold';
 }
 .project_detail_box .left_container{
-    width:780px;
+    width:810px;
     float:left;
     border-right:#d7d7d7 solid 1px;
     padding:28px 30px 30px 25px;
+}
+
+.no_padding_right {
+    padding-right: 0px !important;
+}
+
+.project_detail_box .left_container .left_tablecell_div{
+    max-height:1200px;
+    overflow-y:auto;
+    padding-right: 30px;
 }
 
 .project_detail_box .left_container ul.list_comment{
