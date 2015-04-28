@@ -67,12 +67,15 @@ class ApplicationController < ActionController::Base
   def get_attachments(parent)
     files = params.select {|a,b| a.to_s.slice(0, 12) == "file-upload-"}
     logger.debug(files);
-    files.each do |key, file|
-      attachment = Attachment.new({uploaded_date:   DateTime.now,
-                                   name:            file.original_filename})
-      attachment.attachment = file
-      parent.attachments.push(attachment)
-      logger.debug('made new file');
+    files.map do |key, file_list|
+      file_list = Array(files[key])
+      file_list.map do |file|
+        attachment = Attachment.new({uploaded_date:   DateTime.now,
+                                     name:            file.original_filename})
+        attachment.attachment = file
+        parent.attachments.push(attachment)
+        logger.debug('made new file');
+      end
     end
   end
 end
