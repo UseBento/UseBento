@@ -88,6 +88,11 @@ class ProjectsController < ApplicationController
     @editing  = false
     @messages = @project.messages
 
+    if @project.total_price != 0
+      @project.status = :in_progress
+      @project.save
+    end
+
     if !@project.has_access?(current_user)
       invite = @project.was_invited?(current_user)
       if invite
@@ -295,6 +300,7 @@ class ProjectsController < ApplicationController
     else
       @project             = Project.find(params[:project_id])
       @project.total_price = params[:amount]
+      # @project.status = :in_progress
       @project.save
       @project.get_awaiting_payments
 
