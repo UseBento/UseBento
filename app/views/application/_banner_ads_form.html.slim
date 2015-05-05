@@ -1,0 +1,35 @@
+.form-row
+  label.form-label
+    | Select design service(s) needed below:
+    span.form-asterisk
+      | *
+  .form-controls
+    ul.list-checkboxes.list-checkboxes-custom
+      li
+        .checkbox
+          label.form-label-check[for="field-facebook-photo"]
+            input.header-type#field-facebook-photo[type="checkbox" name="facebook_header_and_profile" value="on" checked=(@project.answer_for('facebook_header_and_profile').answer ? @project.answer_for('facebook_header_and_profile').answer == "on" : true)]
+            i.ico-check
+            span
+              | Facebook header & profile photo
+      li
+        .checkbox
+          label.form-label-check[for="field-twitter-photo"]
+            input.header-type#field-twitter-photo[type="checkbox" name="twitter_header_and_profile" value="on" checked=(@project.answer_for('twitter_header_and_profile').answer == "on")]
+            i.ico-check
+            span
+              | Twitter header & profile photo
+      li
+        .checkbox
+          label.form-label-check[for="field-youtube-photo"]
+            input.header-type#field-youtube-photo[type="checkbox" name="youtube_header_and_profile" value="on" checked=(@project.answer_for('youtube_header_and_profile').answer == "on")]
+            i.ico-check
+            span
+              | YouTube header & profile photo
+      li
+        .checkbox
+          label.form-label-check[for="field-linkedin-photo"]
+            input.header-type#field-linkedin-photo[type="checkbox" name="linkedin_header_and_profile" value="on" checked=(@project.answer_for('linkedin_header_and_profile').answer == "on")]
+            i.ico-check
+            span
+              | LinkedIn header & profile photo

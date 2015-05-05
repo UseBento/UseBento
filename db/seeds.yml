@@ -405,7 +405,71 @@ Services:
       - name: other_requirements
         label: Do you have any other requirements
         type: :text
-        required: false     
+        required: false
+  - name: 'banner_ads'
+    title: 'Banner Ads'
+    description: 'Hand-picked designers to enhance your banner ads. <br />Final logos sent to you as .jpg, .png, .and .psd file formats.'
+    rounds: 3
+    price: 450
+    completion_time: [3, 5]
+    unit: 'Profile'
+    fields: 
+      - name: full_name
+        label: Your Full Name
+        type: :full_name
+        required: true
+      - name: email
+        label: Email Address
+        type: :email
+        required: true
+      - name: business_name
+        label: What is the name of your business?
+        type: :text
+        required: true
+      - name: project_name
+        label: What is the name of your project?
+        type: :text
+        required: true
+      - name: business_description
+        label: Please describe your business.
+        type: :long_text
+        required: true
+      - name: target_audience
+        label: Who is your target audience?
+        type: :text
+        required: false
+      - name: business_keywords
+        label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
+        type: :keywords
+        required: false
+      - name: facebook_header_and_profile
+        label: Select design service(s) needed below
+        type: :boolean
+        required: true
+      - name: twitter_header_and_profile
+        label: Select design service(s) needed below
+        type: :boolean
+        required: true
+      - name: youtube_header_and_profile
+        label: Select design service(s) needed below
+        type: :boolean
+        required: true
+      - name: linkedin_header_and_profile
+        label: Select design service(s) needed below
+        type: :boolean
+        required: true
+      - name: color_preferences
+        label: Do you have any color preferences
+        type: :text
+        required: false
+      - name: font_preferences
+        label: Do you prefer any font?
+        type: :text
+        required: false
+      - name: other_requirements
+        label: Do you have any other requirements
+        type: :text
+        required: false          
   - name: 'website_design_and_development'
     title: 'Website Design & Development'
     description: 'Hand-picked experts to create your website. <br />HTML website development optimized for all major browser clients.'

@@ -37,12 +37,12 @@
       label
         - if ['logo_design', 'stationary_design'].member?(@project.service.name)
           | Please provide any necessary files
-        - elsif ['business_card', 'presentation_design', 'social_media_design', 'mobile_app', 'app_icon'].member?(@project.service.name)
+        - elsif ['business_card', 'presentation_design', 'social_media_design', 'banner_ads', 'mobile_app', 'app_icon'].member?(@project.service.name)
           | Please provide the following
         - elsif ['landing_page_design_and_development', 'email_design_and_development', 'wordpress_design_and_development', 'website_design_and_development', ].member?(@project.service.name)
           | Please provide the following along with any other helpful files
       ul
-        - if ['business_card', 'presentation_design', 'social_media_design', 'website_design_and_development', 'wordpress_design_and_development', 'email_design_and_development', 'landing_page_design_and_development', 'mobile_app', 'app_icon'].member?(@project.service.name)
+        - if ['business_card', 'presentation_design', 'social_media_design', 'website_design_and_development', 'wordpress_design_and_development', 'email_design_and_development', 'landing_page_design_and_development', 'mobile_app', 'app_icon', 'banner_ads'].member?(@project.service.name)
           li
             | Your logo in .eps or .psd format
         - if ['app_icon', 'mobile_app'].member?(@project.service.name)

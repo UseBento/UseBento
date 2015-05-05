@@ -250,7 +250,7 @@ class Project
   end
 
   def get_pages
-    if self.service.name == "social_media_design"
+    if (self.service.name == "social_media_design") || (self.service.name == "banner_ads")
       fields = ["twitter_header_and_profile",
                 "youtube_header_and_profile",
                 "linkedin_header_and_profile",
