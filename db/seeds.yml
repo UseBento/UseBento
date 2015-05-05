@@ -240,7 +240,7 @@ Services:
     title: 'Stationary Design'
     description: 'From letterheads to your complete corporate identity. <br />Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
     rounds: 3
-    price: 400
+    price: 450
     unit: 'Stationary'
     completion_time: [3, 5]
     fields: 
@@ -346,7 +346,7 @@ Services:
     title: 'Social Media Design'
     description: 'Hand-picked designers to enhance your social media profiles. <br />Final logos sent to you as .jpg, .png, .and .psd file formats.'
     rounds: 3
-    price: 200
+    price: 150
     completion_time: [3, 5]
     unit: 'Profile'
     fields: 
@@ -503,7 +503,7 @@ Services:
     title: 'Email Design & Development'
     description: 'A professional email template created just for your business.<br />Responsive HTML optimized for all major email clients.'
     rounds: 3
-    price: 350
+    price: 500
     plus_dev_price: 500
     responsive_price: 500
     unit: 'Email'

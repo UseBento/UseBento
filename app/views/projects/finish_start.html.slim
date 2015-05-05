@@ -32,6 +32,15 @@
                   |  *
               .form-controls
                 textarea#field-describe-business.textarea[type="text" cols="10" rows="10" name="business_description" required data-validation-type="['presence']" placeholder="What is it? Who is it for? What do you want them to do?"]
+            - if @service.name != "business_card"
+              - if @service.name == ("website_design_and_development" || "presentation_design")
+                .form-row
+                  .form-controls
+                    textarea#estimated-cost.textarea[type="text" disabled="disabled" placeholder="Your estimated price is $#{@service.price}/pg"]
+              - else
+                .form-row
+                  .form-controls
+                    textarea#estimated-cost.textarea[type="text" disabled="disabled" placeholder="Your estimated price is $#{@service.price}"]
             br
             .form-row.align-right
               button.brown[type="submit"]
