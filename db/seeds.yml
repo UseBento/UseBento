@@ -189,7 +189,7 @@ Services:
         type: :text
         required: false        
   - name: 'business_card'
-    title: 'Business Card Design'
+    title: 'Other'
     description: 'Stand-out with a custom, professional business card. <br />Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
     rounds: 3
     price: 400
@@ -235,9 +235,13 @@ Services:
       - name: other_requirements
         label: Do you have any other requirements
         type: :text
+        required: false
+      - name: other_info
+        label: Anything else we should know? (i.e. use a certain font, special colors, or mimic a design that you like)
+        type: :text
         required: false        
   - name: 'stationary_design'
-    title: 'Stationary Design'
+    title: 'Marketing Collateral Design'
     description: 'From letterheads to your complete corporate identity. <br />Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
     rounds: 3
     price: 450
@@ -282,6 +286,10 @@ Services:
         required: false
       - name: other_requirements
         label: Do you have any other requirements
+        type: :text
+        required: false
+      - name: other_info
+        label: Anything else we should know? (i.e. special colors, social media goals - the more info we have the better)
         type: :text
         required: false    
   - name: 'presentation_design'
@@ -341,7 +349,11 @@ Services:
       - name: other_requirements
         label: Do you have any other requirements
         type: :text
-        required: false    
+        required: false
+      - name: other_info
+        label: Anything else we should know? (i.e. use a certain font, special colors, or mimic a design that you like)
+        type: :text
+        required: false     
   - name: 'social_media_design'
     title: 'Social Media Design'
     description: 'Hand-picked designers to enhance your social media profiles. <br />Final logos sent to you as .jpg, .png, .and .psd file formats.'
@@ -404,6 +416,10 @@ Services:
         required: false
       - name: other_requirements
         label: Do you have any other requirements
+        type: :text
+        required: false
+      - name: other_info
+        label: Anything else we should know? (i.e. special colors, social media goals - the more info we have the better)
         type: :text
         required: false
   - name: 'banner_ads'
@@ -469,6 +485,10 @@ Services:
       - name: other_requirements
         label: Do you have any other requirements
         type: :text
+        required: false
+      - name: other_info
+        label: Anything else we should know? (i.e. special colors, social media goals - the more info we have the better)
+        type: :text
         required: false          
   - name: 'website_design_and_development'
     title: 'Website Design & Development'
@@ -494,6 +514,10 @@ Services:
         required: true
       - name: project_name
         label: What is the name of your project?
+        type: :text
+        required: true
+      - name: deadline
+        label: Due Date
         type: :text
         required: true
       - name: business_description
@@ -559,10 +583,8 @@ Services:
         label: Do you have any definite things that you don't want to have on your website?
         type: :text
         required: false
-      - name: other_info
-        label: Anything else we should know.
-        type: :text
-        required: false
+
+
   - name: 'email_design_and_development'
     title: 'Email Design & Development'
     description: 'A professional email template created just for your business.<br />Responsive HTML optimized for all major email clients.'
@@ -617,7 +639,7 @@ Services:
         type: :text
         required: false
       - name: other_info
-        label: Anything else we should know.
+        label: Anything else we should know? (i.e. use a certain font, special colors, mimic a design that you like, or what users should do when they get your email)
         type: :text
         required: false
       - name: desired_visitor_action
@@ -709,7 +731,7 @@ Services:
         type: :text
         required: false
       - name: other_info
-        label: Anything else we should know.
+        label: Anything else we should know? (i.e. use a certain font, special colors, purpose of landing page - the more info we have the better)
         type: :text
         required: false
   - name: 'wordpress_design_and_development'
