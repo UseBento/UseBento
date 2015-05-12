@@ -1,13 +1,4 @@
 .form-row
-  label.form-label[for="field-target"]
-    | Who is your target audience? 
-    span.form-asterisk
-      |  *
-  .form-errors
-    = get_error('target_audience')
-  .form-controls
-    input#field-target.field[type="text" name="target_audience" value=(@project.answer_for('target_audience').answer || (current_user ? current_user.default_target_audience : "")) required data-validation-type="['presence']"]
-.form-row
   label.form-label[for="field-keywords"]
     | What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
     span.form-asterisk
