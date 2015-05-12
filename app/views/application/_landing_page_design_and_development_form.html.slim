@@ -1,46 +1,4 @@
 .form-row
-  .form-cols
-    .form-col.form-col-1of2
-      label.form-label[for="field-select-service"]
-        | Select your service below: 
-        span.form-asterisk
-          |  *
-      .form-errors
-        = get_error('service')
-      .form-controls
-        ul.list-radios.list-radios-custom
-          li
-            .radio
-              label.form-label-radio[for="field-design-only"]
-                input#field-design-only[type="radio" name="service" value="design_only" checked=(@project.answer_for('service').answer == "design_only")]
-                span
-                  | Design Only
-          li
-            .radio
-              label.form-label-radio[for="field-design-development"]
-                input#field-design-development[type="radio" name="service" value="design_and_development" checked=(@project.answer_for('service').answer == "design_and_development")]
-                span
-                  | Design & Development
-    .form-col.form-col-1of2#development-type
-      label.form-label[for="field-type-of-development"]
-        | What do you want this optimized for?
-        span.form-asterisk
-          |  *
-      .form-controls
-        ul.list-radios.list-radios-custom
-          li
-            .radio
-              label.form-label-radio[for="field-desktop-only"]
-                input#field-desktop-only[type="radio" name="responsiveness" value="desktop" checked=(@project.answer_for('responsiveness').answer == "desktop")]
-                span
-                  | Desktop Only
-          li
-            .radio
-              label.form-label-radio[for="field-desktop-mobile"]
-                input#field-desktop-mobile[type="radio" name="responsiveness" value="desktop_plus_mobile" checked=(@project.answer_for('responsiveness').answer == "desktop_plus_mobile")]
-                span
-                  | Desktop + Mobile
-.form-row
   label.form-label
     | Select FREE services below:
     span.form-asterisk
