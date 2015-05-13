@@ -78,13 +78,13 @@
               .form-cols
                 .form-col.form-col-1of2
                   label.form-label[for="field-name-deadline"]
-                    | Due Date
+                    | Deadline
                     span.form-asterisk
                       |  *
                   .form-errors
                     = get_error('deadline')
                   .form-controls
-                    input#field-name-deadline.field[type="text" name="deadline" value=(@project.answer_for('deadline').answer || (user_signed_in? ? current_user.company : '')) required data-validation-type="['presence']"]
+                    input#field-name-deadline.field[type="text" name="deadline" value=(@project.deadline || (user_signed_in? ? current_user.company : '')) required data-validation-type="['presence']"]
             .form-row
               label.form-label[for="field-describe-business"]
                 | Please describe your project.
