@@ -394,6 +394,10 @@ Services:
         label: Select design service(s) needed below
         type: :boolean
         required: true
+      - name: visual_content
+        label: Select design service(s) needed below
+        type: :boolean
+        required: true
       - name: color_preferences
         label: Do you have any color preferences
         type: :text
@@ -621,7 +625,7 @@ Services:
         type: :text
         required: false
       - name: desired_visitor_action
-        label: What do you wnat visitors to do when they get your email?
+        label: What do you want visitors to do when they get your email?
         type: :text
         required: false
   - name: 'landing_page_design_and_development'

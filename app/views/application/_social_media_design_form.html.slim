@@ -33,3 +33,10 @@
             i.ico-check
             span
               | LinkedIn header & profile photo
+      li
+        .checkbox
+          label.form-label-check[for="field-visual-content"]
+            input.header-type#field-visual-content[type="checkbox" name="visual_content" value="on" checked=(@project.answer_for('visual_content').answer == "on")]
+            i.ico-check
+            span
+              | Visual Content
