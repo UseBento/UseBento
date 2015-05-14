@@ -15,11 +15,6 @@
               |  &nbsp; 
               = @service.rounds
               |   rounds of design &nbsp; &nbsp; 
-            span
-              i.ico-calendar
-              |  &nbsp; in 
-              = @service.completion_time.first.to_s + '-' + @service.completion_time.last.to_s
-              |  business days 
         form.form-required#project-form[action="/projects/new" method="post" enctype="multipart/form-data"]
           input[type="hidden" name="application-form"]
           input[type="hidden" name="project_id" value=@project.id]
@@ -79,6 +74,17 @@
                     = get_error('project_name')
                   .form-controls
                     input#field-name-project.field[type="text" name="project_name" value=@project.answer_for('project_name').answer required data-validation-type="['presence']"]
+            .form-row
+              .form-cols
+                .form-col.form-col-1of2
+                  label.form-label[for="field-name-deadline"]
+                    | Deadline
+                    span.form-asterisk
+                      |  *
+                  .form-errors
+                    = get_error('deadline')
+                  .form-controls
+                    input#field-name-deadline.field[type="text" name="deadline" value=(@project.deadline || (user_signed_in? ? current_user.company : '')) required data-validation-type="['presence']"]
             .form-row
               label.form-label[for="field-describe-business"]
                 | Please describe your project.
