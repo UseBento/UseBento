@@ -532,20 +532,6 @@ Services:
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
         required: false
-      - name: service
-        label: Select your service below
-        type: :enum
-        values: 
-          - design_only
-          - design_and_development
-        required: true
-      - name: responsiveness
-        label: What type of responsive development do you need?
-        type: :enum
-        values: 
-          - desktop
-          - desktop_plus_mobile
-        required: true
       - name: google_analytics_setup
         label: Select FREE services below
         type: :boolean
