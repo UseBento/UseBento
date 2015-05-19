@@ -40,10 +40,6 @@ Services:
         label: If you have a tagline, what is it?
         type: :text
         required: false
-      - name: color_preferences
-        label: Do you have any color preferences
-        type: :text
-        required: false
       - name: font_preferences
         label: Do you prefer any font?
         type: :text
@@ -99,10 +95,6 @@ Services:
         type: :integer
         values: [1,100]
         required: true
-      - name: color_preferences
-        label: Do you have any color preferences
-        type: :text
-        required: false
       - name: font_preferences
         label: Do you prefer any font?
         type: :text
@@ -164,10 +156,6 @@ Services:
         label: If you have a tagline, what is it?
         type: :text
         required: false
-      - name: color_preferences
-        label: Do you have any color preferences
-        type: :text
-        required: false
       - name: font_preferences
         label: Do you prefer any font?
         type: :text
@@ -207,10 +195,6 @@ Services:
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
-        required: false
-      - name: color_preferences
-        label: Do you have any color preferences
-        type: :text
         required: false
       - name: font_preferences
         label: Do you prefer any font?
@@ -255,10 +239,6 @@ Services:
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
-        required: false
-      - name: color_preferences
-        label: Do you have any color preferences
-        type: :text
         required: false
       - name: font_preferences
         label: Do you prefer any font?
@@ -314,10 +294,6 @@ Services:
         type: :integer
         values: [1,100]
         required: true
-      - name: color_preferences
-        label: Do you have any color preferences
-        type: :text
-        required: false
       - name: font_preferences
         label: Do you prefer any font?
         type: :text
@@ -382,10 +358,6 @@ Services:
         label: Select design service(s) needed below
         type: :boolean
         required: true
-      - name: color_preferences
-        label: Do you have any color preferences
-        type: :text
-        required: false
       - name: font_preferences
         label: Do you prefer any font?
         type: :text
@@ -446,10 +418,6 @@ Services:
         label: Select design service(s) needed below
         type: :boolean
         required: true
-      - name: color_preferences
-        label: Do you have any color preferences
-        type: :text
-        required: false
       - name: font_preferences
         label: Do you prefer any font?
         type: :text
@@ -510,11 +478,7 @@ Services:
         type: :text
         required: false
       - name: competitors
-        label: Please list any competitor's sites.
-        type: :text
-        required: false
-      - name: color_preferences
-        label: Do you have any color preferences
+        label: Please list any competitors' sites.
         type: :text
         required: false
       - name: font_preferences
@@ -529,8 +493,6 @@ Services:
         label: Do you have any definite things that you don't want to have on your website?
         type: :text
         required: false
-
-
   - name: 'email_design_and_development'
     title: 'Email Design & Development'
     description: 'A professional email template created just for your business.<br />Responsive HTML optimized for all major email clients.'
@@ -572,10 +534,6 @@ Services:
           - design_only
           - design_and_development
         required: true
-      - name: color_preferences
-        label: Do you have any color preferences
-        type: :text
-        required: false
       - name: font_preferences
         label: Do you prefer any font?
         type: :text
@@ -739,10 +697,6 @@ Services:
         required: false
       - name: competitors
         label: Please list any competitors' sites.
-        type: :text
-        required: false
-      - name: color_preferences
-        label: Do you have any color preferences
         type: :text
         required: false
       - name: font_preferences
