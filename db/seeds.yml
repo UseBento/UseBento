@@ -27,10 +27,6 @@ Services:
         label: Please describe your business.
         type: :long_text
         required: true
-      - name: target_audience
-        label: Who is your target audience?
-        type: :text
-        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
@@ -84,10 +80,6 @@ Services:
         label: Please describe your business.
         type: :long_text
         required: true
-      - name: target_audience
-        label: Who is your target audience?
-        type: :text
-        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
@@ -159,10 +151,6 @@ Services:
         label: Please describe your business.
         type: :long_text
         required: true
-      - name: target_audience
-        label: Who is your target audience?
-        type: :text
-        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
@@ -216,10 +204,6 @@ Services:
         label: Please describe your business.
         type: :long_text
         required: true
-      - name: target_audience
-        label: Who is your target audience?
-        type: :text
-        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
@@ -268,10 +252,6 @@ Services:
         label: Please describe your business.
         type: :long_text
         required: true
-      - name: target_audience
-        label: Who is your target audience?
-        type: :text
-        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
@@ -320,10 +300,6 @@ Services:
         label: Please describe your business.
         type: :long_text
         required: true
-      - name: target_audience
-        label: Who is your target audience?
-        type: :text
-        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
@@ -450,10 +426,6 @@ Services:
         label: Please describe your business.
         type: :long_text
         required: true
-      - name: target_audience
-        label: Who is your target audience?
-        type: :text
-        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
@@ -524,10 +496,6 @@ Services:
         label: Please describe your business.
         type: :long_text
         required: false
-      - name: target_audience
-        label: Who is your target audience?
-        type: :text
-        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
@@ -593,10 +561,6 @@ Services:
         label: Please describe your business.
         type: :long_text
         required: true
-      - name: target_audience
-        label: Who is your target audience?
-        type: :text
-        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
@@ -654,10 +618,6 @@ Services:
         label: Please describe your business.
         type: :long_text
         required: true
-      - name: target_audience
-        label: Who is your target audience?
-        type: :text
-        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
@@ -742,10 +702,6 @@ Services:
         label: Please describe your business.
         type: :long_text
         required: true
-      - name: target_audience
-        label: Who is your target audience?
-        type: :text
-        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords

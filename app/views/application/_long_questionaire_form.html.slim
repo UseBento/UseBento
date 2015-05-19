@@ -1,13 +1,4 @@
 .form-row
-  label.form-label[for="field-target"]
-    | Who is your target audience? 
-    span.form-asterisk
-      |  *
-  .form-errors
-    = get_error('target_audience')
-  .form-controls
-    input#field-target.field[type="text" name="target_audience" value=(@project.answer_for('target_audience').answer || (current_user ? current_user.default_target_audience : "")) required data-validation-type="['presence']"]
-.form-row
   label.form-label[for="field-keywords"]
     | What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
     span.form-asterisk
@@ -17,7 +8,7 @@
   .form-controls
     input#field-keywords.field[type="text" name="business_keywords" value=(@project.answer_for('business_keywords').answer || (current_user ? current_user.default_keywords : "")) required data-validation-type="['presence']"]
 
-- for action in [{name: 'desired_visitor_action', rows: 2}, {name: 'competitors', rows: 2}, {name: 'tagline', rows: 1}, {name: 'color_preferences', rows: 1}, {name: 'font_preferences', rows: 1}, {name: 'inspiration', rows: 3}, {name: 'definite_nos', rows: 2}, {name: 'other_info', rows: 2}]
+- for action in [{name: 'desired_visitor_action', rows: 2}, {name: 'competitors', rows: 2}, {name: 'tagline', rows: 1}, {name: 'target_audience', rows: 1}, {name: 'color_preferences', rows: 1}, {name: 'font_preferences', rows: 1}, {name: 'inspiration', rows: 3}, {name: 'definite_nos', rows: 2}, {name: 'other_info', rows: 2}]
   - if @project.service.has_question(action[:name])
     .form-row
       label.form-label[for=("field-" + action[:name])]
