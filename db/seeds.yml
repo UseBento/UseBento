@@ -502,10 +502,6 @@ Services:
         label: Anything else we should know? (i.e. use a certain font, special colors, mimic a design that you like, or what users should do when they get your email)
         type: :text
         required: false
-      - name: desired_visitor_action
-        label: What do you wnat visitors to do when they get your email?
-        type: :text
-        required: false
   - name: 'landing_page_design_and_development'
     title: 'Landing Page Design & Development'
     description: 'High converting HTML landing pages by hand-picked experts. <br />HTML landing page development optimized for all major browser clients'
@@ -540,28 +536,6 @@ Services:
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
         required: false
-      - name: service
-        label: Select your service below
-        type: :enum
-        values: 
-          - design_only
-          - design_and_development
-        required: true
-      - name: responsiveness
-        label: What type of responsive development do you need?
-        type: :enum
-        values: 
-          - desktop
-          - desktop_plus_mobile
-        required: true
-      - name: google_analytics_setup
-        label: Select FREE services below
-        type: :boolean
-        required: true
-      - name: ftp_upload
-        label: Select FREE services below
-        type: :boolean
-        required: true
       - name: desired_visitor_action
         label: What do you want the visitor to do when they get to your landing page?
         type: :text
