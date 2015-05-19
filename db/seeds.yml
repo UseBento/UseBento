@@ -453,10 +453,6 @@ Services:
         label: Please list any websites you like. Include the URL. What specific features of these other sites are appealing?
         type: :text
         required: false
-      - name: definite_nos
-        label: Do you have any definite things that you don't want to have on your website?
-        type: :text
-        required: false
   - name: 'email_design_and_development'
     title: 'Email Design & Development'
     description: 'A professional email template created just for your business.<br />Responsive HTML optimized for all major email clients.'
@@ -580,10 +576,6 @@ Services:
         required: false
       - name: inspiration
         label: Please list any landing pages that you like. Include the URL What specific features of these other sites are appealing?
-        type: :text
-        required: false
-      - name: definite_nos
-        label: Do you have any definite things that you don't want to have on your landing page?
         type: :text
         required: false
       - name: other_info
