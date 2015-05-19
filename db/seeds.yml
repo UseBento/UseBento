@@ -532,14 +532,6 @@ Services:
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
         required: false
-      - name: google_analytics_setup
-        label: Select FREE services below
-        type: :boolean
-        required: true
-      - name: ftp_upload
-        label: Select FREE services below
-        type: :boolean
-        required: true
       - name: pages
         label: Number of estimated pages
         type: :integer
