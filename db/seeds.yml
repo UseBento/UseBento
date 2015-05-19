@@ -40,10 +40,6 @@ Services:
         label: If you have a tagline, what is it?
         type: :text
         required: false
-      - name: font_preferences
-        label: Do you prefer any font?
-        type: :text
-        required: false
       - name: other_requirements
         label: Do you have any other requirements
         type: :text
@@ -95,10 +91,6 @@ Services:
         type: :integer
         values: [1,100]
         required: true
-      - name: font_preferences
-        label: Do you prefer any font?
-        type: :text
-        required: false
       - name: desired_visitor_action
         label: What do you want the visitor to do when they use your app?
         type: :text
@@ -156,10 +148,6 @@ Services:
         label: If you have a tagline, what is it?
         type: :text
         required: false
-      - name: font_preferences
-        label: Do you prefer any font?
-        type: :text
-        required: false
       - name: other_requirements
         label: Do you have any other requirements
         type: :text
@@ -195,10 +183,6 @@ Services:
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
-        required: false
-      - name: font_preferences
-        label: Do you prefer any font?
-        type: :text
         required: false
       - name: other_requirements
         label: Do you have any other requirements
@@ -239,10 +223,6 @@ Services:
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
-        required: false
-      - name: font_preferences
-        label: Do you prefer any font?
-        type: :text
         required: false
       - name: other_requirements
         label: Do you have any other requirements
@@ -294,10 +274,6 @@ Services:
         type: :integer
         values: [1,100]
         required: true
-      - name: font_preferences
-        label: Do you prefer any font?
-        type: :text
-        required: false
       - name: other_requirements
         label: Do you have any other requirements
         type: :text
@@ -358,10 +334,6 @@ Services:
         label: Select design service(s) needed below
         type: :boolean
         required: true
-      - name: font_preferences
-        label: Do you prefer any font?
-        type: :text
-        required: false
       - name: other_requirements
         label: Do you have any other requirements
         type: :text
@@ -418,10 +390,6 @@ Services:
         label: Select design service(s) needed below
         type: :boolean
         required: true
-      - name: font_preferences
-        label: Do you prefer any font?
-        type: :text
-        required: false
       - name: other_requirements
         label: Do you have any other requirements
         type: :text
@@ -481,10 +449,6 @@ Services:
         label: Please list any competitors' sites.
         type: :text
         required: false
-      - name: font_preferences
-        label: Do you prefer any font?
-        type: :text
-        required: false
       - name: inspiration
         label: Please list any websites you like. Include the URL. What specific features of these other sites are appealing?
         type: :text
@@ -534,10 +498,6 @@ Services:
           - design_only
           - design_and_development
         required: true
-      - name: font_preferences
-        label: Do you prefer any font?
-        type: :text
-        required: false
       - name: other_info
         label: Anything else we should know? (i.e. use a certain font, special colors, mimic a design that you like, or what users should do when they get your email)
         type: :text
@@ -697,10 +657,6 @@ Services:
         required: false
       - name: competitors
         label: Please list any competitors' sites.
-        type: :text
-        required: false
-      - name: font_preferences
-        label: Do you prefer any font?
         type: :text
         required: false
       - name: inspiration
