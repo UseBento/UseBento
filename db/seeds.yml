@@ -453,6 +453,10 @@ Services:
         label: Please list any websites you like. Include the URL. What specific features of these other sites are appealing?
         type: :text
         required: false
+      - name: other_info
+        label: Anything else we should know? (i.e. use a certain font, special colors, or mimic a design that you like)
+        type: :text
+        required: false
   - name: 'email_design_and_development'
     title: 'Email Design & Development'
     description: 'A professional email template created just for your business.<br />Responsive HTML optimized for all major email clients.'
