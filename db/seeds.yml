@@ -334,6 +334,14 @@ Services:
         label: Select design service(s) needed below
         type: :boolean
         required: true
+      - name: visual_content
+        label: Select design service(s) needed below
+        type: :boolean
+        required: true
+      - name: other
+        label: Select design service(s) needed below
+        type: :boolean
+        required: true
       - name: other_requirements
         label: Do you have any other requirements
         type: :text

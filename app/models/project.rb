@@ -254,7 +254,8 @@ class Project
       fields = ["twitter_header_and_profile",
                 "youtube_header_and_profile",
                 "linkedin_header_and_profile",
-                "facebook_header_and_profile"]
+                "facebook_header_and_profile",
+                "visual_content"]
       fields = fields.map {|f| self.answer_for(f).answer }
       fields = fields.select {|f| f}
       fields.length
@@ -328,7 +329,9 @@ class Project
        "facebook_header_and_profile" => "Facebook Header & Profile",
        "twitter_header_and_profile"  => "Twitter Header & Profile",
        "youtube_header_and_profile"  => "Youtube Header & Profile",
-       "linkedin_header_and_profile" => "LinkedIn Header & Profile"}
+       "linkedin_header_and_profile" => "LinkedIn Header & Profile",
+       "visual_content"              => "Visual Content",
+       "other"                       => "Other"}
 
     featured_answers.map do |name, label|
                       answer = self.answer_for(name).answer
