@@ -213,12 +213,17 @@ class Project
     end
   end
 
-  def self.normalize_company(company)
+   def self.normalize_company(company)
     company.downcase.split(" ").join(" ")
   end
 
   def update_company
     self.company = Project.normalize_company(self.business_name)
+    self.save
+  end
+
+  def update_deadline
+    self.deadline = self.answer_for(:deadline).answer
     self.save
   end
 
@@ -234,6 +239,10 @@ class Project
   def business_name
     answer_for(:business_name).answer
   end
+
+  # def deadline
+  #   answer_for(:deadline).answer
+  # end
 
   def name
     answer_for(:project_name).answer || ""

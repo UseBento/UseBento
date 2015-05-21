@@ -1,4 +1,4 @@
-- for action in [{name: 'desired_visitor_action', rows: 2}, {name: 'competitors', rows: 2}, {name: 'tagline', rows: 1}, {name: 'target_audience', rows: 1}, {name: 'color_preferences', rows: 1}, {name: 'font_preferences', rows: 1}, {name: 'inspiration', rows: 3}, {name: 'definite_nos', rows: 2}, {name: 'other_info', rows: 2}]
+- for action in [{name: 'desired_visitor_action', rows: 2}, {name: 'competitors', rows: 2}, {name: 'links', rows: 2}, {name: 'tagline', rows: 1}, {name: 'target_audience', rows: 1}, {name: 'color_preferences', rows: 1}, {name: 'font_preferences', rows: 1}, {name: 'inspiration', rows: 3}, {name: 'definite_nos', rows: 2}, {name: 'other_info', rows: 2}]
   - if @project.service.has_question(action[:name])
     .form-row
       label.form-label[for=("field-" + action[:name])]

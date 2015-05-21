@@ -185,7 +185,6 @@ class ProjectsController < ApplicationController
     params.map do |key, val|
       @project.update_answer(key, val)
     end
-
     @errors = @project.validate_project
     if @errors.length > 0
       render "projects/create"
@@ -198,8 +197,9 @@ class ProjectsController < ApplicationController
           @project.status_index = brief_index
         end
       end
-      @project.save
       @project.update_company
+      @project.update_deadline
+      @project.save
       redirect_to @project
     end
   end
@@ -265,6 +265,7 @@ class ProjectsController < ApplicationController
       @project.user = @user
       @project.save
       @project.update_company
+      @project.update_deadline
       @project.initialize_project
 
       ProjectMailer.new_project_mail(@project).deliver

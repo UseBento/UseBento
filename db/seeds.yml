@@ -220,6 +220,10 @@ Services:
         label: Please describe your business.
         type: :long_text
         required: true
+      - name: links
+        label: Add links to examples of collateral you like
+        type: :text
+        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
@@ -260,6 +264,10 @@ Services:
         label: Please describe your business.
         type: :long_text
         required: true
+      - name: links
+        label: Add links to presentations that you like
+        type: :text
+        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
@@ -310,6 +318,10 @@ Services:
         label: Please describe your business.
         type: :long_text
         required: true
+      - name: links
+        label: Add links to social media profiles you like
+        type: :text
+        required: false
       - name: target_audience
         label: Who is your target audience?
         type: :text
@@ -370,6 +382,10 @@ Services:
         label: What is the name of your business?
         type: :text
         required: true
+      - name: links
+        label: Add links to examples of ads and content you like 
+        type: :text
+        required: false
       - name: project_name
         label: What is the name of your project?
         type: :text
@@ -430,10 +446,6 @@ Services:
         required: true
       - name: project_name
         label: What is the name of your project?
-        type: :text
-        required: true
-      - name: deadline
-        label: Due Date
         type: :text
         required: true
       - name: business_description
