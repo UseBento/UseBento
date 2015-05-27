@@ -554,13 +554,6 @@ Services:
         label: Anything else we should know? (i.e. use a certain font, special colors, mimic a design that you like, or what users should do when they get your email)
         type: :text
         required: false
-<<<<<<< HEAD
-=======
-      - name: desired_visitor_action
-        label: What do you want visitors to do when they get your email?
-        type: :text
-        required: false
->>>>>>> staging
   - name: 'landing_page_design_and_development'
     title: 'Landing Page Design & Development'
     description: 'High converting HTML landing pages by hand-picked experts. <br />HTML landing page development optimized for all major browser clients'
