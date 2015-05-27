@@ -51,7 +51,6 @@ class ProjectsController < ApplicationController
     @project                 = Project.new
     @project.total_price     = 0
     @project.service         = @service
-    @project.deadline        = params[:project_deadline]
     @project.project_type    = params[:project_type]
     @project.status          = :pending
     @project.start_date      = DateTime.now.to_date
@@ -69,6 +68,7 @@ class ProjectsController < ApplicationController
     @project.add_answer(:full_name, current_user.full_name)
     @project.add_answer(:project_name, params[:project_name])
     @project.add_answer(:business_description, params[:business_description])
+    @project.add_answer(:project_deadline, params[:project_deadline])
     @project.user = @user
     @project.save
 
@@ -197,8 +197,6 @@ class ProjectsController < ApplicationController
           @project.status_index = brief_index
         end
       end
-      @project.update_company
-      @project.update_deadline
       @project.save
       redirect_to @project
     end
@@ -264,8 +262,6 @@ class ProjectsController < ApplicationController
 
       @project.user = @user
       @project.save
-      @project.update_company
-      @project.update_deadline
       @project.initialize_project
 
       ProjectMailer.new_project_mail(@project).deliver

@@ -84,7 +84,7 @@
                   .form-errors
                     = get_error('project_deadline')
                   .form-controls
-                    input#field-name-deadline.field[type="text" name="project_deadline" value=(@project.deadline) required data-validation-type="['presence']"]
+                    input#field-name-deadline.field[type="text" name="project_deadline" value=@project.answer_for('project_deadline').answer required data-validation-type="['presence']"]
             .form-row
               label.form-label[for="field-describe-business"]
                 | Please describe your project.

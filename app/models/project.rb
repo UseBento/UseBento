@@ -10,7 +10,6 @@ class Project
 
   field :last_status,   type: Symbol  # set to keep track of last status before archiving
   field :number,        type: Integer
-  field :deadline,      type: String
   field :company,       type: String
   field :project_type,  type: String
   field :total_price,   type: Integer
@@ -222,11 +221,6 @@ class Project
     self.save
   end
 
-  def update_deadline
-    self.deadline = self.answer_for(:deadline).answer
-    self.save
-  end
-
   def is_valid?
     validate_project.length == 0
   end
@@ -239,10 +233,6 @@ class Project
   def business_name
     answer_for(:business_name).answer
   end
-
-  # def deadline
-  #   answer_for(:deadline).answer
-  # end
 
   def name
     answer_for(:project_name).answer || ""

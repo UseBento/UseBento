@@ -23,6 +23,10 @@ Services:
         label: What is the name of your project?
         type: :text
         required: true
+      - name: project_deadline
+        label: Deadline
+        type: :text
+        required: false
       - name: business_description
         label: Please describe your business.
         type: :long_text
@@ -176,6 +180,10 @@ Services:
         label: What is the name of your project?
         type: :text
         required: true
+      - name: project_deadline
+        label: Deadline
+        type: :text
+        required: false
       - name: business_description
         label: Please describe your business.
         type: :long_text
@@ -216,6 +224,10 @@ Services:
         label: What is the name of your project?
         type: :text
         required: true
+      - name: project_deadline
+        label: Deadline
+        type: :text
+        required: false
       - name: business_description
         label: Please describe your business.
         type: :long_text
@@ -260,6 +272,10 @@ Services:
         label: What is the name of your project?
         type: :text
         required: true
+      - name: project_deadline
+        label: Deadline
+        type: :text
+        required: false
       - name: business_description
         label: Please describe your business.
         type: :long_text
@@ -318,6 +334,10 @@ Services:
         label: Please describe your business.
         type: :long_text
         required: true
+      - name: project_deadline
+        label: Deadline
+        type: :text
+        required: false
       - name: links
         label: Add links to social media profiles you like
         type: :text
@@ -390,6 +410,10 @@ Services:
         label: What is the name of your project?
         type: :text
         required: true
+      - name: project_deadline
+        label: Deadline
+        type: :text
+        required: false
       - name: business_description
         label: Please describe your business.
         type: :long_text
@@ -452,6 +476,10 @@ Services:
         label: Please describe your business.
         type: :long_text
         required: false
+      - name: project_deadline
+        label: Deadline
+        type: :text
+        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
@@ -507,6 +535,10 @@ Services:
         label: Please describe your business.
         type: :long_text
         required: true
+      - name: project_deadline
+        label: Deadline
+        type: :text
+        required: false
       - name: business_keywords
         label: What keywords best describe your business? (ie. modern, masculine, dynamic, etc.)
         type: :keywords
@@ -544,6 +576,10 @@ Services:
         label: What is the name of your business?
         type: :text
         required: true
+      - name: project_deadline
+        label: Deadline
+        type: :text
+        required: false
       - name: project_name
         label: What is the name of your project?
         type: :text
