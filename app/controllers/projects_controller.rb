@@ -198,6 +198,7 @@ class ProjectsController < ApplicationController
         end
       end
       @project.save
+      @project.update_company
       redirect_to @project
     end
   end
@@ -262,6 +263,7 @@ class ProjectsController < ApplicationController
 
       @project.user = @user
       @project.save
+      @project.update_company
       @project.initialize_project
 
       ProjectMailer.new_project_mail(@project).deliver
