@@ -92,9 +92,9 @@ class Project
 
   def dashboard_count(user)
     count = self.unread_messages_count(user)
-    # if self.private_chat.can_view?(user) || user.admin?
-    #   count += self.private_chat.unread_messages_count(user)
-    # end
+    if self.private_chat.can_view?(user) || user.admin?
+      count += self.private_chat.unread_messages_count(user)
+    end
     count
   end
 
