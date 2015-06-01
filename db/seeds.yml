@@ -2,7 +2,7 @@ Services:
   - name: 'logo_design'
     title: 'Logo Design'
     description: 'Hand-picked designers to create your brand for your next project or company. <br /> Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
-    rounds: 3
+    rounds: 2
     price: 400
     unit: 'Logo'
     completion_time: [3, 5]
@@ -51,7 +51,7 @@ Services:
   - name: 'mobile_app'
     title: 'Mobile App Design & Development'
     description: 'Hand-picked experts to get your iOS app to market. <br />Development optimized for iPhone 4, 4s, 5, 5s, 6 and 6 plus.'
-    rounds: 3
+    rounds: 2
     price: 0
     unit: 'Screen'
     completion_time: [2, 3]
@@ -114,7 +114,7 @@ Services:
   - name: 'app_icon'
     title: 'App Icon Design'
     description: 'Hand-picked designers to create the perfect face for your app. <br /> Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
-    rounds: 3
+    rounds: 2
     price: 400
     unit: 'Icon'
     completion_time: [3, 5]
@@ -159,7 +159,7 @@ Services:
   - name: 'business_card'
     title: 'Other'
     description: 'Stand-out with a custom, professional business card. <br />Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
-    rounds: 3
+    rounds: 2
     price: 400
     unit: 'Card'
     completion_time: [3, 5]
@@ -203,7 +203,7 @@ Services:
   - name: 'stationary_design'
     title: 'Marketing Collateral Design'
     description: 'From letterheads to your complete corporate identity. <br />Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
-    rounds: 3
+    rounds: 2
     price: 450
     unit: 'Stationary'
     completion_time: [3, 5]
@@ -251,7 +251,7 @@ Services:
   - name: 'presentation_design'
     title: 'Presentation Design'
     description: 'Creation of new powerpoint or keynote presentation template. <br />Sourced images are an additional cost.'
-    rounds: 3
+    rounds: 2
     price: 100
     unit: 'Slide'
     completion_time: [3, 5]
@@ -309,7 +309,7 @@ Services:
   - name: 'social_media_design'
     title: 'Social Media Design'
     description: 'Hand-picked designers to enhance your social media profiles. <br />Final logos sent to you as .jpg, .png, .and .psd file formats.'
-    rounds: 3
+    rounds: 2
     price: 150
     completion_time: [3, 5]
     unit: 'Profile'
@@ -385,7 +385,7 @@ Services:
   - name: 'banner_ads'
     title: 'Banner Ads'
     description: 'Hand-picked designers to enhance your banner ads. <br />Final logos sent to you as .jpg, .png, .and .psd file formats.'
-    rounds: 3
+    rounds: 2
     price: 450
     completion_time: [3, 5]
     unit: 'Profile'
@@ -447,9 +447,9 @@ Services:
         type: :text
         required: false          
   - name: 'website_design_and_development'
-    title: 'Website Design & Development'
-    description: 'Hand-picked experts to create your website. <br />HTML website development optimized for all major browser clients.'
-    rounds: 3
+    title: 'Website Design'
+    description: 'Hand-picked designers to create your website. <br />Optimized for all major browser clients.'
+    rounds: 2
     unit: 'Page'
     price: 650
     plus_dev_price: 1050
@@ -506,10 +506,10 @@ Services:
         type: :text
         required: false
   - name: 'email_design_and_development'
-    title: 'Email Design & Development'
-    description: 'A professional email template created just for your business.<br />Responsive HTML optimized for all major email clients.'
-    rounds: 3
-    price: 500
+    title: 'Email Design'
+    description: 'A professional email template designed just for your business.<br />Optimized for all major email clients.'
+    rounds: 2
+    price: 350
     plus_dev_price: 500
     responsive_price: 500
     unit: 'Email'
@@ -555,9 +555,9 @@ Services:
         type: :text
         required: false
   - name: 'landing_page_design_and_development'
-    title: 'Landing Page Design & Development'
-    description: 'High converting HTML landing pages by hand-picked experts. <br />HTML landing page development optimized for all major browser clients'
-    rounds: 3
+    title: 'Landing Page Design'
+    description: 'High converting landing pages by hand-picked experts. <br />Landing page design optimized for all major browser clients.'
+    rounds: 2
     price: 650
     plus_dev_price: 1050
     responsive_price: 1200
@@ -619,7 +619,7 @@ Services:
   - name: 'wordpress_design_and_development'
     title: 'Wordpress Website Design & Development'
     description: 'Hand-picked experts to unleash the power of WordPress. <br />Wordpress development optimized for all major browser clients.'
-    rounds: 3
+    rounds: 2
     price: 650
     plus_dev_price: 1300
     responsive_price: 1550
