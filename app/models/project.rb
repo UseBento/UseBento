@@ -393,8 +393,8 @@ class Project
   end
 
   def initialize_project
-    bot_message ("Hi there! My name is Lucas and I'm your project manager. You wrote the following for your project description: \n\n\"" + answer_for("business_description").answer + "\".\n\n" +
-                 "If you have any more details write them here.  Also, please attach any files that we will need such as a logo or style guide.")
+    bot_message ("Hi there! I'm Bento Bot and I'm here to help with your project. You wrote the following for your project description: \n\n\"" + answer_for("business_description").answer + "\".\n\n" +
+                 "Please fill out the creative brief on the right or provide any additional details below. We are assigning a top-quality, vetted designer to help you with your project shortly.")
   end
 
   def status_label
