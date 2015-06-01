@@ -79,7 +79,7 @@ class User
 
   def avatar(root_domain)
     if self.admin
-      return "/images/chat.png"
+      return "/images/chat_new.png"
     end
 
     hash = Digest::MD5.hexdigest(self.email.strip.downcase)
