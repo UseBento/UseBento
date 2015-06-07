@@ -243,6 +243,7 @@ class ProjectsController < ApplicationController
 
     @errors = @project.validate_project
     if @errors.length > 0
+
       render "projects/create"
     else
       existing_user = user_signed_in?
@@ -270,6 +271,7 @@ class ProjectsController < ApplicationController
       if !existing_user
         UserMailer.new_generated_user_mail(@user, password, @project).deliver
       end
+
       redirect_to @project
     end
   end

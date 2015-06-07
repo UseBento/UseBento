@@ -40,8 +40,12 @@ class Question
       end
 
     elsif self.type == :enum
-      valid = self.values.member?(answer)
-      invalid_message = "Invalid entry"
+      
+      if !answer.nil?
+        valid = self.values.member?(answer)
+        invalid_message = "Invalid entry"
+      end
+      
 
     elsif self.type == :boolean
       valid = true

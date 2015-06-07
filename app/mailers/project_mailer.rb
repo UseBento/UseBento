@@ -7,8 +7,11 @@ class ProjectMailer < ActionMailer::Base
     @project    = project
     @admin      = User.get_admin
 
-    mail(to:      @admin.email,
+    if !@admin.nil?
+      mail(to:      @admin.email,
          subject: @user.company + " started a new " + @service.name + " project")
+    end
+    
   end
 
   def new_project_request_mail(name, email, company, company_size, description)
@@ -19,8 +22,11 @@ class ProjectMailer < ActionMailer::Base
     @description   = description
     @admin         = User.get_admin
 
-    mail(to:      @admin.email,
+    if !@admin.nil?
+      mail(to:      @admin.email,
          subject: @company + " wants to start a new project")
+    end
+    
   end
 
   def new_admin_message_mail(message)
@@ -29,8 +35,11 @@ class ProjectMailer < ActionMailer::Base
     @owner      = @project.user
     @admin      = @message.user
 
-    mail(to:      @owner.email,
+    if !@admin.nil?
+      mail(to:      @owner.email,
          subject: "New message from " + @admin.full_name)
+    end
+    
   end
 
   def new_user_message_mail(to_first_name, from_full_name, message_body, link_path, email)
@@ -39,7 +48,10 @@ class ProjectMailer < ActionMailer::Base
     @body        = message_body
     @link_path   = link_path
 
-    mail(to:      email,
+    if !@admin.nil?
+      mail(to:      email,
          subject: "New message from " + @full_name)
+    end
+    
   end
 end

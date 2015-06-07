@@ -18,6 +18,7 @@
  *= require users
  *= require style
  *= require style-redesign
+ *= require users
  *= require_self
  */
 
