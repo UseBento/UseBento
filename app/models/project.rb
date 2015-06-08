@@ -22,6 +22,7 @@ class Project
   embeds_many :answers
   embeds_many :messages
   embeds_many :invited_users
+  embeds_many :invited_designers
   embeds_many :attachments
   embeds_one  :private_chat
 #  validate :is_valid?
@@ -76,6 +77,10 @@ class Project
     self.invited_users.where(user_id: user.id).first
   end
 
+  def was_designer_invited?(user)
+    self.invited_designers.where(user_id: user.id).first
+  end
+
   def invited_admins
     self.people.select do |p|
                  p.user && p.user.admin
@@ -116,6 +121,36 @@ class Project
     end
 
     people
+  end
+
+  def designers
+    designers = self.invited_designers
+    # binding.pry
+
+    # if (designers.empty?)
+    #   invited_designer         = self.invited_designers.create({accepted: true})
+    #   invited_designer.user    = self.user
+    #   invited_designer.save
+    #   designers = self.invited_designers
+    # end
+    # binding.pry
+
+    if (designers.empty?)
+      invited_designer         = self.invited_designers.create({accepted: true})
+      invited_designer.user    = User.get_admin
+      invited_designer.save
+      designers = self.invited_designers
+    end
+
+    # if (designers.select {|person| person.user && person.user.admin}).empty?
+    #   invited_designer         = self.invited_designers.create({accepted: true})
+    #   invited_designer.user    = User.get_admin
+    #   invited_designer.save
+    #   designers = self.invited_users
+    # end
+    # binding.pry
+
+    designers
   end
 
   def owner
@@ -176,7 +211,9 @@ class Project
     (user &&
      (user.id == self.user.id ||
       user.admin ||
-      self.invited_users.where(accepted: true).where(user_id: user.id).first))
+      self.invited_users.where(accepted: true).where(user_id: user.id).first || 
+      self.invited_designers.where(accepted: true).where(user_id: user.id).first))
+      
   end
 
   def validate_project

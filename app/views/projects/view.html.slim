@@ -114,6 +114,22 @@
               a.btn_med.gray#invite-coworkers
                 | INVITE COWORKERS
               strong#invite-errors
+            li
+              h5
+                | Designer on this project
+              #designer-people
+                - for person in (@chat == :group ? @project.designers : @project.get_private_chat.people)
+                  = render partial: 'invited_person', locals: {person: person}
+              .clear
+              br
+              #enter-designer-invite.hidden
+                input#enter-designer-email[type="text" placeholder="email address"]
+                a#submit-designer-invite
+                  | Invite
+              - if current_user.admin
+                a.btn_med.gray#invite-designers
+                  | INVITE DESIGNERS
+              strong#invite-designer-errors
             - if current_user == @project.user || current_user.admin || @project.can_see_invoice?(current_user)
               li#project-invoice
                 h5

@@ -1,0 +1,50 @@
+- if person.can_see?(current_user)
+  div[data-person-id=person.id data-project-id=@project.id class=("col_four people-entry " + (person.can_see_email?(current_user) ? "" : "no-email"))]
+    - if person.can_delete?(current_user)
+      a.fa.fa-trash-o.delete.right.delete-person[ href=("#delete-popup-person-" + person.id.to_s)]
+        - if current_user.admin || current_user != person.user
+          .delete-popup.mfp-hide[id=("delete-popup-person-" + person.id.to_s)]
+            .access
+              .form.form-access
+                form
+                  .popup-body
+                    .form-head
+                      h2
+                        | Are you sure?
+                    .form-body
+                      center
+                        | Are you sure you want to remove this person from the project?
+                        br
+                        br
+                        button.btn.gray.close-delete-person[type="button"]
+                          | Cancel
+                        |   &nbsp;  
+                        button.btn.confirm-delete-person[type="button"]
+                          | Yes
+                        .clear
+                        br
+    - if person.accepted && person.user
+      img.avatar[src=person.user.avatar(request.host_with_port) alt=""]
+      span
+        = person.user.full_name
+        - if current_user.admin && person.accepted
+          i[class=("fa fa-credit-card can-see-invoice right " + (@project.can_see_invoice?(person.user) ? 'can' : 'cant')) data-pid=@project.id data-uid=person.user.id]
+      - if person.can_see_email?(current_user)
+        a[href=("mailto:"+person.user.email)]
+          = person.user.short_email
+      - else
+        = raw "&nbsp;"
+    - else
+      - if person.user
+        img.avatar[src=person.user.avatar(request.host_with_port) alt=""]
+      - else
+        img.avatar[src=User.default_avatar_for(person.email || "a") alt=""]
+      span
+        - if person.user
+          = person.user.full_name
+        - elsif person.can_see_email?(current_user)
+          = person.short_email
+        - else
+          = raw "&nbsp;"
+      span.invite-sent
+        | Invite Sent

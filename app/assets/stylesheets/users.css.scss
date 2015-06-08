@@ -2,9 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .mfp-content {
-  #log-in-form {
+  #log-in-form, #sign-up-form {
     a {
-      color: white;
+      color: #B0996D;
+    }
+    small {
+      a {
+        color: #718097;
+      }
     }
   }
 }

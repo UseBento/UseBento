@@ -18,10 +18,13 @@ Rails.application.routes.draw do
   get  'projects/:id/del_project',            to: 'projects#delete'
   post 'projects/:id/invite',                 to: 'projects#invite'
   post 'projects/:id/:chat/invite',           to: 'projects#invite_to_private'
+  post 'projects/:id/invite_designer',                 to: 'projects#invite_designer'
+  post 'projects/:id/:chat/invite_designer',           to: 'projects#invite_designer_to_private'
   get  'projects/:id/popup',                  to: 'projects#initial_popup'
   post 'projects/:project_id/update_payment', to: 'projects#update_payment'
   post 'projects/:project_id/remove_payment', to: 'projects#remove_payment'
   get  'projects/:id/remove_user/:invite_id', to: 'projects#remove_invite'
+  get  'projects/:id/remove_designer/:invite_id', to: 'projects#remove_invite_designer'
   get 'projects/:project_id/update_status/:status',   to: 'projects#update_status'
 
   get  'accept_invitation/:project_id/:id',   to: 'invitations#join'

@@ -88,14 +88,24 @@ class ProjectsController < ApplicationController
     @editing  = false
     @messages = @project.messages
 
+    # binding.pry
+
     if !@project.has_access?(current_user)
       invite = @project.was_invited?(current_user)
       if invite
         invite.accepted = true
         invite.save
       else
-        return redirect_to_login
+        # return redirect_to_login
+        invite_designer = @project.was_designer_invited?(current_user)
+        if invite_designer
+          invite_designer.accepted = true
+          invite_designer.save
+        else
+          return redirect_to_login
+        end
       end
+      
     end
   end
 
@@ -114,8 +124,16 @@ class ProjectsController < ApplicationController
         invite.accepted = true
         invite.save
       else
-        return redirect_to_login
+        # return redirect_to_login
+        invite_designer = @project.was_designer_invited?(current_user)
+        if invite_designer
+          invite_designer.accepted = true
+          invite_designer.save
+        else
+          return redirect_to_login
+        end
       end
+      
     end
 
     render "projects/view"
@@ -340,12 +358,38 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def invite_designer
+    @project    = Project.find(params[:id])
+
+    invitation = InvitedDesigner.send_invite(@project, current_user, params[:email])
+    # binding.pry
+    @error     = invitation if invitation.class != InvitedDesigner
+
+    respond_to do |format|
+      format.html { redirect_to @project }
+      format.json { render :json => @error ? {error: @error} : invitation }
+    end
+  end
+
   def invite_to_private
     @project        = Project.find(params[:id])
     @private_chat   = @project.private_chat
 
     invitation = InvitedUser.send_invite(@private_chat, current_user, params[:email])
     @error     = invitation if invitation.class != InvitedUser
+
+    respond_to do |format|
+      format.html { redirect_to @project }
+      format.json { render :json => @error ? {error: @error} : invitation }
+    end
+  end
+
+  def invite_designer_to_private
+    @project        = Project.find(params[:id])
+    @private_chat   = @project.private_chat
+
+    invitation = InvitedDesinger.send_invite(@private_chat, current_user, params[:email])
+    @error     = invitation if invitation.class != InvitedDesinger
 
     respond_to do |format|
       format.html { redirect_to @project }
@@ -363,6 +407,17 @@ class ProjectsController < ApplicationController
     invite   = @project.invited_users.find(params[:invite_id]) || @project.private_chat.invited_users.find(params[:invite_id])
     if (invite.can_delete?(current_user))
       invite.delete
+    end
+    respond_to do |format|
+      format.html { render json: {success: true}}
+    end
+  end
+
+  def remove_invite_designer
+    @project = Project.find(params[:id])
+    invite_designer   = @project.invited_designers.find(params[:invite_id]) || @project.private_chat.invited_designers.find(params[:invite_id])
+    if (invite_designer.can_delete?(current_user))
+      invite_designer.delete
     end
     respond_to do |format|
       format.html { render json: {success: true}}

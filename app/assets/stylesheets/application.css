@@ -292,7 +292,7 @@ button.btn.upload-btn {
     margin-right: 0.75em;
 }
 
-#enter-invite #enter-email {
+#enter-invite #enter-email, #enter-designer-invite #enter-designer-email {
     height: 1.5em;
     border: 0.12em solid #bababa;
     border-radius: 0.25em;

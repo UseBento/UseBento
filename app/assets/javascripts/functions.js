@@ -544,6 +544,11 @@ function setup_paypal_direct() {
             $('#enter-invite').removeClass('hidden');
             $('#invite-coworkers').addClass('hidden'); });
 
+        $('#invite-designers').click(function() {
+            $('#enter-designer-invite').removeClass('hidden');
+            $('#invite-designers').addClass('hidden'); 
+        });
+
         $('#submit-invite').click(function() {
             var email    = $('#enter-email').val();
             var id       = $('#project-id').val();
@@ -573,6 +578,39 @@ function setup_paypal_direct() {
                         $('#enter-email').val('');
                         $('#enter-invite').addClass('hidden');
                         $('#invite-coworkers').removeClass('hidden'); }}); });
+
+        $('#submit-designer-invite').click(function() {
+            var email    = $('#enter-designer-email').val();
+            var id       = $('#project-id').val();
+            var chat     = $('#chat').val();
+            var url      = ('/projects/' + id + '/'
+                            + (chat == 'group' ? '' : 'private/')
+                            + 'invite_designer.json');
+
+            $.ajax({type:    'POST',
+                url:      url,
+                data:    {email: email},
+                success:  function(data) {
+                    if (data.error)
+                        return $('#invite-designer-errors').html(data.error);
+                    $('#invite-designer-errors').html('');
+
+                    var row = build_el(
+                        div('people-entry col_four',
+                            [img({'class':  "avatar",
+                                  src:      ('/images/avatars/' +
+                                             email[0].toUpperCase() + '.png'),
+                                  alt:      ''}),
+                             span('', [data.email]),
+                             span('invite-sent', ['Invite Sent'])]));
+                    $('#designer-people').append(row);
+
+                    $('#enter-designer-email').val('');
+                    $('#enter-designer-invite').addClass('hidden');
+                    $('#invite-designers').removeClass('hidden');
+                }
+            });
+        });
 
         function save_message(message_id) {}
 
@@ -702,7 +740,7 @@ function setup_paypal_direct() {
                         element.remove(); }}); }
 
         function link_person_buttons() {
-            $('.people-entry').map(function(i, el) {
+            $('#people .people-entry').map(function(i, el) {
                 el = $(el);
                 var id = el.attr('data-person-id');
                 el.find('.delete-person').magnificPopup();
@@ -711,7 +749,26 @@ function setup_paypal_direct() {
             });
         }
 
+        function remove_designer(invite_id, element) {
+            project_id = $('#project-id').val();
+            $.ajax({type:     'GET',
+                    url:      '/projects/' + project_id + '/remove_designer/' + invite_id,
+                    success:  function(data) {
+                        $.magnificPopup.close();
+                        element.remove(); }}); }
+
+        function link_designer_buttons() {
+            $('#designer-people .people-entry').map(function(i, el) {
+                el = $(el);
+                var id = el.attr('data-person-id');
+                el.find('.delete-person').magnificPopup();
+                el.find('.close-delete-person').click($.magnificPopup.close);
+                el.find('.confirm-delete-person').click(curry(remove_designer, id, el));
+            });
+        }
+
         link_person_buttons();
+        link_designer_buttons();
 
         function run_on_popup() {
             $('#sign-up-form').submit(sign_up);
