@@ -29,6 +29,8 @@ Rails.application.routes.draw do
 
   get  'accept_invitation/:project_id/:id',   to: 'invitations#join'
   get  'accept_invitation/:project_id/:chat/:id',   to: 'invitations#join'
+  get  'accept_designer_invitation/:project_id/:id',   to: 'invitations#join_designer'
+  get  'accept_designer_invitation/:project_id/:chat/:id',   to: 'invitations#join_designer'
 
   post 'projects/:project_id/message',        to: 'messages#post_message'
   post 'projects/delete_message',             to: 'messages#remove'

@@ -58,4 +58,4 @@ seeds["Services"].map do |service_def|
     end
 end
 
-User.create(:email => "admin@admin.com", :password => "adminadmin", :name => "Bento Bot", :admin => true)
+# User.create(:email => "admin@admin.com", :password => "adminadmin", :name => "Bento Bot", :admin => true)
