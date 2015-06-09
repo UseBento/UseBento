@@ -125,7 +125,6 @@ class Project
 
   def designers
     designers = self.invited_designers
-    # binding.pry
 
     # if (designers.empty?)
     #   invited_designer         = self.invited_designers.create({accepted: true})
@@ -133,8 +132,6 @@ class Project
     #   invited_designer.save
     #   designers = self.invited_designers
     # end
-    # binding.pry
-
     if (designers.empty?)
       invited_designer         = self.invited_designers.create({accepted: true})
       invited_designer.user    = User.get_admin
@@ -148,7 +145,6 @@ class Project
     #   invited_designer.save
     #   designers = self.invited_users
     # end
-    # binding.pry
 
     designers
   end

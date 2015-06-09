@@ -88,7 +88,6 @@ class ProjectsController < ApplicationController
     @editing  = false
     @messages = @project.messages
 
-    # binding.pry
 
     if !@project.has_access?(current_user)
       invite = @project.was_invited?(current_user)
@@ -285,6 +284,8 @@ class ProjectsController < ApplicationController
       @project.update_company
       @project.initialize_project
 
+      binding.pry
+
       ProjectMailer.new_project_mail(@project).deliver
       if !existing_user
         UserMailer.new_generated_user_mail(@user, password, @project).deliver
@@ -362,7 +363,6 @@ class ProjectsController < ApplicationController
     @project    = Project.find(params[:id])
 
     invitation = InvitedDesigner.send_invite(@project, current_user, params[:email])
-    # binding.pry
     @error     = invitation if invitation.class != InvitedDesigner
 
     respond_to do |format|

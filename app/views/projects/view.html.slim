@@ -118,7 +118,7 @@
               h5
                 | Designer on this project
               #designer-people
-                - for person in (@chat == :group ? @project.designers : @project.get_private_chat.people)
+                - for person in (@chat == :group ? @project.designers : @project.designers)
                   = render partial: 'invited_person', locals: {person: person}
               .clear
               br

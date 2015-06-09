@@ -32,7 +32,6 @@ class Message
                       body = body_as_html(false, true)
                     end
                     body += " " + attachment_message
-
                     ProjectMailer.new_user_message_mail(
                         participant.user.first_name,
                         user.full_name,
@@ -40,6 +39,7 @@ class Message
                         project_url,
                         participant.user.email
                       ).deliver_later
+
                   end
                 end
   end

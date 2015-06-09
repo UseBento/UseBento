@@ -6,16 +6,18 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
-  config.action_mailer.default_url_options = { :host => '192.168.0.211:3000' }
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :authentication => :plain,
-    :address => "smtp.mailgun.org",
-    :port => 587,
-    :domain => "sandboxa88c11e826b4458aa502808f7ec49c2b.mailgun.org",
-    :user_name => "postmaster@sandboxa88c11e826b4458aa502808f7ec49c2b.mailgun.org",
-    :password => ENV["MAILGUN_PW"]
-  }
+  # config.action_mailer.smtp_settings = {
+  #   :authentication => :plain,
+  #   :address => "smtp.mailgun.org",
+  #   :port => 587,
+  #   :domain => "sandboxa88c11e826b4458aa502808f7ec49c2b.mailgun.org",
+  #   :user_name => "postmaster@sandboxa88c11e826b4458aa502808f7ec49c2b.mailgun.org",
+  #   :password => ENV["MAILGUN_PW"]
+  # }
+
+  config.action_mailer.smtp_settings = { :address => 'localhost', :port => 1025 }
 
   config.twocheckout_private_key = ENV['TWOCHECKOUT_PRIVATE_KEY']
   config.twocheckout_public_key  = '7EB9463F-A64C-4CF5-9B49-912A9912E3D7'

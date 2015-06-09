@@ -48,10 +48,8 @@ class ProjectMailer < ActionMailer::Base
     @body        = message_body
     @link_path   = link_path
 
-    if !@admin.nil?
-      mail(to:      email,
-         subject: "New message from " + @full_name)
-    end
+    mail(to:      email,
+      subject: "New message from " + @full_name)
     
   end
 end
