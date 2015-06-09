@@ -133,10 +133,12 @@ class Project
     #   designers = self.invited_designers
     # end
     if (designers.empty?)
-      invited_designer         = self.invited_designers.create({accepted: true})
-      invited_designer.user    = User.get_admin
-      invited_designer.save
-      designers = self.invited_designers
+      # invited_designer         = self.invited_designers.create({accepted: true})
+      # invited_designer.user    = User.get_admin
+      # invited_designer.save
+      # designers = self.invited_designers
+    else
+      designers.where(:user => User.get_admin).delete
     end
 
     # if (designers.select {|person| person.user && person.user.admin}).empty?
