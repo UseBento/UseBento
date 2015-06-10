@@ -1,0 +1,190 @@
+  /**
+   * Init tooglebox.
+   * @return void
+   */
+  common._extendTogglebox = function () {
+    $.fn.togglebox = function (opts) {
+      var defaults = {
+        },
+        jToggleBoxes = $(this);
+
+      opts = $.extend({}, defaults, opts);
+
+      jToggleBoxes.each (function (idx, itm) {
+        var jToggleBox = $(itm);
+
+        jToggleBox.on('click', function () {
+          if (jToggleBox.is('.checked')) {
+            jToggleBox.removeClass('checked');
+            jToggleBox.data('checked', false);
+            jToggleBox.trigger('unchecked');
+          } else {
+            jToggleBox.addClass('checked');
+            jToggleBox.data('checked', true);
+            jToggleBox.trigger('checked');
+          }
+          jToggleBox.trigger('changed');
+        });
+
+        jToggleBox.trigger('inited');
+        jToggleBox.data('checked', jToggleBox.is('.checked') ? true : false);
+
+      });
+      return jToggleBoxes;
+    };
+  };
+
+
+///////////////////////////////////////////////////////
+
+    /**
+     * Init toggle boxes.
+     * @return void
+     */
+    _initToggleBoxes: function () {
+      var jHomeScreenPreview = $('.home-screen-section .setting-preview'),
+        jHighlightIconText = $('.highlight-icon-text');
+
+      $('.togglebox').togglebox().on('changed', function (event) {
+        var jThis = $(this),
+          checked = jThis.data('checked');
+
+        // If it's on show text toggle button.
+        if (jThis.is('.show-text-togglebox')) {
+          jHighlightIconText.removeClass('selected');
+          if (checked) {
+            jHighlightIconText.removeClass('highlight-hidden');
+          } else {
+            jHighlightIconText.addClass('highlight-hidden');
+          }
+        } else if (jThis.is('.nav-position-togglebox')) { // Nav position toggle button.
+          if (checked) { // Right
+            jHomeScreenPreview.addClass('right');
+          } else {
+            jHomeScreenPreview.removeClass('right'); // Left
+          }
+        }
+      });
+    },
+
+
+/////////////////////////////////////////////////////////////
+/**
+ * Toggle Box
+ */
+
+.togglebox {
+  @togglebox-width: 32px;
+  @togglebox-height: 17px;
+  @togglebox-effect-time: .2s;
+
+  @togglebox-span-min-width: 76px;
+
+  position: relative;
+  background-color: @color-5;
+  border-radius: @togglebox-height / 2;
+  width: @togglebox-width;
+  height: @togglebox-height;
+  cursor: pointer;
+  outline: none;
+  .user-select(none);
+  .opacity(1);
+  .transition(background-color @togglebox-effect-time ease, opacity @togglebox-effect-time ease, border @togglebox-effect-time ease, box-shadow @togglebox-effect-time ease;);
+  > span {
+    position: absolute;
+    left: @togglebox-width + 5;
+    min-width: @togglebox-span-min-width;
+    font-size: 15px;
+    line-height: 19px;
+  }
+  &:before {
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    content: ' ';
+    background: linear-gradient(transparent, rgba(0, 0, 0, .25)) @color-white;
+    border-radius: @togglebox-height / 2 - 1;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05), 0 0 0 1px rgba(39, 41, 43, .15) inset;
+    width: @togglebox-height - 2;
+    height: @togglebox-height - 2;
+    .transition(background @togglebox-effect-time ease 0s, left @togglebox-effect-time ease 0s;);
+  }
+  &:hover {
+    .opacity(.8);
+  }
+  &.checked {
+    background-color: @color-1eacc6;
+    &:before {
+      left: @togglebox-width - @togglebox-height + 1;
+    }
+  }
+
+  /* Mobile */
+  @media screen and (max-width: @screen-lg-min) {
+    > span {
+      font-size: 15px;
+    }
+  }
+  @media screen and (max-width: @screen-md-min) {
+    > span {
+      font-size: 14px;
+    }
+  }
+  @media screen and (max-width: @screen-sm-min) {
+    > span {
+      font-size: 12px;
+      min-width: 58px;
+    }
+  }
+  @media screen and (max-width: @screen-xs-min) {
+    > span {
+      position: absolute;
+      display: none;
+      background-color: @color-1c2b36;
+      border-radius: 3px;
+      left: -80px;
+      font-size: 10px;
+      line-height: 16px;
+      color: @color-white;
+      text-align: center;
+      min-width: 70px;
+      &:after {
+        .triangle-right();
+      }
+    }
+    &:hover {
+      > span {
+        display: block;
+      }
+    }
+    .sb_expanded & {
+      > span {
+        position: absolute;
+        display: none;
+      }
+      &:hover {
+        > span {
+          display: block;
+        }
+      }
+      &.call-us-togglebox {
+        > span {
+          left: -51px;
+          min-width: 51px;
+        }
+      }
+      &.direction-togglebox {
+        > span {
+          left: -51px;
+          min-width: 51px;
+        }
+      }
+      &.tell-friend-togglebox {
+        > span {
+          left: -51px;
+          min-width: 51px;
+        }
+      }
+    }
+  }
+}
