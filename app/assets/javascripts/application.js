@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require semantic-ui/checkbox
 //= require jquery.fullscreener.min.js
 //= require jquery.magnific-popup.min.js
 //= require jquery.selectbox-0.2.min.js

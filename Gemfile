@@ -47,3 +47,4 @@ gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'redis','3.2.0'
 gem 'websocket-rails'
 gem 'pry', group: :development
+gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'

@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/doabit/semantic-ui-sass.git
+  revision: be4cb632ada01e484a0b17d1399c80cbafaa9a9f
+  specs:
+    semantic-ui-sass (1.12.3.0)
+      sass (~> 3.2)
+
+GIT
   remote: git://github.com/mongoid/mongoid.git
   revision: 8f22ade5fda84626e888fd9a4c80dc10e37616b4
   specs:
@@ -249,6 +256,7 @@ DEPENDENCIES
   redis (= 3.2.0)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  semantic-ui-sass!
   slim-rails
   spring
   turbolinks

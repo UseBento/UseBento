@@ -104,6 +104,7 @@ class User
 
   def accessible_projects
     Project.or({"user_id" => id},
-               {"invited_users.user_id" => id})
+               {"invited_users.user_id" => id},
+               {"invited_designers.user_id" => id})
   end
 end
