@@ -1,3 +1,20 @@
 // Place all the styles related to the Projects controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.wrapper {
+  .table_box .subtitle td {
+    font-family: 'AvenirNext';
+  }
+  .project_detail_box {
+    .left_container {
+      ul.list_comment li .dtl_box h4 {
+        // font-family: 'AvenirNext';
+      }
+    }
+    .right_container {
+      ul.box_list li h5 {
+        // font-family: 'AvenirNext';
+      }
+    }
+  }
+}

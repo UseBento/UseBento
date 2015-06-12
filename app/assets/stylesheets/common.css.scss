@@ -6,3 +6,54 @@
     background-color: rgba(217, 83, 79, 0.9);
   }
 }
+
+// redesign headers
+.wrapper {
+  font-family: "AvenirNext";
+  header.header {
+    font-family: "AvenirNextRegular";
+    .shell {
+      nav.nav {
+        ul {
+          li {
+            a {
+              // color: #fff;
+              font-family: AvenirNextRegular;
+              font-size: 13px;
+              font-weight: normal;
+              &:hover {
+                font-weight: bold;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  &#homepage {
+    font-family: "AvenirNext";
+    .btn {
+      font-family: "AvenirNext";
+    }
+    header.header {
+      .shell {
+        nav.nav {
+          ul {
+            li {
+              a {
+                color: #fff;
+                font-family: AvenirNextRegular;
+                font-size: 13px;
+                font-weight: normal;
+                &:hover {
+                  font-weight: bold;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
