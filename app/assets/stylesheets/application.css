@@ -12,6 +12,7 @@
  *
  *= require jquery.selectbox
  *= require magnific-popup
+ *= require checkbox
  *= require payments
  *= require projects
  *= require services
@@ -19,6 +20,7 @@
  *= require style
  *= require style-redesign
  *= require users
+ *= require common
  *= require_self
  */
 

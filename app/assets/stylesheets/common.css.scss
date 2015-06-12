@@ -1,0 +1,8 @@
+.available-button-area {
+  margin-top: 33px;
+  margin-left: 20px;
+  float: left;
+  .ui.toggle.checkbox .box:before, .ui.toggle.checkbox label:before {
+    background-color: rgba(217, 83, 79, 0.9);
+  }
+}
