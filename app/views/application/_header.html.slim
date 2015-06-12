@@ -7,6 +7,11 @@ header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 
         i.sprite-logo
       span.logo-colorful
         i.sprite-logo-colorful
+    - if (user_signed_in? && !current_user.admin && @is_show_available)
+      .available-button-area
+        label AVAILABLE
+        .ui.toggle.checkbox
+          input type="checkbox" checked="checked" /
     nav.nav
       ul
         - if (!user_signed_in? || page == 'start_project')

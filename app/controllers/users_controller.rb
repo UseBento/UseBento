@@ -29,6 +29,7 @@ class UsersController < Devise::SessionsController
   end
 
   def profile
+    @is_show_available = true
     render 'profile', :layout => "application"
   end
 
