@@ -56,9 +56,35 @@ class ApplicationController < ActionController::Base
     BentoMailer.send_to_applier(params['field-full-name'],
                                 params['field-e-mail']).deliver
 
+    user = User.new
+    # user.name = params['field-full-name']
+    user.email = params['field-e-mail']
+    user.password = params['field-password']
+    user.designer = true
+
+    designer_profile = DesignerProfile.new
+    designer_profile.full_name = params['field-full-name']
+    designer_profile.portfolio_url = params['field-portfolio-url']
+    designer_profile.dribble_url = params['field-dribbble-url']
+    designer_profile.behance_url = params['field-behance-url']
+    designer_profile.skill_1 = params['skill']
+    designer_profile.skill_2 = params['skill2']
+    designer_profile.skill_3 = params['skill3']
+    user.designer_profile = designer_profile
+    # 
+
+    @message_sent = user.save
+    @errors = user.errors
+
+    # binding.pry
+    if @message_sent
+      sign_in(:user, user)
+      redirect_to '/profile'
+      return
+    end
     respond_to do |format|
       format.html {
-          @message_sent = true
+          # @message_sent = true
           render 'apply' }
       format.json { render json: {success: true} }
     end

@@ -29,18 +29,37 @@ class UsersController < Devise::SessionsController
   end
 
   def profile
-    @is_show_available = true
+    @is_show_available = current_user.designer
     render 'profile', :layout => "application"
   end
 
   def update_profile
+
     current_user.email       = params[:email]
-    current_user.name        = params[:name]
-    current_user.company     = params[:company]
-    current_user.save
+    if current_user.designer
+      current_user.designer_profile.full_name = params[:name]
+      current_user.designer_profile.paypal_email = params["paypal-email"]
+      current_user.designer_profile.portfolio_url = params[:portfolio]
+      current_user.designer_profile.dribble_url = params[:dribble]
+      current_user.designer_profile.behance_url = params[:behance]
+      current_user.designer_profile.skill_1 = params[:skill_1]
+      current_user.designer_profile.skill_2 = params[:skill_2]
+      current_user.designer_profile.skill_3 = params[:skill_3]
+      # binding.pry
+      current_user.save
 
-    @info_success            = "Updated your information"
+      @info_success            = "Updated your information"
 
+    else
+      
+      current_user.name        = params[:name]
+      current_user.company     = params[:company]
+      current_user.save
+
+      @info_success            = "Updated your information"
+
+    end
+    
     if (params[:password] != "")
       if (!current_user.valid_password?(params[:password]))
         @password_errors = "Invalid password"
@@ -56,6 +75,7 @@ class UsersController < Devise::SessionsController
         end
       end
     end
+
     render 'profile', :layout => "application"
   end
 
@@ -111,6 +131,7 @@ class UsersController < Devise::SessionsController
     end
 
     save_login(params[:email])
+    # binding.pry
 
     respond_to do |format|
       format.html { redirect_to '/' }
@@ -118,12 +139,22 @@ class UsersController < Devise::SessionsController
           if error
             render json: {error: error}
           else
-            render json: {username:    user.full_name,
+            if user.designer
+              render json: {username:    user.designer_profile.full_name,
                           keywords:    user.default_keywords,
                           audience:    user.default_target_audience,
                           email:       user.email,
                           company:     user.company,
                           id:          user.id.to_s}
+            else
+              
+              render json: {username:    user.full_name,
+                          keywords:    user.default_keywords,
+                          audience:    user.default_target_audience,
+                          email:       user.email,
+                          company:     user.company,
+                          id:          user.id.to_s}
+            end
           end }
     end
   end
