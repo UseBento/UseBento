@@ -27,7 +27,12 @@ class User
   field :company,            type: String
   field :company_size,       type: String
   field :admin,              type: Boolean
+  field :designer,           type: Boolean, default: false
 
+  
+
+
+  embeds_one  :designer_profile
   has_many :projects
 
   ## Confirmable

@@ -1,0 +1,12 @@
+<% if !errors.nil? && !errors.empty? %>
+  <div id="errors">
+    <% errors.each do |key, value| -%>
+      <p>
+        <span>
+          <%= key %>
+        </span>
+        <%= value %>
+      </p>
+    <% end -%>
+  </div>
+<% end %>

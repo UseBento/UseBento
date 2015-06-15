@@ -22,6 +22,7 @@
 //= require websocket_rails/main
 //= require semantic-ui-checkbox.js
 //= require common.js
+//= require users.js
 
 function do_nothing() {}
 

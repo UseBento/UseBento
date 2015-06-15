@@ -16,6 +16,7 @@
               center
                 | Your application has been sent, we will get back to you shortly.
             - else
+              = render partial: 'error', locals: {errors: @errors}
               .form-row
                 .form-cols
                   .form-col.form-col-1of2
@@ -32,6 +33,22 @@
                         | *
                     .form-controls
                       input#field-e-mail.field[type="email" name="field-e-mail" required data-validation-type="['email']"]
+              .form-row
+                .form-cols
+                  .form-col.form-col-1of2
+                    label.form-label[for="field-password"]
+                      | Password
+                      span.form-asterisk
+                        | *
+                    .form-controls
+                      input#field-password.field[type="password" name="field-password" required data-validation-type="['presence']"]
+                  .form-col.form-col-1of2
+                    label.form-label[for="field-confirm-password"]
+                      | Confirm password
+                      span.form-asterisk
+                        | *
+                    .form-controls
+                      input#field-confirm-password.field[type="password" name="field-confirm-password" required data-validation-type="['presence']"]
               .form-row
                 label.form-label[for="field-portfolio-url"]
                   | Portfolio URL
@@ -106,6 +123,7 @@
                         | UI Design
                       option[value="UX Design"]
                         | UX Design
+              
               .form-actions
                 input.btn.brown.form-btn[type="submit" value="APPLY NOW"]
 = render partial: 'dark_footer'
