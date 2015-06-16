@@ -193,7 +193,8 @@ class ProjectsController < ApplicationController
                        .where(:status => :closed)
                        .order_by(:number.asc)
 
-    @is_show_available = true
+    
+    @is_show_available = current_user.designer
   end
 
   def update

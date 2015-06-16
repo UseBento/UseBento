@@ -7,11 +7,17 @@ header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 
         i.sprite-logo
       span.logo-colorful
         i.sprite-logo-colorful
-    - if (user_signed_in? && @is_show_available)
+    - if (user_signed_in? )
       .available-button-area
-        label AVAILABLE
-        .ui.toggle.checkbox
-          input type="checkbox" checked="checked" /
+        - if current_user.designer && page == 'profile'
+          - if current_user.designer_profile.available
+            label AVAILABLE
+            .ui.toggle.checkbox
+              input type="checkbox" checked="checked" /
+          - else
+            label UNAVAILABLE
+            .ui.toggle.checkbox
+              input type="checkbox" /
     nav.nav
       ul
         - if (!user_signed_in? || page == 'start_project')
@@ -20,6 +26,9 @@ header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 
         - if user_signed_in?
           li class=(page == 'project' ? 'current' : '')
             = link_to "PROJECTS", "/projects/list"
+          - if current_user.admin
+            li class=(page == 'designer' ? 'current' : '')
+              = link_to "DESIGNERS", "/designers/list"
         - unless user_signed_in?
           li class=(page == 'agencies' ? 'current' : '')
             = link_to "FOR AGENCIES", "/agencies"
