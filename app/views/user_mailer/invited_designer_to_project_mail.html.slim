@@ -4,7 +4,7 @@ html[lang="en"]
   body
     - if @invitation.user
       p
-        = @invitation.user.first_name
+        = @invitation.user.designer_profile.full_name
         | ,
     p
       | You've been invited to join a project as a designer,  

@@ -24,6 +24,7 @@ class UserMailer < ActionMailer::Base
     @project     = project
     @inviter     = inviter
 
+    # binding.pry
     mail(to:       @invitation.email,
          subject:  @inviter.full_name + " invited you to join a project as a desinger on Bento")
   end

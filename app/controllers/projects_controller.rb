@@ -88,6 +88,7 @@ class ProjectsController < ApplicationController
     @editing  = false
     @messages = @project.messages
     @is_show_available = true
+    @designers = User.where(:designer => true)
 
 
     if !@project.has_access?(current_user)
@@ -117,6 +118,7 @@ class ProjectsController < ApplicationController
     @chat     = :private
     @editing  = false
     @messages = @project.get_private_chat.messages
+    @designers = User.where(:designer => true)
 
     if !@project.has_access?(current_user)
       invite = @project.was_invited?(current_user)
@@ -365,6 +367,7 @@ class ProjectsController < ApplicationController
 
   def invite_designer
     @project    = Project.find(params[:id])
+    # binding.pry
 
     invitation = InvitedDesigner.send_invite(@project, current_user, params[:email])
     @error     = invitation if invitation.class != InvitedDesigner

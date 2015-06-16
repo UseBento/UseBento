@@ -88,8 +88,14 @@ class User
     end
 
     hash = Digest::MD5.hexdigest(self.email.strip.downcase)
-    default_img = URI.encode_www_form_component(
+    if self.designer
+      default_img = URI.encode_www_form_component(
+                    "https://" + root_domain + User.default_avatar_for(self.designer_profile.full_name))
+    else
+      default_img = URI.encode_www_form_component(
                     "https://" + root_domain + User.default_avatar_for(name))
+    end
+    
     "//secure.gravatar.com/avatar/" + hash + "?d=" + default_img
   end
   

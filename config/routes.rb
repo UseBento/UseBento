@@ -66,6 +66,8 @@ Rails.application.routes.draw do
       get  'profile',                     to: 'users#profile'
       post 'profile/update',              to: 'users#update_profile'
       get  'designers/list',              to: 'users#designer_list'
+      get  'designers/:id',               to: 'users#designer_profile'
+      post 'designers/:id/update',        to: 'users#update_designer_profile'
     end
 
     post 'users/sign_up',               to: 'users#sign_up'

@@ -12,20 +12,42 @@
   font-family: "AvenirNext";
   header.header {
     font-family: "AvenirNextRegular";
+    background-color: #232323;
+    color: white;
+
+    .logo {
+      width: 139px;
+      height: 33px;
+      background: url(../css/images/sprite.png);
+      background-position: 0px -104px;
+      background-size: 145px 137px;
+      margin: 31px 0 0 0;
+    }
     .shell {
       nav.nav {
         ul {
           li {
             a {
-              // color: #fff;
+              color: #939393;
               font-family: AvenirNextRegular;
               font-size: 13px;
               font-weight: normal;
               &:hover {
                 font-weight: bold;
+                color: white;
+              }
+            }
+            &.current {
+              a {
+                color: white;
               }
             }
           }
+        }
+      }
+      .available-button-area {
+        label {
+          color: white;
         }
       }
     }
@@ -36,20 +58,40 @@
       font-family: "AvenirNext";
     }
     header.header {
+
       .shell {
         nav.nav {
+          letter-spacing: 0;
           ul {
             li {
+              padding-left: 50px;
               a {
-                color: #fff;
+                color: #939393;
                 font-family: AvenirNextRegular;
                 font-size: 13px;
                 font-weight: normal;
+                padding: 30px 0;
                 &:hover {
                   font-weight: bold;
+                  color: white;
                 }
               }
             }
+          }
+        }
+      }
+      &.header-top {
+        height: 90px;
+        background-color: #232323;
+        box-shadow: 0 1px 3px rgba(3, 4, 1, 0.06);
+        .shell {
+          width: 1200px;
+          margin: 0 auto;
+        }
+        @media (max-width: 1200px) {
+          .shell {
+            width: auto;
+            padding: 0 10px;
           }
         }
       }

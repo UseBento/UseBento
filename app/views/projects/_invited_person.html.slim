@@ -41,7 +41,10 @@
         img.avatar[src=User.default_avatar_for(person.email || "a") alt=""]
       span
         - if person.user
-          = person.user.full_name
+          - if person.user.designer
+            = person.user.designer_profile.full_name
+          - else
+            = person.user.full_name
         - elsif person.can_see_email?(current_user)
           = person.short_email
         - else
