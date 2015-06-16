@@ -33,6 +33,11 @@ class UsersController < Devise::SessionsController
     render 'profile', :layout => "application"
   end
 
+  def designer_profile
+    @user = User.find(params[:id])
+    render 'designer_profile', :layout => "application"
+  end
+
   def update_profile
 
     current_user.email       = params[:email]
@@ -82,6 +87,50 @@ class UsersController < Devise::SessionsController
     end
 
     render 'profile', :layout => "application"
+  end
+
+  def update_designer_profile
+    @user = User.find(params[:id])
+    current_user.email       = params[:email]
+
+    @user.designer_profile.full_name = params[:name]
+    @user.designer_profile.paypal_email = params["paypal-email"]
+    @user.designer_profile.portfolio_url = params[:portfolio]
+    @user.designer_profile.dribble_url = params[:dribble]
+    @user.designer_profile.behance_url = params[:behance]
+    @user.designer_profile.skill_1 = params[:skill_1]
+    @user.designer_profile.skill_2 = params[:skill_2]
+    @user.designer_profile.skill_3 = params[:skill_3]
+    if params[:available] == 'true'
+      @user.designer_profile.available = true
+    else
+      @user.designer_profile.available = false
+    end
+    # binding.pry
+    @user.save
+
+    @info_success            = "Updated your information"
+
+    if not params[:new_password].blank?
+      if (params[:new_password] != params[:new_password_confirm])
+        @password_errors = "Passwords don't match"
+      else
+        # @user.update_with_password(
+        #     {current_password:      params[:password],
+        #      password:              params[:new_password],
+        #      password_confirmation: params[:new_password_confirm]})
+        # @password_success = "Updated your password successfully"
+        @user.password = params[:password]
+        if @user.save
+          @password_success = "Updated your password successfully"
+        else
+          @password_errors = "Invalid Password"
+        end
+      end
+    end
+    
+
+    render 'designer_profile', :layout => "application"
   end
 
   def exists

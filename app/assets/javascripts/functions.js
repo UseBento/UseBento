@@ -587,29 +587,33 @@ function setup_paypal_direct() {
                             + (chat == 'group' ? '' : 'private/')
                             + 'invite_designer.json');
 
-            $.ajax({type:    'POST',
-                url:      url,
-                data:    {email: email},
-                success:  function(data) {
-                    if (data.error)
-                        return $('#invite-designer-errors').html(data.error);
-                    $('#invite-designer-errors').html('');
+            if (email != undefined && email != "") {
+                $.ajax({type:    'POST',
+                    url:      url,
+                    data:    {email: email},
+                    success:  function(data) {
+                        if (data.error)
+                            return $('#invite-designer-errors').html(data.error);
+                        $('#invite-designer-errors').html('');
 
-                    var row = build_el(
-                        div('people-entry col_four',
-                            [img({'class':  "avatar",
-                                  src:      ('/images/avatars/' +
-                                             email[0].toUpperCase() + '.png'),
-                                  alt:      ''}),
-                             span('', [data.email]),
-                             span('invite-sent', ['Invite Sent'])]));
-                    $('#designer-people').append(row);
+                        var row = build_el(
+                            div('people-entry col_four',
+                                [img({'class':  "avatar",
+                                      src:      ('/images/avatars/' +
+                                                 email[0].toUpperCase() + '.png'),
+                                      alt:      ''}),
+                                 span('', [data.email]),
+                                 span('invite-sent', ['Invite Sent'])]));
+                        $('#designer-people').append(row);
 
-                    $('#enter-designer-email').val('');
-                    $('#enter-designer-invite').addClass('hidden');
-                    $('#invite-designers').removeClass('hidden');
-                }
-            });
+                        $('#enter-designer-email').val('');
+                        $('#enter-designer-invite').addClass('hidden');
+                        $('#invite-designers').removeClass('hidden');
+                    }
+                });
+            }
+
+            
         });
 
         function save_message(message_id) {}

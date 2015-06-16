@@ -128,7 +128,12 @@
               - if current_user.admin
                 br
               #enter-designer-invite.hidden
-                input#enter-designer-email[type="text" placeholder="email address"]
+                / input#enter-designer-email[type="text" placeholder="email address"]
+                select#enter-designer-email[style="height: initial;"]
+                  option[value=""]
+                  - @designers.each do |designer|
+                    option[value=designer.email]
+                      = designer.email
                 a#submit-designer-invite
                   | Invite
               - if current_user.admin
@@ -210,4 +215,5 @@ input.hidden#chat[type="hidden" value=@chat.to_s]
 - if @project.need_to_show_popup
   = @project.showing_popup
   a[href=("/projects/" + @project.id.to_s + "/popup") class="hidden" id="project-popup"]
-= render partial: 'footer'
+/ = render partial: 'footer'
+= render partial: 'dark_footer'

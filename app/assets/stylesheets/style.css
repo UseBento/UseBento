@@ -126,7 +126,7 @@ html, body { height: 100%; }
 .top { height:1px; width: 100%; position: fixed; top:0; left:0; }
 
 .wrapper { overflow: hidden; }
-.header { padding: 0 0; border-bottom:2px solid #ededed; position: relative; z-index: 2; background: #fff; }
+.header { padding: 0 0; /*border-bottom:2px solid #ededed; */position: relative; z-index: 2; background: #fff; }
 .header .logo { width: 120px; float:left; height:28px; font-size: 0; line-height: 0; text-indent: -4000px; background: url(/images/logo2-2.png) no-repeat 0 0; margin: 31px 0; }
 .header .nav { float:right; font-family:'proxima_nova_rgbold', arial, serif; font-size:13px; text-transform: uppercase; }
 .header .nav ul { list-style: none outside none; }
