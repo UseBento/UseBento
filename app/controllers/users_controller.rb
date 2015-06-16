@@ -45,6 +45,11 @@ class UsersController < Devise::SessionsController
       current_user.designer_profile.skill_1 = params[:skill_1]
       current_user.designer_profile.skill_2 = params[:skill_2]
       current_user.designer_profile.skill_3 = params[:skill_3]
+      if params[:available] == 'true'
+        current_user.designer_profile.available = true
+      else
+        current_user.designer_profile.available = false
+      end
       # binding.pry
       current_user.save
 
@@ -182,5 +187,11 @@ class UsersController < Devise::SessionsController
             render json: @user 
           end }
     end
+  end
+
+
+  def designer_list
+    @designers = User.all.where(:designer => true)
+    render 'designer_list', :layout => "application"
   end
 end

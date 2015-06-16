@@ -13,3 +13,47 @@
     }
   }
 }
+
+.page_content {
+  &.designers_list_content {
+    .left_section {
+      width: 440px;
+      float: left;
+      padding-top: 10px;
+    }
+    .right_section {
+      width: 270px;
+      float: right;
+      padding-bottom: 20px;
+      text-align: right;
+    }
+    .designer_box {
+      padding: 0px;
+
+      table {
+        tr {
+          &.list-item {
+            cursor: default;
+            
+          }
+          td {
+            .available-area {
+              border-radius: 6px;
+              text-align: center;
+              max-width: 90px;
+              color: white;
+
+              &.available {
+                background-color: #5DB75D;
+              }
+
+              &.unavailable {
+                background-color: #DB524F;  
+              }
+            }
+          }
+        }
+      }
+    }  
+  }
+}

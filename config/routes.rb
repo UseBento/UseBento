@@ -56,12 +56,16 @@ Rails.application.routes.draw do
        to: 'payments#checkout'
   post 'payments/checkout/:project_id/:amount/process',   to: 'payments#process_payment'
 
+
+
+
   devise_scope :user do
     get  'user_exists',                 to: 'users#exists'
 
     authenticate :user do
       get  'profile',                     to: 'users#profile'
       post 'profile/update',              to: 'users#update_profile'
+      get  'designers/list',              to: 'users#designer_list'
     end
 
     post 'users/sign_up',               to: 'users#sign_up'

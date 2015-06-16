@@ -9,7 +9,7 @@ class DesignerProfile
   field :skill_2,             type: String
   field :skill_3,             type: String
   field :paypal_email,        type: String
-  field :available,           type: Boolean, default: false
+  field :available,           type: Boolean, default: true
 
   embedded_in :user
 
