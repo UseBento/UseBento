@@ -1,4 +1,4 @@
-.wrapper
+.wrapper.profile-wrapper
   = render partial: 'header', locals: {page: 'profile'}
   .section.section-contacts
     .shell
@@ -7,208 +7,209 @@
           = link_to "LOGOUT", destroy_user_session_path, :method => :delete, class: 'right-link'
           h2
             | Your Profile
-        form.form-required#project-form[action="/profile/update" method="post"]
-          input[type="hidden" name="application-form"]
-          = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) 
-          - if current_user.designer
-            .form-body
-              .form-row
-                .success
-                  = @info_success
-              .form-row
-                - if current_user.designer_profile.available
-                  input#designer-available[type='hidden' name="available" value='true']
-                - else
-                  input#designer-available[type='hidden' name="available" value='false']
-                .form-cols
-                  .form-col.form-col-1of2
-                    label.form-label[for="field-full-name"]
-                      | Full Name
-                      span.form-asterisk
-                        | *
-                    .form-controls
-                      input#field-name.field[type="text" name="name" required data-validation-type="['presence']" value=current_user.designer_profile.full_name]
-                  .form-col.form-col-1of2
-                    label.form-label[for="field-e-mail"]
-                      | Email 
-                      span.form-asterisk
-                        | *
-                    .form-controls
-                      input#field-email.field[type="email" name="email" value=current_user.email required data-validation-type="['email']"]
-              .form-row
-                .form-cols
-                  .form-col.form-col-1of2
-                    label.form-label[for="field-paypal-email"]
-                      | PayPal Email Address (We'll send your earnings here)
-                      span.form-asterisk
-                        | *
-                    .form-controls
-                      input#field-paypal-email.field[type="text" name="paypal-email" value=current_user.designer_profile.paypal_email required data-validation-type="['presence']" ]
-                  .form-col.form-col-1of2
-                    label.form-label[for="field-portfolio"]
-                      | Portfolio URL
-                      span.form-asterisk
-                        | *
-                    .form-controls
-                      input#field-portfolio.field[type="text" name="portfolio" required value=current_user.designer_profile.portfolio_url ]
-              .form-row
-                .form-cols
-                  .form-col.form-col-1of2
-                    label.form-label[for="field-dribble"]
-                      | Dribbble URL
-                    .form-controls
-                      input#field-dribble.field[type="text" name="dribble" value=current_user.designer_profile.dribble_url ]
-                  .form-col.form-col-1of2
-                    label.form-label[for="field-behance"]
-                      | Behance URL
-                    .form-controls
-                      input#field-behance.field[type="text" name="behance" value=current_user.designer_profile.behance_url ]
-              .form-row
-                .form-cols
-                  .form-col.form-col-1of2
-                    label.form-label[for="field-skill_1"]
-                      | Strongest design skill #1
-                    .form-controls
-                      select#field-skill_1.field[name="skill_1" value=current_user.designer_profile.skill_1]
-                        option[value=""]
-                        option[value="Graphic design"]
-                          | Graphic design
-                        option[value="Web design"]
-                          | Web design
-                        option[value="Logo design"]
-                          | Logo design
-                        option[value="Product design (web)"]
-                          | Product design (web)
-                        option[value="Product design (mobile)"]
-                          | Product design (mobile)
-                        option[value="UI Design"]
-                          | UI Design
-                        option[value="UX Design"]
-                          | UX Design
-                  .form-col.form-col-1of2
-                    label.form-label[for="field-skill_2" ]
-                      | Strongest design skill #2
-                    .form-controls
-                      select#field-skill_2.field[name="skill_2" value=current_user.designer_profile.skill_2]
-                        option[value=""]
-                        option[value="Graphic design"]
-                          | Graphic design
-                        option[value="Web design"]
-                          | Web design
-                        option[value="Logo design"]
-                          | Logo design
-                        option[value="Product design (web)"]
-                          | Product design (web)
-                        option[value="Product design (mobile)"]
-                          | Product design (mobile)
-                        option[value="UI Design"]
-                          | UI Design
-                        option[value="UX Design"]
-                          | UX Design
-              .form-row
-                .form-cols
-                  .form-col.form-col-1of2
-                    label.form-label[for="field-skill_3" ]
-                      | Strongest design skill #3
-                    .form-controls
-                      select#field-skill_3.field[name="skill_3" value=current_user.designer_profile.skill_3]
-                        option[value=""]
-                        option[value="Graphic design"]
-                          | Graphic design
-                        option[value="Web design"]
-                          | Web design
-                        option[value="Logo design"]
-                          | Logo design
-                        option[value="Product design (web)"]
-                          | Product design (web)
-                        option[value="Product design (mobile)"]
-                          | Product design (mobile)
-                        option[value="UI Design"]
-                          | UI Design
-                        option[value="UX Design"]
-                          | UX Design
-              .form-header-row
-                | Change Password
-              .form-row
-                .success
-                  = @password_success
-                .errors
-                  = @password_errors
-              .form-row
-                .form-cols
-                  .form-col.form-col-1of2
-                    label.form-label[for="field-password"]
-                      | Current Password
-                    .form-controls
-                      input#field-password.field[type="password" name="password"]
-              .form-row
-                .form-cols
-                  .form-col.form-col-1of2
-                    label.form-label[for="field-new-password"]
-                      | New Password
-                    .form-controls
-                      input#field-new-password.field[type="password" name="new_password"]
-                  .form-col.form-col-1of2
-                    label.form-label[for="field-new-password-confirm"]
-                      | Comfirm New Password
-                    .form-controls
-                      input#field-new-password-confirm.field[type="password" name="new_password_confirm"]
-                a#show-password-link[style="cursor:pointer"]
-                  | Show passwords
-          - else
-            .form-body
-              .form-row
-                .success
-                  = @info_success
-              .form-row
-                .form-cols
-                  .form-col.form-col-1of2
-                    label.form-label[for="field-full-name"]
-                      | Full Name
-                    .form-controls
-                      input#field-name.field[type="text" name="name" required data-validation-type="['presence']" value=current_user.name]
-                  .form-col.form-col-1of2
-                    label.form-label[for="field-e-mail"]
-                      | Email 
-                    .form-controls
-                      input#field-email.field[type="email" name="email" value=current_user.email required data-validation-type="['email']"]
-              .form-row
-                .form-cols
-                  .form-col.form-col-1of2
-                    label.form-label[for="field-company"]
-                      | Company Name
-                    .form-controls
-                      input#field-company.field[type="text" name="company" required data-validation-type="['presence']" value=current_user.company]
-              .form-header-row
-                | Change Password
-              .form-row
-                .success
-                  = @password_success
-                .errors
-                  = @password_errors
-              .form-row
-                .form-cols
-                  .form-col.form-col-1of2
-                    label.form-label[for="field-password"]
-                      | Current Password
-                    .form-controls
-                      input#field-password.field[type="password" name="password"]
-              .form-row
-                .form-cols
-                  .form-col.form-col-1of2
-                    label.form-label[for="field-new-password"]
-                      | New Password
-                    .form-controls
-                      input#field-new-password.field[type="password" name="new_password"]
-                  .form-col.form-col-1of2
-                    label.form-label[for="field-new-password-confirm"]
-                      | Comfirm New Password
-                    .form-controls
-                      input#field-new-password-confirm.field[type="password" name="new_password_confirm"]
-                a#show-password-link[style="cursor:pointer"]
-                  | Show passwords
-          .form-actions
-            input.btn.form-btn#profile-submit[type="submit" value="SAVE CHANGES"]
+        .form-container
+          form.form-required#project-form[action="/profile/update" method="post"]
+            input[type="hidden" name="application-form"]
+            = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) 
+            - if current_user.designer
+              .form-body
+                .form-row
+                  .success
+                    = @info_success
+                .form-row
+                  - if current_user.designer_profile.available
+                    input#designer-available[type='hidden' name="available" value='true']
+                  - else
+                    input#designer-available[type='hidden' name="available" value='false']
+                  .form-cols
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-full-name"]
+                        | Full Name
+                        span.form-asterisk
+                          | *
+                      .form-controls
+                        input#field-name.field[type="text" name="name" required data-validation-type="['presence']" value=current_user.designer_profile.full_name]
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-e-mail"]
+                        | Email 
+                        span.form-asterisk
+                          | *
+                      .form-controls
+                        input#field-email.field[type="email" name="email" value=current_user.email required data-validation-type="['email']"]
+                .form-row
+                  .form-cols
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-paypal-email"]
+                        | PayPal Email Address (We'll send your earnings here)
+                        span.form-asterisk
+                          | *
+                      .form-controls
+                        input#field-paypal-email.field[type="text" name="paypal-email" value=current_user.designer_profile.paypal_email required data-validation-type="['presence']" ]
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-portfolio"]
+                        | Portfolio URL
+                        span.form-asterisk
+                          | *
+                      .form-controls
+                        input#field-portfolio.field[type="text" name="portfolio" required value=current_user.designer_profile.portfolio_url ]
+                .form-row
+                  .form-cols
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-dribble"]
+                        | Dribbble URL
+                      .form-controls
+                        input#field-dribble.field[type="text" name="dribble" value=current_user.designer_profile.dribble_url ]
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-behance"]
+                        | Behance URL
+                      .form-controls
+                        input#field-behance.field[type="text" name="behance" value=current_user.designer_profile.behance_url ]
+                .form-row
+                  .form-cols
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-skill_1"]
+                        | Strongest design skill #1
+                      .form-controls
+                        select#field-skill_1.field[name="skill_1" value=current_user.designer_profile.skill_1]
+                          option[value=""]
+                          option[value="Graphic design"]
+                            | Graphic design
+                          option[value="Web design"]
+                            | Web design
+                          option[value="Logo design"]
+                            | Logo design
+                          option[value="Product design (web)"]
+                            | Product design (web)
+                          option[value="Product design (mobile)"]
+                            | Product design (mobile)
+                          option[value="UI Design"]
+                            | UI Design
+                          option[value="UX Design"]
+                            | UX Design
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-skill_2" ]
+                        | Strongest design skill #2
+                      .form-controls
+                        select#field-skill_2.field[name="skill_2" value=current_user.designer_profile.skill_2]
+                          option[value=""]
+                          option[value="Graphic design"]
+                            | Graphic design
+                          option[value="Web design"]
+                            | Web design
+                          option[value="Logo design"]
+                            | Logo design
+                          option[value="Product design (web)"]
+                            | Product design (web)
+                          option[value="Product design (mobile)"]
+                            | Product design (mobile)
+                          option[value="UI Design"]
+                            | UI Design
+                          option[value="UX Design"]
+                            | UX Design
+                .form-row
+                  .form-cols
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-skill_3" ]
+                        | Strongest design skill #3
+                      .form-controls
+                        select#field-skill_3.field[name="skill_3" value=current_user.designer_profile.skill_3]
+                          option[value=""]
+                          option[value="Graphic design"]
+                            | Graphic design
+                          option[value="Web design"]
+                            | Web design
+                          option[value="Logo design"]
+                            | Logo design
+                          option[value="Product design (web)"]
+                            | Product design (web)
+                          option[value="Product design (mobile)"]
+                            | Product design (mobile)
+                          option[value="UI Design"]
+                            | UI Design
+                          option[value="UX Design"]
+                            | UX Design
+                .form-header-row
+                  | Change Password
+                .form-row
+                  .success
+                    = @password_success
+                  .errors
+                    = @password_errors
+                .form-row
+                  .form-cols
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-password"]
+                        | Current Password
+                      .form-controls
+                        input#field-password.field[type="password" name="password"]
+                .form-row
+                  .form-cols
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-new-password"]
+                        | New Password
+                      .form-controls
+                        input#field-new-password.field[type="password" name="new_password"]
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-new-password-confirm"]
+                        | Comfirm New Password
+                      .form-controls
+                        input#field-new-password-confirm.field[type="password" name="new_password_confirm"]
+                  a#show-password-link[style="cursor:pointer"]
+                    | Show passwords
+            - else
+              .form-body
+                .form-row
+                  .success
+                    = @info_success
+                .form-row
+                  .form-cols
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-full-name"]
+                        | Full Name
+                      .form-controls
+                        input#field-name.field[type="text" name="name" required data-validation-type="['presence']" value=current_user.name]
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-e-mail"]
+                        | Email 
+                      .form-controls
+                        input#field-email.field[type="email" name="email" value=current_user.email required data-validation-type="['email']"]
+                .form-row
+                  .form-cols
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-company"]
+                        | Company Name
+                      .form-controls
+                        input#field-company.field[type="text" name="company" required data-validation-type="['presence']" value=current_user.company]
+                .form-header-row
+                  | Change Password
+                .form-row
+                  .success
+                    = @password_success
+                  .errors
+                    = @password_errors
+                .form-row
+                  .form-cols
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-password"]
+                        | Current Password
+                      .form-controls
+                        input#field-password.field[type="password" name="password"]
+                .form-row
+                  .form-cols
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-new-password"]
+                        | New Password
+                      .form-controls
+                        input#field-new-password.field[type="password" name="new_password"]
+                    .form-col.form-col-1of2
+                      label.form-label[for="field-new-password-confirm"]
+                        | Comfirm New Password
+                      .form-controls
+                        input#field-new-password-confirm.field[type="password" name="new_password_confirm"]
+                  a#show-password-link[style="cursor:pointer"]
+                    | Show passwords
+            .form-actions
+              input.btn.form-btn#profile-submit[type="submit" value="SAVE CHANGES"]
 = render partial: 'dark_footer'
 
 javascript:

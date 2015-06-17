@@ -133,7 +133,7 @@
                   option[value=""]
                   - @designers.each do |designer|
                     option[value=designer.email]
-                      = designer.email
+                      = designer.designer_profile.full_name
                 a#submit-designer-invite
                   | Invite
               - if current_user.admin
@@ -217,3 +217,10 @@ input.hidden#chat[type="hidden" value=@chat.to_s]
   a[href=("/projects/" + @project.id.to_s + "/popup") class="hidden" id="project-popup"]
 / = render partial: 'footer'
 = render partial: 'dark_footer'
+
+javascript:
+  jQuery(document).ready(function($) {
+    $('#enter-designer-email')
+      .dropdown()
+    ;
+  });

@@ -20,7 +20,9 @@
 //= require jquery.carouFredSel-6.2.1-packed.js
 //= require functions.js
 //= require websocket_rails/main
+//= require semantic-ui-transition.js
 //= require semantic-ui-checkbox.js
+//= require semantic-ui-dropdown.js
 //= require common.js
 //= require users.js
 

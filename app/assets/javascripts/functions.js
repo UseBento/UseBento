@@ -584,7 +584,7 @@ function setup_paypal_direct() {
             var id       = $('#project-id').val();
             var chat     = $('#chat').val();
             var url      = ('/projects/' + id + '/'
-                            + (chat == 'group' ? '' : 'private/')
+                            + (chat == 'group' ? '' : '')
                             + 'invite_designer.json');
 
             if (email != undefined && email != "") {

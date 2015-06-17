@@ -327,6 +327,7 @@ class ProjectsController < ApplicationController
 
       respond_to do |format|
         format.html { redirect_to @project }
+        # binding.pry
         format.json { render :json => @project }
       end
     end
