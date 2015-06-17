@@ -133,6 +133,27 @@ class UsersController < Devise::SessionsController
     render 'designer_profile', :layout => "application"
   end
 
+  def update_designer_availability
+    user      = User.find(params[:id])
+    @status = 'error'
+    if user.designer
+      user.designer_profile.available = params[:is_available]
+      if user.save
+        @status = 'success'
+      end
+    end
+    # binding.pry
+
+    respond_to do |format|
+      # format.html { redirect_to @project }
+      if @status == 'success'
+        format.json { render :json => {success: 'success'} }
+      else
+        format.json { render :json => {error: 'error'} }
+      end
+    end
+  end
+
   def exists
     user = User.where(email: params[:email]).first
     respond_to do |format|

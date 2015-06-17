@@ -8,6 +8,7 @@ header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 
       span.logo-colorful
         i.sprite-logo-colorful
     - if (user_signed_in? )
+      input[type="hidden" name="user-id" id="user-id" value=current_user.id]
       .available-button-area
         - if current_user.designer && page == 'profile'
           - if current_user.designer_profile.available
@@ -56,3 +57,24 @@ header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 
           li
             a.popup-link.hidden#userlink[href="/popups/login"]
               | LOGIN
+
+
+javascript:
+  jQuery(document).ready(function($) {
+    
+    $('.ui.toggle.checkbox').on('click', function() {
+      var is_available = $(this).hasClass('checked');
+      var user_id = $('#user-id').val();
+      $.ajax({
+        type: 'post',
+        url:  '/users/' + user_id + '/update_designer_availability.json',
+        data: {
+          is_available:   is_available
+        },
+        success:  function(data) {
+          console.log('success available');
+        }});
+
+    });
+    
+  });
