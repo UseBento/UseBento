@@ -10,6 +10,7 @@
 // redesign headers
 .wrapper {
   font-family: "AvenirNext";
+  background-color: #f1f1f1;
   header.header {
     font-family: "AvenirNextRegular";
     background-color: #232323;
@@ -52,6 +53,9 @@
       }
     }
   }
+  .section-contacts {
+    background-color: #f1f1f1;
+  }
   &#homepage {
     font-family: "AvenirNext";
     .btn {
@@ -82,7 +86,7 @@
       }
       &.header-top {
         height: 90px;
-        background-color: #232323;
+        // background-color: #232323;
         box-shadow: 0 1px 3px rgba(3, 4, 1, 0.06);
         .shell {
           width: 1200px;
