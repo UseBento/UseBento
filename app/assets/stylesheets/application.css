@@ -12,7 +12,9 @@
  *
  *= require jquery.selectbox
  *= require magnific-popup
+ *= require transition
  *= require checkbox
+ *= require dropdown
  *= require common
  *= require payments
  *= require projects

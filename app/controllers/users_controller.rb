@@ -262,6 +262,7 @@ class UsersController < Devise::SessionsController
 
   def designer_list
     @designers = User.all.where(:designer => true)
+    
     render 'designer_list', :layout => "application"
   end
 end

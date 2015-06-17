@@ -57,3 +57,20 @@
     }  
   }
 }
+
+
+.wrapper {
+  &.profile-wrapper {
+    .form-business-card {
+      .form-head {
+        border-bottom: none;
+      }
+      .form-container {
+        border: 1px solid #D1D1D1;
+        background-color: #FCFDFF;
+        padding: 0 35px 30px 35px;
+      }
+    }
+    
+  }
+}

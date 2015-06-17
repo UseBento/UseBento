@@ -22,7 +22,8 @@ header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 
         - if current_user.designer && page == 'project'
           - if current_user.designer_profile.available
             .ui.toggle.checkbox
-              input type="checkbox" checked="checked" disabled="disabled" /
+              / input type="checkbox" checked="checked" disabled="disabled" /
+              input type="checkbox" checked="checked" /
             label AVAILABLE
           - else
             .ui.toggle.checkbox
@@ -73,7 +74,7 @@ javascript:
         },
         success:  function(data) {
           console.log('success available');
-        }});
+      }});
 
     });
     

@@ -38,7 +38,7 @@ class Project
      status_index:           status_index,
      number:           number,
      company:          company,
-     deadline:         deadline,
+     # deadline:         deadline,
      price:            self.get_price,
      payments:         self.payments,
      unpaid_payments:  self.awaiting_payments}
