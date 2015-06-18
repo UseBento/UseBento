@@ -61,7 +61,11 @@ class User
   end
 
   def full_name
-    self.name.split.map(&:capitalize).join ' '
+    if self.designer && self.name.blank?
+      self.designer_profile.full_name
+    else
+      self.name.split.map(&:capitalize).join ' '
+    end
   end
 
   def first_name
