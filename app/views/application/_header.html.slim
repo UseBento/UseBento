@@ -38,6 +38,8 @@ header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 
           li class=(page == 'project' ? 'current' : '')
             = link_to "PROJECTS", "/projects/list"
           - if current_user.admin
+            li class=(page == 'user' ? 'current' : '')
+              = link_to "USERS", "/normal_users/list"
             li class=(page == 'designer' ? 'current' : '')
               = link_to "DESIGNERS", "/designers/list"
         - unless user_signed_in?

@@ -70,6 +70,11 @@ Rails.application.routes.draw do
       post 'designers/:id/update',        to: 'users#update_designer_profile'
       post 'users/:id/update_designer_availability',
                                           to: 'users#update_designer_availability'
+      get  'normal_users/list',              to: 'users#normal_user_list'
+      get  'normal_users/:id',               to: 'users#normal_user_profile'
+      post 'normal_users/:id/update',        to: 'users#update_normal_user_profile'
+      get  'normal_users/:id/convert',
+                                          to: 'users#convert_normal_user_to_designer'
     end
 
     post 'users/sign_up',               to: 'users#sign_up'

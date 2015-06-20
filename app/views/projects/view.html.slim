@@ -133,7 +133,7 @@
                   option[value=""]
                   - @designers.each do |designer|
                     option[value=designer.email]
-                      = designer.designer_profile.full_name
+                      = designer.full_name
                 a#submit-designer-invite
                   | Invite
               - if current_user.admin

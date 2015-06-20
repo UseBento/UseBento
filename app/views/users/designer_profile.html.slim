@@ -27,6 +27,8 @@
             li
               = link_to "PROJECTS", "/projects/list"
             li
+              = link_to "USERS", "/normal_users/list"
+            li
               = link_to "DESIGNERS", "/designers/list"
             li
               a#userlink[href="/profile" data-userid=current_user.id]
@@ -58,7 +60,7 @@
                         span.form-asterisk
                           | *
                       .form-controls
-                        input#field-name.field[type="text" name="name" required data-validation-type="['presence']" value=@user.designer_profile.full_name]
+                        input#field-name.field[type="text" name="name" required data-validation-type="['presence']" value=@user.full_name]
                     .form-col.form-col-1of2
                       label.form-label[for="field-e-mail"]
                         | Email 

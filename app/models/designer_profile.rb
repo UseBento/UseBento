@@ -13,6 +13,6 @@ class DesignerProfile
 
   embedded_in :user
 
-  validates_presence_of :full_name, :portfolio_url
+  # validates_presence_of :full_name, :portfolio_url
 
 end

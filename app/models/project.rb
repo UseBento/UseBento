@@ -139,6 +139,7 @@ class Project
       # designers = self.invited_designers
     else
       designers.where(:user => User.get_admin).delete
+      designers.where(:email => nil).delete
     end
 
     # if (designers.select {|person| person.user && person.user.admin}).empty?

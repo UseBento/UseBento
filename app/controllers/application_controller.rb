@@ -61,9 +61,10 @@ class ApplicationController < ActionController::Base
     user.email = params['field-e-mail']
     user.password = params['field-password']
     user.designer = true
+    user.name = params['field-full-name']
 
     designer_profile = DesignerProfile.new
-    designer_profile.full_name = params['field-full-name']
+    # designer_profile.full_name = params['field-full-name']
     designer_profile.portfolio_url = params['field-portfolio-url']
     designer_profile.dribble_url = params['field-dribbble-url']
     designer_profile.behance_url = params['field-behance-url']

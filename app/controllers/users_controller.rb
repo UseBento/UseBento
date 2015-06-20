@@ -38,11 +38,17 @@ class UsersController < Devise::SessionsController
     render 'designer_profile', :layout => "application"
   end
 
+  def normal_user_profile
+    @user = User.find(params[:id])
+    render 'normal_user_profile', :layout => "application"
+  end
+
   def update_profile
 
     current_user.email       = params[:email]
+    current_user.name        = params[:name]
     if current_user.designer
-      current_user.designer_profile.full_name = params[:name]
+      # current_user.designer_profile.full_name = params[:name]
       current_user.designer_profile.paypal_email = params["paypal-email"]
       current_user.designer_profile.portfolio_url = params[:portfolio]
       current_user.designer_profile.dribble_url = params[:dribble]
@@ -91,9 +97,9 @@ class UsersController < Devise::SessionsController
 
   def update_designer_profile
     @user = User.find(params[:id])
-    current_user.email       = params[:email]
-
-    @user.designer_profile.full_name = params[:name]
+    @user.email       = params[:email]
+    @user.name        = params[:name]
+    # @user.designer_profile.full_name = params[:name]
     @user.designer_profile.paypal_email = params["paypal-email"]
     @user.designer_profile.portfolio_url = params[:portfolio]
     @user.designer_profile.dribble_url = params[:dribble]
@@ -128,9 +134,57 @@ class UsersController < Devise::SessionsController
         end
       end
     end
-    
-
     render 'designer_profile', :layout => "application"
+
+  end
+
+  def update_normal_user_profile
+    @user = User.find(params[:id])
+    @user.email       = params[:email]
+    @user.name        = params[:name]
+    @user.company     = params[:company]
+
+    @user.save
+
+    @info_success            = "Updated your information"
+
+    if not params[:new_password].blank?
+      if (params[:new_password] != params[:new_password_confirm])
+        @password_errors = "Passwords don't match"
+      else
+        # @user.update_with_password(
+        #     {current_password:      params[:password],
+        #      password:              params[:new_password],
+        #      password_confirmation: params[:new_password_confirm]})
+        # @password_success = "Updated your password successfully"
+        @user.password = params[:password]
+        if @user.save
+          @password_success = "Updated your password successfully"
+        else
+          @password_errors = "Invalid Password"
+        end
+      end
+    end
+    render 'normal_user_profile', :layout => "application"
+  end
+
+  def convert_normal_user_to_designer
+    user      = User.find(params[:id])
+    @status = 'error'
+    if current_user.admin
+      if user.normal_user_to_convert
+        @status = 'success'
+      end
+    end
+    # binding.pry
+
+    respond_to do |format|
+      if @status == 'success'
+        format.json { render :json => {success: 'success'} }
+      else
+        format.json { render :json => {error: 'error'} }
+      end
+    end
   end
 
   def update_designer_availability
@@ -215,7 +269,7 @@ class UsersController < Devise::SessionsController
             render json: {error: error}
           else
             if user.designer
-              render json: {username:    user.designer_profile.full_name,
+              render json: {username:    user.full_name,
                           keywords:    user.default_keywords,
                           audience:    user.default_target_audience,
                           email:       user.email,
@@ -262,7 +316,11 @@ class UsersController < Devise::SessionsController
 
   def designer_list
     @designers = User.all.where(:designer => true)
-    
     render 'designer_list', :layout => "application"
+  end
+
+  def normal_user_list
+    @normal_users = User.where(:designer.nin => [true]).where(:admin.nin => [true])
+    render 'normal_user_list', :layout => "application"
   end
 end

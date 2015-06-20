@@ -94,7 +94,7 @@ class User
     hash = Digest::MD5.hexdigest(self.email.strip.downcase)
     if self.designer
       default_img = URI.encode_www_form_component(
-                    "https://" + root_domain + User.default_avatar_for(self.designer_profile.full_name))
+                    "https://" + root_domain + User.default_avatar_for(self.full_name))
     else
       default_img = URI.encode_www_form_component(
                     "https://" + root_domain + User.default_avatar_for(name))
@@ -125,5 +125,17 @@ class User
 
   def designer_projects
     Project.where({"invited_designers.user_id" => id})
+  end
+
+  def normal_user_to_convert
+    # not designer and admin (normal user)
+    if not (self.designer || self.admin)
+      self.designer = true
+      designer_profile = DesignerProfile.new
+      self.designer_profile = designer_profile
+      self.save
+    else
+      false
+    end
   end
 end
