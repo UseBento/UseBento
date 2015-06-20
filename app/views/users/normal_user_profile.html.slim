@@ -1,0 +1,108 @@
+.wrapper.profile-wrapper
+  header.header
+    a.expand[href="#"]
+    .shell
+      a.logo[href="/"]
+        | Bento
+        span.logo-bw
+          i.sprite-logo
+        span.logo-colorful
+          i.sprite-logo-colorful
+      - if (user_signed_in? && current_user.admin? )
+        input[type="hidden" name="user-id" id="user-id" value=@user.id]
+        .available-button-area
+          - if @user.designer
+            - if @user.designer_profile.available
+              .ui.toggle.checkbox
+                input type="checkbox" checked="checked" /
+              label AVAILABLE
+            - else
+              .ui.toggle.checkbox
+                input type="checkbox" /
+              label UNAVAILABLE
+          
+      nav.nav
+        ul
+          - if (user_signed_in? && current_user.admin? )
+            li
+              = link_to "PROJECTS", "/projects/list"
+            li
+              = link_to "USERS", "/normal_users/list"
+            li
+              = link_to "DESIGNERS", "/designers/list"
+            li
+              a#userlink[href="/profile" data-userid=current_user.id]
+                | PROFILE
+  .section.section-contacts
+    .shell
+      .form.form-apply.form-business-card
+        .section-head.form-head
+          h2
+            | Designer Profile
+        .form-container
+          form.form-required#project-form[action="/normal_users/#{@user.id}/update" method="post"]
+            input[type="hidden" name="application-form"]
+            = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) 
+            
+            .form-body
+              .form-row
+                .success
+                  = @info_success
+              .form-row
+                .form-cols
+                  .form-col.form-col-1of2
+                    label.form-label[for="field-full-name"]
+                      | Full Name
+                      span.form-asterisk
+                        | *
+                    .form-controls
+                      input#field-name.field[type="text" name="name" required data-validation-type="['presence']" value=@user.name]
+                  .form-col.form-col-1of2
+                    label.form-label[for="field-e-mail"]
+                      | Email
+                      span.form-asterisk
+                        | *
+                    .form-controls
+                      input#field-email.field[type="email" name="email" value=@user.email required data-validation-type="['email']"]
+              .form-row
+                .form-cols
+                  .form-col.form-col-1of2
+                    label.form-label[for="field-company"]
+                      | Company Name
+                      span.form-asterisk
+                        | *
+                    .form-controls
+                      input#field-company.field[type="text" name="company" required data-validation-type="['presence']" value=@user.company]
+              .form-header-row
+                | Change Password
+              .form-row
+                .success
+                  = @password_success
+                .errors
+                  = @password_errors
+              .form-row
+                .form-cols
+                  .form-col.form-col-1of2
+                    label.form-label[for="field-new-password"]
+                      | New Password
+                    .form-controls
+                      input#field-new-password.field[type="password" name="new_password"]
+                  .form-col.form-col-1of2
+                    label.form-label[for="field-new-password-confirm"]
+                      | Comfirm New Password
+                    .form-controls
+                      input#field-new-password-confirm.field[type="password" name="new_password_confirm"]
+                a#show-password-link[style="cursor:pointer"]
+                  | Show passwords
+            .form-actions
+              input.btn.form-btn#profile-submit[type="submit" value="SAVE CHANGES"]
+= render partial: 'dark_footer'
+
+javascript:
+  jQuery(document).ready(function($) {
+    
+    
+
+    });
+    
+  });

@@ -15,7 +15,7 @@
 }
 
 .page_content {
-  &.designers_list_content {
+  &.user_list_content {
     .left_section {
       width: 440px;
       float: left;
@@ -27,8 +27,19 @@
       padding-bottom: 20px;
       text-align: right;
     }
-    .designer_box {
+    .user_box {
       padding: 0px;
+      table {
+        tr {
+          border: 1px dotted #ccc;
+        }
+      }
+    }
+  }
+  &.designers_list_content {
+    
+    .designer_box {
+      
 
       table {
         tr {
@@ -55,6 +66,12 @@
         }
       }
     }  
+  }
+  &.normal_users_list_content {
+    .convert-user {
+      padding: 5px 15px;
+      text-transform: capitalize;
+    }
   }
 }
 

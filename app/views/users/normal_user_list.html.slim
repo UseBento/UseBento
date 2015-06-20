@@ -1,0 +1,97 @@
+.wrapper
+  = render partial: 'header', locals: {page: 'user'}
+  .page_content.center_container.normal_users_list_content.user_list_content
+    .normal_user_box.user_box
+      .left_section
+        h2
+          | Users
+      .right_section
+        - if !current_user.admin
+          a.btn_large.purple[href="/projects/start"]
+            | START A NEW PROJECT
+            i.fa.fa-angle-right
+        - else
+          = raw "&nbsp;"
+      .clear
+      .table_box
+        table[width="100%" border="0" cellspacing="0" cellpadding="0"]
+          tr
+            td.heading[colspan="5"]
+              | Users
+        table#projects-list.tablesorter[width="100%" border="0" cellspacing="0" cellpadding="0"]
+          thead
+            tr.tbl_row.subtitle
+              td[width="18%"]
+                | Name
+                span.sort-carot
+              td[width="25%"]
+                | Email
+                span.sort-carot
+              td[width="42%"]
+                | Current Project
+                span.sort-carot
+              td[width="42%"]
+                | Convert
+              
+          tbody
+            - for normal_user in @normal_users do
+              tr.tbl_row.list-item[onclick=("window.location.href=\"/normal_users/" + normal_user.id + "\"")]
+                td
+                  = normal_user.full_name
+                td
+                  = normal_user.email
+                td
+                  - normal_user.accessible_projects.each do |project|
+                    a[href="/projects/#{project.id}" style="display:block; color: #428BCA;"]
+                     = project.name
+                td.convert
+                  a.convert-user.btn.form-btn[href="/normal_users/list" user_id="#{normal_user.id}"]
+                    | Convert
+                
+  / .ui.modal
+  /   i.close.icon
+  /   .header
+  /     | Convert a User to Designer
+  /   .content
+  /     .description
+  /       .ui.header We've converted this user to designer
+  /   .actions
+  /     .ui.positive.right.labeled.icon.button
+  /       | Yep, that's me
+  /       i.checkmark.icon
+
+
+= render partial: 'dark_footer'
+
+javascript:
+  
+  jQuery(document).ready(function($) {
+
+    var user_id;
+    var url;
+    $('.convert-user').on('click', function(event) {
+
+      
+      user_id = $(this).attr('user_id');
+      url = "/normal_users/" + user_id + "/convert.json";
+      $.ajax({type:    'GET',
+        url:      url,
+        data:    {},
+        success:  function(data) {
+          /*
+          $('.ui.modal')
+            .modal('show')
+          ;
+          */
+          // alert('success');
+          // alertify.success("Success convert", null, click);
+          // var i = 0;
+
+        },
+        error: function(data) {
+          // alert('error');
+        }
+      });
+      
+    });
+  });

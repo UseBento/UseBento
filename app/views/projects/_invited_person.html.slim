@@ -42,7 +42,7 @@
       span
         - if person.user
           - if person.user.designer
-            = person.user.designer_profile.full_name
+            = person.user.full_name
           - else
             = person.user.full_name
         - elsif person.can_see_email?(current_user)

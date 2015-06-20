@@ -1,7 +1,7 @@
 .wrapper
   = render partial: 'header', locals: {page: 'designer'}
-  .page_content.center_container.designers_list_content
-    .designer_box
+  .page_content.center_container.designers_list_content.user_list_content
+    .designer_box.user_box
       .left_section
         h2
           | Designers
@@ -41,7 +41,7 @@
             - for designer in @designers do
               tr.tbl_row.list-item[onclick=("window.location.href=\"/designers/" + designer.id + "\"")]
                 td
-                  = designer.designer_profile.full_name
+                  = designer.full_name
                 td
                   = designer.email
                 td
@@ -60,7 +60,7 @@
                     - specialities = specialities[1..-1]
                   = specialities
                 td
-                  - designer.designer_projects.each do |project|
+                  - designer.accessible_projects.each do |project|
                     a[href="/projects/#{project.id}" style="display:block; color: #428BCA;"]
                      = project.name
                 
