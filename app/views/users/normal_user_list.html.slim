@@ -41,7 +41,7 @@
                 td
                   = normal_user.email
                 td
-                  - normal_user.accessible_projects.each do |project|
+                  - normal_user.accessible_projects.where(:status.ne => :closed).order_by(:number.asc).each do |project|
                     a[href="/projects/#{project.id}" style="display:block; color: #428BCA;"]
                      = project.name
                 td.convert

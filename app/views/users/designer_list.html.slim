@@ -60,7 +60,7 @@
                     - specialities = specialities[1..-1]
                   = specialities
                 td
-                  - designer.accessible_projects.each do |project|
+                  - designer.accessible_projects.where(:status.ne => :closed).order_by(:number.asc).each do |project|
                     a[href="/projects/#{project.id}" style="display:block; color: #428BCA;"]
                      = project.name
                 

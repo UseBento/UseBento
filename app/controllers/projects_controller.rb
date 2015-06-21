@@ -230,7 +230,15 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:project_id])
     status = params[:status].to_i
 
-    if !current_user.admin || status < 0
+    # binding.pry
+
+    # if !current_user.admin || !@project.was_designer_invited?(current_user) || status < 0
+    #   return render :nothing => true, :status => 500
+    # end
+
+    if status < 0
+      return render :nothing => true, :status => 500
+    elsif !current_user.admin && !@project.was_designer_invited?(current_user)
       return render :nothing => true, :status => 500
     end
 

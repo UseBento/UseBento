@@ -132,8 +132,9 @@
                 select#enter-designer-email[style="height: initial;"]
                   option[value=""]
                   - @designers.each do |designer|
-                    option[value=designer.email]
-                      = designer.full_name
+                    - if @project.designers.where(:user => designer).size == 0
+                      option[value=designer.email]
+                        = designer.full_name
                 a#submit-designer-invite
                   | Invite
               - if current_user.admin
