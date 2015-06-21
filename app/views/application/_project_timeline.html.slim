@@ -7,7 +7,7 @@
 			i.fa.fa-check.incomplete
 
 		.status_step
-			- if current_user.admin
+			- if current_user.admin || @project.was_designer_invited?(current_user)
 				a[href=("/projects/" + @project.id.to_s + "/update_status/" + i.to_s)]
 					=@project_statuses[i]
 			- else
