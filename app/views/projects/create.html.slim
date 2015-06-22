@@ -35,10 +35,10 @@
                         |  *
                     .form-errors
                       = get_error('full_name')
-                    .form-controls.grey-background
+                    .form-controls
                       - if user_signed_in?
-                        = current_user.full_name
-                        input#field-full-name.field[type="hidden" name="full_name" value=current_user.full_name]
+                        = @project.user.full_name
+                        input#field-full-name.field[type="hidden" name="full_name" value=@project.user.full_name]
                       - else
                         input#field-full-name.field[type="text" name="full_name" required data-validation-type="['presence']" value=@project.answer_for('full_name').answer]
                   - if (current_user && (@project.was_invited?(current_user))) || !@project.created_at
@@ -49,10 +49,10 @@
                           |  *
                       .form-errors
                         = get_error('email')
-                      .form-controls.grey-background
+                      .form-controls
                         - if user_signed_in?
-                          = current_user.email
-                          input#field-e-mail.field[type="hidden" name="email" value=current_user.email]
+                          = @project.user.email
+                          input#field-e-mail.field[type="hidden" name="email" value=@project.user.email]
                         - else
                           input#field-e-mail.field[type="email" name="email" value=@project.answer_for('email').answer required data-validation-type="['email']"]
               .form-row
