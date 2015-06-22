@@ -76,6 +76,7 @@ class ProjectsController < ApplicationController
     @project.initialize_project
 
     ProjectMailer.new_project_mail(@project).deliver
+    @project.people
     redirect_to @project
   end
 
@@ -90,7 +91,7 @@ class ProjectsController < ApplicationController
     @is_show_available = true
     @designers = User.where(:designer => true)
 
-
+    # binding.pry
     if !@project.has_access?(current_user)
       invite = @project.was_invited?(current_user)
       if invite
