@@ -41,7 +41,7 @@
                         input#field-full-name.field[type="hidden" name="full_name" value=current_user.full_name]
                       - else
                         input#field-full-name.field[type="text" name="full_name" required data-validation-type="['presence']" value=@project.answer_for('full_name').answer]
-                  - if (current_user && (@project.was_invited?(current_user))) || !@project.created_at
+                  - if (current_user && (current_user.admin || current_user == @project.user)) || !@project.created_at
                     .form-col.form-col-1of2
                       label.form-label[for="field-e-mail"]
                         | Email Address
@@ -99,7 +99,7 @@
               = render partial: @service.partial_name
               - if @editing
                 = render partial: 'long_questionaire_form'
-            - if (current_user && (@project.was_invited?(current_user))) || !@project.created_at
+            - if (current_user && (current_user.admin || current_user == @project.user)) || !@project.created_at
               .form-actions
                 button.btn.form-btn#project-submit[type="submit"]
                   - if @editing
@@ -113,7 +113,7 @@
                   |  &nbsp; &nbsp; &nbsp;
                   = link_to "Cancel", @project
               input#page-price[type="hidden" value=(@service.price)]
-- if !((current_user && (@project.was_invited?(current_user))) || !@project.created_at)
+- if !((current_user && (current_user.admin || current_user == @project.user)) || !@project.created_at)
   script
     | $(document).ready(function() { $('input, textarea').prop('disabled', true); });
       
