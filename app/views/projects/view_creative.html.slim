@@ -16,63 +16,44 @@
               = @service.rounds
               |   rounds of design &nbsp; &nbsp;
         .form-container
-          form.form-required#project-form[action="/projects/new" method="post" enctype="multipart/form-data"]
+          form-required#project-form
             input[type="hidden" name="application-form"]
             input[type="hidden" name="project_id" value=@project.id]
             input#plus-dev-price[type="hidden" name="plus_dev_price" value=@service.plus_dev_price]
             input#responsive-price[type="hidden" name="responsive_price" value=@service.responsive_price]
             input[type="hidden" name="service_name" value=@service.name]
             = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) 
-            - if @editing
-              input#editing[type="hidden" name="editing" value="true"]
             .form-body
               .form-row
                 .form-cols
                   .form-col.form-col-1of2
                     label.form-label[for="field-full-name"]
                       | Your Full Name
-                      span.form-asterisk
-                        |  *
-                    .form-errors
-                      = get_error('full_name')
                     .form-controls.grey-background
                       - if user_signed_in?
                         = current_user.full_name
                         input#field-full-name.field[type="hidden" name="full_name" value=current_user.full_name]
                       - else
                         input#field-full-name.field[type="text" name="full_name" required data-validation-type="['presence']" value=@project.answer_for('full_name').answer]
-                  - if (current_user && (@project.was_invited?(current_user))) || !@project.created_at
-                    .form-col.form-col-1of2
-                      label.form-label[for="field-e-mail"]
-                        | Email Address
-                        span.form-asterisk
-                          |  *
-                      .form-errors
-                        = get_error('email')
-                      .form-controls.grey-background
-                        - if user_signed_in?
-                          = current_user.email
-                          input#field-e-mail.field[type="hidden" name="email" value=current_user.email]
-                        - else
-                          input#field-e-mail.field[type="email" name="email" value=@project.answer_for('email').answer required data-validation-type="['email']"]
+                  .form-col.form-col-1of2
+                    label.form-label[for="field-e-mail"]
+                      | Email Address
+                    .form-controls.grey-background
+                      - if user_signed_in?
+                        = current_user.email
+                        input#field-e-mail.field[type="hidden" name="email" value=current_user.email]
+                      - else
+                        input#field-e-mail.field[type="email" name="email" value=@project.answer_for('email').answer required data-validation-type="['email']"]
               .form-row
                 .form-cols
                   .form-col.form-col-1of2
                     label.form-label[for="field-name-business"]
-                      | What is the name of your business?
-                      span.form-asterisk
-                        |  *
-                    .form-errors
-                      = get_error('business_name')
+                      | What is the name of the business?
                     .form-controls
                       input#field-name-business.field[type="text" name="business_name" value=(@project.answer_for('business_name').answer || (user_signed_in? ? current_user.company : '')) required data-validation-type="['presence']"]
                   .form-col.form-col-1of2
                     label.form-label[for="field-name-project"]
-                      | What is the name of your project?
-                      span.form-asterisk
-                        |  *
-                    .form-errors
-                      = get_error('project_name')
+                      | What is the name of this project?
                     .form-controls
                       input#field-name-project.field[type="text" name="project_name" value=@project.answer_for('project_name').answer required data-validation-type="['presence']"]
               .form-row
@@ -80,42 +61,20 @@
                   .form-col.form-col-1of2
                     label.form-label[for="field-name-deadline"]
                       | Deadline
-                      span.form-asterisk
-                        |  *
-                    .form-errors
-                      = get_error('project_deadline')
                     .form-controls
                       input#field-name-deadline.field[type="text" name="project_deadline" value=@project.answer_for('project_deadline').answer required data-validation-type="['presence']"]
               .form-row
                 label.form-label[for="field-describe-business"]
-                  | Please describe your project.
-                  span.form-asterisk
-                    |  *
-                .form-errors
-                  = get_error('business_description')
+                  | Description of the project.
                 .form-controls
                   textarea#field-describe-business.textarea[type="text" cols="10" rows="10" name="business_description" required data-validation-type="['presence']"]
                     = @project.answer_for('business_description').answer
               = render partial: @service.partial_name
-              - if @editing
-                = render partial: 'long_questionaire_form'
-            - if (current_user && (@project.was_invited?(current_user))) || !@project.created_at
-              .form-actions
-                button.btn.form-btn#project-submit[type="submit"]
-                  - if @editing
-                    | Save Changes
-                  - else
-                    - if @service.price != 0 
-                      = "GET STARTED - $" + @service.price.to_s
-                    - else
-                      = "Get Started"
-                - if @editing
-                  |  &nbsp; &nbsp; &nbsp;
-                  = link_to "Cancel", @project
-              input#page-price[type="hidden" value=(@service.price)]
-- if !((current_user && (@project.was_invited?(current_user))) || !@project.created_at)
+              = render partial: 'long_questionaire_form'
+            
+- if !((current_user && (current_user.admin || current_user == @project.user)) || !@project.created_at)
   script
-    | $(document).ready(function() { $('input, textarea').prop('disabled', true); });
+    | $(document).ready(function() { $('.form-container input, textarea').prop('disabled', true); });
       
 / = render partial: 'footer'
 = render partial: 'dark_footer'

@@ -154,6 +154,19 @@ class ProjectsController < ApplicationController
     render "projects/create"
   end
 
+  def view_creative_projects
+    @project = Project.find(params[:id])
+    if !@project.has_access?(current_user)
+      return redirect_to_login
+    end
+
+    @errors  = []
+    @editing = false
+    @service = @project.service
+    @partial = @service.partial_name
+    render "projects/view_creative"
+  end
+
   def archive
     @project = Project.find(params[:id])
     if !current_user.admin

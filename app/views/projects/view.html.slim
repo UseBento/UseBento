@@ -82,11 +82,13 @@
                 br
               /= 'Deadline: ' + (@project.deadline || 'Not set')
               /br
-              - if !@project.filled_out_creative_brief?
-                = link_to "Fill Out Creative Brief", "/projects/" + @project.id.to_s + "/edit"
-              - else
-                = link_to "Edit Creative Brief", "/projects/" + @project.id.to_s + "/edit"
-
+              - if @project.was_invited?(current_user)
+                - if !@project.filled_out_creative_brief?
+                  = link_to "Fill Out Creative Brief", "/projects/" + @project.id.to_s + "/edit"
+                - else
+                  = link_to "Edit Creative Brief", "/projects/" + @project.id.to_s + "/edit"
+              - elsif @project.was_designer_invited?(current_user)
+                = link_to "View Creative Brief", "/projects/" + @project.id.to_s + "/view"
               - if current_user.admin
                 br
                 - if @project.archived?
