@@ -12,7 +12,7 @@
         - else
           input.field[id=("field-" + action[:name]) type="text" name=action[:name] value=(@project.answer_for(action[:name]).answer)]
 
-- if (current_user.admin || current_user == @project.user || !@project.created_at)
+- if ((current_user && (@project.was_invited?(current_user))) || !@project.created_at)
   .form-row
     .outlined-box
       label
