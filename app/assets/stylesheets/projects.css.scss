@@ -47,7 +47,7 @@
 
   @media screen and (max-width: 840px) {
     .center_container {
-      padding: 0 5px;
+      padding: 45px 5px;
       .project_detail_box {
         .row_box_split {
           display: block;
@@ -76,9 +76,28 @@
               }
             }
             
+            #message-form-li {
+              .post_img {
+                img {
+                  display: none;
+                }
+              }
+              #message-form {
+                #message-box {
+                  padding: 20px 10px;
+                  width: 100%;
+                }
+                .bottom_box {
+                  #add-comment {
+                    margin-right: -20px;
+                  }
+                }
+              }
+            }
           }
           .right_container {
-            display: block;
+            // display: block;
+            display: none;
             float: right !important;
             padding: 0 5px 0 0;
             width: 280px;
