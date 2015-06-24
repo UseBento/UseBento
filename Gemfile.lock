@@ -264,3 +264,6 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   valid_email
   websocket-rails
+
+BUNDLED WITH
+   1.10.2
