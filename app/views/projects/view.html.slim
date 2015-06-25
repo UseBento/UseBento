@@ -226,4 +226,40 @@ javascript:
     $('#enter-designer-email')
       .dropdown()
     ;
+    // $('.mfp-close').css('visibility', 'visible');
+
+    /*
+    $('.list_comment .project-message .dtl_box .responsive_img a').magnificPopup({
+      type: 'image',
+      closeOnContentClick: true,
+      mainClass: 'mfp-img-mobile',
+      image: {
+        verticalFit: true
+      }
+      
+    });
+    */
+
+  });
+
+  function resizeRowBoxSplit() {
+    var screen_width = $(window).width();
+    console.log(screen_width);
+    if (screen_width > 840 && screen_width < 1225) {
+      var width = $('.left_container').outerWidth();
+      var jLeftTitle = $('.left_title');
+      jLeftTitle.css('width', (width - parseInt(jLeftTitle.css('padding-left')) - parseInt(jLeftTitle.css('padding-right')) - 1).toString() + 'px');
+    }
+  }
+
+  jQuery(window).resize(function($) {
+
+    console.log('resize');
+    // resizeRowBoxSplit();
+  });
+
+  jQuery(window).load(function($) {
+
+    console.log('load');
+    // resizeRowBoxSplit();
   });

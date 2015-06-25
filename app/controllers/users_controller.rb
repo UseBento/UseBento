@@ -16,6 +16,8 @@ class UsersController < Devise::SessionsController
     render 'sign_up', layout: false
   end
 
+  
+
   def password_popup
     render 'password', layout: false
   end

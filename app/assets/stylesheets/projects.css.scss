@@ -5,24 +5,27 @@
   .table_box .subtitle td {
     font-family: 'AvenirNext';
   }
-  .project_detail_box {
-    .left_container {
-      ul.list_comment li .dtl_box h4 {
-        // font-family: 'AvenirNext';
-      }
-    }
-    .right_container {
-      ul.box_list li h5 {
-        // font-family: 'AvenirNext';
-      }
-      #enter-designer-invite {
-        .ui.dropdown{
-          margin-right: 0.75em;
+  .center_container {
+    .project_detail_box {
+      .left_container {
+        ul.list_comment li .dtl_box h4 {
+          // font-family: 'AvenirNext';
         }
-        
+      }
+      .right_container {
+        ul.box_list li h5 {
+          // font-family: 'AvenirNext';
+        }
+        #enter-designer-invite {
+          .ui.dropdown{
+            margin-right: 0.75em;
+          }
+        }
       }
     }
+
   }
+  
   &.project-wrapper {
     .form-business-card {
       .form-head {
@@ -40,5 +43,68 @@
         }
       }
     }
+  }
+
+  @media screen and (max-width: 840px) {
+    .center_container {
+      padding: 45px 5px;
+      .project_detail_box {
+        .row_box_split {
+          display: block;
+          .left_title {
+            display: block;
+            padding: 21px 10px 21px;
+            width: inherit;
+            h2 {
+              font-size: 20px;
+            }
+          }
+          .right_chats {
+            display: block;
+            height: 70px;
+          }
+        }
+        .table-row {
+          display: block;
+          .left_container {
+            display: block;
+            width: initial;
+            padding: 0;
+            .project-message {
+              img {
+                width: 100%;
+              }
+            }
+            
+            #message-form-li {
+              .post_img {
+                img {
+                  display: none;
+                }
+              }
+              #message-form {
+                #message-box {
+                  padding: 20px 10px;
+                  width: 100%;
+                }
+                .bottom_box {
+                  #add-comment {
+                    margin-right: -20px;
+                  }
+                }
+              }
+            }
+          }
+          .right_container {
+            // display: block;
+            display: none;
+            float: right !important;
+            padding: 0 5px 0 0;
+            width: 280px;
+          }
+        }
+      }
+    }
+    
   }
 }
