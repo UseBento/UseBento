@@ -42,6 +42,32 @@ class Message
 
                   end
                 end
+    participants = parent_project.designers.select {|p| p.accepted}
+    
+    participants.map do |participant|
+                  if participant.user != user
+                    # If there was an attachement we need add extra copy
+                    body = ""
+                    attachment_message = ""
+
+                    if self.attachments.count > 0
+                      attachment_message = user.first_name + ' has added a file to ' + parent_project.name
+                    end
+
+                    if !self.body.blank?
+                      body = body_as_html(false, true)
+                    end
+                    body += " " + attachment_message
+                    ProjectMailer.new_user_message_mail(
+                        participant.user.first_name,
+                        user.full_name,
+                        body,
+                        project_url,
+                        participant.user.email
+                      ).deliver_later
+
+                  end
+                end
   end
 
   def serialize_message(request, rendered)

@@ -7,7 +7,7 @@ class PrivateChat
   embeds_many :messages
 
   def can_view?(user)
-    user.admin || self.invited_users.where(user_id: user.id).first
+    user.admin || self.project.designers.where(user_id: user.id).first || self.invited_users.where(user_id: user.id).first
   end
 
   def unread_messages_count(user)
@@ -19,14 +19,16 @@ class PrivateChat
 
     if (people.empty?)
       self.project.people.each do |p|
-                           if p.user && p.user.admin
-                             user = self.invited_users.create({accepted: true})
-                             user.user = p.user
-                             user.save
-                           end
-                         end
+        if p.user && p.user.admin
+          user = self.invited_users.create({accepted: true})
+          user.user = p.user
+          user.save
+        end
+      end
       people = self.invited_users
     end
     people
   end
+
+
 end
