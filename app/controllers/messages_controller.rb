@@ -12,6 +12,7 @@ class MessagesController < ApplicationController
 
     @room     = params['chat-room'];
     @people   = @room == 'private' ? @project.get_private_chat.people : @project.people
+    @designers = @project.designers
     @messages = @room == 'private' ? @project.get_private_chat.messages : @project.messages
     @message  = @messages.create({body:  params[:message_body],
                                   posted_date: DateTime.now})
