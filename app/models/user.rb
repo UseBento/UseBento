@@ -69,7 +69,14 @@ class User
   end
 
   def first_name
-    self.name.split.first.capitalize
+    if not self.name.blank?
+      self.name.split.first.capitalize
+    elsif self.designer && self.name.blank? && !self.designer.full_name.blank?
+      self.designer_profile.full_name
+    else
+      'anonymous'
+    end
+    
   end
 
   def self.generate(name, email, company, company_size)
