@@ -48,3 +48,4 @@ gem 'redis','3.2.0'
 gem 'websocket-rails'
 gem 'pry', group: :development
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
+gem 'time_difference', '~> 0.4.2'
