@@ -71,7 +71,7 @@ class User
   def first_name
     if not self.name.blank?
       self.name.split.first.capitalize
-    elsif self.designer && self.name.blank? && !self.designer.full_name.blank?
+    elsif self.designer && self.name.blank? && !self.designer_profile.full_name.blank?
       self.designer_profile.full_name
     else
       'anonymous'
