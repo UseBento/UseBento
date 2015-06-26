@@ -23,6 +23,7 @@
 //= require semantic-ui-transition.js
 //= require semantic-ui-checkbox.js
 //= require semantic-ui-dropdown.js
+//= require expanding_textarea.js
 //= require common.js
 //= require users.js
 
