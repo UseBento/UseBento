@@ -154,9 +154,11 @@ class Message
     # date_str     += date.strftime "%Y %l:%M%P %Z"
     # date_str
 
-    if time_difference[:seconds].to_i < 60
+    if time_difference[:seconds].to_i < 5
+      date_str = " just now"
+    elsif time_difference[:seconds].to_i < 60
       date_str = time_difference[:seconds].to_i.to_s
-      date_str += " second(s) ago"
+      date_str += " seconds ago"
     elsif time_difference[:minutes].to_i < 60 
       date_str = time_difference[:minutes].to_i.to_s
       date_str += " minute(s) ago"
