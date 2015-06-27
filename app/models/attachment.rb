@@ -3,6 +3,7 @@ class Attachment
 
   field :uploaded_date,    type: DateTime
   field :name,             type: String
+  field :is_amazon_s3,     type: Boolean, default: false
 
   attr_accessor   :attachment
   embedded_in     :message

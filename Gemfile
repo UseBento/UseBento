@@ -43,6 +43,7 @@ gem 'mongoid-rails'
 gem 'valid_email'
 gem 'slim-rails'
 gem 'twocheckout'
+gem "fog-aws"
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'redis','3.2.0'
 gem 'websocket-rails'
