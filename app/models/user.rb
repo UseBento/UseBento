@@ -90,7 +90,12 @@ class User
   end
 
   def self.default_avatar_for(name)
-    "/images/avatars/" + name[0].upcase + ".png"
+    if name.blank?
+      "/images/avatars/A.png"
+    else
+      "/images/avatars/" + name[0].upcase + ".png"
+    end
+    
   end
 
   def avatar(root_domain)

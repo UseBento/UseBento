@@ -77,7 +77,6 @@ class ApplicationController < ActionController::Base
     @message_sent = user.save
     @errors = user.errors
 
-    # binding.pry
     if @message_sent
       sign_in(:user, user)
       redirect_to '/profile'
@@ -97,15 +96,19 @@ class ApplicationController < ActionController::Base
     files.map do |key, file_list|
       file_list = Array(files[key])
       file_list.map do |file|
-        # attachment = Attachment.new({uploaded_date:   DateTime.now,
-        #                              name:            file.original_filename})
-
         attachment = Attachment.new({uploaded_date:   DateTime.now,
-                                     name:            file.original_filename,
-                                     is_amazon_s3:    true})
+                                     name:            file.original_filename})
         attachment.attachment = file
         parent.attachments.push(attachment)
         logger.debug('made new file');
+
+        # attachment = Attachment.new({uploaded_date:   DateTime.now,
+        #                              name:            file.original_filename,
+        #                              is_amazon_s3:    true})
+        # attachment.attachment_s3 = file
+        # parent.attachments.push(attachment)
+        # logger.debug('made new file');
+
       end
     end
   end

@@ -91,7 +91,6 @@ class ProjectsController < ApplicationController
     @is_show_available = true
     @designers = User.where(:designer => true)
 
-    # binding.pry
     if !@project.has_access?(current_user)
       invite = @project.was_invited?(current_user)
       if invite
@@ -244,7 +243,6 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:project_id])
     status = params[:status].to_i
 
-    # binding.pry
 
     # if !current_user.admin || !@project.was_designer_invited?(current_user) || status < 0
     #   return render :nothing => true, :status => 500
@@ -312,7 +310,6 @@ class ProjectsController < ApplicationController
       @project.update_company
       @project.initialize_project
 
-      binding.pry
 
       ProjectMailer.new_project_mail(@project).deliver
       if !existing_user
@@ -349,7 +346,6 @@ class ProjectsController < ApplicationController
 
       respond_to do |format|
         format.html { redirect_to @project }
-        # binding.pry
         format.json { render :json => @project }
       end
     end
@@ -390,7 +386,6 @@ class ProjectsController < ApplicationController
 
   def invite_designer
     @project    = Project.find(params[:id])
-    # binding.pry
 
     invitation = InvitedDesigner.send_invite(@project, current_user, params[:email])
     @error     = invitation if invitation.class != InvitedDesigner

@@ -17,7 +17,9 @@ class MessagesController < ApplicationController
     @message  = @messages.create({body:  params[:message_body],
                                   posted_date: DateTime.now})
     @message.user = current_user
+
     @message.save
+
 
     attachments  = get_attachments(@message)
 
@@ -32,6 +34,7 @@ class MessagesController < ApplicationController
     @message.send_emails(current_user, url, @room)
     @project.updated_at = DateTime.now
     @project.save!
+
 
 
     respond_to do |format|

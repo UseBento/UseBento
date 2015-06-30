@@ -52,11 +52,11 @@ Rails.application.configure do
 
   config.middleware.delete Rack::Lock
 
-  CarrierWave.configure do |config|
-               config.storage = :grid_fs
-               config.root = Rails.root.join('tmp')
-               config.cache_dir = "uploads"
-             end
+  # CarrierWave.configure do |config|
+  #              config.storage = :grid_fs
+  #              config.root = Rails.root.join('tmp')
+  #              config.cache_dir = "uploads"
+  #            end
 end
 
 WebsocketRails.setup do |config|

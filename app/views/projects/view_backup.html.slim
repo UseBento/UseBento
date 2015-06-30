@@ -203,11 +203,8 @@
                 h5
                   | FILE UPLOADS
                 - for attachment in @project.attachments
-                  - if attachment.is_amazon_s3
-                    = link_to attachment.shortname, attachment.attachment_s3_url, :target => "_blank"
-                  - else
-                    = link_to attachment.shortname, attachment.url, :target => "_blank"
-                    = " " + attachment.filesize
+                  = link_to attachment.shortname, attachment.url, :target => "_blank"
+                  = " " + attachment.filesize
                   br
       .clear
         /li
