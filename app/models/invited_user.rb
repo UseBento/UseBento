@@ -17,6 +17,8 @@ class InvitedUser
     elsif (project.invited_users.where(email: email).first ||
            (to && project.invited_users.where(user: to).first))
       error = "You already invited " + ((to && to.full_name) || email)
+    elsif !ValidateEmail.valid?(email)
+      error = "Invalid email address!"
     else
       invitation  = project.invited_users.create({accepted:   false,
                                                   email:      email})
@@ -34,11 +36,22 @@ class InvitedUser
   end
 
   def short_email
-    if email.length > 20
-      email.slice(0,20) + "..."
+    if email.blank?
+      if !self.user.blank? && !self.user.email.blank?
+        if self.user.email.length > 20
+          self.user.email.slice(0,20) + "..."
+        else
+          self.user.email
+        end
+      end
     else
-      email
+      if email.length > 20
+        email.slice(0,20) + "..."
+      else
+        email
+      end
     end
+    
   end
 
   def can_see?(user)

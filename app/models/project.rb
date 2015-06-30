@@ -109,15 +109,23 @@ class Project
     if (people.empty?)
       invited_user         = self.invited_users.create({accepted: true})
       invited_user.user    = self.user
+      invited_user.email = self.user.email
       invited_user.save
       people = self.invited_users
+    else
+      people.where(:email => nil).delete
+      people.where(:email => "").delete
     end
 
     if (people.select {|person| person.user && person.user.admin}).empty?
-      invited_user         = self.invited_users.create({accepted: true})
-      invited_user.user    = User.get_admin
-      invited_user.save
-      people = self.invited_users
+      admin_user = User.get_admin
+      unless admin_user.nil?
+        invited_user         = self.invited_users.create({accepted: true})
+        invited_user.user    = admin_user
+        invited_user.email = admin_user.email
+        invited_user.save
+        people = self.invited_users
+      end
     end
 
     people
@@ -140,6 +148,7 @@ class Project
     else
       designers.where(:user => User.get_admin).delete
       designers.where(:email => nil).delete
+      designers.where(:email => "").delete
     end
 
     # if (designers.select {|person| person.user && person.user.admin}).empty?

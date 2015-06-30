@@ -24,7 +24,6 @@ class InvitedDesigner
       invitation.user        = to if to
       invitation.save
 
-      # binding.pry
       if project.class == Project
         UserMailer.invited_designer_to_project_mail(invitation, project, from).deliver
       elsif project.class == PrivateChat

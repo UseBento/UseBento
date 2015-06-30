@@ -77,7 +77,6 @@ class ApplicationController < ActionController::Base
     @message_sent = user.save
     @errors = user.errors
 
-    # binding.pry
     if @message_sent
       sign_in(:user, user)
       redirect_to '/profile'
@@ -102,6 +101,14 @@ class ApplicationController < ActionController::Base
         attachment.attachment = file
         parent.attachments.push(attachment)
         logger.debug('made new file');
+
+        # attachment = Attachment.new({uploaded_date:   DateTime.now,
+        #                              name:            file.original_filename,
+        #                              is_amazon_s3:    true})
+        # attachment.attachment_s3 = file
+        # parent.attachments.push(attachment)
+        # logger.debug('made new file');
+
       end
     end
   end

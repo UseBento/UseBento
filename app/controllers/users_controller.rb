@@ -63,7 +63,6 @@ class UsersController < Devise::SessionsController
       else
         current_user.designer_profile.available = false
       end
-      # binding.pry
       current_user.save
 
       @info_success            = "Updated your information"
@@ -114,7 +113,6 @@ class UsersController < Devise::SessionsController
     else
       @user.designer_profile.available = false
     end
-    # binding.pry
     @user.save
 
     @info_success            = "Updated your information"
@@ -178,7 +176,6 @@ class UsersController < Devise::SessionsController
         @status = 'success'
       end
     end
-    # binding.pry
 
     respond_to do |format|
       if @status == 'success'
@@ -198,7 +195,6 @@ class UsersController < Devise::SessionsController
         @status = 'success'
       end
     end
-    # binding.pry
 
     respond_to do |format|
       # format.html { redirect_to @project }
@@ -262,7 +258,6 @@ class UsersController < Devise::SessionsController
     end
 
     save_login(params[:email])
-    # binding.pry
 
     respond_to do |format|
       format.html { redirect_to '/' }
