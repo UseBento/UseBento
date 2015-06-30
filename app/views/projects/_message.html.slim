@@ -22,13 +22,15 @@ li.project-message[data-id=message.id data-project-id=@project.id]
                   .clear
                   br
   .avtar
-    img[src=message.user.avatar(request.host_with_port) alt=""]
+    - unless message.user.blank?
+      img[src=message.user.avatar(request.host_with_port) alt=""]
   .dtl_box
     - if to_owner && (current_user.admin || current_user == message.user)
       a.right.fa.fa-trash-o.delete-message[data-project-id=@project.id data-message-id=message.id href=("#delete-popup-" + message.id.to_s)]
       a.right.fa.fa-pencil.edit-message[data-project-id=@project.id data-message-id=message.id]
     h4
-      = message.user.full_name
+      - unless message.user.blank?
+        = message.user.full_name
     .content-wrapper
       .message-content
         = raw message.body_as_html
