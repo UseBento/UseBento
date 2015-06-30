@@ -115,6 +115,14 @@ class Project
     else
       people.where(:email => nil).delete
       people.where(:email => "").delete
+
+      if (people.select {|person| person.user && person.user == self.user}).empty?
+        invited_user         = self.invited_users.create({accepted: true})
+        invited_user.user    = self.user
+        invited_user.email = self.user.email
+        invited_user.save
+        people = self.invited_users
+      end
     end
 
     if (people.select {|person| person.user && person.user.admin}).empty?
