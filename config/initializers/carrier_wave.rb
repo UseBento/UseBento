@@ -2,10 +2,12 @@ CarrierWave.configure do |config|
   config.storage = :fog
   config.fog_credentials = {
     :provider               => 'AWS',
-    :aws_access_key_id      => 'AKIAJNM33Z5GZXUPRGQQ',
-    :aws_secret_access_key  => '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'
+    :aws_access_key_id      => 'AKIAJXAS6QC5PAV3OABA',
+    :aws_secret_access_key  => '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'
   }
   config.fog_directory  = 'usebento'
+  config.fog_public = false
+  config.fog_attributes = { 'Cache-Control' => "max-age=#{365.day.to_i}"}
 end
 
 # CarrierWave.configure do |config|
