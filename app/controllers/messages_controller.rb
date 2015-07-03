@@ -38,6 +38,7 @@ class MessagesController < ApplicationController
 
 
     respond_to do |format|
+      # binding.pry
       format.html { redirect_to @project }
       format.json { render json: @message.serialize_message(request, message_body) }
     end
