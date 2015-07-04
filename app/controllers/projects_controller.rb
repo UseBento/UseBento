@@ -261,7 +261,16 @@ class ProjectsController < ApplicationController
       @project.status_index = status
     end
 
-    @project.save
+    if @project.save
+      # ProjectMailer.project_status_update_mail(@project, current_user).deliver
+      @project.people.each do |person|
+        to_full_name = person.full_name
+        from_full_name = current_user.full_name
+        message = "updated the project status"
+        to_email = person.email
+        ProjectMailer.project_status_update_mail(to_full_name, from_full_name, message, to_email).deliver
+      end
+    end
 
     redirect_to @project
   end
