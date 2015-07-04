@@ -4,6 +4,7 @@ CarrierWave.configure do |config|
     :provider               => 'AWS',
     :aws_access_key_id      => 'AKIAJXAS6QC5PAV3OABA',
     :aws_secret_access_key  => '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'
+    :region                 => 'us-west-2'
   }
   config.fog_directory  = 'usebento'
   config.fog_public = false
