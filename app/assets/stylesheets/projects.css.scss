@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .wrapper {
-  .table_box .subtitle td {
+  .table_box .subtitle td, .table_box .subtitle th {
     font-family: 'AvenirNext';
   }
   .center_container {
@@ -24,6 +24,35 @@
       }
     }
 
+  }
+
+  .page_content {
+    .project_box {
+      .table_box {
+        thead tr {
+          text-align: left;
+          th {
+            padding: 16px 25px 16px;
+          }
+        }
+        @media screen and (max-width: 840px) {
+          thead tr th {
+            padding: 10px 15px 10px;
+          }
+          .tbl_row td {
+            padding: 10px 15px 10px;
+          }
+        }
+        @media screen and (max-width: 480px) {
+          thead tr th {
+            padding: 10px 10px 10px;
+          }
+          .tbl_row td {
+            padding: 10px 10px 10px;
+          }
+        }
+      }
+    }
   }
   
   &.project-wrapper {

@@ -22,25 +22,25 @@
           table#projects-list.tablesorter.footable[width="100%" border="0" cellspacing="0" cellpadding="0"]
             thead
               tr.tbl_row.subtitle
-                th[data-hide="phone,tablet"]
+                td[width="15%"]
                   | Date Created
                   span.sort-carot
-                th[data-hide="phone"]
+                td[width="17%"]
                   | Company
                   span.sort-carot
-                th[data-hide="phone,tablet"]
+                td[width="12%"]
                   | Number
                   span.sort-carot
-                th
+                td[width="12%"]
                   | Name
                   span.sort-carot
-                th[data-hide="phone"]
+                td[width="14%"]
                   | Type
                   span.sort-carot
-                th[data-hide="phone,tablet"]
+                td[width="14%"]
                   | Deliverables
                   span.sort-carot
-                th
+                td[width="11%"]
                   | Status
                   span.sort-carot
             tbody
@@ -75,19 +75,19 @@
           table#projects-list.tablesorter[width="100%" border="0" cellspacing="0" cellpadding="0"]
             thead
               tr.tbl_row.subtitle
-                th
+                td[width="23%"]
                   | Project Name
                   span.sort-carot
-                th
+                td[width="26%"]
                   | Project Type
                   span.sort-carot
-                th
+                td[width="16%"]
                   | Date Started
                   span.sort-carot
-                th
+                td[width="16%"]
                   | Last Updated
                   span.sort-carot
-                th
+                td[width="18%"]
                   | Project Status
                   span.sort-carot
             tbody
@@ -121,25 +121,25 @@
             table#projects-list.tablesorter[width="100%" border="0" cellspacing="0" cellpadding="0"]
               thead
                 tr.tbl_row.subtitle
-                  th
+                  td[width="15%"]
                     | Date Created
                     span.sort-carot
-                  th
+                  td[width="17%"]
                     | Company
                     span.sort-carot
-                  th
+                  td[width="12%"]
                     | Number
                     span.sort-carot
-                  th
+                  td[width="12%"]
                     | Name
                     span.sort-carot
-                  th
+                  td[width="14%"]
                     | Type
                     span.sort-carot
-                  td
-                    | Dhliverables
+                  td[width="14%"]
+                    | Deliverables
                     span.sort-carot
-                  th
+                  td[width="11%"]
                     | Status
                     span.sort-carot
               tbody
@@ -171,19 +171,19 @@
             table#projects-list.tablesorter[width="100%" border="0" cellspacing="0" cellpadding="0"]
               thead
                 tr.tbl_row.subtitle
-                  th
+                  td[width="23%"]
                     | Project Namef
                     span.sort-carot
-                  th
+                  td[width="26%"]
                     | Project Type
                     span.sort-carot
-                  th
+                  td[width="16%"]
                     | Date Started
                     span.sort-carot
-                  th
+                  td[width="16%"]
                     | Last Updated
                     span.sort-carot
-                  th
+                  td[width="18%"]
                     | Project Status
                     span.sort-carot
               tbody
@@ -209,10 +209,8 @@
 javascript:
   jQuery(document).ready(function($) {
     
-    $('.footable').footable(
-      
-    );
-
+    $('.footable').footable();
+    
   });
 
   

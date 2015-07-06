@@ -15,6 +15,7 @@
  *= require transition
  *= require checkbox
  *= require dropdown
+ *= require footable.core
  *= require common
  *= require payments
  *= require projects

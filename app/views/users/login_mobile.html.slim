@@ -1,0 +1,33 @@
+.wrapper
+  = render partial: 'dark_header', locals: {page: 'apply'}
+  .section.section-contacts
+    .shell
+      .form.form-apply
+        .section-head.form-head
+          a.form-logo[href="#"]
+          .separator
+          h2
+            | Log In to Your Bento Account
+        form#apply-form.form-required[action="/apply" method="post"]
+          input[type="hidden" name="application-form"]
+          = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token)
+          .form-body
+            .form-row
+              .form-controls
+                input#field-email.field[type="text" placeholder="Email *" name="field-email" value=@saved_email]
+            .form-row
+              .form-controls
+                input#field-password.field[type="password" placeholder="Password *" name="field-password"]
+            .form-actions
+              input.form-btn.btn.brown[type="submit" value="Login"]
+            .form-foot.form-foot-secondary
+              p
+                span
+                  a.popup-link[href="/popups/password"]
+                    | Forgot Password?
+                span
+                  |  Don’t have an account? &nbsp;
+                  a.popup-link[href="/popups/sign_up"]
+                    |    Get Started
+              
+= render partial: 'dark_footer'
