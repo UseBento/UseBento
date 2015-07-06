@@ -50,16 +50,24 @@ header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 
         - unless page == 'project' && !user_signed_in? && false
           - unless user_signed_in?
             li[ class=(page == 'profile' ? 'current' : '')]
-              a.popup-link#userlink[href="/popups/login"]
-                | LOGIN
+              - if mobile_device?
+                a.popup-link-mobile#userlink[href="/popups/login"]
+                  | LOGIN
+              - else
+                a.popup-link#userlink[href="/popups/login"]
+                  | LOGIN
           - else
             li[ class=(page == 'profile' ? 'current' : '')]
               a#userlink[href="/profile" data-userid=current_user.id]
                 | PROFILE
         - else
           li
-            a.popup-link.hidden#userlink[href="/popups/login"]
-              | LOGIN
+            - if mobile_device?
+              a.popup-link-mobile.hidden#userlink[href="/popups/login"]
+                | LOGIN
+            - else
+              a.popup-link.hidden#userlink[href="/popups/login"]
+                | LOGIN
 
 
 javascript:
