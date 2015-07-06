@@ -11,14 +11,13 @@ class UsersController < Devise::SessionsController
     @saved_email = cookies[:saved_email]
     # render 'login', layout: false
     
-    # if mobile_device?
-    #   render 'login_mobile', layout: "application"
-    # else
-    #   render 'login', layout: false
-    # end
+    if mobile_device?
+      redirect_to '/users/sign_in'
+    else
+      render 'login', layout: false
+    end
 
-    # render 'login_mobile', layout: "application"
-    redirect_to '/users/sign_in'
+    
   end
 
   def sign_up_popup
