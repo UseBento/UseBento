@@ -52,4 +52,29 @@ class ProjectMailer < ActionMailer::Base
       subject: "New message from " + @full_name)
     
   end
+
+  # def project_status_update_mail(project, user)
+
+  #   @full_name   = user.full_name
+  #   project.people.each do |person|
+  #     mail(to: person.email, 
+  #       subject: "Project status updated")
+  #   end
+
+  #   project.designers.each do |designer|
+  #     mail(to: designer.email, 
+  #       subject: "Project status updated")
+  #   end
+  # end
+
+  def project_status_update_mail(to_full_name, from_full_name, message, to_email)
+    @from_full_name = from_full_name
+    @to_full_name = to_full_name
+    @message = message
+    mail(to: to_email, 
+      subject: "Project status updated")
+  end
+
+
+
 end

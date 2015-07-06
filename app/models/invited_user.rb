@@ -72,4 +72,12 @@ class InvitedUser
     return false if self.user == get_project.user
     !(self.user && self.user.admin && get_project.invited_admins.count == 1)
   end
+
+  def full_name
+    unless self.user.blank?
+      user.full_name
+    else
+      email
+    end
+  end
 end
