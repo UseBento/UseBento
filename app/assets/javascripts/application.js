@@ -16,6 +16,7 @@
 //= require jquery.magnific-popup.min.js
 //= require jquery.selectbox-0.2.min.js
 //= require validator.js
+//= require footable.js
 //= require jquery.touchSwipe.min.js
 //= require jquery.carouFredSel-6.2.1-packed.js
 //= require functions.js

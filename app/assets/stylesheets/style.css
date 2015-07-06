@@ -1161,7 +1161,7 @@ a.btn_small{
 
 
 }
-.table_box .subtitle td{
+.table_box .subtitle td, .table_box .subtitle th{
 	border-bottom:#c9c9c9 solid 1px;
 	border-top:#c9c9c9 solid 1px;
 	background-color:#f3f3f3;

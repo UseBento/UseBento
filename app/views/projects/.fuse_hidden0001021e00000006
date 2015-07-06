@@ -22,22 +22,22 @@
           table#projects-list.tablesorter.footable[width="100%" border="0" cellspacing="0" cellpadding="0"]
             thead
               tr.tbl_row.subtitle
-                th[data-hide="phone,tablet"]
+                th[data-hide="phone"]
                   | Date Created
                   span.sort-carot
-                th[data-hide="phone"]
+                th
                   | Company
                   span.sort-carot
-                th[data-hide="phone,tablet"]
+                th[data-hide="phone"]
                   | Number
                   span.sort-carot
                 th
                   | Name
                   span.sort-carot
-                th[data-hide="phone"]
+                th
                   | Type
                   span.sort-carot
-                th[data-hide="phone,tablet"]
+                th[data-hide="phone"]
                   | Deliverables
                   span.sort-carot
                 th
@@ -209,9 +209,7 @@
 javascript:
   jQuery(document).ready(function($) {
     
-    $('.footable').footable(
-      
-    );
+    $('.footable').footable();
 
   });
 
