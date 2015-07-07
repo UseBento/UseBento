@@ -25,19 +25,19 @@
                 th[data-hide="phone,tablet"]
                   | Date Created
                   span.sort-carot
-                th[data-hide="phone"]
+                th
                   | Company
                   span.sort-carot
-                th[data-hide="phone,tablet"]
+                th
                   | Number
                   span.sort-carot
                 th
                   | Name
                   span.sort-carot
-                th[data-hide="phone"]
+                th[data-hide="phone,tablet"]
                   | Type
                   span.sort-carot
-                th[data-hide="phone,tablet"]
+                th[data-hide="phone"]
                   | Deliverables
                   span.sort-carot
                 th
@@ -72,7 +72,7 @@
             tr
               td.heading[colspan="6"]
                 | Ongoing Projects
-          table#projects-list.tablesorter[width="100%" border="0" cellspacing="0" cellpadding="0"]
+          table#projects-list.tablesorter.footable[width="100%" border="0" cellspacing="0" cellpadding="0"]
             thead
               tr.tbl_row.subtitle
                 th
@@ -81,10 +81,10 @@
                 th
                   | Project Type
                   span.sort-carot
-                th
+                th[data-hide="phone"]
                   | Date Started
                   span.sort-carot
-                th
+                th[data-hide="phone"]
                   | Last Updated
                   span.sort-carot
                 th
@@ -118,10 +118,10 @@
               tr
                 td.heading[colspan="6"]
                   | Archived Projects
-            table#projects-list.tablesorter[width="100%" border="0" cellspacing="0" cellpadding="0"]
+            table#projects-list.tablesorter.footable[width="100%" border="0" cellspacing="0" cellpadding="0"]
               thead
                 tr.tbl_row.subtitle
-                  th
+                  th[data-hide="phone,tablet"]
                     | Date Created
                     span.sort-carot
                   th
@@ -133,11 +133,11 @@
                   th
                     | Name
                     span.sort-carot
-                  th
+                  th[data-hide="phone,tablet"]
                     | Type
                     span.sort-carot
-                  td
-                    | Dhliverables
+                  td[data-hide="phone"]
+                    | Deliverables
                     span.sort-carot
                   th
                     | Status
@@ -168,19 +168,19 @@
               tr
                 td.heading[colspan="6"]
                   | Archived Projects
-            table#projects-list.tablesorter[width="100%" border="0" cellspacing="0" cellpadding="0"]
+            table#projects-list.tablesorter.footable[width="100%" border="0" cellspacing="0" cellpadding="0"]
               thead
                 tr.tbl_row.subtitle
                   th
-                    | Project Namef
+                    | Project Name
                     span.sort-carot
                   th
                     | Project Type
                     span.sort-carot
-                  th
+                  th[data-hide="phone"]
                     | Date Started
                     span.sort-carot
-                  th
+                  th[data-hide="phone"]
                     | Last Updated
                     span.sort-carot
                   th
