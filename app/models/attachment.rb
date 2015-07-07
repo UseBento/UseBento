@@ -40,7 +40,11 @@ class Attachment
 
   def filesize
     if is_amazon_s3
-      my_size = self.attachment_s3.file.size
+      if self.attachment_s3.file
+        # binding.pry
+        my_size = self.attachment_s3.file.size
+      end
+      
     else
       my_size = self.attachment.size
     end

@@ -54,7 +54,7 @@ li.project-message[data-id=message.id data-project-id=@project.id]
         p.img_txt
           | Click file to download
           br
-          - if attachment.is_amazon_s3
+          - if attachment.is_amazon_s3 
             = link_to attachment.name, attachment.attachment_s3_url, :target => "_blank"
             = " " + attachment.filesize
           - else
