@@ -29,6 +29,9 @@
   .page_content {
     .project_box {
       .table_box {
+        .footable-toggle {
+          display: none;
+        }
         thead tr {
           text-align: left;
           th {
