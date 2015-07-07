@@ -40,21 +40,23 @@ class Attachment
 
   def filesize
     if is_amazon_s3
+      my_size = self.attachment_s3.file.size
     else
       my_size = self.attachment.size
-      if (my_size == 0 || !my_size)
-        return "0b"
-      else
-        sizes = {b:  1,
-                 kb: 1024,
-                 mb: 1024 * 1024,
-                 gb: 1024 * 1024 * 1024}
-        sizes.each do |label, size|
-               if (my_size > size && my_size < (size * 1024))
-                 return (my_size.to_f / size.to_f).round(2).to_s + label.to_s
-               end
+    end
+    
+    if (my_size == 0 || !my_size)
+      return "0b"
+    else
+      sizes = {b:  1,
+               kb: 1024,
+               mb: 1024 * 1024,
+               gb: 1024 * 1024 * 1024}
+      sizes.each do |label, size|
+             if (my_size > size && my_size < (size * 1024))
+               return (my_size.to_f / size.to_f).round(2).to_s + label.to_s
              end
-      end
+           end
     end
     
   end
