@@ -67,14 +67,17 @@ class ProjectMailer < ActionMailer::Base
   #   end
   # end
 
-  def project_status_update_mail(to_full_name, from_full_name, message, to_email)
+  def project_status_update_mail(project, to_first_name, from_full_name, to_email)
+    @project = project
     @from_full_name = from_full_name
-    @to_full_name = to_full_name
-    @message = message
+    @to_first_name = to_first_name
+    if @project.status_index >= 0
+      @message = "#{@project.name} has been updated to the milestone #{Project::STATUS_LIST[@project.status_index]}"
+    else
+      @message = "#{@project.name} has been updated to the milestone"
+    end
     mail(to: to_email, 
       subject: "Project status updated")
   end
-
-
 
 end

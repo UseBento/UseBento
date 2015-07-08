@@ -3,10 +3,10 @@ html[lang="en"]
   head
   body
     p
-      = "Hey " + @to_full_name
+      = "Hey " + @to_first_name
     p
       = @message
     p
-      | -Bento
+      = link_to "Click here to review the project.", project_url(@project), :only_path => false
 
 

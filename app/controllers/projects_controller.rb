@@ -264,31 +264,20 @@ class ProjectsController < ApplicationController
     if @project.save
       @project.people.each do |person|
         unless person.user == current_user
-          to_full_name = person.full_name
+          to_first_name = person.first_name
           from_full_name = current_user.full_name
-          if @project.status_index >= 0
-            message = "Bento Bot updated the project status to #{Project::STATUS_LIST[@project.status_index]}"
-          else
-            message = "Bento Bot updated the project status NO STATUS"
-          end
-          
           to_email = person.email
-          ProjectMailer.project_status_update_mail(to_full_name, from_full_name, message, to_email).deliver
+          ProjectMailer.project_status_update_mail(@project, to_first_name, from_full_name, to_email).deliver
         end
       end
 
       @project.designers.each do |designer|
         unless designer.user == current_user
-          to_full_name = ''
+          to_first_name = designer.first_name
           from_full_name = current_user.full_name
-          if @project.status_index >= 0
-            message = "Bento Bot updated the project status to #{Project::STATUS_LIST[@project.status_index]}"
-          else
-            message = "Bento Bot updated the project status to NO STATUS"
-          end
           
           to_email = designer.email
-          ProjectMailer.project_status_update_mail(to_full_name, from_full_name, message, to_email).deliver
+          ProjectMailer.project_status_update_mail(@project, to_first_name, from_full_name, to_email).deliver
         end
       end
     end

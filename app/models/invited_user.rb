@@ -80,4 +80,12 @@ class InvitedUser
       email
     end
   end
+
+  def first_name
+    unless self.user.blank?
+      self.user.first_name
+    else
+      email
+    end
+  end
 end
