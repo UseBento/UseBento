@@ -12,6 +12,38 @@ class Message
   embedded_in :private_chat
   embeds_many :attachments
 
+
+  def self.get_email_replies
+    Mailman.config.imap = {
+      server: 'imap.gmail.com',
+      port: 993, 
+      ssl: true,
+      # Use starttls instead of ssl (do not specify both)
+      starttls: true,
+      username: Rails.configuration.gmail_imap_username,
+      password: Rails.configuration.gmail_imap_password}
+
+    Mailman.config.poll_interval = 0
+    
+    Mailman::Application.run do
+      default do
+        begin
+          matches = message.body.match /bento-reply<([a-zA-Z0-9]+):(chat|private_chat)>/
+          if matches
+            reply_id      = matches[1]
+            room          = matches[2]
+            project       = Project.find(reply_id)
+
+            messages      = room == 'chat' ? project.messages : project.get_private_chat.messages
+          rescue Exception => e
+            Mailman.logger.error "Exception occurred while receiving message:n#{message}"
+            Mailman.logger.error [e, *e.backtrace].join("n")
+          end
+        end
+      end
+    end
+  end
+  
   def send_emails(user, project_url, room)
     if room == 'private'
       participants = parent_project.private_chat.people.select {|p| p.accepted}

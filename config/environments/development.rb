@@ -24,6 +24,9 @@ Rails.application.configure do
   config.twocheckout_seller_id   = 901261089
   config.twocheckout_sandbox     = true
 
+  config.gmail_imap_username     = 'abebosche@gmail.com'
+  config.gmail_imap_password     = '1mp34chg0d'
+
   # Do not eager load code on boot.
   config.eager_load = false
 
