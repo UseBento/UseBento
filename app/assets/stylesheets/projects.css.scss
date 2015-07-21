@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .wrapper {
+
   .table_box .subtitle td, .table_box .subtitle th {
     font-family: 'AvenirNext';
   }
@@ -23,7 +24,6 @@
         }
       }
     }
-
   }
 
   .page_content {
@@ -81,6 +81,9 @@
     }
   }
 
+  &.projects-start {
+    min-height: inherit;
+  }
   @media screen and (max-width: 840px) {
     .center_container {
       padding: 45px 5px;
@@ -142,5 +145,13 @@
       }
     }
     
+  }
+
+    
+}
+
+@media screen and (max-width: 640px) {
+  .projects-start .shell.start-project .section-body.start-form button {
+    width: 100%;
   }
 }
