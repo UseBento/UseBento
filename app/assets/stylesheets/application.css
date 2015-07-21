@@ -479,7 +479,8 @@ span.unread-tag.notification {
     background-color: #f1f1f1; }
 
 .shell.start-project {
-    width: 820px; }
+    /*width: 820px; */
+}
 
 .shell.start-project h3 {
 color: #212F44;
