@@ -463,4 +463,8 @@ class Project
     self.shown_popup = true
     save
   end
+
+  def email_code(is_private)
+    'bento-reply<' + self.id + ':' + (is_private ? 'private_chat' : 'chat') + '>'
+  end
 end
