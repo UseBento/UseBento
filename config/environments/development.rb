@@ -8,24 +8,24 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.smtp_settings = {
-  #   :authentication => :plain,
-  #   :address => "smtp.mailgun.org",
-  #   :port => 587,
-  #   :domain => "sandboxa88c11e826b4458aa502808f7ec49c2b.mailgun.org",
-  #   :user_name => "postmaster@sandboxa88c11e826b4458aa502808f7ec49c2b.mailgun.org",
-  #   :password => ENV["MAILGUN_PW"]
-  # }
+   config.action_mailer.smtp_settings = {
+     :authentication => :plain,
+     :address => "smtp.mailgun.org",
+     :port => 587,
+     :domain => "sandboxc84676d0390645d2abda73fd1b5115fd.mailgun.org",
+     :user_name => "postmaster@sandboxc84676d0390645d2abda73fd1b5115fd.mailgun.org",
+     :password => "95eyypl176p8"
+   }
 
-  config.action_mailer.smtp_settings = { :address => 'localhost', :port => 1025 }
+#  config.action_mailer.smtp_settings = { :address => 'localhost', :port => 1025 }
 
   config.twocheckout_private_key = ENV['TWOCHECKOUT_PRIVATE_KEY']
   config.twocheckout_public_key  = '7EB9463F-A64C-4CF5-9B49-912A9912E3D7'
   config.twocheckout_seller_id   = 901261089
   config.twocheckout_sandbox     = true
 
-  config.gmail_imap_username     = 'abebosche@gmail.com'
-  config.gmail_imap_password     = '1mp34chg0d'
+  config.gmail_imap_username     = 'email@usebento.com'
+  config.gmail_imap_password     = '2015Crush'
 
   # Do not eager load code on boot.
   config.eager_load = false
