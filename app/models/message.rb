@@ -23,7 +23,7 @@ class Message
       username: Rails.configuration.gmail_imap_username,
       password: Rails.configuration.gmail_imap_password}
 
-    Mailman.config.poll_interval = 0
+    Mailman.config.poll_interval = 60
     
     Mailman::Application.run do
       default do
