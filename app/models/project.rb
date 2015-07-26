@@ -464,7 +464,7 @@ class Project
     save
   end
 
-  def email_code(is_private)
-    'bento-reply<' + self.id + ':' + (is_private ? 'private_chat' : 'chat') + '>'
+  def email_code(user, is_private)
+    'bento-reply<' + self.id + ':' + user.id + ':' + (is_private ? 'private_chat' : 'chat') + '>'
   end
 end

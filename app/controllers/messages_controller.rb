@@ -30,7 +30,7 @@ class MessagesController < ApplicationController
                     (@room == 'private' ? '/private_chat' : ''))
 
     @message.send_emails(current_user, url, @room,
-                         @project.email_code(@room == 'private'))
+                         @project, @room == 'private')
     @project.updated_at = DateTime.now
     @project.save!
 

@@ -31,16 +31,17 @@ class Message
           body = (message.body).to_s
           print message.to_yaml
           print body + "\n\n"
-          print body.match /bento-reply<([a-zA-Z0-9]+):(chat|private_chat)>/
+          print body.match /bento-reply<([a-zA-Z0-9]+):([a-zA-Z0-9]+):(chat|private_chat)>/
           print "\n\n"
           
-          matches = body.match /bento-reply<([a-zA-Z0-9]+):(chat|private_chat)>/
+          matches = body.match /bento-reply<([a-zA-Z0-9]+):([a-zA-Z0-9]+):(chat|private_chat)>/
           if matches
             reply_id      = matches[1]
-            room          = matches[2]
+            user_id       = matches[3]
+            room          = matches[3]
             project       = Project.find(reply_id)
             from          = message.from.first
-            from_user     = User.where(email: from).first
+            from_user     = User.find(user_id) || User.where(email: from).first
 
             messages      = room == 'chat' ? project.messages : project.get_private_chat.messages
             message       = messages.create({body: Message.remove_quote_from_email(body),
@@ -53,7 +54,7 @@ class Message
 
             message.send_emails(from_user, url,
                                 (room == 'prvate_chat' ? 'prvate' : 'chat'),
-                                project.email_code(room == 'private_chat'))
+                                project, room == 'private_chat')
             project.updated_at = DateTime.now
             project.save!
           end
@@ -82,7 +83,7 @@ class Message
     message
   end
   
-  def send_emails(user, project_url, room, code)
+  def send_emails(user, project_url, room, project, is_private)
     if room == 'private'
       participants = parent_project.private_chat.people.select {|p| p.accepted}
     else
@@ -109,7 +110,7 @@ class Message
                         body,
                         project_url,
                         participant.user.email,
-                        code
+                        project.email_code(participant.user, is_private)
                       ).deliver_later
 
                   end
@@ -136,7 +137,7 @@ class Message
                         body,
                         project_url,
                         participant.user.email,
-                        code
+                        project.email_code(participant.user, is_private)
                       ).deliver_later
 
                   end
