@@ -37,7 +37,7 @@ class Message
           matches = body.match /bento-reply<([a-zA-Z0-9]+):([a-zA-Z0-9]+):(chat|private_chat)>/
           if matches
             reply_id      = matches[1]
-            user_id       = matches[3]
+            user_id       = matches[2]
             room          = matches[3]
             project       = Project.find(reply_id)
             from          = message.from.first
