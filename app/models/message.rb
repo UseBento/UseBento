@@ -40,7 +40,7 @@ class Message
             room          = matches[2]
             project       = Project.find(reply_id)
             from          = message.from.first
-            from_user     = User.where(email: from)
+            from_user     = User.where(email: from).first
 
             messages      = room == 'chat' ? project.messages : project.get_private_chat.messages
             message       = messages.create({body: Message.remove_quote_from_email(body),
