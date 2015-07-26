@@ -12,12 +12,83 @@ class Message
   embedded_in :private_chat
   embeds_many :attachments
 
-  def send_emails(user, project_url, room)
+
+  def self.get_email_replies
+    Mailman.config.imap = {
+      server: 'imap.gmail.com',
+      port: 993, 
+      ssl: true,
+      # Use starttls instead of ssl (do not specify both)
+#      starttls: true,
+      username: Rails.configuration.gmail_imap_username,
+      password: Rails.configuration.gmail_imap_password}
+
+    Mailman.config.poll_interval = 0
+    
+    Mailman::Application.run do
+      default do
+        begin
+          body = (message.body).to_s
+          print message.to_yaml
+          print body + "\n\n"
+          print body.match /bento-reply<([a-zA-Z0-9]+):(chat|private_chat)>/
+          print "\n\n"
+          
+          matches = body.match /bento-reply<([a-zA-Z0-9]+):(chat|private_chat)>/
+          if matches
+            reply_id      = matches[1]
+            room          = matches[2]
+            project       = Project.find(reply_id)
+            from          = message.from.first
+            from_user     = User.where(email: from).first
+
+            messages      = room == 'chat' ? project.messages : project.get_private_chat.messages
+            message       = messages.create({body: Message.remove_quote_from_email(body),
+                                             posted_date: DateTime.now})
+            message.user  = from_user
+            message.save
+
+            url           = root_url + ('/projects/' + project.id +
+                                        (@room == 'private_chat' ? '/private_chat' : ''))
+
+            message.send_emails(from_user, url,
+                                (room == 'prvate_chat' ? 'prvate' : 'chat'),
+                                project.email_code(room == 'private_chat'))
+            project.updated_at = DateTime.now
+            project.save!
+          end
+        rescue Exception => e
+          Mailman.logger.error "Exception occurred while receiving message:n#{message}"
+          Mailman.logger.error [e, *e.backtrace].join("n")
+        end
+      end
+    end
+  end
+
+  def self.remove_quote_from_email(body)
+    message = ""
+    broken  = false
+    
+    body.split("\n").each do |line|
+      if !broken
+        if (line.match(/^On [^\r\n]+wrote:/))
+          broken = true
+        elsif (!line.match(/^>/))
+          message += line + "\r\n"
+        end
+      end
+    end
+
+    message
+  end
+  
+  def send_emails(user, project_url, room, code)
     if room == 'private'
       participants = parent_project.private_chat.people.select {|p| p.accepted}
     else
       participants = parent_project.people.select {|p| p.accepted}
     end
+    ## shouldn't these two blocks be combined? particpants.concat(parent_projects.designers.select {|p| p.accepted}).map do |participant|
     participants.map do |participant|
                   if participant.user != user
                     # If there was an attachement we need add extra copy
@@ -37,7 +108,8 @@ class Message
                         user.full_name,
                         body,
                         project_url,
-                        participant.user.email
+                        participant.user.email,
+                        code
                       ).deliver_later
 
                   end
@@ -63,7 +135,8 @@ class Message
                         user.full_name,
                         body,
                         project_url,
-                        participant.user.email
+                        participant.user.email,
+                        code
                       ).deliver_later
 
                   end
