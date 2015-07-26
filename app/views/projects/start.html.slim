@@ -1,107 +1,109 @@
-.wrapper.dark
+.wrapper.dark.projects-start
   = render partial: 'dark_header', locals: {page: 'start_project'}
   .section.section-project
     .shell.start-project
-      .section-head.section-head-little-gutter
-        h3
-          | TELL US ABOUT YOUR PROJECT
-        - if @error
-          br
-          strong
-            = @error
-      form.form-required#start-form[action="/projects/finish_start" method="post"]
-        = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token)
-        .section-body.start-form
-          .form-body
-            .form-row
-              .form-cols
-                .form-col.form-col-1of2
-                  label.form-label[for="field-project-type"]
-                    | Service Type
-                  .form-controls
-                    select#field-project-type.field[name="project_type" required]
-                      - for type in ['New', 'Update Existing']
-                        option[value=type]
-                          = type
-                .form-col.form-col-1of2
-                  label.form-label[for="field-project-type"]
-                    | Service
-                  .form-controls
-                    select#field-service.field[name="service" required]
-                      option[value=""]
-                        | Select Service
-                      - for service in [['Website', 'website_design_and_development'], ['Landing Page', 'landing_page_design_and_development'], ['Email', 'email_design_and_development'], ['Social Media', 'social_media_design'], ['Collateral', 'stationary_design'], ['Presentation', 'presentation_design'], ['Banner Ads', 'banner_ads'], ['Other', 'business_card']]
-                        option[value=service[1]]
-                          = service[0]
+      .form.form-apply.form-business-card
+        .section-head.section-head-little-gutter
+          h3
+            | TELL US ABOUT YOUR PROJECT
+          - if @error
             br
-            .form-row.align-right#js-button
-              button.brown[type="button"]
-                | CONTINUE >
-            #login-signup-parts
-              .form-row#part
-                p
-                  span.signup-part
-                    | Sign up 
-                  span.login-part
-                    | Log in 
-                  |  for an account below or&nbsp;
-                  a#login-link.signup-part
-                    | Log In
-                  a#signup-link.login-part
-                    | Sign Up
-                hr[style="border:0;border-bottom:1px solid #eee;"]
-              #login-part.login-part
+            strong
+              = @error
+        .form-container
+          form.form-required#start-form[action="/projects/finish_start" method="post"]
+            = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token)
+            .section-body.start-form
+              .form-body
                 .form-row
                   .form-cols
                     .form-col.form-col-1of2
-                      label.form-label[for="field-email-address"]
-                        | Email Address
+                      label.form-label[for="field-project-type"]
+                        | Service Type
                       .form-controls
-                        input#field-email-address.field[type="text" name="login_email_address" required]
+                        select#field-project-type.field[name="project_type" required]
+                          - for type in ['New', 'Update Existing']
+                            option[value=type]
+                              = type
                     .form-col.form-col-1of2
-                      label.form-label[for="field-password"]
-                        | Password
+                      label.form-label[for="field-project-type"]
+                        | Service
                       .form-controls
-                        input#field-full-name.field[type="password" name="login_password" required]
-              #signup-part.signup-part
-                .form-row
-                  .form-cols
-                    .form-col.form-col-1of2
-                      label.form-label[for="field-full-name"]
-                        | Full Name
-                      .form-controls
-                        input#field-full-name.field[type="text" name="signup_full_name" required]
-                    .form-col.form-col-1of2
-                      label.form-label[for="field-email-address"]
-                        | Email Address
-                      .form-controls
-                        input#field-email-address.field[type="text" name="signup_email_address" required]
-                .form-row
-                  .form-cols
-                    .form-col.form-col-1of2
-                      label.form-label[for="field-company"]
-                        | Company Name
-                      .form-controls
-                        input#field-company.field[type="text" name="signup_company" required]
-                    .form-col.form-col-1of2
-                      label.form-label[for="field-company-size"]
-                        | Company Size
-                      .form-controls
-                        select#field-company-size.field[name="signup_company_size" required]
-                          option[value="1-10"]
-                            | 1-10
-                          option[value="11-50"]
-                            | 11-50
-                          option[value="51-200"]
-                            | 51-200
-                          option[value="201-500"]
-                            | 201-500
-                          option[value="501-1000"]
-                            | 501-1000
-                          option[value="1000+"]
-                            | 1000+
-              br
-              .form-row.align-right
-               button.brown#submit-start-form[type="submit"]
-                  | CONTINUE >
+                        select#field-service.field[name="service" required]
+                          option[value=""]
+                            | Select Service
+                          - for service in [['Website', 'website_design_and_development'], ['Landing Page', 'landing_page_design_and_development'], ['Email', 'email_design_and_development'], ['Social Media', 'social_media_design'], ['Collateral', 'stationary_design'], ['Presentation', 'presentation_design'], ['Banner Ads', 'banner_ads'], ['Other', 'business_card']]
+                            option[value=service[1]]
+                              = service[0]
+                br
+                .form-row.align-right#js-button
+                  button.brown.btn[type="button"]
+                    | CONTINUE >
+                #login-signup-parts
+                  .form-row#part
+                    p
+                      span.signup-part
+                        | Sign up 
+                      span.login-part
+                        | Log in 
+                      |  for an account below or&nbsp;
+                      a#login-link.signup-part
+                        | Log In
+                      a#signup-link.login-part
+                        | Sign Up
+                    hr[style="border:0;border-bottom:1px solid #eee;"]
+                  #login-part.login-part
+                    .form-row
+                      .form-cols
+                        .form-col.form-col-1of2
+                          label.form-label[for="field-email-address"]
+                            | Email Address
+                          .form-controls
+                            input#field-email-address.field[type="text" name="login_email_address" required]
+                        .form-col.form-col-1of2
+                          label.form-label[for="field-password"]
+                            | Password
+                          .form-controls
+                            input#field-full-name.field[type="password" name="login_password" required]
+                  #signup-part.signup-part
+                    .form-row
+                      .form-cols
+                        .form-col.form-col-1of2
+                          label.form-label[for="field-full-name"]
+                            | Full Name
+                          .form-controls
+                            input#field-full-name.field[type="text" name="signup_full_name" required]
+                        .form-col.form-col-1of2
+                          label.form-label[for="field-email-address"]
+                            | Email Address
+                          .form-controls
+                            input#field-email-address.field[type="text" name="signup_email_address" required]
+                    .form-row
+                      .form-cols
+                        .form-col.form-col-1of2
+                          label.form-label[for="field-company"]
+                            | Company Name
+                          .form-controls
+                            input#field-company.field[type="text" name="signup_company" required]
+                        .form-col.form-col-1of2
+                          label.form-label[for="field-company-size"]
+                            | Company Size
+                          .form-controls
+                            select#field-company-size.field[name="signup_company_size" required]
+                              option[value="1-10"]
+                                | 1-10
+                              option[value="11-50"]
+                                | 11-50
+                              option[value="51-200"]
+                                | 51-200
+                              option[value="201-500"]
+                                | 201-500
+                              option[value="501-1000"]
+                                | 501-1000
+                              option[value="1000+"]
+                                | 1000+
+                  br
+                  .form-row.align-right
+                   button.brown.btn#submit-start-form[type="submit"]
+                      | CONTINUE >
 = render partial: 'dark_footer'

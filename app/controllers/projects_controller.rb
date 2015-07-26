@@ -106,7 +106,14 @@ class ProjectsController < ApplicationController
           return redirect_to_login
         end
       end
-      
+    end
+
+    @is_show_designers_li = false
+    @project.designers.each do |designer|
+      if designer.can_see?(current_user)
+        @is_show_designers_li = true
+        break  
+      end
     end
   end
 

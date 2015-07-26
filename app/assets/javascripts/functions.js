@@ -346,7 +346,13 @@ function setup_paypal_direct() {
                     enctype:      'multipart/form-data',
                     processData:   false,
                     contentType:   false,
-                    success:       success}); }
+                    success:       success})
+                .always(function() {
+                    console.log('always');
+                    $("textarea.expanding").expanding('destroy');
+                    $("textarea.expanding").expanding();
+                }); 
+        }
 
         function reset_message_form() {
             $('input[name^="file-upload-"], .file-upload-container').map(
