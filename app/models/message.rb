@@ -36,21 +36,21 @@ class Message
           ws.close
           self.forward_message_to_websocket(message, proj, is_private)
         end
-        if (!sent_msg)
-
+        if (sent_msg)
+          ws.close
+        else
           msg = ('["message_posted",{"id":' + (rand * 1000000).round.to_s + ',"channel":"project-' + 
                  proj.id.to_s  + '","data":{"message_id":"' + message.id.to_s + 
                  '","room":"group","project_id":"' + (proj.id.to_s) + '"},"token":"' + token + '"}]')
           p msg
           ws.send(msg)
           sent_msg = true
-          ws.close
         end
       end
     end
 
     ws.on :open do
-      m = '["websocket_rails.subscribe",{"id":' + (rand * 1000000).round.to_s + ',"data":{"channel":"project-551f32fe626f733267010000"}}]'
+      m = '["websocket_rails.subscribe",{"id":' + (rand * 1000000).round.to_s + ',"data":{"channel":"project-' + proj.id.to_s + '"}}]'
       p m
       ws.send m
     end
@@ -108,7 +108,7 @@ class Message
             message.user  = from_user
             message.save
 
-            url           = root_url + ('/projects/' + project.id +
+            url           = "https://usebento.com/" + ('/projects/' + project.id +
                                         (@room == 'private_chat' ? '/private_chat' : ''))
 
             message.send_emails(from_user, url,
@@ -118,8 +118,8 @@ class Message
             project.updated_at = DateTime.now
             project.save!
 
-            self.forward_message_to_websocket(message, project, @room == 'private_chat')
-            self.forward_message_to_websocket(message, project, @room == 'private_chat')
+            Message.forward_message_to_websocket(message, project, @room == 'private_chat')
+            Message.forward_message_to_websocket(message, project, @room == 'private_chat')
           end
         rescue Exception => e
           Mailman.logger.error "Exception occurred while receiving message:n#{message}"
