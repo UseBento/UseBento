@@ -13,6 +13,65 @@ class Message
   embeds_many :attachments
 
 
+  def self.forward_message_to_websocket(message, proj, is_private)
+    sent_msg    = false
+    token       = ""
+    ws          = WebSocket::Client::Simple.connect 'ws://localhost:3001/websocket'
+    pongs       = 0
+
+    ws.on :message do |msg|
+      p msg.to_yaml
+      puts msg.data
+      parsed = JSON.parse(msg.data)
+      if (parsed && parsed[0].kind_of?(Array) && parsed[0][0] == 'websocket_rails.channel_token')
+        token = parsed[0][1]['data']['token']
+      end
+
+      if (msg.data.slice(3,20) == 'websocket_rails.ping')
+        m = '["websocket_rails.pong",{"id":' + (rand * 1000000).round.to_s + ',"data":{}}]'
+        p m
+        ws.send m
+        pongs += 1
+        if pongs > 10
+          ws.close
+          self.forward_message_to_websocket(message, proj, is_private)
+        end
+        if (!sent_msg)
+
+          msg = ('["message_posted",{"id":' + (rand * 1000000).round.to_s + ',"channel":"project-' + 
+                 proj.id.to_s  + '","data":{"message_id":"' + message.id.to_s + 
+                 '","room":"group","project_id":"' + (proj.id.to_s) + '"},"token":"' + token + '"}]')
+          p msg
+          ws.send(msg)
+          sent_msg = true
+          ws.close
+        end
+      end
+    end
+
+    ws.on :open do
+      m = '["websocket_rails.subscribe",{"id":' + (rand * 1000000).round.to_s + ',"data":{"channel":"project-551f32fe626f733267010000"}}]'
+      p m
+      ws.send m
+    end
+
+    ws.on :close do |e|
+      p 'error' + e.to_s
+    end
+
+    ws.on :error do |e|
+      p 'error' + e.to_s
+    end
+
+    (1..10).map do |i|
+
+    end
+    p 'test'
+    ws
+  end
+
+
+
   def self.get_email_replies
     Mailman.config.imap = {
       server: 'imap.gmail.com',
@@ -55,8 +114,12 @@ class Message
             message.send_emails(from_user, url,
                                 (room == 'prvate_chat' ? 'prvate' : 'chat'),
                                 project, room == 'private_chat')
+            
             project.updated_at = DateTime.now
             project.save!
+
+            self.forward_message_to_websocket(message, project, @room == 'private_chat')
+            self.forward_message_to_websocket(message, project, @room == 'private_chat')
           end
         rescue Exception => e
           Mailman.logger.error "Exception occurred while receiving message:n#{message}"
