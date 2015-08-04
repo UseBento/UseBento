@@ -133,11 +133,16 @@ class Message
     message = ""
     broken  = false
     
-    body.split("\n").each do |line|
+    split = body.split(/^On (.*?)wrote:/mi)
+    if split
+      body = split[0]
+    end
+    
+    body.split(/[\r\n]/).each do |line|
       if !broken
         if (line.match(/^On [^\r\n]+wrote:/))
           broken = true
-        elsif (!line.match(/^>/))
+        elsif (!line.match(/^>/) && !line.match(/^--[0-9a-fA-F]{20,40}/) && !line.match(/^(Content-Type|Content-Transfer-Encoding):/i))
           message += line + "\r\n"
         end
       end
