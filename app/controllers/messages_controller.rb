@@ -17,12 +17,10 @@ class MessagesController < ApplicationController
     @message  = @messages.create({body:  params[:message_body],
                                   posted_date: DateTime.now})
     @message.user = current_user
-
     @message.save
 
 
     attachments  = get_attachments(@message)
-
     message_body = render_to_string(partial:   'projects/message',
                                     layout:     false,
                                     formats:    :html,
@@ -31,11 +29,10 @@ class MessagesController < ApplicationController
     url          = root_url + ('/projects/' + @project.id +
                     (@room == 'private' ? '/private_chat' : ''))
 
-    @message.send_emails(current_user, url, @room)
+    @message.send_emails(current_user, url, @room,
+                         @project, @room == 'private')
     @project.updated_at = DateTime.now
     @project.save!
-
-
 
     respond_to do |format|
       # binding.pry

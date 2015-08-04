@@ -1,5 +1,5 @@
 class BentoMailer < ActionMailer::Base
-  default from: "Bento <info@usebento.com>"
+  default from: "Bento <email@usebento.com>"
   
   def contact_us(name, email, subject, message)
     @full_name     = name

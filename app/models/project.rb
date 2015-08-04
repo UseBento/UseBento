@@ -97,7 +97,7 @@ class Project
 
   def dashboard_count(user)
     count = self.unread_messages_count(user)
-    if self.private_chat.can_view?(user) || user.admin?
+    if (self.private_chat && self.private_chat.can_view?(user)) || user.admin?
       count += self.private_chat.unread_messages_count(user)
     end
     count
@@ -462,5 +462,9 @@ class Project
   def showing_popup
     self.shown_popup = true
     save
+  end
+
+  def email_code(user, is_private)
+    'bento-reply<' + self.id + ':' + user.id + ':' + (is_private ? 'private_chat' : 'chat') + '>'
   end
 end

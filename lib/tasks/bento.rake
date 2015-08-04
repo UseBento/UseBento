@@ -7,7 +7,11 @@ namespace :bento do
                      admin:      true,
                      company:   'Bento'})
   end
-
+  
+  task check_mailers: :environment do
+    Message.get_email_replies
+  end
+  
   task update_companies: :environment do
         Project.all.map do |p|
                      p.update_company

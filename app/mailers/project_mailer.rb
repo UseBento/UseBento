@@ -1,5 +1,5 @@
 class ProjectMailer < ActionMailer::Base
-  default from: "Bento <info@usebento.com>"
+  default from: "Bento <email@usebento.com>"
 
   def new_project_mail(project)
     @user       = project.user
@@ -42,11 +42,12 @@ class ProjectMailer < ActionMailer::Base
     
   end
 
-  def new_user_message_mail(to_first_name, from_full_name, message_body, link_path, email)
+  def new_user_message_mail(to_first_name, from_full_name, message_body, link_path, email, code)
     @first_name  = to_first_name
     @full_name   = from_full_name
     @body        = message_body
     @link_path   = link_path
+    @code        = code
 
     mail(to:      email,
       subject: "New message from " + @full_name)
