@@ -545,6 +545,7 @@ function setup_paypal_direct() {
 
         $('#projects-list').tablesorter({sortList: [[0,0]]});
 //        $('#projects-list thead .tbl_row td:first-child').click();
+        $('#closed-projects-list').tablesorter({sortList: [[0,0]]});
 
         $('#invite-coworkers').click(function() {
             $('#enter-invite').removeClass('hidden');
