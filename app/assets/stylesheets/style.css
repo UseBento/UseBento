@@ -418,7 +418,7 @@ input.btn { display: inline-block; height:60px; }
 
 .form-apply { width: 810px; margin:0 auto; }
 .form-head { padding-bottom:60px; }
-.shell .form-apply .apply-body { background-color: white; padding: 50px 25px;}
+.shell .form-apply .apply-body { padding: 50px; background-color: #FCFDFF; border: 1px solid #D1D1D1;}
 
 .form-thanks .form-head { padding-bottom:27px; margin-bottom:27px;  }
 .form-thanks .form-head h2 { padding-bottom: 0; }
