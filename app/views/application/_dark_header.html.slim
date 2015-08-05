@@ -1,4 +1,4 @@
-header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 'header-secondary ' : '')) + 'header header-dark')]
+header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 'header-secondary ' : '')) + 'header header-dark ' + (page == 'apply' || page == 'contact' ? 'text-capital' : ''))]
   a.expand[href="#"]
   .shell
     a.logo[href="/"]
@@ -11,33 +11,33 @@ header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 
       ul
         - if (!user_signed_in? || page == 'start_project')
           li class=(page == 'start_project' ? 'current' : '')
-            = link_to "START YOUR PROJECT", "/projects/start"
+            = link_to "start your project", "/projects/start"
         - if user_signed_in?
           li class=(page == 'project' ? 'current' : '')
-            = link_to "PROJECTS", "/projects/list"
+            = link_to "projects", "/projects/list"
         - unless user_signed_in?
           li class=(page == 'agencies' ? 'current' : '')
-            = link_to "FOR AGENCIES", "/agencies"
+            = link_to "for agencies", "/agencies"
           li class=(page == 'apply' ? 'current' : '')
-            = link_to "JOIN THE TEAM", "/apply"
+            = link_to "join the team", "/apply"
         - unless page == 'project' && !user_signed_in? && false
           - unless user_signed_in?
             li[ class=(page == 'profile' ? 'current' : '')]
               - if mobile_device?
                 a.popup-link-mobile#userlink[href="/popups/login"]
-                  | LOGIN
+                  | login
               - else
                 a.popup-link#userlink[href="/popups/login"]
-                  | LOGIN
+                  | login
           - else
             li[ class=(page == 'profile' ? 'current' : '')]
               a#userlink[href="/profile" data-userid=current_user.id]
-                | PROFILE
+                | profile
         - else
           li
             - if mobile_device?
               a.popup-link-mobile.hidden#userlink[href="/popups/login"]
-                | LOGIN
+                | login
             - else
               a.popup-link.hidden#userlink[href="/popups/login"]
-                | LOGIN
+                | login
