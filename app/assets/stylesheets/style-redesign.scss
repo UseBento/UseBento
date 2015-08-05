@@ -439,7 +439,8 @@ input.btn { display: inline-block; height:60px; }
 
 
 .form-apply { width: 810px; margin:0 auto; }
-.form-head { border-bottom:1px solid #d1dae8; padding-bottom:80px; margin-bottom:87px;  }
+.form-head { padding-bottom:60px; }
+.shell .form-apply .apply-body { background-color: white; padding: 50px 25px;}
 
 .form-thanks .form-head { padding-bottom:27px; margin-bottom:27px;  }
 .form-thanks .form-head h2 { padding-bottom: 0; }

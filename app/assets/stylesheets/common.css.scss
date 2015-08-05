@@ -102,5 +102,18 @@
       }
     }
   }
+
+
+  .main {
+    &.contact-main {
+      .sidebar {
+        display: none;
+      }
+      .form-body {
+        background-color: white;
+        padding: 30px 20px;
+      }
+    }
+  }
 }
 
