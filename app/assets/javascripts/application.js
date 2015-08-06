@@ -25,6 +25,8 @@
 //= require semantic-ui-checkbox.js
 //= require semantic-ui-dropdown.js
 //= require expanding_textarea.js
+//= require modernizr.js
+//= require webflow.js
 //= require common.js
 //= require users.js
 

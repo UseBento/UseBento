@@ -24,6 +24,9 @@
  *= require style
  *= require style-redesign
  *= require welcome
+ *= require normalize
+ *= require webflow
+ *= require newbento.webflow
  *= require_self
  */
 
