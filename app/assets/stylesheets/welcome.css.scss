@@ -1,0 +1,17 @@
+.wrapper-new {
+	overflow: visible;
+	header.header {
+		height: 90px;
+
+		position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    border-bottom: 0;
+    background: transparent;
+	}
+	#footer-push {
+		display: none;
+	}
+}

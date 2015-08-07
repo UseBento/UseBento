@@ -5,9 +5,7 @@
   <meta name="keywords" content="Design, marketing, designer, developer, landing, page, white, paper, expert">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="generator" content="Webflow">
-  <link rel="stylesheet" type="text/css" href="css/normalize.css">
-  <link rel="stylesheet" type="text/css" href="css/webflow.css">
-  <link rel="stylesheet" type="text/css" href="css/newbento.webflow.css">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
   <script>
     WebFont.load({
@@ -16,7 +14,12 @@
       }
     });
   </script>
-  <script type="text/javascript" src="js/modernizr.js"></script>
+  <%= javascript_include_tag 'application' %>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.18.4/js/jquery.tablesorter.min.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+  <%= csrf_meta_tags %>
+
   <link rel="shortcut icon" type="image/x-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
+  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/ui-lightness/jquery-ui.css"> -->
 </head>

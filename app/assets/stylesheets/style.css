@@ -440,7 +440,7 @@ input.btn { display: inline-block; height:60px; }
 
 .form-body p { margin-bottom:20px; }
 
-.form .form-label { font-weight:700; color: #525f71; padding-bottom:15px; display:block; }
+.form .form-label { font-weight:700; color: #525f71; padding-bottom:15px; display:block; margin-bottom: 0;}
 .form-asterisk { color: #d77a80; }
 .form .form-row { padding-bottom:25px; }
 

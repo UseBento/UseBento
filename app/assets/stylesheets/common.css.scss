@@ -8,7 +8,7 @@
 }
 
 // redesign headers
-.wrapper {
+.wrapper, .wrapper-new {
   font-family: "AvenirNext";
   background-color: #f1f1f1;
   header.header {
@@ -114,8 +114,14 @@
         // padding-bottom: 30px;
         background-color: #FCFDFF;
         border: 1px solid #D1D1D1;
+        text-align: left;
       }
     }
+  }
+
+  // for overwriting the webflow.css
+  .section {
+    text-align: left;
   }
 }
 

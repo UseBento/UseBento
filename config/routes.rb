@@ -43,6 +43,10 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
   get  'fbads',                       to: 'welcome#fbads'
+  get  'privacy',                     to: 'welcome#privacy'
+  get  'products-pricing',            to: 'welcome#products_pricing'
+  get  'terms',                       to: 'welcome#terms'
+  get  'whitepapers',                 to: 'welcome#whitepapers'
 
   get  'contact',                     to: 'application#contact'
   post 'send_contact',                to: 'application#send_contact'
