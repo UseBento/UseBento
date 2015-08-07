@@ -104,6 +104,10 @@ body {
     letter-spacing: 2px;
     text-decoration: none;
     text-transform: uppercase;
+
+    &.learnmore {
+      margin-left: 0;
+    }
   }
   .button:hover {
     background-color: #b0996d;
@@ -1504,6 +1508,9 @@ body {
       padding-right: 15px;
       padding-left: 15px;
     }
+  }
+  .footer-homepage {
+    border-top: none;
   }
 }
 
