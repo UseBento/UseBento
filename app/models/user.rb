@@ -52,6 +52,11 @@ class User
     admin_user
   end
 
+  def self.get_custom_admin
+    custom_admin = User.where({admin: true, email: "roland@usebento.com"}).first
+    custom_admin
+  end
+
   def short_email
     if email.length > 20
       email.slice(0,20) + "..."
@@ -105,7 +110,8 @@ class User
         return "/images/chat_new.png"  
       else
         default_img = URI.encode_www_form_component(
-                      "https://" + root_domain + User.default_avatar_for(name))
+                      "http://" + root_domain + User.default_avatar_for(name))
+
       end
       
       # default_img = "http://" + root_domain + "/images/chat_new.png"
@@ -113,14 +119,22 @@ class User
     else
       if self.designer
         default_img = URI.encode_www_form_component(
-                      "https://" + root_domain + User.default_avatar_for(self.full_name))
+                      "http://" + root_domain + User.default_avatar_for(self.full_name))
+        default_img = User.default_avatar_for(self.full_name)
       else
         default_img = URI.encode_www_form_component(
-                      "https://" + root_domain + User.default_avatar_for(name))
+                      "http://" + root_domain + User.default_avatar_for(name))
+        default_img = User.default_avatar_for(name)
+        puts default_img
+        
+      end
+
+      if !gravatar?
+        return default_img
       end
     end
-    # "//secure.gravatar.com/avatar/" + hash + "?d=" + default_img
-    "http://gravatar.com/avatar/#{hash}.png?s=48&d=#{CGI.escape(default_img)}"
+    "//secure.gravatar.com/avatar/" + hash + "?d=" + default_img
+    # "http://gravatar.com/avatar/#{hash}.png?s=48&d=#{CGI.escape(default_img)}"
   end
 
   def gravatar?

@@ -271,24 +271,27 @@ class ProjectsController < ApplicationController
     end
 
     if @project.save
-      @project.people.each do |person|
-        unless person.user == current_user
-          to_first_name = person.first_name
-          from_full_name = current_user.full_name
-          to_email = person.email
-          ProjectMailer.project_status_update_mail(@project, to_first_name, from_full_name, to_email).deliver
+      if status > 1
+        @project.people.each do |person|
+          unless person.user == current_user
+            to_first_name = person.first_name
+            from_full_name = current_user.full_name
+            to_email = person.email
+            ProjectMailer.project_status_update_mail(@project, to_first_name, from_full_name, to_email).deliver
+          end
         end
-      end
 
-      @project.designers.each do |designer|
-        unless designer.user == current_user
-          to_first_name = designer.first_name
-          from_full_name = current_user.full_name
-          
-          to_email = designer.email
-          ProjectMailer.project_status_update_mail(@project, to_first_name, from_full_name, to_email).deliver
+        @project.designers.each do |designer|
+          unless designer.user == current_user
+            to_first_name = designer.first_name
+            from_full_name = current_user.full_name
+            
+            to_email = designer.email
+            ProjectMailer.project_status_update_mail(@project, to_first_name, from_full_name, to_email).deliver
+          end
         end
       end
+      
     end
 
     redirect_to @project

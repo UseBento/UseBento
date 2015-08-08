@@ -112,20 +112,7 @@ class Project
       invited_user.email = self.user.email
       invited_user.save
       people = self.invited_users
-    else
-      people.where(:email => nil).delete
-      people.where(:email => "").delete
 
-      if (people.select {|person| person.user && person.user == self.user}).empty?
-        invited_user         = self.invited_users.create({accepted: true})
-        invited_user.user    = self.user
-        invited_user.email = self.user.email
-        invited_user.save
-        people = self.invited_users
-      end
-    end
-
-    if (people.select {|person| person.user && person.user.admin}).empty?
       admin_user = User.get_admin
       unless admin_user.nil?
         invited_user         = self.invited_users.create({accepted: true})
@@ -134,7 +121,46 @@ class Project
         invited_user.save
         people = self.invited_users
       end
+      custom_admin = User.get_custom_admin
+      unless custom_admin.nil?
+        invited_user         = self.invited_users.create({accepted: true})
+        invited_user.user    = custom_admin
+        invited_user.email = custom_admin.email
+        invited_user.save
+        people = self.invited_users
+      end
+      
+    # else
+    #   people.where(:email => nil).delete
+    #   people.where(:email => "").delete
+
+    #   if (people.select {|person| person.user && person.user == self.user}).empty?
+    #     invited_user         = self.invited_users.create({accepted: true})
+    #     invited_user.user    = self.user
+    #     invited_user.email = self.user.email
+    #     invited_user.save
+    #     people = self.invited_users
+    #   end
     end
+
+    # if (people.select {|person| person.user && person.user.admin}).empty?
+    #   admin_user = User.get_admin
+    #   unless admin_user.nil?
+    #     invited_user         = self.invited_users.create({accepted: true})
+    #     invited_user.user    = admin_user
+    #     invited_user.email = admin_user.email
+    #     invited_user.save
+    #     people = self.invited_users
+    #   end
+    #   custom_admin = User.get_custom_admin
+    #   unless custom_admin.nil?
+    #     invited_user         = self.invited_users.create({accepted: true})
+    #     invited_user.user    = custom_admin
+    #     invited_user.email = custom_admin.email
+    #     invited_user.save
+    #     people = self.invited_users
+    #   end
+    # end
 
     people
   end
