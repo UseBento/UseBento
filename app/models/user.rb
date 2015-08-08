@@ -99,20 +99,41 @@ class User
   end
 
   def avatar(root_domain)
-    if self.admin
-      return "/images/chat_new.png"
-    end
-
     hash = Digest::MD5.hexdigest(self.email.strip.downcase)
-    if self.designer
-      default_img = URI.encode_www_form_component(
-                    "https://" + root_domain + User.default_avatar_for(self.full_name))
+    if self.admin
+      if !gravatar?
+        return "/images/chat_new.png"  
+      else
+        default_img = URI.encode_www_form_component(
+                      "https://" + root_domain + User.default_avatar_for(name))
+      end
+      
+      # default_img = "http://" + root_domain + "/images/chat_new.png"
+      # default_img = "#{root_domain}images/chat_new.png"
     else
-      default_img = URI.encode_www_form_component(
-                    "https://" + root_domain + User.default_avatar_for(name))
+      if self.designer
+        default_img = URI.encode_www_form_component(
+                      "https://" + root_domain + User.default_avatar_for(self.full_name))
+      else
+        default_img = URI.encode_www_form_component(
+                      "https://" + root_domain + User.default_avatar_for(name))
+      end
     end
-    
-    "//secure.gravatar.com/avatar/" + hash + "?d=" + default_img
+    # "//secure.gravatar.com/avatar/" + hash + "?d=" + default_img
+    "http://gravatar.com/avatar/#{hash}.png?s=48&d=#{CGI.escape(default_img)}"
+  end
+
+  def gravatar?
+    gravatar_check = "http://gravatar.com/avatar/#{Digest::MD5.hexdigest(self.email.downcase)}.png?d=404"
+    uri = URI.parse(gravatar_check)
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    if (response.code.to_i == 404)
+        return false
+    else
+        return true
+    end 
   end
   
   def last_project
