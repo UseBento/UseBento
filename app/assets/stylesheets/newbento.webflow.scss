@@ -1,11 +1,12 @@
-body {
-  background-color: white;
-  font-family:'Open Sans', sans-serif;
-  color: #6a859c;
-  font-size: 16px;
-  line-height: 20px;
-}
-.wrapper-new {
+.public-html {
+  body {
+    background-color: white;
+    font-family:'Open Sans', sans-serif;
+    color: #6a859c;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
   h1 {
     margin-bottom: 10px;
     color: #8e8e9c;
@@ -912,43 +913,43 @@ body {
     color: #8e8e9c;
     text-align: left;
   }
-  html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
+  &.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
     opacity: 0;
     -webkit-transform: translate(0px, 50px);
     -ms-transform: translate(0px, 50px);
     transform: translate(0px, 50px);
   }
-  html.w-mod-js *[data-ix="fade-in-left-scroll-in"] {
+  &.w-mod-js *[data-ix="fade-in-left-scroll-in"] {
     opacity: 0;
     -webkit-transform: translate(-100px, 0px);
     -ms-transform: translate(-100px, 0px);
     transform: translate(-100px, 0px);
   }
-  html.w-mod-js *[data-ix="fade-in-right-scroll-in"] {
+  &.w-mod-js *[data-ix="fade-in-right-scroll-in"] {
     opacity: 0;
     -webkit-transform: translate(100px, 0px);
     -ms-transform: translate(100px, 0px);
     transform: translate(100px, 0px);
   }
-  html.w-mod-js *[data-ix="fade-in-top-scroll-in"] {
+  &.w-mod-js *[data-ix="fade-in-top-scroll-in"] {
     opacity: 0;
     -webkit-transform: translate(0px, -50px);
     -ms-transform: translate(0px, -50px);
     transform: translate(0px, -50px);
   }
-  html.w-mod-js *[data-ix="fade-in-bottom-scroll-in"] {
+  &.w-mod-js *[data-ix="fade-in-bottom-scroll-in"] {
     opacity: 0;
     -webkit-transform: translate(0px, 50px);
     -ms-transform: translate(0px, 50px);
     transform: translate(0px, 50px);
   }
-  html.w-mod-js *[data-ix="bounce-in-scroll-in"] {
+  &.w-mod-js *[data-ix="bounce-in-scroll-in"] {
     opacity: 0;
     -webkit-transform: scale(0.6);
     -ms-transform: scale(0.6);
     transform: scale(0.6);
   }
-  html.w-mod-js *[data-ix="scale-on-scroll"] {
+  &.w-mod-js *[data-ix="scale-on-scroll"] {
     opacity: 0;
     -webkit-transform: scale(0.01);
     -ms-transform: scale(0.01);
