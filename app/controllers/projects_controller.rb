@@ -75,7 +75,7 @@ class ProjectsController < ApplicationController
     @project.update_company
     @project.initialize_project
 
-    # ProjectMailer.new_project_mail(@project).deliver
+    ProjectMailer.new_project_mail(@project).deliver
     @project.people
     redirect_to @project
   end
@@ -271,24 +271,22 @@ class ProjectsController < ApplicationController
     end
 
     if @project.save
-      if status > 1
-        @project.people.each do |person|
-          unless person.user == current_user
-            to_first_name = person.first_name
-            from_full_name = current_user.full_name
-            to_email = person.email
-            ProjectMailer.project_status_update_mail(@project, to_first_name, from_full_name, to_email).deliver
-          end
+      @project.people.each do |person|
+        unless person.user == current_user
+          to_first_name = person.first_name
+          from_full_name = current_user.full_name
+          to_email = person.email
+          ProjectMailer.project_status_update_mail(@project, to_first_name, from_full_name, to_email).deliver
         end
+      end
 
-        @project.designers.each do |designer|
-          unless designer.user == current_user
-            to_first_name = designer.first_name
-            from_full_name = current_user.full_name
-            
-            to_email = designer.email
-            ProjectMailer.project_status_update_mail(@project, to_first_name, from_full_name, to_email).deliver
-          end
+      @project.designers.each do |designer|
+        unless designer.user == current_user
+          to_first_name = designer.first_name
+          from_full_name = current_user.full_name
+          
+          to_email = designer.email
+          ProjectMailer.project_status_update_mail(@project, to_first_name, from_full_name, to_email).deliver
         end
       end
       

@@ -11,6 +11,13 @@ class ProjectMailer < ActionMailer::Base
       mail(to:      @admin.email,
          subject: @user.company + " started a new " + @service.name + " project")
     end
+
+    @custom_admin      = User.get_custom_admin
+
+    if !@custom_admin.nil?
+      mail(to:      @custom_admin.email,
+         subject: @user.company + " started a new " + @service.name + " project")
+    end
     
   end
 
