@@ -75,7 +75,7 @@ class ProjectsController < ApplicationController
     @project.update_company
     @project.initialize_project
 
-    ProjectMailer.new_project_mail(@project).deliver
+    # ProjectMailer.new_project_mail(@project).deliver
     @project.people
     redirect_to @project
   end
