@@ -54,6 +54,7 @@ class User
 
   def self.get_custom_admin
     custom_admin = User.where({admin: true, email: "roland@usebento.com"}).first
+    # custom_admin = User.where({admin: true, email: "jason@usebento.com"}).first
     custom_admin
   end
 
@@ -126,7 +127,7 @@ class User
                       "http://" + root_domain + User.default_avatar_for(name))
         default_img = User.default_avatar_for(name)
         puts default_img
-        
+
       end
 
       if !gravatar?

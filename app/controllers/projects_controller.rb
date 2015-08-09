@@ -62,7 +62,7 @@ class ProjectsController < ApplicationController
     else
       @project.number = 1
     end
-
+    
     @project.add_answer(:business_name, current_user.company || current_user.name)
     @project.add_answer(:email, current_user.email)
     @project.add_answer(:full_name, current_user.full_name)
@@ -71,7 +71,7 @@ class ProjectsController < ApplicationController
     @project.add_answer(:project_deadline, params[:project_deadline])
     @project.user = @user
     @project.save
-
+    
     @project.update_company
     @project.initialize_project
 

@@ -40,25 +40,24 @@
             ul.list_comment
               - for message in @messages
                 = render partial: 'message', locals: {message: message, to_owner: true}
-              - if current_user != User.get_admin
-                li#message-form-li
-                  .post_img
-                    img[src=current_user.avatar(request.host_with_port) alt=""]
-                  form#message-form.dtl_box[action=("/projects/" + @project.id.to_s + "/message") method="POST" enctype="multipart/form-data"]
-                    = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token)
-                    input#project-id[name="project_id" type="hidden" value=@project.id]
-                    textarea#message-box.text_box.expanding[rows="" placeholder="Add a comment or upload a file..." name="message_body" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"]
-                    input#chat-room[name="chat-room" type="hidden" value=@chat style="display:none"]
-                    .bottom_box
-                      .attachment_box
-                        #progress-bar
-                        a#file-link[href="#"]
-                          img[src="/images/attachment.png" alt=""]
-                          | Attach files from your computer.
-                        input#file-upload[type="file" multiple="multiple" style="display:none;"]
-                      .submit_box
-                        input.cancel_btn[name="" type="reset" value="Cancel" style="display:none"]
-                        input#add-comment.comment_btn.purple[name="" type="submit" value="SEND" disabled]
+              li#message-form-li
+                .post_img
+                  img[src=current_user.avatar(request.host_with_port) alt=""]
+                form#message-form.dtl_box[action=("/projects/" + @project.id.to_s + "/message") method="POST" enctype="multipart/form-data"]
+                  = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token)
+                  input#project-id[name="project_id" type="hidden" value=@project.id]
+                  textarea#message-box.text_box.expanding[rows="" placeholder="Add a comment or upload a file..." name="message_body" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"]
+                  input#chat-room[name="chat-room" type="hidden" value=@chat style="display:none"]
+                  .bottom_box
+                    .attachment_box
+                      #progress-bar
+                      a#file-link[href="#"]
+                        img[src="/images/attachment.png" alt=""]
+                        | Attach files from your computer.
+                      input#file-upload[type="file" multiple="multiple" style="display:none;"]
+                    .submit_box
+                      input.cancel_btn[name="" type="reset" value="Cancel" style="display:none"]
+                      input#add-comment.comment_btn.purple[name="" type="submit" value="SEND" disabled]
         .right_container
           ul.box_list
             li
@@ -107,7 +106,8 @@
                 | People on this project
               #people
                 - for person in (@chat == :group ? @project.people : @project.get_private_chat.people)
-                  = render partial: 'invited_person', locals: {person: person}
+                  - if (not person.user.blank?) && person.user != User.get_admin
+                    = render partial: 'invited_person', locals: {person: person}
               .clear
               br
               #enter-invite.hidden
