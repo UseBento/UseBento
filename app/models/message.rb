@@ -66,10 +66,10 @@ class Message
     (1..10).map do |i|
 
     end
+
     p 'test'
     ws
   end
-
 
 
   def self.get_email_replies
@@ -87,7 +87,11 @@ class Message
     Mailman::Application.run do
       default do
         begin
-          body = (message.body).to_s
+          if (message.body.parts)
+            body = message.body.parts[0].decoded
+          else
+            body = message.body.decoded
+          end
           print message.to_yaml
           print body + "\n\n"
           print body.match /bento-reply<([a-zA-Z0-9]+):([a-zA-Z0-9]+):(chat|private_chat)>/
