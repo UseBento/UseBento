@@ -47,7 +47,7 @@ function setup_paypal_direct() {
         signup_part.detach();
 
         $('#start-form #js-button button').click(function() {
-            if ($('#userlink').html() != 'LOGIN')
+            if ($('#userlink').html().toUpperCase() != 'LOGIN')
                 $('#submit-start-form').click();
             else {
                 signup_part.detach();
