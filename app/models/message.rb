@@ -16,7 +16,7 @@ class Message
   def self.forward_message_to_websocket(message, proj, is_private)
     sent_msg    = false
     token       = ""
-    ws          = WebSocket::Client::Simple.connect 'ws://localhost:3001/websocket'
+    ws          = WebSocket::Client::Simple.connect 'ws://localhost:3002/websocket'
     pongs       = 0
 
     ws.on :message do |msg|
