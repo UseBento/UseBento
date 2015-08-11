@@ -125,3 +125,15 @@
   }
 }
 
+.footer {
+  &.footer-homepage {
+    .copy-link {
+      color: #919191;
+      margin: 0 10px;
+      &:first-child {
+        margin-left: 20px;
+      }
+    }
+  }
+}
+
