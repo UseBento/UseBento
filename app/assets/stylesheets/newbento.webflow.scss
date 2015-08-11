@@ -817,15 +817,15 @@
     color: black;
   }
   .slidetitle {
-    margin-top: 0px;
-    margin-bottom: 25px;
+    margin-top: 30px;
+    margin-bottom: 50px;
     padding-right: 110px;
     padding-left: 110px;
     color: #676770;
     font-size: 16px;
     line-height: 24px;
     font-style: normal;
-    text-align: left;
+    text-align: center;
     letter-spacing: 0px;
     text-indent: 0px;
     text-transform: none;
@@ -873,7 +873,7 @@
     margin-right: auto;
     margin-bottom: 5px;
     margin-left: auto;
-    padding-top: 10px;
+    padding-top: 0px;
     padding-bottom: 10px;
     border-top: 1px solid #b0996d;
     border-bottom: 1px none #b0996d;
@@ -889,6 +889,10 @@
     margin-top: 20px;
     padding-right: 30px;
     padding-left: 30px;
+
+    .w-col {
+      padding-left: 40px;
+    }
   }
   .imagecolum {
     display: block;
