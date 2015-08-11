@@ -873,7 +873,7 @@
     margin-right: auto;
     margin-bottom: 5px;
     margin-left: auto;
-    padding-top: 0px;
+    padding-top: 20px;
     padding-bottom: 10px;
     border-top: 1px solid #b0996d;
     border-bottom: 1px none #b0996d;
@@ -892,6 +892,11 @@
 
     .w-col {
       padding-left: 40px;
+      h1.include {
+        text-align: left;
+        margin: 5px 0 30px 0;
+        padding: 0;
+      }
     }
   }
   .imagecolum {
