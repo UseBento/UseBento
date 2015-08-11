@@ -53,8 +53,8 @@ class User
   end
 
   def self.get_custom_admin
-    # custom_admin = User.where({admin: true, email: "roland@usebento.com"}).first
-    custom_admin = User.where({admin: true, email: "jason@usebento.com"}).first
+    custom_admin = User.where({admin: true, email: "roland@usebento.com"}).first
+    # custom_admin = User.where({admin: true, email: "jason@usebento.com"}).first
     custom_admin
   end
 
