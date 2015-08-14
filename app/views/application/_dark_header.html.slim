@@ -17,8 +17,8 @@ header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 
           li class=(page == 'project' ? 'current' : '')
             = link_to "projects", "/projects/list"
         - unless user_signed_in?
-          li class=(page == 'agencies' ? 'current' : '')
-            = link_to "for agencies", "/agencies"
+          / li class=(page == 'agencies' ? 'current' : '')
+          /   = link_to "for agencies", "/agencies"
           li class=(page == 'apply' ? 'current' : '')
             = link_to "join the team", "/apply"
         - unless page == 'project' && !user_signed_in? && false

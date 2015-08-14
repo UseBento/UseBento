@@ -16,6 +16,8 @@ class ProjectsController < ApplicationController
   end
 
   def start
+    @service = params[:service]
+    # binding.pry
   end
 
   def finish_start

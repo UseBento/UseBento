@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get  'services/add'
   get  'projects/new/:name',                  to: 'services#create',      as: 'service'
 
-  get  'projects/start',                      to: 'projects#start'
+  get  'projects/start',             to: 'projects#start'
   post 'projects/finish_start',               to: 'projects#finish_start'
   post 'projects/submit_start',               to: 'projects#submit_start'
   get  'projects/list',                       to: 'projects#list'

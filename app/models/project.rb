@@ -359,7 +359,12 @@ class Project
   end
 
   def get_price
-    return self.total_price if (self.total_price)
+    return self.total_price if (self.total_price && self.total_price != 0)
+
+    if self.service.title == "Other"
+      return self.total_price      
+    end
+
 
     pages          = get_pages
     price_per_page = self.service.price

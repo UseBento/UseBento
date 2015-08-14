@@ -43,8 +43,8 @@ header[class=((page == 'home-top' ? 'header-top ' : (page == 'home-secondary' ? 
             li class=(page == 'designer' ? 'current' : '')
               = link_to "DESIGNERS", "/designers/list"
         - unless user_signed_in?
-          li class=(page == 'agencies' ? 'current' : '')
-            = link_to "FOR AGENCIES", "/agencies"
+          / li class=(page == 'agencies' ? 'current' : '')
+          /   = link_to "FOR AGENCIES", "/agencies"
           li class=(page == 'apply' ? 'current' : '')
             = link_to "JOIN THE TEAM", "/apply"
         - unless page == 'project' && !user_signed_in? && false
