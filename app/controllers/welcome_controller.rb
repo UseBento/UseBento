@@ -12,6 +12,7 @@ class WelcomeController < ApplicationController
   end
 
   def products_pricing
+    @service = params[:service]
   	render layout: "application_new"
   end
 
