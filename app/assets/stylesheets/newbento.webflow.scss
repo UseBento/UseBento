@@ -341,6 +341,12 @@
     background-size: auto, auto;
     background-repeat: no-repeat, repeat;
   }
+  @media (max-width: 730px) {
+    .section.accent.start {
+      padding-top: 60px;
+      padding-bottom: 10px;
+    }
+  }
   .section.accent.start.productpromo {
     background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.59)), url('../new_images/S5bKt4s.jpg');
     background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.59)), url('../new_images/S5bKt4s.jpg');

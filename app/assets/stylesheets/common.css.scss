@@ -38,6 +38,10 @@
                 font-weight: bold;
                 color: white;
               }
+
+              @media (max-width: 980px) {
+                padding: 10px 10px;
+              }
             }
             &.current {
               a {
@@ -132,6 +136,16 @@
       margin: 0 10px;
       &:first-child {
         margin-left: 20px;
+      }
+    }
+    @media (max-width: 730px) {
+      ul {
+        li {
+          display: block;
+        }
+      }
+      .copy-link {
+        display: block;
       }
     }
   }
