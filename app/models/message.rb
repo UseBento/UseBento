@@ -87,17 +87,26 @@ class Message
     Mailman::Application.run do
       default do
         begin
+          parts = []
           if (message.body.parts)
             body = message.body.parts[0].decoded
+            parts = message.body.parts
           else
             body = message.body.decoded
+            parts = [body]
           end
           print message.to_yaml
           print body + "\n\n"
-          print body.match /bento-reply<([a-zA-Z0-9]+):([a-zA-Z0-9]+):(chat|private_chat)>/
+          print body.match /bento-reply:([a-zA-Z0-9]+):([a-zA-Z0-9]+):(chat|private_chat):/
           print "\n\n"
-          
-          matches = body.match /bento-reply<([a-zA-Z0-9]+):([a-zA-Z0-9]+):(chat|private_chat)>/
+         
+          matches = false
+          parts.each do |part|
+            if !matches
+              matches = part.decoded.match /bento-reply:([a-zA-Z0-9]+):([a-zA-Z0-9]+):(chat|private_chat):/
+            end
+          end
+
           if matches
             reply_id      = matches[1]
             user_id       = matches[2]
