@@ -32,7 +32,7 @@
                         select#field-service.field[name="service" required]
                           option[value=""]
                             | Select Service
-                          - for service in [['Landing Page', 'landing_page_design_and_development'], ['Email', 'email_design_and_development'], ['Social Media', 'social_media_design'], ['White Paper', 'white_paper'], ['Presentation', 'presentation_design'], ['Banner Ads', 'banner_ads'], ['Other', 'business_card']]
+                          - for service in [['Landing Page', 'landing_page_design_and_development'], ['Email', 'email_design_and_development'], ['Social Media', 'social_media_design'], ['White Paper', 'stationary_design'], ['Presentation', 'presentation_design'], ['Banner Ads', 'banner_ads'], ['Custom', 'business_card']]
                             - if (not @service.nil?) && @service == service[0]
                               option[value=service[1] selected]
                                 = service[0]

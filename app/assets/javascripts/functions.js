@@ -859,6 +859,7 @@ function setup_paypal_direct() {
                     success:  function(data) {
                         form.css('display', 'none');
                         span.css('display', 'inline');
+                        $('.total-price-label').html("$" + data.price.toString());
                         span.find('strong.payment-amount[data-id="' + id + '"]')
                             .html('$' + price.toString());
 

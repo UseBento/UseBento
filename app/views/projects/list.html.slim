@@ -6,12 +6,16 @@
         h2
           | My Projects
       .right_section
-        - if !current_user.admin
-          a.btn_large.purple[href="/projects/start"]
-            | START A NEW PROJECT
-            i.fa.fa-angle-right
-        - else
-          = raw "&nbsp;"
+        / - if !current_user.admin
+        /   a.btn_large.purple[href="/projects/start"]
+        /     | START A NEW PROJECT
+        /     i.fa.fa-angle-right
+        / - else
+        /   = raw "&nbsp;"
+
+        a.btn_large.purple[href="/projects/start"]
+          | START A NEW PROJECT
+          i.fa.fa-angle-right
       .clear
       - if current_user.admin
         .table_box
@@ -57,7 +61,7 @@
                   td
                     = project.name
                   td
-                    = project.service.title
+                    = project.service.title.gsub 'Design', ''
                   td
                     = project.print_pages
                   td
@@ -96,7 +100,7 @@
                   td
                     = project.answer_for("project_name").answer
                   td
-                    = project.service.title
+                    = project.service.title.gsub 'Design', ''
                   td
                     span.hidden
                       = project.start_date.to_i
@@ -156,7 +160,7 @@
                     td
                       = project.name
                     td
-                      = project.service.title
+                      = project.service.title.gsub 'Design', ''
                     td
                       = project.print_pages
                     td
@@ -192,7 +196,7 @@
                     td
                       = project.answer_for("project_name").answer
                     td
-                      = project.service.title
+                      = project.service.title.gsub 'Design', ''
                     td
                       span.hidden
                         project.start_date.to_i

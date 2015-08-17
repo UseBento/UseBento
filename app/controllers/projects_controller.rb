@@ -17,7 +17,7 @@ class ProjectsController < ApplicationController
 
   def start
     @service = params[:service]
-    # binding.pry
+    
   end
 
   def finish_start
@@ -26,6 +26,7 @@ class ProjectsController < ApplicationController
     @errors     = []
     @project    = Project.new
     @project.service     = @service
+
 
     if params[:login_email_address]
       @user = User.where(email: params[:login_email_address]).first
@@ -79,6 +80,7 @@ class ProjectsController < ApplicationController
 
     ProjectMailer.new_project_mail(@project).deliver
     @project.people
+    @project.set_default_price
     redirect_to @project
   end
 
@@ -93,8 +95,7 @@ class ProjectsController < ApplicationController
     @is_show_available = true
     @designers = User.where(:designer => true)
 
-    # binding.pry
-
+    
     if !@project.has_access?(current_user)
       invite = @project.was_invited?(current_user)
       if invite
@@ -375,6 +376,7 @@ class ProjectsController < ApplicationController
       @project.save
       @project.get_awaiting_payments
 
+      
       respond_to do |format|
         format.html { redirect_to @project }
         format.json { render :json => @project }
@@ -396,6 +398,7 @@ class ProjectsController < ApplicationController
       @payment.amount = params[:amount]
       @payment.save
 
+      
       respond_to do |format|
         format.html { redirect_to @project }
         format.json { render :json => @project }

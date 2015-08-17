@@ -31,6 +31,9 @@ class Project
 
   STATUS_LIST = ['Project Started', 'Creative Brief', 'First Round Designs', 'Second Round Designs', 'Files Delivered']
 
+
+  # after_initialize :default_values
+
   def as_json(i=0)
     {start_date:       start_date,
      state:            state,
@@ -98,7 +101,7 @@ class Project
   def dashboard_count(user)
     count = self.unread_messages_count(user)
     if (self.private_chat && self.private_chat.can_view?(user)) || user.admin?
-      count += self.private_chat.unread_messages_count(user)
+      count += self.private_chat.unread_messages_count(user) unless self.private_chat.nil?
     end
     count
   end
@@ -358,13 +361,11 @@ class Project
     answer ? answer.answer == 'design_and_development' : false
   end
 
-  def get_price
-    return self.total_price if (self.total_price && self.total_price != 0)
+  def set_default_price
 
     if self.service.title == "Other"
-      return self.total_price      
+      return
     end
-
 
     pages          = get_pages
     price_per_page = self.service.price
@@ -382,7 +383,36 @@ class Project
       end
     end
 
-    price_per_page * pages
+    self.total_price = price_per_page * pages
+    self.save
+  end
+
+  def get_price
+    return self.total_price
+    # return self.total_price if (self.total_price && self.total_price != 0)
+
+    # if self.service.title == "Other"
+    #   return self.total_price      
+    # end
+
+
+    # pages          = get_pages
+    # price_per_page = self.service.price
+    # if self.get_plus_dev
+    #   if self.service.plus_dev_price
+    #     price_per_page = self.service.plus_dev_price
+    #   end
+    # end
+
+    # if self.get_responsive
+    #   if self.service.responsive_price
+    #     price_per_page = self.service.responsive_price
+    #   else
+    #     price_per_page += 20
+    #   end
+    # end
+
+    # price_per_page * pages
   end
 
   def archived?

@@ -78,7 +78,8 @@
               - if current_user == @project.user || current_user.admin
                 span.detail-label
                   = 'Total: '
-                = '$' + @project.get_price.to_s
+                span.total-price-label
+                  = '$' + @project.get_price.to_s
                 br
               /= 'Deadline: ' + (@project.deadline || 'Not set')
               /br
