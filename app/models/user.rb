@@ -58,6 +58,11 @@ class User
     custom_admin
   end
 
+  def self.get_admin_list
+    admin_user_list   = User.where({admin: true})
+    admin_user_list
+  end
+
   def short_email
     if email.length > 20
       email.slice(0,20) + "..."

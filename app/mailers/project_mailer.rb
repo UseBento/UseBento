@@ -5,18 +5,26 @@ class ProjectMailer < ActionMailer::Base
     @user       = project.user
     @service    = project.service
     @project    = project
-    @admin      = User.get_admin
 
-    if !@admin.nil?
-      mail(to:      @admin.email,
-         subject: @user.company + " started a new " + @service.name + " project")
-    end
+    # @admin      = User.get_admin
+    # if !@admin.nil?
+    #   mail(to:      @admin.email,
+    #      subject: @user.company + " started a new " + @service.name + " project")
+    # end
 
-    @custom_admin      = User.get_custom_admin
+    # @custom_admin      = User.get_custom_admin
 
-    if !@custom_admin.nil?
-      mail(to:      @custom_admin.email,
-         subject: @user.company + " started a new " + @service.name + " project")
+    # if !@custom_admin.nil?
+    #   mail(to:      @custom_admin.email,
+    #      subject: @user.company + " started a new " + @service.name + " project")
+    # end
+
+    @amdin_list = User.get_admin_list
+    if @amdin_list.blank?
+      @amdin_list.each do |admin_user|
+        mail(to:      admin_user.email,
+          subject: @user.company + " started a new " + @service.name + " project")
+      end
     end
     
   end
