@@ -10,7 +10,7 @@ html[lang="en"]
     blockquote
       = raw @body
     p
-      = link_to "Respond here", @link_path, :only_path => false
+      = link_to "Respond here", (@link_path + '?c=' + @code), :only_path => false
       | , or reply to this email
     p
       | -Bento
