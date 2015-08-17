@@ -36,7 +36,10 @@
               <h1 class="pandpheader sub">Starting at $100/pg</h1>
               <h1 class="slidetitle">Presentations are a time-tested way to persuade an audience, pitch your product or present your sales performance. Bento helps you create a great presentation by taking your information and turning it into a visual masterpiece.</h1>
               <div class="w-row">
-                <div class="w-col w-col-6"><img src="new_images/presentations.png" width="350">
+                <div class="w-col w-col-6">
+                  <a href="new_images/presentation_big.png" class="image-popup-vertical-fit">
+                    <img src="new_images/presentation_small.png" width="350" />
+                  </a>
                 </div>
                 <div class="w-col w-col-6 w-clearfix imagecolum">
                   <h1 class="slidetitle include">All presentations include:</h1>
@@ -51,7 +54,10 @@
               <h1 class="pandpheader sub">Starting at $100/pg</h1>
               <h1 class="slidetitle">White papers and eBooks have become a staple in B2B marketing. &nbsp;White papers that are well-designed are a tested way to persuade, educate, and communicate unique information. Bento helps you create beautiful white papers and eBooks that will generate leads and assist sales enablement.</h1>
               <div class="w-row">
-                <div class="w-col w-col-6"><img src="new_images/White paper 2.png" width="350">
+                <div class="w-col w-col-6">
+                  <a href="new_images/whitepaper_big.png" class="image-popup-vertical-fit">
+                    <img src="new_images/whitepaper_small.png" width="350">
+                  </a>
                 </div>
                 <div class="w-col w-col-6 w-clearfix imagecolum">
                   <h1 class="slidetitle include">All white papers and eBooks include:</h1>
@@ -66,7 +72,10 @@
               <h1 class="pandpheader sub">Starting at $395</h1>
               <h1 class="slidetitle">Email is an essential way that all businesses connect with their users and perspective users. Whether its a sales pitch, newsletter, or welcome message – Bento helps you create effective emails with a clear messages and calls to action.</h1>
               <div class="w-row">
-                <div class="w-col w-col-6"><img src="new_images/Emails.png" width="350">
+                <div class="w-col w-col-6">
+                  <a href="new_images/email_big.png" class="image-popup-vertical-fit">
+                    <img src="new_images/email_small.png" width="350">
+                  </a>
                 </div>
                 <div class="w-col w-col-6 w-clearfix imagecolum">
                   <h1 class="slidetitle include">All emails include:</h1>
@@ -81,7 +90,10 @@
               <h1 class="pandpheader sub">Starting at $100/post</h1>
               <h1 class="slidetitle">Bento helps you create visual content for Snapchat, Pinterest, Instagram, Facebook and Twitter.&nbsp;No matter what your marketing strategy, we can help you reach your users where they live. All content is designed specifically for your medium of choice or can be created from existing content.</h1>
               <div class="w-row">
-                <div class="w-col w-col-6"><img src="new_images/social.png" width="350">
+                <div class="w-col w-col-6">
+                  <a href="new_images/social_big.jpg" class="image-popup-vertical-fit">
+                    <img src="new_images/social_small.jpg" width="350">
+                  </a>
                 </div>
                 <div class="w-col w-col-6 w-clearfix imagecolum">
                   <h1 class="slidetitle include">All Social Media projects include:</h1>
@@ -96,7 +108,10 @@
               <h1 class="pandpheader sub">Starting at $650</h1>
               <h1 class="slidetitle">Bento's experienced designers take help your business by creating beautiful, high converting landing pages.&nbsp;&nbsp;All pages are responsive and&nbsp;look great on tablets and mobile devices.&nbsp;No matter whether you’re B2B and collecting leads&nbsp;or a consumer app gearing up for launch, the right landing page will help you succeed.</h1>
               <div class="w-row">
-                <div class="w-col w-col-6"><img src="new_images/Landing Page.png" width="350">
+                <div class="w-col w-col-6">
+                  <a href="new_images/landing_big.jpg" class="image-popup-vertical-fit">
+                    <img src="new_images/landing_small.jpg" width="350">
+                  </a>
                 </div>
                 <div class="w-col w-col-6 w-clearfix imagecolum">
                   <h1 class="slidetitle include">All landing pages include:</h1>
@@ -111,7 +126,10 @@
               <h1 class="pandpheader sub">Contact us</h1>
               <h1 class="slidetitle">Bento designers and front-end&nbsp;developers have decades of experience helping startups, agencies, and SMBs.&nbsp;&nbsp;If you have a project where design and development talent can help, feel free to start a project or contact us. We’d love to help!</h1>
               <div class="w-row">
-                <div class="w-col w-col-6"><img src="new_images/custom_1.png" width="350">
+                <div class="w-col w-col-6">
+                  <a href="new_images/custom_1.png" class="image-popup-vertical-fit">
+                    <img src="new_images/custom_1.png" width="350">
+                  </a>
                 </div>
                 <div class="w-col w-col-6 w-clearfix imagecolum">
                   <h1 class="slidetitle include">All projects include:</h1>
@@ -223,5 +241,24 @@
         $('.w-tab-link:nth-child(6)').addClass('w--current');
         break;
     }
+
+    // $('.image-popup-vertical-fit').magnificPopup({
+    //   type: 'image',
+    //   closeOnContentClick: true,
+    //   mainClass: 'mfp-img-mobile',
+    //   image: {
+    //     verticalFit: true
+    //   }
+    // });
+
+    $('.image-popup-vertical-fit').magnificPopup({
+      type: 'image',
+      closeOnContentClick: true,
+      image: {
+        verticalFit: false
+      }
+    });
+
+    
   });
 </script>
