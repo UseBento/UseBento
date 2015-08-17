@@ -78,7 +78,16 @@ class ProjectsController < ApplicationController
     @project.update_company
     @project.initialize_project
 
-    ProjectMailer.new_project_mail(@project).deliver
+    # ProjectMailer.new_project_mail(@project).deliver
+    # mail send to admin users
+    admin_list = User.get_admin_list
+    if not admin_list.blank?
+      admin_list.each do |admin_user|
+        ProjectMailer.new_project_mail_to_admin(@project, admin_user).deliver
+      end
+    end
+
+
     @project.people
     @project.set_default_price
     redirect_to @project
@@ -343,7 +352,16 @@ class ProjectsController < ApplicationController
       @project.initialize_project
 
 
-      ProjectMailer.new_project_mail(@project).deliver
+      # ProjectMailer.new_project_mail(@project).deliver
+      # mail send to admin users
+      admin_list = User.get_admin_list
+      if not admin_list.blank?
+        admin_list.each do |admin_user|
+          ProjectMailer.new_project_mail_to_admin(@project, admin_user).deliver
+        end
+      end
+
+
       if !existing_user
         UserMailer.new_generated_user_mail(@user, password, @project).deliver
       end

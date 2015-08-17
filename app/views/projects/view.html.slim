@@ -83,7 +83,7 @@
                 br
               /= 'Deadline: ' + (@project.deadline || 'Not set')
               /br
-              - if @project.was_invited?(current_user)
+              - if @project.was_invited?(current_user) || current_user.admin
                 - if !@project.filled_out_creative_brief?
                   = link_to "Fill Out Creative Brief", "/projects/" + @project.id.to_s + "/edit"
                 - else

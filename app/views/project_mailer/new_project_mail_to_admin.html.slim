@@ -1,0 +1,15 @@
+doctype html
+html[lang="en"]
+  head
+  body
+    p
+      = "Hey " + @admin.first_name + ", "
+    p
+      = @project.business_name
+      |  started a new project of  
+      = @project.service.title
+    p
+      = link_to "Go to the project page to assign a designer to the project", project_url(@project), :only_path => false
+    p
+      | -Bento
+

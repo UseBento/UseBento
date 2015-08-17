@@ -20,13 +20,24 @@ class ProjectMailer < ActionMailer::Base
     # end
 
     @amdin_list = User.get_admin_list
-    if @amdin_list.blank?
+    if not @amdin_list.blank?
       @amdin_list.each do |admin_user|
+        @admin = admin_user
         mail(to:      admin_user.email,
           subject: @user.company + " started a new " + @service.name + " project")
       end
     end
     
+  end
+
+
+  def new_project_mail_to_admin(project, admin_user)
+    @user       = project.user
+    @service    = project.service
+    @project    = project
+    @admin = admin_user
+    mail(to:      admin_user.email,
+      subject: @user.company + " started a new " + @service.name + " project")
   end
 
   def new_project_request_mail(name, email, company, company_size, description)
