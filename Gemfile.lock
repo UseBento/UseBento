@@ -403,3 +403,6 @@ DEPENDENCIES
   valid_email
   websocket-client-simple
   websocket-rails
+
+BUNDLED WITH
+   1.10.2
