@@ -53,3 +53,5 @@ gem 'time_difference', '~> 0.4.2'
 gem 'maildir', '2.1.0'
 gem 'mailman'
 gem 'websocket-client-simple'
+
+gem 'intercom-rails'
