@@ -500,6 +500,8 @@ function setup_paypal_direct() {
 
 
         function update_price() {
+
+            /*
             var button         = $('#project-submit');
             var price          = parseInt($('#page-price').val());
             var page_counter   = $('#pages-count');
@@ -535,7 +537,8 @@ function setup_paypal_direct() {
             
 
             price = price * page_count;
-            button.html('GET STARTED - $' + price); }
+            button.html('GET STARTED - $' + price); */
+        }
 
         function update_development_type_visibility() {
             if ($('#field-design-development').prop('checked')) {
