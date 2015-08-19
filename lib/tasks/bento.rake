@@ -18,14 +18,14 @@ namespace :bento do
                    end
   end
 
-  task service_question_pages_remove: :environment do
+  task service_question_pages_remove: :environment, :production do
     Service.all.each do |service|
       service.remove_question('pages')
       service.remove_question('design_andor_development')
     end
   end
 
-  task service_update: :environment do
+  task service_update: :environment, :production do
     Service.all.each do |service|
       if service.has_question('pages').nil?
 
