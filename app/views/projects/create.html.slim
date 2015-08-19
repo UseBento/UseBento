@@ -100,7 +100,7 @@
               = render partial: 'number_of_pages_form'
               - if @editing
                 = render partial: 'long_questionaire_form'
-            - if (current_user && (@project.was_invited?(current_user))) || !@project.created_at
+            - if (current_user && (@project.was_invited?(current_user))) || current_user.admin || !@project.created_at
               .form-actions
                 button.btn.form-btn#project-submit[type="submit"]
                   - if @editing
@@ -114,7 +114,7 @@
                   |  &nbsp; &nbsp; &nbsp;
                   = link_to "Cancel", @project
               input#page-price[type="hidden" value=(@service.price)]
-- if !((current_user && (@project.was_invited?(current_user))) || !@project.created_at)
+- if !((current_user && (current_user.admin || current_user == @project.user)) || !@project.created_at)
   script
     | $(document).ready(function() { $('input, textarea').prop('disabled', true); });
       
