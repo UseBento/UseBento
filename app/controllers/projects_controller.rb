@@ -26,6 +26,7 @@ class ProjectsController < ApplicationController
     @errors     = []
     @project    = Project.new
     @project.service     = @service
+    # @service_json = @service.to_json
 
 
     if params[:login_email_address]
@@ -45,6 +46,9 @@ class ProjectsController < ApplicationController
       sign_in @user, :bypass => true
       UserMailer.new_generated_user_mail(@user, password, false).deliver
     end
+    
+    # render :
+    # render :format => 'js' { :}
     
   end
 
@@ -72,6 +76,15 @@ class ProjectsController < ApplicationController
     @project.add_answer(:project_name, params[:project_name])
     @project.add_answer(:business_description, params[:business_description])
     @project.add_answer(:project_deadline, params[:project_deadline])
+
+
+    if not params[:pages].blank?
+      @project.add_answer(:pages, params[:pages])
+      @project.add_answer(:design_andor_development, params[:design_andor_development])
+    else
+      @project.add_answer(:pages, params[:pages])
+      @project.add_answer(:design_andor_development, params[:design_andor_development])
+    end
     @project.user = @user
     @project.save
     
@@ -239,6 +252,8 @@ class ProjectsController < ApplicationController
     filled_out   = @project.filled_out_creative_brief?
     get_attachments(@project)
 
+    # binding.pry
+
     params.map do |key, val|
       @project.update_answer(key, val)
     end
@@ -254,6 +269,7 @@ class ProjectsController < ApplicationController
           @project.status_index = brief_index
         end
       end
+      @project.set_update_price
       @project.save
       @project.update_company
       redirect_to @project

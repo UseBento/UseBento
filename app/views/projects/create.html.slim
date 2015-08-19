@@ -96,7 +96,8 @@
                 .form-controls
                   textarea#field-describe-business.textarea[type="text" cols="10" rows="10" name="business_description" required data-validation-type="['presence']"]
                     = @project.answer_for('business_description').answer
-              = render partial: @service.partial_name
+              / = render partial: @service.partial_name
+              = render partial: 'number_of_pages_form'
               - if @editing
                 = render partial: 'long_questionaire_form'
             - if (current_user && (@project.was_invited?(current_user))) || !@project.created_at
@@ -119,3 +120,39 @@
       
 / = render partial: 'footer'
 = render partial: 'dark_footer'
+
+javascript:
+  jQuery(document).ready(function($) {
+    
+    $('#field-design-only').on('click', function() {
+      updateEstimatedPrice();
+    });
+
+    $('#field-design-and-development').on('click', function() {
+      updateEstimatedPrice();
+    });
+
+    $('.counter-field').on('change', function() {
+      updateEstimatedPrice();
+    });
+
+    function updateEstimatedPrice() {
+      var price = parseInt($('#design_price').val());
+      var plus_dev_price = parseInt($('#plus_dev_price').val());
+      if (plus_dev_price == 0 || isNaN(plus_dev_price)) {
+        plus_dev_price = price;
+      }
+      var page_count = parseInt($('#pages-count').val());
+      console.log(page_count);
+      var total_price;
+      if($("#field-design-only").is(':checked')) {
+        total_price = price * page_count;
+      } else {
+        total_price = plus_dev_price * page_count;
+      }
+
+      // console.log(total_price);
+      $('#estimated-cost').attr("placeholder", "Your estimated price is $" + total_price.toString());
+    }
+
+  });

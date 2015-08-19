@@ -332,22 +332,30 @@ class Project
   end
 
   def get_pages
-    if (self.service.name == "social_media_design") || (self.service.name == "banner_ads")
-      fields = ["twitter_header_and_profile",
-                "youtube_header_and_profile",
-                "linkedin_header_and_profile",
-                "facebook_header_and_profile",
-                "visual_content"]
-      fields = fields.map {|f| self.answer_for(f).answer }
-      fields = fields.select {|f| f}
-      fields.length
+    # if (self.service.name == "social_media_design") || (self.service.name == "banner_ads")
+    #   fields = ["twitter_header_and_profile",
+    #             "youtube_header_and_profile",
+    #             "linkedin_header_and_profile",
+    #             "facebook_header_and_profile",
+    #             "visual_content"]
+    #   fields = fields.map {|f| self.answer_for(f).answer }
+    #   fields = fields.select {|f| f}
+    #   fields.length
+    # else
+    #   names = ['number_of_screens', 'slide_count', 'pages']
+    #   answers = names.map { |name|
+    #               answer = self.answer_for(name)
+    #               answer ? answer.answer : false }
+    #   answers = answers.select {|a| a}
+    #   answers.empty? ? 1 : answers[0].to_i
+    # end
+
+    name = "pages"
+    answer = self.answer_for(name)
+    if (not answer.blank?) && (not answer.answer.blank?)
+      answer.answer.to_i
     else
-      names = ['number_of_screens', 'slide_count', 'pages']
-      answers = names.map { |name|
-                  answer = self.answer_for(name)
-                  answer ? answer.answer : false }
-      answers = answers.select {|a| a}
-      answers.empty? ? 1 : answers[0].to_i
+      1
     end
   end
 
@@ -357,13 +365,13 @@ class Project
   end
 
   def get_plus_dev
-    answer = self.answer_for('service')
+    answer = self.answer_for('design_andor_development')
     answer ? answer.answer == 'design_and_development' : false
   end
 
   def set_default_price
 
-    if self.service.title == "Other"
+    if self.service.name == "business_card"
       return
     end
 
@@ -385,6 +393,25 @@ class Project
 
     self.total_price = price_per_page * pages
     self.save
+  end
+
+  def set_update_price
+    pages          = get_pages
+    price_per_page = self.service.price
+    if self.get_plus_dev
+      if self.service.plus_dev_price
+        price_per_page = self.service.plus_dev_price
+      end
+    end
+
+    if self.get_responsive
+      if self.service.responsive_price
+        price_per_page = self.service.responsive_price
+      else
+        price_per_page += 20
+      end
+    end
+    self.total_price = price_per_page * pages
   end
 
   def get_price

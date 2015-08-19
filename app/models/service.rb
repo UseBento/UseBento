@@ -38,4 +38,8 @@ class Service
   def has_question(name) 
     self.questions.where(name: name).first
   end
+
+  def remove_question(name)
+    self.questions.where(name: name).delete
+  end
 end

@@ -509,22 +509,30 @@ function setup_paypal_direct() {
             var responsive_price     = $('#responsive-price').val() || price;
             var plus_dev_price       = $('#plus-dev-price').val() || price;
 
-            if ($('input[name="service_name"]').val() == 'social_media_design')
-                page_count = $('input.header-type')
-                    .map(function(i, ii) {
-                        return $(ii).prop('checked'); })
-                    .filter(function(i, x) {
-                        return x; }).length;
+            // if ($('input[name="service_name"]').val() == 'social_media_design')
+            //     page_count = $('input.header-type')
+            //         .map(function(i, ii) {
+            //             return $(ii).prop('checked'); })
+            //         .filter(function(i, x) {
+            //             return x; }).length;
 
             if (price === 0) return;
             if (plus_dev)
                 if (plus_dev_price)
                     price = plus_dev_price;
+
+            // update plus_dev_price
+            if ($('#field-design-and-development').length > 0 && $('#field-design-and-development').prop('checked')) {
+                if (plus_dev_price)
+                    price = plus_dev_price;
+            };
             if (responsive) {
                 if (responsive_price)
                     price = responsive_price;
                 else
                     price += 20; }
+
+            
 
             price = price * page_count;
             button.html('GET STARTED - $' + price); }
@@ -539,7 +547,7 @@ function setup_paypal_direct() {
 
         $('#pages-count').change(update_price);
         $('.header-type').change(update_price);
-        $('#field-desktop-mobile, #field-desktop-only, #field-design-development, #field-design-only')
+        $('#field-desktop-mobile, #field-desktop-only, #field-design-development, #field-design-only, #field-design-and-development')
             .change(o(update_price,
                       update_development_type_visibility));
 
@@ -811,7 +819,7 @@ function setup_paypal_direct() {
                 width: '100%',
                 height: 'variable',
                 items: {
-                    height: 'variable'
+                    height: 'variable' 
                 },
                 prev: this.content.find('.slider-prev'),
                 next: this.content.find('.slider-next'),
