@@ -570,15 +570,49 @@ border: 1px solid #DDD; }
     margin-bottom: 0px; }
 
 .shell.start-project .section-body.start-form button {
-width: 240px;
-height: 50px;
-border: 0;
-background-color: #B0996D;
-color: #FFF;
-font-family: "AvenirNext";
-font-size: 15px;
-font-weight: 600;
-margin-top: 10px; }
+    width: 240px;
+    height: 50px;
+    border: 0;
+    background-color: #B0996D;
+    color: #FFF;
+    font-family: "AvenirNext";
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 10px; 
+}
+
+.shell.start-project .section-body.start-form .number-of-pages-row button, .number-of-pages-row button.counter-control {
+    width: 60px;
+    height: 60px;
+    margin: 0;
+    display: block;
+    background: none;
+    background-color: #F5F6FA;
+    color: #202F44;
+    font-size: 23px;
+}
+
+.shell.start-project .section-body.start-form .number-of-pages-row .counter-field {
+    height: 60px;
+    margin: 0;
+    border: none;
+    padding: 0;
+    width: 50px;
+    background-color: white;
+    color: #202F44;
+}
+label.form-label-radio {
+    margin: 0;
+}
+
+.number-of-pages-row .list-radios-custom .radio input:checked + span { 
+    background-color: #202F44;
+    
+}
+
+.number-of-pages-row .list-radios-custom .radio span {
+    padding: 0 19px;
+}
 
 .btn:hover { background: #dbc08c; }
 

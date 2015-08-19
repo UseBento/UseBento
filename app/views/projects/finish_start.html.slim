@@ -36,15 +36,64 @@
                 .form-controls
                   textarea#field-describe-business.textarea[type="text" cols="10" rows="10" name="business_description" required data-validation-type="['presence']" placeholder="What is it? Who is it for? What do you want them to do?"]
               - if @service.name != "business_card"
-                - if ["website_design_and_development","presentation_design"].include?(@service.name)
-                  .form-row
-                    .form-controls
-                      textarea#estimated-cost.textarea[type="text" disabled="disabled" placeholder="Your estimated price is $#{@service.price}/pg"]
-                - else
-                  .form-row
+                = render partial: 'number_of_pages_form'                
+                / - if ["website_design_and_development","presentation_design"].include?(@service.name)
+                /   .form-row
+                /     .form-controls
+                /       textarea#estimated-cost.textarea[type="text" disabled="disabled" placeholder="Your estimated price is $#{@service.price}/pg"]
+                / - else
+                /   .form-row
+                /     .form-controls
+                /       textarea#estimated-cost.textarea[type="text" disabled="disabled" placeholder="Your estimated price is $#{@service.price}"]
+
+                .form-row
                     .form-controls
                       textarea#estimated-cost.textarea[type="text" disabled="disabled" placeholder="Your estimated price is $#{@service.price}"]
               .form-row.align-right
                 button.brown[type="submit"]
                   | CONTINUE >
+          input[type="hidden" name="design_price" value=@service.name]
+          input[type="hidden" name="design_price" id="design_price" value=@service.price]
+          input[type="hidden" name="plus_dev_price" id="plus_dev_price" value=@service.plus_dev_price]
+
+
 = render partial: 'dark_footer'
+/ = render partial: 'finish_start', formats: 'js'
+
+javascript:
+  jQuery(document).ready(function($) {
+    
+    $('#field-design-only').on('click', function() {
+      updateEstimatedPrice();
+    });
+
+    $('#field-design-and-development').on('click', function() {
+      updateEstimatedPrice();
+    });
+
+    $('.counter-field').on('change', function() {
+      updateEstimatedPrice();
+    });
+
+    function updateEstimatedPrice() {
+      var price = parseInt($('#design_price').val());
+      var plus_dev_price = parseInt($('#plus_dev_price').val());
+      if (plus_dev_price == 0 || isNaN(plus_dev_price)) {
+        plus_dev_price = price;
+      }
+      var page_count = parseInt($('#pages-count').val());
+      console.log(page_count);
+      var total_price;
+      if($("#field-design-only").is(':checked')) {
+        total_price = price * page_count;
+      } else {
+        total_price = plus_dev_price * page_count;
+      }
+
+      // console.log(total_price);
+      $('#estimated-cost').attr("placeholder", "Your estimated price is $" + total_price.toString());
+    }
+
+  });
+  
+

@@ -47,7 +47,15 @@ Services:
       - name: other_requirements
         label: Do you have any other requirements
         type: :text
-        required: false        
+        required: false  
+      - name: pages
+        label: Number of estimated pages
+        type: :text
+        required: false
+      - name: design_andor_development
+        label: Project type of page
+        type: :text
+        required: false     
   - name: 'mobile_app'
     title: 'Mobile App Design & Development'
     description: 'Hand-picked experts to get your iOS app to market. <br />Development optimized for iPhone 4, 4s, 5, 5s, 6 and 6 plus.'
@@ -111,6 +119,14 @@ Services:
         label: Anything else we should know.
         type: :text
         required: false
+      - name: pages
+        label: Number of estimated pages
+        type: :text
+        required: false
+      - name: design_andor_development
+        label: Project type of page
+        type: :text
+        required: false
   - name: 'app_icon'
     title: 'App Icon Design'
     description: 'Hand-picked designers to create the perfect face for your app. <br /> Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
@@ -155,9 +171,17 @@ Services:
       - name: other_requirements
         label: Do you have any other requirements
         type: :text
+        required: false
+      - name: pages
+        label: Number of estimated pages
+        type: :text
+        required: false
+      - name: design_andor_development
+        label: Project type of page
+        type: :text
         required: false        
   - name: 'business_card'
-    title: 'Other'
+    title: 'Custom'
     description: 'Stand-out with a custom, professional business card. <br />Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
     rounds: 2
     price: 400
@@ -199,9 +223,17 @@ Services:
       - name: other_info
         label: Anything else we should know? (i.e. use a certain font, special colors, or mimic a design that you like)
         type: :text
+        required: false
+      - name: pages
+        label: Number of estimated pages
+        type: :text
+        required: false
+      - name: design_andor_development
+        label: Project type of page
+        type: :text
         required: false        
   - name: 'stationary_design'
-    title: 'Marketing Collateral Design'
+    title: 'White Paper'
     description: 'From letterheads to your complete corporate identity. <br />Final logos sent to you as .jpg, .png, .pdf, .ai, and .eps file formats.'
     rounds: 2
     price: 450
@@ -246,6 +278,14 @@ Services:
         required: false
       - name: other_info
         label: Anything else we should know? (i.e. special colors, social media goals - the more info we have the better)
+        type: :text
+        required: false
+      - name: pages
+        label: Number of estimated pages
+        type: :text
+        required: false
+      - name: design_andor_development
+        label: Project type of page
         type: :text
         required: false    
   - name: 'presentation_design'
@@ -305,7 +345,15 @@ Services:
       - name: other_info
         label: Anything else we should know? (i.e. use a certain font, special colors, or mimic a design that you like)
         type: :text
-        required: false     
+        required: false
+      - name: pages
+        label: Number of estimated pages
+        type: :text
+        required: false
+      - name: design_andor_development
+        label: Project type of page
+        type: :text
+        required: false
   - name: 'social_media_design'
     title: 'Social Media Design'
     description: 'Hand-picked designers to enhance your social media profiles. <br />Final logos sent to you as .jpg, .png, .and .psd file formats.'
@@ -382,6 +430,14 @@ Services:
         label: Anything else we should know? (i.e. special colors, social media goals - the more info we have the better)
         type: :text
         required: false
+      - name: pages
+        label: Number of estimated pages
+        type: :text
+        required: false
+      - name: design_andor_development
+        label: Project type of page
+        type: :text
+        required: false
   - name: 'banner_ads'
     title: 'Banner Ads'
     description: 'Hand-picked designers to enhance your banner ads. <br />Final logos sent to you as .jpg, .png, .and .psd file formats.'
@@ -445,6 +501,14 @@ Services:
       - name: other_info
         label: Anything else we should know? (i.e. special colors, social media goals - the more info we have the better)
         type: :text
+        required: false
+      - name: pages
+        label: Number of estimated pages
+        type: :text
+        required: false
+      - name: design_andor_development
+        label: Project type of page
+        type: :text
         required: false          
   - name: 'website_design_and_development'
     title: 'Website Design'
@@ -505,6 +569,14 @@ Services:
         label: Anything else we should know? (i.e. use a certain font, special colors, or mimic a design that you like)
         type: :text
         required: false
+      - name: pages
+        label: Number of estimated pages
+        type: :text
+        required: false
+      - name: design_andor_development
+        label: Project type of page
+        type: :text
+        required: false
   - name: 'email_design_and_development'
     title: 'Email Design'
     description: 'A professional email template designed just for your business.<br />Optimized for all major email clients.'
@@ -552,6 +624,14 @@ Services:
         required: true
       - name: other_info
         label: Anything else we should know? (i.e. use a certain font, special colors, mimic a design that you like, or what users should do when they get your email)
+        type: :text
+        required: false
+      - name: pages
+        label: Number of estimated pages
+        type: :text
+        required: false
+      - name: design_andor_development
+        label: Project type of page
         type: :text
         required: false
   - name: 'landing_page_design_and_development'
@@ -614,6 +694,14 @@ Services:
         required: false
       - name: other_info
         label: Anything else we should know? (i.e. use a certain font, special colors, purpose of landing page - the more info we have the better)
+        type: :text
+        required: false
+      - name: pages
+        label: Number of estimated pages
+        type: :text
+        required: false
+      - name: design_andor_development
+        label: Project type of page
         type: :text
         required: false
   - name: 'wordpress_design_and_development'
@@ -695,5 +783,13 @@ Services:
         required: false
       - name: other_info
         label: Anything else we should know.
+        type: :text
+        required: false
+      - name: pages
+        label: Number of estimated pages
+        type: :text
+        required: false
+      - name: design_andor_development
+        label: Project type of page
         type: :text
         required: false
