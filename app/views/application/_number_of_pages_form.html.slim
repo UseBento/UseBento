@@ -20,7 +20,7 @@
   .form-cols
     .form-col.form-col-1of2
       label.form-label[for="field-e-mail"]
-        | Number of estimated pages 
+        = @project.service.has_question('pages') ? @project.service.has_question('pages').label : 'Number of pages'
         span.form-asterisk
           |  *
       .form-errors

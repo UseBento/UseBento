@@ -18,11 +18,29 @@ namespace :bento do
                    end
   end
 
+  task service_question_pages_remove: :environment do
+    Service.all.each do |service|
+      service.remove_question('pages')
+      service.remove_question('design_andor_development')
+    end
+  end
+
   task service_update: :environment do
     Service.all.each do |service|
       if service.has_question('pages').nil?
+
+        label_str = "Number of pages"
+        if service.name == "email_design_and_development"
+          label_str = "Number of emails"
+        elsif service.name == "presentation_design"
+          label_str = "Number of slides"
+        elsif service.name == "social_media_design"
+          label_str = "Number of ads"
+        elsif service.name == "banner_ads"
+          label_str = "Number of ads"
+        end
         service.questions.create({name:        'pages',
-                                label:       'Number of estimated pages',
+                                label:       label_str,
                                 type:        ':text',
                                 values:      nil,
                                 required:   false})  
@@ -38,7 +56,7 @@ namespace :bento do
         puts 'Service design and development save'
       end
 
-      
+
 
       if service.name == "business_card"
         service.title = "Custom"
