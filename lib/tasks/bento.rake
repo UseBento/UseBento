@@ -20,32 +20,48 @@ namespace :bento do
 
   task service_update: :environment do
     Service.all.each do |service|
-      service.questions.create({name:        'pages',
+      if service.has_question('pages').nil?
+        service.questions.create({name:        'pages',
                                 label:       'Number of estimated pages',
                                 type:        ':text',
                                 values:      nil,
-                                required:   false})
+                                required:   false})  
 
-      service.questions.create({name:        'design_andor_development',
+        puts 'Service pages save'
+      end
+      if service.has_question('design_andor_development').nil?
+        service.questions.create({name:        'design_andor_development',
                                 label:       'Design or Design + Development',
                                 type:        ':text',
                                 values:      nil,
                                 required:   false})
+        puts 'Service design and development save'
+      end
+
+      
 
       if service.name == "business_card"
         service.title = "Custom"
-        service.save
+        if service.save
+          puts 'Custom save'
+        end
       elsif service.name == "stationary_design"
         service.title = "White Paper"
-        service.save
+        if service.save
+          puts 'White Paper save'
+        end
       elsif service.name == "email_design_and_development"
         service.price = 350
         service.plus_dev_price = 650
-        service.save
+        if service.save
+          puts 'Email save'
+        end
       elsif service.name == "landing_page_design_and_development"
         service.price = 650
         service.plus_dev_price = 1500
-        service.save
+        if service.save
+          puts 'Landing save'
+        end
       end
     end
   end
