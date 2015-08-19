@@ -110,11 +110,14 @@ class Project
     people = self.invited_users
 
     if (people.empty?)
-      invited_user         = self.invited_users.create({accepted: true})
-      invited_user.user    = self.user
-      invited_user.email = self.user.email
-      invited_user.save
-      people = self.invited_users
+      if self.user
+        invited_user         = self.invited_users.create({accepted: true})
+        invited_user.user    = self.user
+        invited_user.email = self.user.email
+        invited_user.save
+        people = self.invited_users
+      end
+      
 
       admin_user = User.get_admin
       unless admin_user.nil?
@@ -254,7 +257,7 @@ class Project
 
   def has_access?(user)
     (user &&
-     (user.id == self.user.id ||
+     ((self.user && user.id == self.user.id) ||
       user.admin ||
       self.invited_users.where(accepted: true).where(user_id: user.id).first || 
       self.invited_designers.where(accepted: true).where(user_id: user.id).first))
