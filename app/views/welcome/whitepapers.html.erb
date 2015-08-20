@@ -39,7 +39,10 @@
       <h2 class="section-heading centered companies section2 whitepaper">CONTENT THAT converts</h2>
       <div class="section-subheading center">White papers and ebooks guaranteed to grow your business</div>
       <div class="w-row">
-        <div class="w-col w-col-5"><img src="new_images/White paper 2.png" width="300">
+        <div class="w-col w-col-5">
+          <a href="new_images/White paper 2.png" class="image-popup-vertical-fit">
+            <img src="new_images/White paper 2.png" width="300">
+          </a>
         </div>
         <div class="w-col w-col-7">
           <h2 class="section-subheading center promo">White papers and eBooks have become a staple in B2B marketing.&nbsp;White papers that are well-designed are a tested way to persuade, educate, and communicate unique information.&nbsp;Bento helps you create beautiful white papers and eBooks that will generate leads and assist sales enablement.</h2>
@@ -52,7 +55,10 @@
       <h2 class="section-heading centered companies section2 whitepaper">COLLABORATE EFFORTLESSLY</h2>
       <div class="section-subheading center">Bento gives you the tools to work smarter</div>
       <div class="w-row">
-        <div class="w-col w-col-7"><img src="new_images/Bento.png" width="400">
+        <div class="w-col w-col-7">
+          <a href="new_images/Bento.png" class="image-popup-vertical-fit">
+            <img src="new_images/Bento.png" width="400">
+          </a>
         </div>
         <div class="w-col w-col-5">
           <h2 class="section-subheading center promo">-Communication tools<br>-Payment protection<br>-Top notch design talent<br>-100%&nbsp;transfer of ownership<br>-Secure online workplace<br>-Reviewed by a Bento Creative Director<br>-Consistent brand guidelines and visual tone<br>-Two rounds of revisions<br>-5 business day turn around</h2>
@@ -125,3 +131,17 @@
   <script type="text/javascript" src="<%= asset_path 'webflow.js' %>"></script>
   <%= render partial: 'dark_footer' %>
 </div>
+
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+
+    $('.image-popup-vertical-fit').magnificPopup({
+      type: 'image',
+      closeOnContentClick: true,
+      image: {
+        verticalFit: false
+      }
+    });
+
+  });
+</script>
