@@ -17,7 +17,7 @@ class ProjectsController < ApplicationController
 
   def start
     @service = params[:service]
-    
+    @is_project_start = true
   end
 
   def finish_start
