@@ -230,6 +230,7 @@ input.hidden#chat[type="hidden" value=@chat.to_s]
   a[href=("/projects/" + @project.id.to_s + "/popup") class="hidden" id="project-popup"]
 / = render partial: 'footer'
 = render partial: 'dark_footer'
+= intercom_script_tag
 
 javascript:
   jQuery(document).ready(function($) {
