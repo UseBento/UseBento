@@ -54,4 +54,4 @@ gem 'maildir', '2.1.0'
 gem 'mailman'
 gem 'websocket-client-simple'
 
-gem 'intercom-rails'
+# gem 'intercom-rails'
