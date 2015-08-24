@@ -116,6 +116,7 @@ class ProjectsController < ApplicationController
     @messages = @project.messages
     @is_show_available = true
     @designers = User.where(:designer => true)
+    @is_disable_load_intercom = true
 
     
     if !@project.has_access?(current_user)
