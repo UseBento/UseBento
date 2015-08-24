@@ -205,6 +205,8 @@ GEM
     hitimes (1.2.2)
     i18n (0.7.0)
     inflecto (0.0.2)
+    intercom-rails (0.2.28)
+      activesupport (> 3.0)
     ipaddress (0.8.0)
     jbuilder (2.2.11)
       activesupport (>= 3.0.0, < 5)
@@ -379,6 +381,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   fog
+  intercom-rails
   jbuilder (~> 2.0)
   jquery-rails
   maildir (= 2.1.0)
