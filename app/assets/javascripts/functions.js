@@ -856,80 +856,188 @@ function setup_paypal_direct() {
     });
 
 
-        $('form.new-payment-amount').submit(function(event) {
-            event.preventDefault();
-            var form   = $(this);
-            var id     = form.attr('data-id');
-            var input  = form.find('input.new-payment-amount-field');
-            var span   = $('span.current-payment-amount[data-id="' + id + '"]');
-            var price  = parseInt(input.val().match(/[0-9]+/));
+    // $('form.new-payment-amount').submit(function(event) {
+    //     event.preventDefault();
+    //     var form   = $(this);
+    //     var id     = form.attr('data-id');
+    //     var input  = form.find('input.new-payment-amount-field');
+    //     var span   = $('span.current-payment-amount[data-id="' + id + '"]');
+    //     var price  = parseInt(input.val().match(/[0-9]+/));
 
-            $.ajax({type:    'POST',
-                    url:      window.location.pathname + '/update_payment.json',
-                    data:    {id: id, amount: price},
-                    success:  function(data) {
-                        form.css('display', 'none');
-                        span.css('display', 'inline');
-                        $('.total-price-label').html("$" + data.price.toString());
-                        span.find('strong.payment-amount[data-id="' + id + '"]')
-                            .html('$' + price.toString());
+    //     $.ajax({type:    'POST',
+    //             url:      window.location.pathname + '/update_payment.json',
+    //             data:    {id: id, amount: price},
+    //             success:  function(data) {
+    //                 form.css('display', 'none');
+    //                 span.css('display', 'inline');
+    //                 $('.total-price-label').html("$" + data.price.toString());
+    //                 span.find('strong.payment-amount[data-id="' + id + '"]')
+    //                     .html('$' + price.toString());
 
-                        $('.new-payment-amount[data-id="total"] .new-payment-amount-field')
-                            .val('$' + data.price.toString());
-                        $('strong.payment-amount[data-id="total"], #project-total')
-                            .html('$' + data.price.toString());
-                        $('a.btn-edit-payment[data-id="total"]')
-                            .attr('data-amount', data.price.toString());
+    //                 $('.new-payment-amount[data-id="total"] .new-payment-amount-field')
+    //                     .val('$' + data.price.toString());
+    //                 $('strong.payment-amount[data-id="total"], #project-total')
+    //                     .html('$' + data.price.toString());
+    //                 $('a.btn-edit-payment[data-id="total"]')
+    //                     .attr('data-amount', data.price.toString());
 
-                        data.unpaid_payments.map(function(payment) {
-                            var id = payment._id.$oid;
-                        $('.new-payment-amount[data-id="' + id + '"] .new-payment-amount-field')
-                            .val('$' + payment.amount.toString());
-                        $('strong.payment-amount[data-id="' + id + '"]')
-                            .html('$' + payment.amount.toString());
-                        $('a.btn-edit-payment[data-id="' + id + '"]')
-                            .attr('data-amount', payment.amount.toString()); }); }}); });
+    //                 data.unpaid_payments.map(function(payment) {
+    //                     var id = payment._id.$oid;
+    //                 $('.new-payment-amount[data-id="' + id + '"] .new-payment-amount-field')
+    //                     .val('$' + payment.amount.toString());
+    //                 $('strong.payment-amount[data-id="' + id + '"]')
+    //                     .html('$' + payment.amount.toString());
+    //                 $('a.btn-edit-payment[data-id="' + id + '"]')
+    //                     .attr('data-amount', payment.amount.toString()); }); }}); });
 
-        $('.btn-edit-payment').click(function() {
-            var id = $(this).attr('data-id');
-            $('span.current-payment-amount[data-id="' + id + '"]')
-                .css('display', 'none');
-            $('form.new-payment-amount[data-id="' + id + '"]')
-                .css('display', 'inline'); });
+    $('#project-invoice').on('submit', 'form.new-payment-amount', function(event) {
+        event.preventDefault();
+        var form   = $(this);
+        var id     = form.attr('data-id');
+        var input  = form.find('input.new-payment-amount-field');
+        var span   = $('span.current-payment-amount[data-id="' + id + '"]');
+        var price  = parseInt(input.val().match(/[0-9]+/));
 
-        $('a.submit-payment').click(function() {
-            $(this).parent().submit(); });
+        $.ajax({type:    'POST',
+                url:      window.location.pathname + '/update_payment.json',
+                data:    {id: id, amount: price},
+                success:  function(data) {
+                    form.css('display', 'none');
+                    span.css('display', 'inline');
+                    $('.total-price-label').html("$" + data.price.toString());
+                    span.find('strong.payment-amount[data-id="' + id + '"]')
+                        .html('$' + price.toString());
 
-        $('a.btn-remove-payment').click(function() {
-            var id = $(this).attr('data-id');
-            
-            $.ajax({type:    'POST',
-                    url:      window.location.pathname + '/remove_payment.json',
-                    data:    {},
-                    success:  function(data) {
-                        $('*[data-id="' + id + '"]').detach();
-                        var total = $('.payment-amount[data-id="total"]').html();
-                        $('.payment-amount').html(total); }}); });
+                    $('.new-payment-amount[data-id="total"] .new-payment-amount-field')
+                        .val('$' + data.price.toString());
+                    $('strong.payment-amount[data-id="total"], #project-total')
+                        .html('$' + data.price.toString());
+                    $('a.btn-edit-payment[data-id="total"]')
+                        .attr('data-amount', data.price.toString());
+
+                    data.unpaid_payments.map(function(payment) {
+                        var id = payment.payment_id.$oid;
+                    $('.new-payment-amount[data-id="' + id + '"] .new-payment-amount-field')
+                        .val('$' + payment.amount.toString());
+                    $('strong.payment-amount[data-id="' + id + '"]')
+                        .html('$' + payment.amount.toString());
+                    $('a.btn-edit-payment[data-id="' + id + '"]')
+                        .attr('data-amount', payment.amount.toString()); }); }});
+    });
+
+    $('#project-invoice').on('click', 'a.btn-edit-payment', function() {
+        var id = $(this).attr('data-id');
+        $('span.current-payment-amount[data-id="' + id + '"]')
+            .css('display', 'none');
+        $('form.new-payment-amount[data-id="' + id + '"]')
+            .css('display', 'inline');
+    });
+    // $('.btn-edit-payment').click(function() {
+    //     var id = $(this).attr('data-id');
+    //     $('span.current-payment-amount[data-id="' + id + '"]')
+    //         .css('display', 'none');
+    //     $('form.new-payment-amount[data-id="' + id + '"]')
+    //         .css('display', 'inline'); });
+
+    $('#project-invoice').on('click', 'a.submit-payment', function() {
+        $(this).parent().submit();
+    });
+    // $('a.submit-payment').click(function() {
+    //     $(this).parent().submit(); });
+
+    $('#project-invoice').on('click', 'a.btn-remove-payment', function() {
+        var id = $(this).attr('data-id');
         
-        function validate_apply_form(event) {
-            var skills           = [$('#skill1'),
-                                    $('#skill2'),
-                                    $('#skill3')];
-            var selected_skills  = [];
+        $.ajax({
+            type:    'POST',
+            url:      window.location.pathname + '/remove_payment.json',
+            data:    {id: id},
+            success:  function(data) {
+                $('*[data-id="' + id + '"]').detach();
+                // var total = $('.payment-amount[data-id="total"]').html();
+                $('.total-payment-amount').html(data.price.toString());
+                $('.total-price-label').html("$" + data.price.toString());
+            }
+        }); 
+    });
+    // $('a.btn-remove-payment').click(function() {
+    //     var id = $(this).attr('data-id');
+        
+    //     $.ajax({
+    //         type:    'POST',
+    //         url:      window.location.pathname + '/remove_payment.json',
+    //         data:    {id: id},
+    //         success:  function(data) {
+    //             $('*[data-id="' + id + '"]').detach();
+    //             // var total = $('.payment-amount[data-id="total"]').html();
+    //             var total = data.price;
+    //             $('.payment-amount').html(total);
+    //         }
+    //     }); 
+    // });
 
-            for (var i in skills) {
-                if (skills[i].val() && member(selected_skills, skills[i].val())) {
-                    event.preventDefault();
-                    return notify_duplicate_skill(skills[i]); }
-                selected_skills.push(skills[i].val()); }
+    $('#project-invoice').on('click', 'a.btn-add-payment', function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: window.location.pathname + '/add_payment.json',
+            data: {},
+            success: function(data) {
+                $('a.btn-remove-payment').remove();
+                $('a.btn-add-payment').remove();
+                var payment_count = $('form.new-payment-amount').length;
+                var add_payment = '<span data-id="55dd6f256b796c38a9040000">2 of 2 payments: </span>'
+                var add_payment = '<span data-id="';
+                add_payment += data.payment_id.$oid;
+                add_payment += '">';
+                add_payment += payment_count.toString();
+                add_payment += ' of ';
+                add_payment += payment_count.toString();
+                add_payment += ' payments: </span>';
+                add_payment += '<form class="new-payment-amount" data-id="';
+                add_payment += data.payment_id.$oid;
+                add_payment += '">';
+                add_payment += '<input class="form-control field new-payment-amount-field" type="text" value="$';
+                add_payment += data.amount.toString()
+                add_payment += '"><a class="submit-payment" data-id="';
+                add_payment += data.payment_id.$oid;
+                add_payment += '"> save</a><br/></form>';
+                add_payment += '<span class="current-payment-amount" data-id="';
+                add_payment += data.payment_id.$oid;
+                add_payment += '"><strong class="payment-amount" data-id="';
+                add_payment += data.payment_id.$oid;
+                add_payment += '">$0 </strong><a class="btn-edit-payment" data-amount="0" data-id="';
+                add_payment += data.payment_id.$oid;
+                add_payment += '"> Edit</a>&nbsp;';
+                add_payment += '<a class="fa fa-times btn-remove-payment" data-amount="100" data-id="';
+                add_payment += data.payment_id.$oid;
+                add_payment += '"> </a><br/></span>';
+                add_payment += '<a class="btn-add-payment">Add payment</a>';
+                // add_payment += '<a class="fa fa-times btn-remove-payment" data-amount="100" data-id="55dd96ab6b796c38a9190000"> </a>'
+                $('#project-invoice').append(add_payment);
+            }
+        });
+    });
 
-            return true; }
+    function validate_apply_form(event) {
+        var skills           = [$('#skill1'),
+                                $('#skill2'),
+                                $('#skill3')];
+        var selected_skills  = [];
 
-        function notify_duplicate_skill(skill) {
-            $('#error').html("You can't enter the same skill twice!");
-            window.location.hash = '#error'; }
+        for (var i in skills) {
+            if (skills[i].val() && member(selected_skills, skills[i].val())) {
+                event.preventDefault();
+                return notify_duplicate_skill(skills[i]); }
+            selected_skills.push(skills[i].val()); }
 
-        $('#apply-form').submit(validate_apply_form);
+        return true; }
+
+    function notify_duplicate_skill(skill) {
+        $('#error').html("You can't enter the same skill twice!");
+        window.location.hash = '#error'; }
+
+    $('#apply-form').submit(validate_apply_form);
 
     // mobile menu
     $('.expand').on('click', function (event) {

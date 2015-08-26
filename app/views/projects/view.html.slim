@@ -157,17 +157,18 @@
                       a.submit-payment[data-id='total']
                         |  save
                   span.current-payment-amount[data-id='total']
-                    strong.payment-amount[data-id='total']
+                    strong.payment-amount.total-payment-amount[data-id='total']
                       = "$" + @project.get_price.to_s + " "
                     a.btn-edit-payment[data-id='total' data-amount=@project.get_price.to_s]
                       |  Edit
                   br
                   - i = 1
-                  - @project.get_awaiting_payments(true).map do |payment|
+                  - payments = @project.get_awaiting_payments(true)
+                  - payments.map do |payment|
                     span[data-id=payment.id]
                       = i.to_s + " of " + @project.get_awaiting_payments(true).length.to_s + " payments: "
                     - if payment.class == Payment
-                        strong.payment-amount
+                        strong.payment-amount.item-payment-amount
                           = '$' + payment.amount.to_s
                         |  paid
                     - else
@@ -175,17 +176,21 @@
                         input.form-control.field.new-payment-amount-field[type="text" value=('$' + payment.amount.to_s)]
                         a.submit-payment[data-id=payment.id]
                           |  save
+                        br
                       span.current-payment-amount[data-id=payment.id]
                         strong.payment-amount[data-id=payment.id]
                           = "$" + payment.amount.to_s + " "
                         a.btn-edit-payment[data-id=payment.id data-amount=payment.amount]
                           |  Edit
                         | &nbsp; 
-                        - if i == 2
+                        - if i == payments.count
                           a.fa.fa-times.btn-remove-payment[data-id=payment.id data-amount=payment.amount]
                             |  
+                        br
                       - i += 1
-                    br
+                    
+                  a.btn-add-payment
+                    | Add payment
                 - else
                   - if !@project.payments.blank? || @project.next_payment_price
                     h5
