@@ -171,6 +171,7 @@
                         strong.payment-amount.item-payment-amount
                           = '$' + payment.amount.to_s
                         |  paid
+                        br
                     - else
                       form.new-payment-amount[data-id=payment.id]
                         input.form-control.field.new-payment-amount-field[type="text" value=('$' + payment.amount.to_s)]
