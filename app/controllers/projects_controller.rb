@@ -387,38 +387,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def remove_payment
-    if !current_user.admin
-      redirect_to "/"
-    else
-      @project  = Project.find(params[:project_id])
-      @project.remove_payment
-
-      respond_to do |format|
-        format.html { redirect_to @project }
-        format.json { render :json => @project }
-      end
-    end
-  end
-  
-  def update_total_price
-    if !current_user.admin
-      redirect_to "/"
-    else
-      @project             = Project.find(params[:project_id])
-      @project.total_price = params[:amount]
-      @project.status = :in_progress
-      @project.save
-      @project.get_awaiting_payments
-
-      
-      respond_to do |format|
-        format.html { redirect_to @project }
-        format.json { render :json => @project }
-      end
-    end
-  end
-
   def update_payment
     return self.update_total_price if params[:id] == 'total'
     if !current_user.admin
@@ -432,6 +400,52 @@ class ProjectsController < ApplicationController
 
       @payment.amount = params[:amount]
       @payment.save
+
+      
+      respond_to do |format|
+        format.html { redirect_to @project }
+        format.json { render :json => @project }
+      end
+    end
+  end
+
+  def remove_payment
+    if !current_user.admin
+      redirect_to "/"
+    else
+      @project  = Project.find(params[:project_id])
+      @project.remove_payment(params[:id])
+
+      respond_to do |format|
+        format.html { redirect_to @project }
+        format.json { render :json => @project }
+      end
+    end
+  end
+
+  def add_payment
+    if !current_user.admin
+      redirect_to "/"
+    else
+      @project  = Project.find(params[:project_id])
+      add_payment = @project.add_payment
+
+      respond_to do |format|
+        format.html { redirect_to @project }
+        format.json { render :json => add_payment }
+      end
+    end
+  end
+  
+  def update_total_price
+    if !current_user.admin
+      redirect_to "/"
+    else
+      @project             = Project.find(params[:project_id])
+      @project.total_price = params[:amount]
+      @project.status = :in_progress
+      @project.save
+      @project.get_awaiting_payments
 
       
       respond_to do |format|

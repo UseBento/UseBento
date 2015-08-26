@@ -7,4 +7,12 @@ class AwaitingPayment
   
   belongs_to :project
   
+
+  def as_json(i=0)
+    {
+      payment_id: self.id,
+      amount:   self.amount
+    }
+  end
+  
 end

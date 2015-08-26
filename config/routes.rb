@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get  'projects/:id/popup',                  to: 'projects#initial_popup'
   post 'projects/:project_id/update_payment', to: 'projects#update_payment'
   post 'projects/:project_id/remove_payment', to: 'projects#remove_payment'
+  post 'projects/:project_id/add_payment',    to: 'projects#add_payment'
   get  'projects/:id/remove_user/:invite_id', to: 'projects#remove_invite'
   get  'projects/:id/remove_designer/:invite_id', to: 'projects#remove_invite_designer'
   get 'projects/:project_id/update_status/:status',   to: 'projects#update_status'

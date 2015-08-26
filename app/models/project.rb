@@ -47,11 +47,24 @@ class Project
      unpaid_payments:  self.awaiting_payments}
   end
 
-  def remove_payment
-    self.payments_count = 1
-    awaiting_payments.last.delete
-    awaiting_payments.first.amount = self.total_price
+  def remove_payment(payment_id)
+    self.payments_count = self.payments_count || 2
+    self.payments_count -= 1
+    payment = self.awaiting_payments.find(payment_id)
+    self.total_price = self.total_price - payment.amount
+    payment.delete
+    # awaiting_payments.last.delete
+    # awaiting_payments.first.amount = self.total_price
     self.save
+    
+  end
+
+  def add_payment
+    self.payments_count = self.payments_count || 2
+    self.payments_count += 1
+    payment = self.awaiting_payments.create({amount: 0, paid: false});
+    self.save
+    payment
   end
   
   def can_see_invoice?(user) 

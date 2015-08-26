@@ -15,6 +15,8 @@ class Payment
      seller_id:        Rails.configuration.twocheckout_seller_id.to_s,
      sandbox:          Rails.configuration.twocheckout_sandbox}
   end
+
+  
   
   def self.new_payment(project, amount, token, address) 
     Twocheckout::API.credentials = self.api_credentials
