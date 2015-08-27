@@ -32,27 +32,28 @@
           input#pages-count.counter-field.calc-item[type="text" name="pages" readonly data-math-type="multiply" value=(@project.answer_for('pages').answer || 1)]
           button.counter-control.counter-control-plus[type="button"]
             | +
-    .form-col.form-col-1of2
-      label.form-label[for="field-full-name"]
-        | What do you need done?
-        span.form-asterisk
-          |  *
-      .form-errors
-        = get_error('design_andor_development')
-      .form-controls
-        ul.list-radios.list-radios-custom
-          li
-            .radio
-              label.form-label-radio[for="field-design-only"]
-                input#field-design-only[type="radio" name="design_andor_development" value="design_only" checked=(@project.answer_for('design_andor_development').answer == "design_only" || @project.answer_for('design_andor_development').answer.blank?)]
-                span
-                  | Design Only
-          li
-            .radio
-              label.form-label-radio[for="field-design-and-development"]
-                input#field-design-and-development[type="radio" name="design_andor_development" value="design_and_development" checked=(@project.answer_for('design_andor_development').answer == "design_and_development")]
-                span
-                  | Design + Development
+    - if @service.name == 'email_design_and_development' || @service.name == 'landing_page_design_and_development'
+      .form-col.form-col-1of2
+        label.form-label[for="field-full-name"]
+          | What do you need done?
+          span.form-asterisk
+            |  *
+        .form-errors
+          = get_error('design_andor_development')
+        .form-controls
+          ul.list-radios.list-radios-custom
+            li
+              .radio
+                label.form-label-radio[for="field-design-only"]
+                  input#field-design-only[type="radio" name="design_andor_development" value="design_only" checked=(@project.answer_for('design_andor_development').answer == "design_only" || @project.answer_for('design_andor_development').answer.blank?)]
+                  span
+                    | Design Only
+            li
+              .radio
+                label.form-label-radio[for="field-design-and-development"]
+                  input#field-design-and-development[type="radio" name="design_andor_development" value="design_and_development" checked=(@project.answer_for('design_andor_development').answer == "design_and_development")]
+                  span
+                    | Design + Development
 
 
 
