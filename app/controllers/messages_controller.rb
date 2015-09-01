@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
     if !@project.has_access?(current_user)
       redirect_to_login
     end
-
+    
     @project.updated_at = DateTime.now
     @project.save
 
@@ -19,7 +19,7 @@ class MessagesController < ApplicationController
     @message.user = current_user
     @message.save
 
-
+    
     attachments  = get_attachments(@message)
     message_body = render_to_string(partial:   'projects/message',
                                     layout:     false,
@@ -28,14 +28,13 @@ class MessagesController < ApplicationController
                                                 to_owner: true})
     url          = root_url + ('/projects/' + @project.id +
                     (@room == 'private' ? '/private_chat' : ''))
-
     @message.send_emails(current_user, url, @room,
                          @project, @room == 'private')
     @project.updated_at = DateTime.now
     @project.save!
 
+    
     respond_to do |format|
-      # binding.pry
       format.html { redirect_to @project }
       format.json { render json: @message.serialize_message(request, message_body) }
     end

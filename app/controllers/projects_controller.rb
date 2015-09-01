@@ -253,8 +253,7 @@ class ProjectsController < ApplicationController
     filled_out   = @project.filled_out_creative_brief?
     get_attachments(@project)
 
-    # binding.pry
-
+    
     params.map do |key, val|
       @project.update_answer(key, val)
     end
@@ -270,7 +269,10 @@ class ProjectsController < ApplicationController
           @project.status_index = brief_index
         end
       end
-      @project.set_update_price
+      if @project.service.name != 'business_card'
+        @project.set_update_price
+      end
+      
       @project.save
       @project.update_company
       redirect_to @project
