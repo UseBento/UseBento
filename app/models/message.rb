@@ -105,6 +105,9 @@ class Message
             if !matches
               matches = part.decoded.match /bento-reply:([a-zA-Z0-9]+):([a-zA-Z0-9]+):(chat|private_chat):/
             end
+            if !matches
+              matches = part.decoded.match /bento-reply%3C([a-zA-Z0-9]+):([a-zA-Z0-9]+):(chat|private_chat)%3E/
+            end
           end
 
           if matches
@@ -123,6 +126,7 @@ class Message
 
             url           = "https://usebento.com/" + ('/projects/' + project.id +
                                         (@room == 'private_chat' ? '/private_chat' : ''))
+
 
             message.send_emails(from_user, url,
                                 (room == 'prvate_chat' ? 'prvate' : 'chat'),
