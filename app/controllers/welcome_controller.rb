@@ -13,6 +13,9 @@ class WelcomeController < ApplicationController
 
   def products_pricing
     @service = params[:service]
+    if @service.blank?
+      @service = 'presentation'
+    end
   	render layout: "application_new"
   end
 
