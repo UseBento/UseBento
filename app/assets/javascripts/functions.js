@@ -1014,6 +1014,7 @@ function setup_paypal_direct() {
                 add_payment += '"> </a><br/></span>';
                 add_payment += '<a class="btn-add-payment">Add payment</a>';
                 // add_payment += '<a class="fa fa-times btn-remove-payment" data-amount="100" data-id="55dd96ab6b796c38a9190000"> </a>'
+                // $(this).find('.index').
                 $('#project-invoice').append(add_payment);
             }
         });

@@ -165,7 +165,7 @@
                   - i = 1
                   - payments = @project.get_awaiting_payments(true)
                   - payments.map do |payment|
-                    span[data-id=payment.id]
+                    span.index[data-id=payment.id]
                       = i.to_s + " of " + @project.get_awaiting_payments(true).length.to_s + " payments: "
                     - if payment.class == Payment
                         strong.payment-amount.item-payment-amount
@@ -188,7 +188,7 @@
                           a.fa.fa-times.btn-remove-payment[data-id=payment.id data-amount=payment.amount]
                             |  
                         br
-                      - i += 1
+                    - i += 1
                     
                   a.btn-add-payment
                     | Add payment
