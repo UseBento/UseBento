@@ -201,15 +201,15 @@
                         = '$' + payment.amount.to_s + " - paid"
                     - if @project.next_payment_price
                       p
-                        = @project.current_payment.to_s + ' of ' + @project.total_payments.to_s + ' Payments: '
+                        = @project.current_payment.to_s + ' of ' + @project.get_awaiting_payments(true).length.to_s + ' Payments: '
                         span
                           = '$' + number_with_delimiter(@project.next_payment_price, :delimiter => ',')
                       - unless current_user.admin
                         a.btn_med.gray[href=("/payments/checkout/" + @project.id.to_s + "/50")]
-                          - if @project.payments.empty?
-                            | PAY INVOICE
-                          - else
+                          - if !@project.awaiting_payments.blank? && @project.awaiting_payments.count == 1
                             | PAY FINAL INVOICE
+                          - else
+                            | PAY INVOICE
 
             - if @project.attachments.count > 0
               li#attachments
