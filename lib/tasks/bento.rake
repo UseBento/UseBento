@@ -83,4 +83,16 @@ namespace :bento do
       end
     end
   end
+
+  task service_white_paper_price_update: :environment do
+    Service.all.each do |service|
+      if service.name == "stationary_design"
+        service.price = 100
+        if service.save
+          puts 'White paper price updated.'
+        end
+      end
+    end
+  end
+
 end

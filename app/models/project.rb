@@ -408,6 +408,9 @@ class Project
     end
 
     self.total_price = price_per_page * pages
+    if self.service.name == 'stationary_design'
+      self.total_price = 300
+    end
     self.save
   end
 
@@ -428,6 +431,9 @@ class Project
       end
     end
     self.total_price = price_per_page * pages
+    if self.service.name == 'stationary_design'
+      self.total_price = 300
+    end
   end
 
   def get_price
